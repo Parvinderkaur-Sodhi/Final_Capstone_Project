@@ -25,5 +25,5 @@ public class LeaveBalance {
     private LeaveType leaveType;
 
     private int balance;
-
+   
 }

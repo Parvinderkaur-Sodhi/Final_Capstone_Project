@@ -2,6 +2,8 @@ package com.example.trial.models;
 
 import javax.persistence.*;
 
+
+
 @Entity
 @Table(name = "auser")
 public class User {

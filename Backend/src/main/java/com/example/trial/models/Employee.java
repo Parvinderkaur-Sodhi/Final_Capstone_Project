@@ -1,9 +1,17 @@
 package com.example.trial.models;
 
-import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
 import javax.persistence.*;
+
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -38,7 +46,8 @@ public class Employee {
     @Lob
     private byte[] resume;
 
-    public LeaveBalance getLeaveBalanceByType(LeaveType leaveTypeName) {
+	public LeaveBalance getLeaveBalanceByType(LeaveType leaveTypeName) {
         return null;
     }
+
 }
