@@ -39,8 +39,10 @@ public class LeaveRequest {
     private Date endDate;
 
     private String reason;
+    
+      
 
-    public void updateStatus(String newStatus, LeaveBalanceController leaveBalanceController) {
+	public void updateStatus(String newStatus, LeaveBalanceController leaveBalanceController) {
         if ("Rejected".equals(newStatus) || "Accepted".equals(newStatus)) {
             this.status = newStatus;
 
@@ -95,5 +97,6 @@ public class LeaveRequest {
             throw new IllegalArgumentException("Invalid status: " + newStatus);
         }
     }
+
 
 }
