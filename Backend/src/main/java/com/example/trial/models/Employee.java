@@ -25,6 +25,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
+
     private String fname;
     private String lname;
     private String gender;
@@ -49,5 +50,9 @@ public class Employee {
 	public LeaveBalance getLeaveBalanceByType(LeaveType leaveTypeName) {
         return null;
     }
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 }

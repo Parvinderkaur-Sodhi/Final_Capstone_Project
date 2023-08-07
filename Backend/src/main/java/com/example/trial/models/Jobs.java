@@ -16,11 +16,11 @@ public class Jobs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobId;
-    
     private String jobProfile;
     private String publish_date;
     private int vacancy;
     private String description;
     private String jobType;
     private int salary;
+    private int last_date;
 }
