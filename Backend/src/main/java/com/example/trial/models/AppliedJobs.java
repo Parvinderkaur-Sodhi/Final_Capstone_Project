@@ -2,6 +2,9 @@ package com.example.trial.models;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.Set;
+
 import javax.persistence.*;
 
 
@@ -10,18 +13,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @DynamicUpdate
-@Table(name = "jobs")
-public class Jobs {
+@Table(name = "Appliedjobs")
+public class AppliedJobs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int jobId;
+    private int applicationId;
     
-    private String jobProfile;
-    private String publish_date;
-    private int vacancy;
+    private int jobId;
+    private String status;
     private String description;
-    private String jobType;
-    private int salary;
-    private int last_date;
+    private String role;
+    
+    @OneToOne
+   private Employee emp;
+    
 }
