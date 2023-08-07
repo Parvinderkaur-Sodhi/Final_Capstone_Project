@@ -1,8 +1,10 @@
 package com.example.trial.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.example.trial.models.Attendance;
@@ -24,31 +26,55 @@ public class AttendanceServiceImpl implements AttendanceService {
 		this.empRepo = empRepo;
 	}
 	
-	@Override
-	public Attendance markAttendance(Attendance attendance) {
-		// TODO Auto-generated method stub
-		attendance.setAttendanceDate(LocalDate.now());
-		return attendancerepo.save(attendance);
-	
-	}
+    @Override
+    public Attendance markAttendance(Attendance attendance) {
+        if (!attendance.isPresent()) {
+            attendance.setAttendanceDate(null); 
+            if (attendance.getAbsenceReason() == null || attendance.getAbsenceReason().isEmpty()) {
+                attendance.setAbsenceReason("Reason not provided");
+            }
+        } else {
+            attendance.setAttendanceDate(LocalDate.now());
+            attendance.setAbsenceReason("NA"); 
+        }
+        attendance.setAttendanceDate(LocalDate.now());
+        return attendancerepo.save(attendance);
+    }
 
-	@Override
-	public Attendance updateAttendance(int attendanceId, Attendance updatedAttendance) {
-		// TODO Auto-generated method stub
-		Attendance attendance= attendancerepo.findById(attendanceId).orElse(null);
-		if(attendance==null) {
-			return null;
-		}
-		attendance.setPresent(updatedAttendance.isPresent());
-		return attendancerepo.save(attendance);
-	}
+    @Override
+    public Attendance updateAttendance(int attendanceId, Attendance updatedAttendance) {
+        Attendance attendance = attendancerepo.findById(attendanceId).orElse(null);
+        if (attendance == null) {
+            return null;
+        }
 
-	@Override
-	public Employee getEmployeeById(int employeeId) {
-		// TODO Auto-generated method stub
-		return empRepo.findById(employeeId).orElse(null);
-	}
+        if (attendance.isPresent() != updatedAttendance.isPresent()) {
+            attendance.setPresent(updatedAttendance.isPresent());
+            
+            if (!updatedAttendance.isPresent()) {
+                if (updatedAttendance.getAbsenceReason() == null || updatedAttendance.getAbsenceReason().isEmpty()) {
+                    attendance.setAbsenceReason("Reason not provided");
+                } else {
+                    attendance.setAbsenceReason(updatedAttendance.getAbsenceReason());
+                }
+            } else {
+                attendance.setAbsenceReason(null);
+            }
+        }
+       
+        return attendancerepo.save(attendance);
+    }
 
-	
+    @Override
+    public Employee getEmployeeById(int employeeId) {
+        return empRepo.findById(employeeId).orElse(null);
+    }
+
+    @Override
+    public List<Attendance> getAttendanceByEmployeeId(int employeeId) {
+        return attendancerepo.findByEmployeeEmployeeId(employeeId);
+    }
+
+
 
 }

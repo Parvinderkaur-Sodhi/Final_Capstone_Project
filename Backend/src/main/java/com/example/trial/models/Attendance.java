@@ -26,9 +26,14 @@ public class Attendance {
 	private boolean present;
     private LocalDate attendanceDate;
     
+    private String absenceReason; 
+
+    
     @ManyToOne
     @JoinColumn
     private Employee employee;
+    
+    
    
     public Attendance(Employee employee) {
 		super();
