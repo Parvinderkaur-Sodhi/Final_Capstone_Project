@@ -52,16 +52,7 @@ public class Employee {
     }
 
     @OneToOne
-    @JoinColumn(name = "email", referencedColumnName = "email", unique = true)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
-    // Getter and Setter for the User association
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 }
