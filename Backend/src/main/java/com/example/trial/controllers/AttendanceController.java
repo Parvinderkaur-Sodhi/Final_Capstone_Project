@@ -1,8 +1,12 @@
 package com.example.trial.controllers;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,7 +32,7 @@ public class AttendanceController {
 	
 	@PostMapping("/addattendance/{employeeId}")
 	public ResponseEntity<Attendance> markAttendance(@PathVariable int employeeId, @RequestBody Attendance attendance){
-		//retrieve employee using employeeId
+		
 		Employee employee= attendanceService.getEmployeeById(employeeId);
 		if(employee==null) {
 			return ResponseEntity.notFound().build();
@@ -37,7 +41,10 @@ public class AttendanceController {
 		
 		
 		Attendance savedAttendance=attendanceService.markAttendance(attendance);
-		return ResponseEntity.ok(savedAttendance);
+		
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(savedAttendance);
+		
 	}
 	
 	@PutMapping("/{attendanceId}")
@@ -49,7 +56,14 @@ public class AttendanceController {
 		return ResponseEntity.ok(attendance);
 	}
 	
-	
+	@GetMapping("/{employeeId}")
+	public ResponseEntity<List<Attendance>> getAttendanceByEmployeeId(@PathVariable int employeeId) {
+		List<Attendance> attendanceList = attendanceService.getAttendanceByEmployeeId(employeeId);
+		if (attendanceList.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(attendanceList);
+	}
 	
 	
 	
