@@ -1,8 +1,5 @@
 package com.example.trial.models;
-
 import javax.persistence.*;
-
-
 
 @Entity
 @Table(name = "auser")
@@ -57,6 +54,18 @@ public class User {
 
     public User() {
         super();
+    }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Employee employee;
+
+    // Getter and Setter for the Employee association
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 }
