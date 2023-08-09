@@ -77,9 +77,9 @@ public class AppliedJobsController {
     }
 
     //edit AppliedJobs details
-    @PutMapping("/updateStatus/{AppliedJobId}")
-    public AppliedJobs updateAppliedJobs(@PathVariable int AppliedJobId, @RequestBody AppliedJobs AppliedJobs) {
-        return AppliedJobsService.updateStatus(AppliedJobId, AppliedJobs);
+    @PutMapping("/updateStatus/{AppliedJobId}/{status}")
+    public AppliedJobs updateAppliedJobs(@PathVariable int AppliedJobId, @PathVariable String status) {
+        return AppliedJobsService.updateStatus(AppliedJobId, status);
     }
 
 

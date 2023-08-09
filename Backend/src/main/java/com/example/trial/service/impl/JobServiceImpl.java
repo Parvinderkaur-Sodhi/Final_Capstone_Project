@@ -63,7 +63,8 @@ public class JobServiceImpl implements JobService{
 			            existingjob.setDescription(Job.getDescription());
 			            existingjob.setJobType(Job.getJobType());
 			            existingjob.setSalary(Job.getSalary());
-existingjob.setLast_date(Job.getLast_date());
+existingjob.setLastdate(Job.getLastdate());
+existingjob.setActive(false);
 			            return jobrepo.save(existingjob);
 			        }
 			        return null;

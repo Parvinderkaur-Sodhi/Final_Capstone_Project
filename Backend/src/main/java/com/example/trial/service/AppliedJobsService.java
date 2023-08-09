@@ -20,7 +20,8 @@ public interface AppliedJobsService {
 
     AppliedJobs applyForJob(int empId,int JobId,AppliedJobs Job);
 
-    AppliedJobs updateStatus(int applicationno, AppliedJobs Job);
+
+	AppliedJobs updateStatus(int applicationno, String status);
 
 //    void deleteJob(int JobId);
 }

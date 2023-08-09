@@ -22,5 +22,6 @@ public class Jobs {
     private String description;
     private String jobType;
     private int salary;
-    private String last_date;
+    private String lastdate;
+    private boolean active;
 }

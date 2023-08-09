@@ -20,12 +20,12 @@ public class AppliedJobs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int applicationId;
     
-    private int jobId;
-    private String status;
-    private String description;
-    private String role;
+    @OneToOne
+    private Jobs job;
+    
+   private String status;
     
     @OneToOne
-   private Employee emp;
+    private Employee emp;
     
 }
