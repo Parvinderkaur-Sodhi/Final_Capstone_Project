@@ -26,6 +26,6 @@ public class AppliedJobs {
     private String role;
     
     @OneToOne
-   private Employee emp;
+    private Employee emp;
     
 }
