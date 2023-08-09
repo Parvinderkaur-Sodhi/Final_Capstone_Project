@@ -22,5 +22,5 @@ public class Jobs {
     private String description;
     private String jobType;
     private int salary;
-    private int last_date;
+    private String last_date;
 }
