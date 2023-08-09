@@ -41,9 +41,9 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 			}
 
 			@Override
-			public AppliedJobs applyForJob(int empId,int jobId,AppliedJobs appliedJob) {
-				Jobs job=jobservice.getJobById(jobId);
-				Employee emp=empservice.getEmployeeById(empId);
+			public AppliedJobs applyForJob(int empId,int jobId, AppliedJobs appliedJob) {
+				Jobs job = jobservice.getJobById(jobId);
+				Employee emp = empservice.getEmployeeById(empId);
 				List<AppliedJobs>appliedjoblist=appliedjobrepo.findAll();
 				for(int i=0; i<appliedjoblist.size(); i++)  {
 					AppliedJobs appliedjob=appliedjoblist.get(i);
@@ -52,7 +52,8 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 				}
 				}
 					appliedJob.setJob(job);
-
+			
+				appliedJob.setStatus("inprocess");
 				appliedJob.setEmp(emp);
 				
 				 return appliedjobrepo.save(appliedJob);
