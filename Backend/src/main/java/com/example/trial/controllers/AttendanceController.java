@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.example.trial.models.Employee;
 import com.example.trial.service.AttendanceService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000, maxAge = 3600")
 @RequestMapping("/api/attendance")
 public class AttendanceController {
 	
@@ -65,7 +67,12 @@ public class AttendanceController {
 		return ResponseEntity.ok(attendanceList);
 	}
 	
-	
+	// need to add get all attendance
+	@GetMapping("/AllAttendance")
+	public ResponseEntity<List<Attendance>> getAllAttendanceDetails(){
+		List<Attendance> allD=attendanceService.getAllAttendance();
+		return new ResponseEntity<>(allD, HttpStatus.OK);
+	}
 	
 	
 

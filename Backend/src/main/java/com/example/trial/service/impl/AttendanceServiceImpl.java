@@ -75,6 +75,12 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendancerepo.findByEmployeeEmployeeId(employeeId);
     }
 
+	@Override
+	public List<Attendance> getAllAttendance() {
+		List<Attendance> at= attendancerepo.findAll();
+		return at;
+	}
+
 
 
 }

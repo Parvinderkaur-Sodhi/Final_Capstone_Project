@@ -20,7 +20,7 @@ import com.example.trial.models.Jobs;
 import com.example.trial.service.JobService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000, maxAge = 3600")
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/Jobs")
 public class JobController {
 
@@ -34,6 +34,7 @@ public class JobController {
     //List of Jobs
     @GetMapping("/viewJob")
     public List<Jobs> getAllJobs() {
+    	System.out.print("helii");
         return JobService.getAllJobs();
     }
 
