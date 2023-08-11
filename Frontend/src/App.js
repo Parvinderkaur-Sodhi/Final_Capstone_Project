@@ -12,6 +12,7 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
+import AllJob from "./components/JobManagementComponents/AllJob";
 
 class App extends Component {
   constructor(props) {
@@ -110,6 +111,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/user" component={User} />
+              <Route exact path="/job" component={AllJob}/>
             </Switch>
           </div>
         </div>
