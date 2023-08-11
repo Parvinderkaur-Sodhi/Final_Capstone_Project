@@ -20,7 +20,7 @@ import com.example.trial.models.AppliedJobs;
 import com.example.trial.service.AppliedJobsService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000, maxAge = 3600")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/AppliedJobs")
 public class AppliedJobsController {
 
