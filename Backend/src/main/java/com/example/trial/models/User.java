@@ -14,6 +14,8 @@ public class User {
     private String email;
     private String password;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Employee employee;
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
@@ -56,6 +58,5 @@ public class User {
         super();
     }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Employee employee;
+  
 }

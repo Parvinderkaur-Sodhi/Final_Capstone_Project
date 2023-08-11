@@ -13,7 +13,7 @@ import com.example.trial.models.Jobs;
 @EnableJpaRepositories
 	public interface AppliedJobsRepository extends JpaRepository<AppliedJobs, Integer>{
 		// TODO Auto-generated constructor stub
-AppliedJobs getJobByRole(String profile);
+AppliedJobs findByJobJobProfile(String profile);
 
     List<AppliedJobs>findAllByStatus(String status);
 	}

@@ -47,26 +47,38 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 				List<AppliedJobs>appliedjoblist=appliedjobrepo.findAll();
 				for(int i=0; i<appliedjoblist.size(); i++)  {
 					AppliedJobs appliedjob=appliedjoblist.get(i);
-				if(appliedjob.getJobId()==job.getJobId() && appliedjob.getEmp().getEmployeeId()==emp.getEmployeeId()) {
+				if(appliedjob.getJob().getJobId()==job.getJobId() && appliedjob.getEmp().getEmployeeId()==emp.getEmployeeId()) {
 					return null;
 				}
 				}
-				appliedJob.setJobId(job.getJobId());
-				appliedJob.setRole(job.getJobProfile());
-				appliedJob.setDescription(job.getDescription());
+					appliedJob.setJob(job);
+			
 				appliedJob.setStatus("inprocess");
 				appliedJob.setEmp(emp);
+				
 				 return appliedjobrepo.save(appliedJob);
 
 			}
 
 			@Override
-			public AppliedJobs updateStatus(int applicationno, AppliedJobs Job) {
+			public AppliedJobs updateStatus(int applicationno, String status) {
 				// TODO Auto-generated method stub
+				String currstatus="accept";
 				 AppliedJobs existingappliedjob = appliedjobrepo.findById(applicationno).orElse(null);
 			        if (existingappliedjob != null) {
 			            // Update properties of existingJobs using jobs object
-			            existingappliedjob.setStatus(Job.getStatus());		
+			        	
+			            existingappliedjob.setStatus(status);	
+			            System.out.println(status);
+			            System.out.println(currstatus);
+			            if(status.equals(currstatus)){
+							System.out.println("working");
+						
+							Jobs job1=jobservice.getJobById(existingappliedjob.getJob().getJobId());
+							job1.setVacancy(job1.getVacancy()-1);
+							System.out.println(job1);
+							jobservice.saveJob(job1);
+						}
 			            return appliedjobrepo.save(existingappliedjob);
 			            }
 			        return null;
@@ -74,7 +86,7 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 
 			@Override
 			public AppliedJobs getJobByJobProfile(String profile) {
-				 AppliedJobs credentials = appliedjobrepo.getJobByRole(profile);
+				 AppliedJobs credentials = appliedjobrepo.findByJobJobProfile(profile);
 
 				   return credentials;
 			}
