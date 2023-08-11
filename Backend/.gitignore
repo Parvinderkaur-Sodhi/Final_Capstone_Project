@@ -6,6 +6,7 @@ target/
 !**babel-loader/
 node_modules/
 .cache
+package-lock.json
 
 ### STS ###
 .apt_generated
@@ -21,7 +22,7 @@ node_modules/
 *.iws
 *.iml
 *.ipr
-.properties
+application.properties
 *resources
 
 ### NetBeans ###
