@@ -13,7 +13,11 @@ import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
-
+import LeaveTypeList from "./components/LeaveManagementComponents/TypeComp/LeaveTypeList";
+import LeaveTypeListUser from "./components/LeaveManagementComponents/TypeComp/LeaveTypeListUsers";
+import LeaveRequestList from "./components/LeaveManagementComponents/LeaveRequestComp/LeaveRequestList";
+import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceList";
+//import AdminDashboard from "./components/adminDashboard.component";
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +29,7 @@ class App extends Component {
     };
 
     history.listen((location) => {
-      props.dispatch(clearMessage()); 
+      props.dispatch(clearMessage());
     });
   }
 
@@ -55,17 +59,17 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser} = this.state;
+    const { currentUser } = this.state;
 
     return (
       <Router history={history}>
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
-              HRMS Internal Portal
+              HRMS/Job Portal System
             </Link>
             <div className="navbar-nav mr-auto">
-              
+
               {currentUser && (
                 <li className="nav-item">
                   <Link to={"/user"} className="nav-link">
@@ -107,7 +111,10 @@ class App extends Component {
 
           <div className="container mt-3">
             <Switch>
-              <Route exact path={["/", "/register"]} component={Register} />
+            {/* {currentUser && currentUser.username === "Admin" && currentUser.email === "admin@gmail.com" && (
+                <Route exact path="/admin-dashboard" component={AdminDashboard} />
+              )} */}
+              <Route exact path={["/", "/login"]} component={Login} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
@@ -115,6 +122,10 @@ class App extends Component {
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
 
              
+              <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
+              <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
+              <Route path="/type-list" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
+              <Route path="/type-list-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
             </Switch>
           </div>
         </div>
