@@ -58,7 +58,12 @@ class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       dispatch(login(this.state.username, this.state.password))
         .then(() => {
-          history.push("/profile");
+          // history.push("/profile");
+          if (this.state.username === "Admin" && this.state.email === "admin@gmail.com") {
+            history.push("/admin-dashboard");
+          } else {
+            history.push("/profile");
+          }
           window.location.reload();
         })
         .catch(() => {
@@ -76,8 +81,12 @@ class Login extends Component {
   render() {
     const { isLoggedIn, message } = this.props;
 
+    // if (isLoggedIn) {
+    //   return <Redirect to="/profile" />;
+    // }
+
     if (isLoggedIn) {
-      return <Redirect to="/profile" />;
+      return <Redirect to={this.state.username === "Admin" && this.state.email === "admin@gmail.com" ? "/admin-dashboard" : "/profile"} />;
     }
 
     return (
