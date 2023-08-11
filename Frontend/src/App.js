@@ -12,6 +12,8 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
+import EmployeeList from "./components/EmployeeComponents/EmployeeList";
+
 
 class App extends Component {
   constructor(props) {
@@ -60,7 +62,7 @@ class App extends Component {
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
-              Knowledgefactory
+              HRMS Internal Portal
             </Link>
             <div className="navbar-nav mr-auto">
               
@@ -110,6 +112,9 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/user" component={User} />
+              <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
+
+             
             </Switch>
           </div>
         </div>

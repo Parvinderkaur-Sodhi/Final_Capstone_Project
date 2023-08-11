@@ -15,6 +15,7 @@ public interface AttendanceService {
     Employee getEmployeeById(int employeeId);
     
     List<Attendance> getAttendanceByEmployeeId(int employeeId);
+    List<Attendance> getAllAttendance();
     
 
 }
