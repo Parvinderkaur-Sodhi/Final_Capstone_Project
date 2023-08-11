@@ -18,6 +18,8 @@ import LeaveTypeList from "./components/LeaveManagementComponents/TypeComp/Leave
 import LeaveTypeListUser from "./components/LeaveManagementComponents/TypeComp/LeaveTypeListUsers";
 import LeaveRequestList from "./components/LeaveManagementComponents/LeaveRequestComp/LeaveRequestList";
 import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceList";
+import AddLeaveType from "./components/LeaveManagementComponents/TypeComp/AddLeaveType";
+import UpdateLeaveType from "./components/LeaveManagementComponents/TypeComp/UpdateLeaveType";
 //import AdminDashboard from "./components/adminDashboard.component";
 
 class App extends Component {
@@ -122,12 +124,12 @@ class App extends Component {
               <Route exact path="/user" component={User} />
               <Route exact path="/job" component={AllJob}/>
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
-
-             
-              <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
-              <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
-              <Route path="/type-list" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
-              <Route path="/type-list-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
+              <Route path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
+              <Route path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
+              <Route path="/leave-types" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
+              <Route path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
+              <Route exact path="/addLeaveTypes" render={(props) => <AddLeaveType {...props} user={this.props.user} />} />
+              <Route path="/updateLeaveType/:leaveTypeId" component={UpdateLeaveType} />
             </Switch>
           </div>
         </div>

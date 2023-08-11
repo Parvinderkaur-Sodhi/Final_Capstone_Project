@@ -32,6 +32,7 @@ public class Employee {
     private String phoneNumber;
     private String department;
     private String jobTitle;
+    private String email;
 
     @Temporal(TemporalType.DATE)
     private Date doJoining;

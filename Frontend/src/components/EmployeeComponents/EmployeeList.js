@@ -35,6 +35,7 @@ function EmployeeList(props) {
               <TableCell>Gender</TableCell>
               <TableCell>DOB</TableCell>
               <TableCell>Department</TableCell>
+              <TableCell>Email</TableCell>
               <TableCell>Phone no</TableCell>
               <TableCell>Date of Joinig</TableCell>
               <TableCell>Job Title</TableCell>
@@ -52,6 +53,7 @@ function EmployeeList(props) {
                 <TableCell>{employee.gender}</TableCell>
                 <TableCell>{employee.dob}</TableCell>
                 <TableCell>{employee.department}</TableCell>
+                <TableCell>{employee.email}</TableCell>
                 <TableCell>{employee.phoneNumber}</TableCell>
                 <TableCell>{employee.doJoining}</TableCell>
                 <TableCell>{employee.jobTitle}</TableCell>

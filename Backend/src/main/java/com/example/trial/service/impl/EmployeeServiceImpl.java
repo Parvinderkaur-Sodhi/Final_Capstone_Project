@@ -51,6 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             existingEmployee.setDoJoining(employee.getDoJoining());
             existingEmployee.setEmployeePic(employee.getEmployeePic());
             existingEmployee.setResume(employee.getResume());
+            existingEmployee.setEmail(employee.getEmail());
 
             return employeeRepository.save(existingEmployee);
         }

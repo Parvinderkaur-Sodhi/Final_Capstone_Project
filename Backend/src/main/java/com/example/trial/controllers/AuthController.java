@@ -1,5 +1,6 @@
 package com.example.trial.controllers;
 
+import com.example.trial.models.Employee;
 import com.example.trial.models.User;
 import com.example.trial.repository.UserRepository;
 import com.example.trial.request.LoginRequest;
@@ -8,6 +9,7 @@ import com.example.trial.response.JwtResponse;
 import com.example.trial.response.MessageResponse;
 import com.example.trial.security.jwt.JwtUtils;
 import com.example.trial.security.services.UserDetailsImpl;
+import com.example.trial.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,6 +39,14 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public AuthController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateuser(@RequestBody LoginRequest loginRequest) {
@@ -68,6 +78,13 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
 
         userRepository.save(user);
+
+        // Create corresponding employee record
+        Employee employee = new Employee();
+        employee.setUser(user);
+        employee.setEmail(signUpRequest.getEmail());
+        // Set other fields to null or default values
+        employeeService.saveEmployee(employee);
 
         return ResponseEntity.ok(new MessageResponse("user registered successfully!"));
     }

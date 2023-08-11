@@ -1,5 +1,5 @@
 import React from 'react'
-import EmployeeService from '../../services/Employee.service';
+import EmployeeService from '../../services/employee.service';
 import { useEffect } from 'react';
 import { useState } from 'react';
 

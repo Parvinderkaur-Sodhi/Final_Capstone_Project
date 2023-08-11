@@ -24,6 +24,15 @@ getAllLeaveBalances() {
   return axios.get(API_URL_BAL, { headers: authHeader() });
 }
 
+saveLeaveType(typedata) {
+  return axios.post(API_URL_TYPE, typedata, {headers: authHeader()})
+}
+
+updateLeaveType(leaveTypeId, leaveTypeData) {
+  const url = `${API_URL_TYPE}/${leaveTypeId}`;
+  return axios.put(url, leaveTypeData, { headers: authHeader() });
+}
+
 }
 
 export default new HrService();
