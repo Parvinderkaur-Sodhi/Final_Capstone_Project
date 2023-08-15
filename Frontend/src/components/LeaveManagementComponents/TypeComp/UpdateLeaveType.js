@@ -13,7 +13,7 @@ function UpdateLeaveType(props) {
     const [redirectToList, setRedirectToList] = useState(false);
 
     useEffect(() => {
-        HrService.getLeaveType(typeId)
+        HrService.getLeaveTypeById(typeId)
             .then((response) => {
                 const leaveTypeData = response.data;
                 setLeaveType(leaveTypeData);
@@ -27,12 +27,12 @@ function UpdateLeaveType(props) {
 
     const handleUpdateLeaveType = () => {
         const updatedLeaveType = {
-            typeId,
+            typeId: leaveType.typeId,
             typeName: leaveTypeName,
             countAllowed: leaveTypeAllowedCount,
         };
 
-        HrService.updateLeaveType(updatedLeaveType)
+        HrService.updateLeaveType(leaveType.typeId, updatedLeaveType)
             .then((response) => {
                 setRedirectToList(true);
             })
@@ -46,44 +46,42 @@ function UpdateLeaveType(props) {
     }
 
     if (redirectToList) {
-        return <Redirect to="/leaves-types" />;
+        return <Redirect to="/leave-types" />;
     }
-
+    
     return (
         <div>
             <Card>
                 <CardHeader title={`Update Leave Type - ${leaveType.typeName}`} />
-                <hr></hr>
                 <CardContent>
-                    <Box textAlign="center" margin={1}>
-                        <TextField
-                            label="Leave Type Name"
-                            variant="outlined"
-                            value={leaveTypeName}
-                            onChange={(e) => setLeaveTypeName(e.target.value)}
-                        />
-                        &nbsp;&nbsp;
-                        <TextField
-                            label="Allowed Count"
-                            type="number"
-                            variant="outlined"
-                            value={leaveTypeAllowedCount}
-                            onChange={(e) => setLeaveTypeAllowedCount(e.target.value)}
-                        />
-                    </Box>
+                    <form>
+                        <Box display="flex" flexDirection="column" alignItems="center">
+                            <TextField
+                                label="Leave Type Name"
+                                variant="outlined"
+                                value={leaveTypeName}
+                                onChange={(e) => setLeaveTypeName(e.target.value)}
+                                style={{ marginBottom: "20px" }}
+                            />
+                            <TextField
+                                label="Allowed Count"
+                                type="number"
+                                variant="outlined"
+                                value={leaveTypeAllowedCount}
+                                onChange={(e) => setLeaveTypeAllowedCount(e.target.value)}
+                                style={{ marginBottom: "20px" }}
+                            />
+                            <Button
+                                variant="outlined"
+                                color="success"
+                                startIcon={<Done />}
+                                onClick={handleUpdateLeaveType}
+                            >
+                                Update Leave Type
+                            </Button>
+                        </Box>
+                    </form>
                 </CardContent>
-                <CardActions>
-                    <Box display="flex" justifyContent="center" width="100%">
-                        <Button
-                            variant="outlined"
-                            color="success"
-                            startIcon={<Done />}
-                            onClick={handleUpdateLeaveType}
-                        >
-                            Update Leave Type
-                        </Button>
-                    </Box>
-                </CardActions>
             </Card>
         </div>
     );

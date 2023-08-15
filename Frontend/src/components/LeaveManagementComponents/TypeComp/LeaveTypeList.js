@@ -1,12 +1,15 @@
+// LeaveTypeList.js
 import React, { useState, useEffect } from "react";
 import { Redirect, Link } from 'react-router-dom';
 import HrService from "../../../services/hr.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Card, CardContent, CardActions, CardHeader } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Card, CardContent, CardActions, CardHeader, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Delete, Create, AddCircleOutline } from '@mui/icons-material';
 
 function LeaveTypeList(props) {
   const [leaveTypes, setLeaveTypes] = useState([]);
   const { user: currentUser } = props;
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedLeaveType, setSelectedLeaveType] = useState(null);
 
   useEffect(() => {
     HrService.getAllLeaveTypes()
@@ -19,6 +22,31 @@ function LeaveTypeList(props) {
       });
   }, []);
 
+  const handleDeleteClick = (leaveType) => {
+    setSelectedLeaveType(leaveType);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (selectedLeaveType) {
+      HrService.deleteLeaveType(selectedLeaveType.typeId)
+        .then(() => {
+          // Filter out the deleted leave type from the list
+          setLeaveTypes(leaveTypes.filter((lt) => lt.typeId !== selectedLeaveType.typeId));
+          setSelectedLeaveType(null);
+          setDeleteDialogOpen(false);
+        })
+        .catch((error) => {
+          console.log("Error deleting leave type:", error);
+        });
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setSelectedLeaveType(null);
+    setDeleteDialogOpen(false);
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -28,14 +56,14 @@ function LeaveTypeList(props) {
       <Card>
         <CardHeader className="title" title="Leave Type List" />
         <CardContent>
-          <TableContainer component={Paper}>
-            <Table>
+          <TableContainer component={Paper} style={{ width: "100%" }}>
+            <Table stickyHeader>
               <TableHead>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Allowed Count</TableCell>
-                  <TableCell>Actions</TableCell>
+                  <TableCell style={{ width: "10%" }}>ID</TableCell>
+                  <TableCell style={{ width: "30%" }}>Name</TableCell>
+                  <TableCell style={{ width: "20%" }}>Allowed Count</TableCell>
+                  <TableCell style={{ width: "30%" }}>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -49,7 +77,7 @@ function LeaveTypeList(props) {
                         <Button variant="outlined" startIcon={<Create />}>Edit</Button>
                       </Link>
                       &nbsp;
-                      <Button variant="outlined" color="error" startIcon={<Delete />}>
+                      <Button variant="outlined" color="error" startIcon={<Delete />} onClick={() => handleDeleteClick(leaveType)}>
                         Delete
                       </Button>
                     </TableCell>
@@ -57,17 +85,33 @@ function LeaveTypeList(props) {
                 ))}
               </TableBody>
             </Table>
-            <CardActions>
-              <Box display="flex" justifyContent="center" width="100%">
-                <Link to="/addLeaveTypes">
-                  <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Leave Type</Button>
-                </Link>
-              </Box>
-            </CardActions>
           </TableContainer>
+          <br></br>
+          <CardActions>
+            <Box display="flex" justifyContent="flex-end" width="100%">
+              <Link to="/addLeaveTypes">
+                <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Leave Type</Button>
+              </Link>
+            </Box>
+          </CardActions>
         </CardContent>
-      </Card >
-    </div >
+      </Card>
+
+      <Dialog open={deleteDialogOpen}>
+        <DialogTitle>Delete Leave Type</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete the leave type?
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteCancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="error">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
 

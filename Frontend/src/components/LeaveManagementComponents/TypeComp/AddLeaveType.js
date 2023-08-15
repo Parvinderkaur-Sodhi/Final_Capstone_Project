@@ -30,7 +30,7 @@ function AddLeaveType(props) {
     }
 
     if (redirectToList) {
-        return <Redirect to="/leaves-types" />;
+        return <Redirect to="/leave-types" />;
     }
 
     return (
