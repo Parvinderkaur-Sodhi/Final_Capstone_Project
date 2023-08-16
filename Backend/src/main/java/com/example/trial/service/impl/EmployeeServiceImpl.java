@@ -51,7 +51,15 @@ public class EmployeeServiceImpl implements EmployeeService {
             existingEmployee.setDoJoining(employee.getDoJoining());
             existingEmployee.setEmployeePic(employee.getEmployeePic());
             existingEmployee.setResume(employee.getResume());
-
+            existingEmployee.setEmail(employee.getEmail());
+            existingEmployee.setAddress(employee.getAddress());
+            existingEmployee.setDoLeaving(employee.getDoLeaving());
+            existingEmployee.setIdNo(employee.getIdNo());
+            existingEmployee.setUsername(employee.getUsername());
+            existingEmployee.setPAddress(employee.getPAddress());
+            existingEmployee.setEmployeeStatus(employee.getEmployeeStatus());
+            existingEmployee.setUserId(employee.getUserId());
+            existingEmployee.setOther(employee.getOther());
             return employeeRepository.save(existingEmployee);
         }
         return null;
@@ -61,9 +69,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployee(int employeeId) {
         employeeRepository.deleteById(employeeId);
     }
-    
-    
-   
 
+    @Override
+    public Integer getEmployeeIdByUserId(Long userId) {
+        return employeeRepository.getEmployeeIdByUserId(userId);
+    }
     
 }

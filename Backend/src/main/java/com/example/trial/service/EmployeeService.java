@@ -13,6 +13,8 @@ public interface EmployeeService {
     Employee updateEmployee(int employeeId, Employee employee);
 
     void deleteEmployee(int employeeId);
+
+    public Integer getEmployeeIdByUserId(Long userId);
     
    
 }

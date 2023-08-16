@@ -8,7 +8,7 @@ function LeaveRequestList(props) {
   const { user: currentUser } = props;
 
   useEffect(() => {
-    HrService.getAllLeaveRequest()
+    HrService.getAllLeaveRequests()
       .then((response) => {
         console.log(response)
         setLeaveRequests(response.data);

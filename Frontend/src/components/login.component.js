@@ -59,7 +59,7 @@ class Login extends Component {
       dispatch(login(this.state.username, this.state.password))
         .then(() => {
           // history.push("/profile");
-          if (this.state.username === "Admin" && this.state.email === "admin@gmail.com") {
+          if (this.state.username == "Admin" && this.state.email == "admin@gmail.com") {
             history.push("/admin-dashboard");
           } else {
             history.push("/profile");

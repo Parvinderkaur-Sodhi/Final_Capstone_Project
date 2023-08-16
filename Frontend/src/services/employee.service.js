@@ -3,6 +3,7 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/api/";
 const API_URL_ATND="http://localhost:8080/api/attendance";
+const API_URL_REQ = "http://localhost:8080/api/leave-requests";
 
 class EmployeeService {
   
@@ -21,6 +22,10 @@ class EmployeeService {
     const url=`${API_URL_ATND}/${employeeId}`;
     return axios.get(url, {headers: authHeader()} );
  }
+  //Leave Requests
+  getLeaveRequestByEmployeeId() {
+    return axios.get(`${API_URL_REQ}/employee/${employeeIdd}`, { headers: authHeader() });
+  }
   
 }
 

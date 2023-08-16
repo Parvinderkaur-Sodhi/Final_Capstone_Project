@@ -32,11 +32,21 @@ public class Employee {
     private String phoneNumber;
     private String department;
     private String jobTitle;
+    private String email;
+    private String username;
 
     @Temporal(TemporalType.DATE)
     private Date doJoining;
 
+    @Temporal(TemporalType.DATE)
+    private Date doLeaving;
+
     private String employeeStatus;
+    private String address;
+    private String pAddress;
+    private Long idNo;
+
+    private String other;
 
     @Lob
     private byte[] employeePic;
@@ -44,12 +54,10 @@ public class Employee {
     @Lob
     private byte[] resume;
 
+    private long userId;
+
 //	public LeaveBalance getLeaveBalanceByType(LeaveType leaveTypeName) {
 //        return null;
 //    }
-
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 
 }
