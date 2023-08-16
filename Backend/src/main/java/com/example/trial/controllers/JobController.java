@@ -20,7 +20,7 @@ import com.example.trial.models.Jobs;
 import com.example.trial.service.JobService;
 
 @RestController
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/Jobs")
 public class JobController {
 
