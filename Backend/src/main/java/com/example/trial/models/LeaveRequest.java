@@ -88,7 +88,6 @@ public class LeaveRequest {
                         }
 
                         newLeaveBalance.setBalance(balance);
-                        // Save the new leave balance through the save endpoint
                         leaveBalanceController.saveLeaveBalance(newLeaveBalance);
                     }
                 }

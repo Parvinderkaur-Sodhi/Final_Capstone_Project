@@ -55,8 +55,12 @@ getAllLeaveRequests() {
   return axios.get(API_URL_REQ, { headers: authHeader() });
 }
 
-getLeaveRequestsById() {
+getLeaveRequestsById(requestId) {
   return axios.get(`${API_URL_REQ}/${requestId}`, { headers: authHeader() });
+}
+
+setStatusLeaveRequest(requestId, status) {
+  return axios.put(`${API_URL_REQ}/${requestId}/status`, status, { headers: authHeader() });
 }
 
 //Leave Balances

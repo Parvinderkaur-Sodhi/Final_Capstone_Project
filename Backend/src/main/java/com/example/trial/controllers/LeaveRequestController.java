@@ -53,7 +53,7 @@ public class LeaveRequestController {
         leaveRequestService.deleteLeaveRequest(leaveRequestId);
     }
 
-    @GetMapping("/{employeeId}")
+    @GetMapping("leaves/{employeeId}")
     public List<LeaveRequest> getLeaveRequestsByEmployeeId(@PathVariable int employeeId) {
         return leaveRequestService.getLeaveRequestsByEmployeeId(employeeId);
     }

@@ -13,16 +13,25 @@ import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
 import AllJob from "./components/JobManagementComponents/AllJob";
+
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
 import EmployeeListUser from "./components/EmployeeComponents/EmployeeListUser";
 import AddEmployee from "./components/EmployeeComponents/AddEmployee";
 import UpdateEmployee from "./components/EmployeeComponents/UpdateEmployee";
+
 import LeaveTypeList from "./components/LeaveManagementComponents/TypeComp/LeaveTypeList";
 import LeaveTypeListUser from "./components/LeaveManagementComponents/TypeComp/LeaveTypeListUsers";
-import LeaveRequestList from "./components/LeaveManagementComponents/LeaveRequestComp/LeaveRequestList";
-import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceList";
 import AddLeaveType from "./components/LeaveManagementComponents/TypeComp/AddLeaveType";
 import UpdateLeaveType from "./components/LeaveManagementComponents/TypeComp/UpdateLeaveType";
+
+import LeaveRequestList from "./components/LeaveManagementComponents/LeaveRequestComp/LeaveRequestList";
+import LeaveRequestListUser from "./components/LeaveManagementComponents/LeaveRequestCompUser/LeaveRequestListUser";
+import UpdateLeaveRequestUser from "./components/LeaveManagementComponents/LeaveRequestCompUser/UpdateLeaveRequestUser";
+import AddLeaveRequest from "./components/LeaveManagementComponents/LeaveRequestCompUser/AddLeaveRequestUser";
+
+import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceList";
+import LeaveBalanceListUser from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceListUser";
+import HrHome from "./components/UserComponents/HrHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
 //import AdminDashboard from "./components/adminDashboard.component";
 
@@ -126,14 +135,22 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/user" component={User} />
+              <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
+
               <Route exact path="/job" component={AllJob}/>
+
               <Route exact path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route exact path="/add-employee" render={(props) => <AddEmployee {...props} user={this.props.user} />} />
               <Route exact path="/update-employee/:employeeId" render={(props) => <UpdateEmployee {...props} user={this.props.user} />} />
               <Route exact path="/employee-list-user" render={(props) => <EmployeeListUser {...props} user={this.props.user} />} />
 
-              <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
-              <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-requests" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-request-user" render={(props) => <LeaveRequestListUser {...props} user={this.props.user} />} />
+              <Route exact path="/updateLeaveRequest/:requestId" render={(props) => <UpdateLeaveRequestUser {...props} user={this.props.user} />} />
+              <Route exact path="/add-leave-request" render={(props) => <AddLeaveRequest {...props} user={this.props.user} />} />
+
+              <Route exact path="/leave-balances" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-balances-user" render={(props) => <LeaveBalanceListUser {...props} user={this.props.user} />} />
               
               <Route exact path="/leave-types" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
               <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />

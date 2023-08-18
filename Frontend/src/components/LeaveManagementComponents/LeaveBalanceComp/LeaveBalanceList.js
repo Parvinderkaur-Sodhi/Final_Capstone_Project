@@ -29,19 +29,21 @@ function LeaveBalanceList(props) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Employee ID</TableCell>
-              <TableCell>Leave Type</TableCell>
-              <TableCell>Balance</TableCell>
+              <TableCell style={{ width: "10%" }}>ID</TableCell>
+              <TableCell style={{ width: "10%" }}>Employee Name</TableCell>
+              <TableCell style={{ width: "10%" }}>Leave Type</TableCell>
+              <TableCell style={{ width: "10%" }}>Balance</TableCell>
+              <TableCell style={{ width: "10%" }}>Leaves Used</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {leaveBalances.map((leaveBalance) => (
-              <TableRow key={leaveBalance.id}>
-                <TableCell>{leaveBalance.id}</TableCell>
-                <TableCell>{leaveBalance.employeeId}</TableCell>
-                <TableCell>{leaveBalance.leaveType}</TableCell>
+              <TableRow key={leaveBalance.balanceId}>
+                <TableCell>{leaveBalance.balanceId}</TableCell>
+                <TableCell>{leaveBalance.employee.fname}</TableCell>
+                <TableCell>{leaveBalance.leaveType.typeName}</TableCell>
                 <TableCell>{leaveBalance.balance}</TableCell>
+                <TableCell>{leaveBalance.leaveType.countAllowed - leaveBalance.balance}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -52,3 +54,4 @@ function LeaveBalanceList(props) {
 }
 
 export default LeaveBalanceList;
+

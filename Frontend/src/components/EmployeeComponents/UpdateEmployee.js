@@ -142,7 +142,10 @@ function UpdateEmployee(props) {
                         <Grid item xs={12} md={6}>
                             <TextField
                                 label="Date of Birth"
-                                type="date" // Use type "date" for date picker input
+                                type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 value={employee.dob || ""}
                                 onChange={(e) => handleFieldChange("dob", e.target.value)}
                                 fullWidth
@@ -173,7 +176,10 @@ function UpdateEmployee(props) {
                         <Grid item xs={12} md={6}>
                             <TextField
                                 label="Date of Joining"
-                                type="date" // Use type "date" for date picker input
+                                type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 value={employee.doJoining || ""}
                                 onChange={(e) => handleFieldChange("doJoining", e.target.value)}
                                 fullWidth
@@ -239,7 +245,10 @@ function UpdateEmployee(props) {
                         <Grid item xs={12} md={6}>
                             <TextField
                                 label="Date of Leaving"
-                                type="date" // Use type "date" for date picker input
+                                type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 value={employee.doLeaving || ""}
                                 onChange={(e) => handleFieldChange("doLeaving", e.target.value)}
                                 fullWidth
