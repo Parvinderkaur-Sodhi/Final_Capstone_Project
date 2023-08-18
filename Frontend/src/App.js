@@ -12,14 +12,17 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
-import AllJob from "./components/JobManagementComponents/AllJob";
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
 import LeaveTypeList from "./components/LeaveManagementComponents/TypeComp/LeaveTypeList";
 import LeaveTypeListUser from "./components/LeaveManagementComponents/TypeComp/LeaveTypeListUsers";
 import LeaveRequestList from "./components/LeaveManagementComponents/LeaveRequestComp/LeaveRequestList";
 import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceList";
+import CustomerJobPortal from "./components/JobManagementComponents/CustomerJobPortal/CustomerJobPortal";
 //import AdminDashboard from "./components/adminDashboard.component";
-
+import HrJobPortal from "./components/JobManagementComponents/HrJobPortal/HrJobPortal"
+import TrackStatus from "./components/JobManagementComponents/CustomerJobPortal/TrackStatus";
+import FilterByCategory from "./components/JobManagementComponents/CustomerJobPortal/FilterByCategory";
+import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -120,7 +123,9 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/user" component={User} />
-              <Route exact path="/job" component={AllJob}/>
+              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
+                            <Route exact path="/Hrjob" component={HrJobPortal}/>
+<Route exact path="/trackStatus/:empid" component={TrackStatus}/>
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />

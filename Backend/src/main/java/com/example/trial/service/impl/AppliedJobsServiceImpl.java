@@ -100,6 +100,12 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 				   return credentials;
 			}
 
+			@Override
+			public List<AppliedJobs> AppliedJobsforEmp(int empId) {
+				// TODO Auto-generated method stub
+				return appliedjobrepo.findAllByEmpEmployeeId(empId);
+			}
+
 			        
 			
 		
