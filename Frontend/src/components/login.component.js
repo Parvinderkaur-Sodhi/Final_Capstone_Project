@@ -1,22 +1,31 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
-
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
+import { Container, Typography, TextField, Button, CircularProgress, Snackbar, Card, Grid} from "@mui/material";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import MuiAlert from '@mui/material/Alert';
+import { styled } from '@mui/material/styles';
 
 const required = (value) => {
   if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
+    return "This field is required!";
   }
 };
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const StyledContainer = styled(Container)({
+  display: "flex",
+  marginTop: "25px",
+  justifyContent: "center",
+  alignItems: "center",
+  minHeight: "70vh",
+  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.2)",
+});
+
 
 class Login extends Component {
   constructor(props) {
@@ -29,6 +38,7 @@ class Login extends Component {
       username: "",
       password: "",
       loading: false,
+      snackbarOpen: false,
     };
   }
 
@@ -51,107 +61,102 @@ class Login extends Component {
       loading: true,
     });
 
-    this.form.validateAll();
-
     const { dispatch, history } = this.props;
 
-    if (this.checkBtn.context._errors.length === 0) {
-      dispatch(login(this.state.username, this.state.password))
-        .then(() => {
-          // history.push("/profile");
-          if (this.state.username === "Admin" && this.state.email === "admin@gmail.com") {
-            history.push("/admin-dashboard");
-          } else {
-            history.push("/profile");
-          }
-          window.location.reload();
-        })
-        .catch(() => {
-          this.setState({
-            loading: false
-          });
+    dispatch(login(this.state.username, this.state.password))
+      .then(() => {
+        if (this.state.username === "Admin" && this.state.email === "admin@gmail.com") {
+          history.push("/admin-dashboard");
+        } else {
+          history.push("/profile");
+        }
+        window.location.reload();
+      })
+      .catch(() => {
+        this.setState({
+          loading: false,
+          snackbarOpen: true,
         });
-    } else {
-      this.setState({
-        loading: false,
       });
-    }
   }
+
+  handleSnackbarClose = () => {
+    this.setState({
+      snackbarOpen: false,
+    });
+  };
 
   render() {
     const { isLoggedIn, message } = this.props;
-
-    // if (isLoggedIn) {
-    //   return <Redirect to="/profile" />;
-    // }
 
     if (isLoggedIn) {
       return <Redirect to={this.state.username === "Admin" && this.state.email === "admin@gmail.com" ? "/admin-dashboard" : "/profile"} />;
     }
 
     return (
-      <div className="col-md-12">
-        <div className="card bg-light text-dark">
-          <h1><center>Login</center></h1>
+      <div>
+        <Grid container >
+          <Grid item xs={12} md={6}>
+            <StyledContainer>
+              <div>
+                <Typography variant="h4" align="center">
+                  Login <LockOpenIcon color="default" fontSize="large" />
+                </Typography>
+                <br></br>
+                <form onSubmit={this.handleLogin}>
+                  <TextField
+                    variant="outlined"
+                    margin="dense"
+                    required
+                    fullWidth
+                    label="Username"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                    error={message}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChangePassword}
+                    error={message}
+                  />
 
+                  <br></br>
+                  <br></br>
 
-          <Form
-            onSubmit={this.handleLogin}
-            ref={(c) => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    style={{ backgroundColor: 'black', color: 'white' }}
+                    disabled={this.state.loading}
+                  >
+                    {this.state.loading ? <CircularProgress size={24} /> : "Login"}
+                  </Button>
+                </form>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <button
-                className="btn btn-dark btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {message}
-                </div>
+                <Snackbar
+                  open={this.state.snackbarOpen}
+                  autoHideDuration={6000}
+                  onClose={this.handleSnackbarClose}
+                >
+                  <Alert onClose={this.handleSnackbarClose} severity="error">
+                    {message}
+                  </Alert>
+                </Snackbar>
               </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={(c) => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-        </div>
+            </StyledContainer>
+          </Grid>
+          <Grid item xs={12} md={6} style={{ backgroundImage: 'url("/bg.png")', backgroundSize: 'cover' }}></Grid>
+        </Grid>
       </div>
     );
   }

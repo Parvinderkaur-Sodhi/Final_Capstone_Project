@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.example.trial.models.Employee;
 import com.example.trial.service.AttendanceService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")  
 @RequestMapping("/api/attendance")
 public class AttendanceController {
 	
@@ -47,13 +49,16 @@ public class AttendanceController {
 		
 	}
 	
+	@GetMapping
+	public ResponseEntity<List<Attendance>> getAllAttendances(){
+		List<Attendance> allD=attendanceService.getAllAttendances();
+		return new ResponseEntity<>(allD, HttpStatus.OK);
+	}
+	
+	
 	@PutMapping("/{attendanceId}")
-	public ResponseEntity<Attendance> updateAttendance(@PathVariable int attendanceId, @RequestBody Attendance updatedAttendance){
-		Attendance attendance=attendanceService.updateAttendance(attendanceId, updatedAttendance);
-		if(attendance==null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(attendance);
+	public Attendance updateAttendance(@PathVariable int attendanceId, @RequestBody Attendance attendance) {
+		return attendanceService.updateAttendance(attendanceId, attendance);
 	}
 	
 	@GetMapping("/{employeeId}")
@@ -65,8 +70,6 @@ public class AttendanceController {
 		return ResponseEntity.ok(attendanceList);
 	}
 	
-	
-	
-	
+
 
 }

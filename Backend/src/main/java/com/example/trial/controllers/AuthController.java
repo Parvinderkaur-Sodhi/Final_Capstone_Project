@@ -1,5 +1,6 @@
 package com.example.trial.controllers;
 
+import com.example.trial.models.Employee;
 import com.example.trial.models.User;
 import com.example.trial.repository.UserRepository;
 import com.example.trial.request.LoginRequest;
@@ -8,6 +9,7 @@ import com.example.trial.response.JwtResponse;
 import com.example.trial.response.MessageResponse;
 import com.example.trial.security.jwt.JwtUtils;
 import com.example.trial.security.services.UserDetailsImpl;
+import com.example.trial.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -37,6 +35,19 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public AuthController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @GetMapping("/getEmployeeId")
+    public ResponseEntity<Integer> getEmployeeIdByUserId(@RequestParam Long userId) {
+        Integer employeeId = employeeService.getEmployeeIdByUserId(userId);
+        return ResponseEntity.ok(employeeId);
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateuser(@RequestBody LoginRequest loginRequest) {
@@ -68,6 +79,13 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
 
         userRepository.save(user);
+
+        // Create corresponding employee record
+        Employee employee = new Employee();
+        employee.setUserId(user.getId());
+        employee.setEmail(signUpRequest.getEmail());
+        employee.setUsername(signUpRequest.getUsername());
+        employeeService.saveEmployee(employee);
 
         return ResponseEntity.ok(new MessageResponse("user registered successfully!"));
     }

@@ -8,7 +8,19 @@ class AuthService {
       .post(API_URL + "signin", { username, password })
       .then((response) => {
         if (response.data.accessToken) {
+
+          // Store the user details in local storage
           localStorage.setItem("user", JSON.stringify(response.data));
+
+          // Fetch the employee ID using the user's ID
+          axios.get(API_URL + "getEmployeeId", {
+            params: { userId: response.data.id }
+
+          }).then((employeeResponse) => {
+
+            // Store the employee ID in local storage
+            localStorage.setItem("employeeId", employeeResponse.data);
+          });
         }
 
         return response.data;
@@ -17,6 +29,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("employeeId");
   }
 
   register(username, email, password) {
