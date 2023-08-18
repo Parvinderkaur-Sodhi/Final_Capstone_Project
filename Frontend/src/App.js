@@ -132,7 +132,7 @@ class App extends Component {
 
           <div className="container mt-3">
             <Switch>
-            {/* {currentUser && currentUser.username === "Admin" && currentUser.email === "admin@gmail.com" && (
+              {/* {currentUser && currentUser.username === "Admin" && currentUser.email === "admin@gmail.com" && (
                 <Route exact path="/admin-dashboard" component={AdminDashboard} />
               )} */}
               <Route exact path={["/", "/login"]} component={Login} />
@@ -142,10 +142,10 @@ class App extends Component {
               <Route exact path="/user" component={User} />
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
 
-              <Route exact path="/job" component={AllJob}/>
+              <Route exact path="/job" component={AllJob} />
 
 
-              <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user}/>} />
+              <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
 
 
               <Route exact path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
@@ -153,9 +153,23 @@ class App extends Component {
               <Route exact path="/update-employee/:employeeId" render={(props) => <UpdateEmployee {...props} user={this.props.user} />} />
               <Route exact path="/employee-list-user" render={(props) => <EmployeeListUser {...props} user={this.props.user} />} />
 
+              <Route exact path="/leave-requests" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-request-user" render={(props) => <LeaveRequestListUser {...props} user={this.props.user} />} />
+              <Route exact path="/updateLeaveRequest/:requestId" render={(props) => <UpdateLeaveRequestUser {...props} user={this.props.user} />} />
+              <Route exact path="/add-leave-request" render={(props) => <AddLeaveRequest {...props} user={this.props.user} />} />
+
+              <Route exact path="/leave-balances" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-balances-user" render={(props) => <LeaveBalanceListUser {...props} user={this.props.user} />} />
+
+              <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
+              <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
+              <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
+
+
               <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
-              
+
+
               <Route exact path="/leave-types" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
               <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
               <Route exact path="/addLeaveTypes" render={(props) => <AddLeaveType {...props} user={this.props.user} />} />
