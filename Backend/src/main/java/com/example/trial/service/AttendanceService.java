@@ -10,12 +10,9 @@ import com.example.trial.models.Employee;
 public interface AttendanceService {
 	
 	Attendance markAttendance(Attendance attendance);
-    Attendance updateAttendance(int attendanceId, Attendance updatedAttendance);
-    
-    Employee getEmployeeById(int employeeId);
-    
+	Employee getEmployeeById(int employeeId);
+	List<Attendance> getAllAttendances();
+    Attendance updateAttendance(int attendanceId, Attendance attendance);
     List<Attendance> getAttendanceByEmployeeId(int employeeId);
-    List<Attendance> getAllAttendance();
-    
 
 }

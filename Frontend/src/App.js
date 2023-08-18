@@ -33,7 +33,12 @@ import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanc
 import LeaveBalanceListUser from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceListUser";
 import HrHome from "./components/UserComponents/HrHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
 //import AdminDashboard from "./components/adminDashboard.component";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+//import EmployeeNavbar from "./employeeNavbar";
 
 class App extends Component {
   constructor(props) {
@@ -139,18 +144,17 @@ class App extends Component {
 
               <Route exact path="/job" component={AllJob}/>
 
+
+              <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user}/>} />
+
+
               <Route exact path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route exact path="/add-employee" render={(props) => <AddEmployee {...props} user={this.props.user} />} />
               <Route exact path="/update-employee/:employeeId" render={(props) => <UpdateEmployee {...props} user={this.props.user} />} />
               <Route exact path="/employee-list-user" render={(props) => <EmployeeListUser {...props} user={this.props.user} />} />
 
-              <Route exact path="/leave-requests" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
-              <Route exact path="/leave-request-user" render={(props) => <LeaveRequestListUser {...props} user={this.props.user} />} />
-              <Route exact path="/updateLeaveRequest/:requestId" render={(props) => <UpdateLeaveRequestUser {...props} user={this.props.user} />} />
-              <Route exact path="/add-leave-request" render={(props) => <AddLeaveRequest {...props} user={this.props.user} />} />
-
-              <Route exact path="/leave-balances" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
-              <Route exact path="/leave-balances-user" render={(props) => <LeaveBalanceListUser {...props} user={this.props.user} />} />
+              <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
               
               <Route exact path="/leave-types" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
               <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
