@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { Redirect,  useParams } from "react-router-dom";
-import EmployeeService from "../../services/Employee.service";
+import EmployeeService from "../../services/employee.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 
-//--
+
 function formatDate(dateString) {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
-
-//--
-
 
 function SingleEmpAttendance(props){
 	const {employeeId}=useParams();

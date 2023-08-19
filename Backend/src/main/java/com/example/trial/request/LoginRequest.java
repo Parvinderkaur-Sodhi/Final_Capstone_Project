@@ -2,9 +2,20 @@ package com.example.trial.request;
 
 public class LoginRequest {
 
+    private String role;
+
     private String username;
 
     private String password;
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;

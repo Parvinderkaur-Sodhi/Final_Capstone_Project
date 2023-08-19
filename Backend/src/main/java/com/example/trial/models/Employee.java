@@ -44,6 +44,7 @@ public class Employee {
     private String employeeStatus;
     private String address;
     private String pAddress;
+    private String empRole;
     private Long idNo;
 
     private String other;

@@ -33,11 +33,12 @@ import LeaveBalanceList from "./components/LeaveManagementComponents/LeaveBalanc
 import LeaveBalanceListUser from "./components/LeaveManagementComponents/LeaveBalanceComp/LeaveBalanceListUser";
 import HrHome from "./components/UserComponents/HrHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
-import AttendanceList from "./components/Attendancecomponents/AttendanceList";
 //import AdminDashboard from "./components/adminDashboard.component";
-import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
-import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+
+import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
 //import EmployeeNavbar from "./employeeNavbar";
 
 class App extends Component {

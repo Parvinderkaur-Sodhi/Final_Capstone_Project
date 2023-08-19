@@ -1,45 +1,49 @@
+// Working code 
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
+
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
-import { Container, Typography, TextField, Button, CircularProgress, Snackbar, Card, Grid} from "@mui/material";
+
+import { Box, Typography, InputLabel, MenuItem, TextField, FormControl, Select } from "@mui/material";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import MuiAlert from '@mui/material/Alert';
-import { styled } from '@mui/material/styles';
+import "./login.css"; // Import the CSS file
+
 
 const required = (value) => {
   if (!value) {
-    return "This field is required!";
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
   }
 };
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-const StyledContainer = styled(Container)({
-  display: "flex",
-  marginTop: "25px",
-  justifyContent: "center",
-  alignItems: "center",
-  minHeight: "70vh",
-  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.2)",
-});
-
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
+    this.onChangeErole = this.onChangeErole.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
+      erole: "",
       username: "",
       password: "",
       loading: false,
-      snackbarOpen: false,
     };
+  }
+
+  onChangeErole(e) {
+    this.setState({
+      erole: e.target.value,
+    });
   }
 
   onChangeUsername(e) {
@@ -61,103 +65,131 @@ class Login extends Component {
       loading: true,
     });
 
+    this.form.validateAll();
+
     const { dispatch, history } = this.props;
 
-    dispatch(login(this.state.username, this.state.password))
-      .then(() => {
-        if (this.state.username === "Admin" && this.state.email === "admin@gmail.com") {
-          history.push("/admin-dashboard");
-        } else {
+    if (this.checkBtn.context._errors.length === 0) {
+      dispatch(login(this.state.username, this.state.password, this.state.erole))
+        .then(() => {
           history.push("/profile");
-        }
-        window.location.reload();
-      })
-      .catch(() => {
-        this.setState({
-          loading: false,
-          snackbarOpen: true,
+          window.location.reload();
+        })
+        .catch(() => {
+          this.setState({
+            loading: false
+          });
         });
+    } else {
+      this.setState({
+        loading: false,
       });
+    }
   }
-
-  handleSnackbarClose = () => {
-    this.setState({
-      snackbarOpen: false,
-    });
-  };
 
   render() {
     const { isLoggedIn, message } = this.props;
 
     if (isLoggedIn) {
-      return <Redirect to={this.state.username === "Admin" && this.state.email === "admin@gmail.com" ? "/admin-dashboard" : "/profile"} />;
+      return <Redirect to="/profile" />;
     }
 
     return (
-      <div>
-        <Grid container >
-          <Grid item xs={12} md={6}>
-            <StyledContainer>
-              <div>
-                <Typography variant="h4" align="center">
-                  Login <LockOpenIcon color="default" fontSize="large" />
-                </Typography>
-                <br></br>
-                <form onSubmit={this.handleLogin}>
-                  <TextField
-                    variant="outlined"
-                    margin="dense"
-                    required
+      <Box>
+        <div className="login-container">
+          <div className="login-form">
+            <Typography variant="h4" align="center">
+              Login <LockOpenIcon color="default" fontSize="large" />
+            </Typography>
+            <br></br>
+            <Form
+              onSubmit={this.handleLogin}
+              ref={(c) => {
+                this.form = c;
+              }}
+            >
+              <div className="form-group">
+                <FormControl required variant="outlined" fullWidth>
+                  <InputLabel required>Role</InputLabel>
+                  <Select
                     fullWidth
-                    label="Username"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    error={message}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    label="Password"
-                    type="password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    error={message}
-                  />
-
-                  <br></br>
-                  <br></br>
-
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    style={{ backgroundColor: 'black', color: 'white' }}
-                    disabled={this.state.loading}
+                    label="role"
+                    name="erole"
+                    value={this.state.erole}
+                    onChange={this.onChangeErole}
                   >
-                    {this.state.loading ? <CircularProgress size={24} /> : "Login"}
-                  </Button>
-                </form>
-
-                <Snackbar
-                  open={this.state.snackbarOpen}
-                  autoHideDuration={6000}
-                  onClose={this.handleSnackbarClose}
-                >
-                  <Alert onClose={this.handleSnackbarClose} severity="error">
-                    {message}
-                  </Alert>
-                </Snackbar>
+                    <MenuItem value="">Select Role</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem>
+                    <MenuItem value="Manager">Manager</MenuItem>
+                    <MenuItem value="Employee">Employee</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
-            </StyledContainer>
-          </Grid>
-          <Grid item xs={12} md={6} style={{ backgroundImage: 'url("/bg.png")', backgroundSize: 'cover' }}></Grid>
-        </Grid>
-      </div>
+
+              <div className="form-group">
+                <TextField
+                  required
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  label="Username"
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}
+                  validations={[required]}
+                />
+              </div>
+
+              <div className="form-group">
+                <TextField
+                  required
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                  validations={[required]}
+                />
+              </div>
+              <br></br>
+              <div className="form-group">
+                <button
+                  className="btn btn-dark btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Login</span>
+                </button>
+              </div>
+
+              {message && (
+                <div className="form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={(c) => {
+                  this.checkBtn = c;
+                }}
+              />
+            </Form>
+          </div>
+          <div className="login-bg">
+            <img src="./bg.png"></img>
+          </div>
+        </div>
+      </Box>
     );
   }
 }

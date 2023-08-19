@@ -11,6 +11,7 @@ import com.example.trial.security.jwt.JwtUtils;
 import com.example.trial.security.services.UserDetailsImpl;
 import com.example.trial.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -58,11 +61,20 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
+        String selectedRole = loginRequest.getRole();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        return ResponseEntity
-                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail()));
-    }
+        // Perform role validation
+        if (selectedRole.equals(userDetails.getRole())) {
+            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getRole(), userDetails.getUsername(), userDetails.getEmail()));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Error: Unauthorized"));
+        }
+
+//        return ResponseEntity
+//                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getRole(), userDetails.getUsername(), userDetails.getEmail()));
+//
+}
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
@@ -75,7 +87,7 @@ public class AuthController {
         }
 
         // Create new user account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
+        User user = new User(signUpRequest.getRole(), signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
         userRepository.save(user);
@@ -85,6 +97,7 @@ public class AuthController {
         employee.setUserId(user.getId());
         employee.setEmail(signUpRequest.getEmail());
         employee.setUsername(signUpRequest.getUsername());
+        employee.setEmpRole(signUpRequest.getRole());
         employeeService.saveEmployee(employee);
 
         return ResponseEntity.ok(new MessageResponse("user registered successfully!"));
