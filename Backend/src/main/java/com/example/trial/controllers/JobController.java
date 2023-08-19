@@ -53,7 +53,7 @@ public class JobController {
     @GetMapping("/viewJobProfile/{JobProfile}")
     @ResponseStatus(HttpStatus.OK)
     public List<Jobs> getJobByProfile(@PathVariable String JobProfile) {
-        List<Jobs> Job = JobService.getJobByJobType(JobProfile);
+        List<Jobs> Job = JobService.getJobByJobProfile(JobProfile);
         if (Job == null) {
             throw new ResourceNotFoundException("Job Type not found: " + JobProfile);
         }
@@ -61,12 +61,22 @@ public class JobController {
     }
 
   //search Job by category
-    @GetMapping("/viewJobType/{JobType}")
+    @GetMapping("/viewByJobType/{JobType}")
     @ResponseStatus(HttpStatus.OK)
     public List<Jobs> getJobByType(@PathVariable String JobType) {
         List<Jobs> Job = JobService.getJobByJobType(JobType);
         if (Job == null) {
             throw new ResourceNotFoundException("Job Type not found: " + JobType);
+        }
+        return Job;
+    }
+    
+    @GetMapping("/viewByJobCategory/{category}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Jobs> getJobByCategory(@PathVariable String category) {
+        List<Jobs> Job = JobService.getJobByCategory(category);
+        if (Job == null) {
+            throw new ResourceNotFoundException("Job Type not found: " + category);
         }
         return Job;
     }
@@ -89,5 +99,15 @@ public class JobController {
         JobService.deleteJob(JobId);
     }
     
-    
-}
+    @GetMapping("/Salary/{min}/{max}")
+    public List<Jobs> getJobBySalary(@PathVariable int min,@PathVariable int max) {
+        System.out.println(min);
+
+        List<Jobs> Job = JobService.getSalaryRangeJobs(min, max);
+        System.out.print(Job);
+        if (Job == null) {
+            throw new ResourceNotFoundException("Job Type not found: " );
+        }
+        return Job;
+    }
+    }

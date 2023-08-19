@@ -7,3 +7,6 @@ application.properties
 **.properties
 **resources/
 package-lock.json
+**.eslintcache
+.eslintcache
+.cache

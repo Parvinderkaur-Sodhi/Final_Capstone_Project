@@ -42,8 +42,8 @@ public class JobServiceImpl implements JobService{
 			}
 
 			@Override
-			public List<Jobs> getJobByJobType(String category) {
-				 List<Jobs> credentials = jobrepo.getJobByJobType(category);
+			public List<Jobs> getJobByJobType(String type) {
+				 List<Jobs> credentials = jobrepo.getJobByJobType(type);
 
 				   return credentials;
 			}
@@ -63,8 +63,7 @@ public class JobServiceImpl implements JobService{
 			            existingjob.setDescription(Job.getDescription());
 			            existingjob.setJobType(Job.getJobType());
 			            existingjob.setSalary(Job.getSalary());
-			            existingjob.setLastdate(Job.getLastdate());
-			            existingjob.setActive(false);
+existingjob.setLastdate(Job.getLastdate());
 			            return jobrepo.save(existingjob);
 			        }
 			        return null;
@@ -75,6 +74,21 @@ public class JobServiceImpl implements JobService{
 		        jobrepo.deleteById(JobId);
 				
 			}
+
+			@Override
+			public List<Jobs> getSalaryRangeJobs(int min, int max) {
+				// TODO Auto-generated method stub
+				return jobrepo.findBySalaryBetween(min, max);
+				
+			}
+
+			@Override
+			public List<Jobs> getJobByCategory(String category) {
+				// TODO Auto-generated method stub
+				 List<Jobs> credentials = jobrepo.getJobByCategory(category);
+
+				   return credentials;
+				   }
 
 		    
 	}

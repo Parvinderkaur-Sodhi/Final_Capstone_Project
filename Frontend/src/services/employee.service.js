@@ -13,6 +13,14 @@ class EmployeeService {
     return axios.get(`${API_URL}employees/${id}`, { headers: authHeader() });
   }
 
+ applyforJob(empId,jobId,obj){
+  return axios.post(`${API_URL}AppliedJobs/apply/${empId}/${jobId}`,obj,{ headers: authHeader() });
+ }
+
+ getAppliedJobforEmp(empId){
+    return axios.get(`${API_URL}AppliedJobs/viewByEmp/${empId}`,{ headers: authHeader() });
+
+ }
   getAllJobs(token) {
     console.log("dfdsf");
     return axios.get(API_URL + 'Jobs/viewJob', { headers: { "Authorization": `Bearer ${token}` } });

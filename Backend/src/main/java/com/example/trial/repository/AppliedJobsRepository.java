@@ -16,4 +16,6 @@ import com.example.trial.models.Jobs;
 AppliedJobs findByJobJobProfile(String profile);
 
     List<AppliedJobs>findAllByStatus(String status);
+    List<AppliedJobs>findAllByEmpEmployeeId(int empId);
+
 	}
