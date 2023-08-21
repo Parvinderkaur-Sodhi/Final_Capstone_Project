@@ -1,73 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { Redirect, useParams, Link } from "react-router-dom";
-import EmployeeService from '../../services/employee.service';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField } from "@mui/material";
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState, useEffect} from "react";
+import { Redirect,  useParams } from "react-router-dom";
+import EmployeeService from "../../services/Employee.service";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 
-const useStyles = makeStyles({
-
-  root: {
-      "& .MuiTableCell-head": {
-          color: "black",
-          backgroundColor: "lightpink",
-          fontWeight: "bold"
-      },
-  },
-  pageBackground: {
-    backgroundColor: "lightblue", 
-  },
-  editButton: {
-    backgroundColor: "primary", 
-    color: "black", 
-    '&:hover': {
-      backgroundColor: "#1565c0", 
-    },
-  },
-  introText: {
-    fontStyle: "italic",
-    fontSize: '18px',
-    lineHeight: '1.5',
-    marginBottom: '20px',
-    textAlign: 'center',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    backgroundColor: 'white', 
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-
- 
-});
-
+//--
 function formatDate(dateString) {
   const options = { year: "numeric", month: "numeric", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
-function SingleEmpAttendance(props) {
-  const classes = useStyles();
-  const { employeeId } = useParams();
-  const [attendance, setAttendance] = useState([]);
-  const [attendancePercentage, setAttendancePercentage] = useState(0);
-  const { user: currentUser } = props;
+//--
 
-  useEffect(() => {
-    EmployeeService.getAttendanceByEmployeeId(employeeId)
-      .then((response) => {
-        setAttendance(response.data);
 
-        const presentDays = response.data.filter(
-          (record) => record.present.toLowerCase() === "present"
-        ).length;
-        console.log("Present Days:", presentDays); 
-        const percentage = (presentDays / response.data.length) * 100 || 0;
-        console.log("Percentage:", percentage);
-        setAttendancePercentage(percentage);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [employeeId]);
+function SingleEmpAttendance(props){
+	const {employeeId}=useParams();
+	const [attendance, setAttendance]=useState([]);
+	const {user: currentUser}=props;
+
+        useEffect(() =>{
+
+          EmployeeService.getAttendanceByEmployeeId(employeeId)
+            .then((response) =>{
+	        console.log("Data", response.data);	
+	        setAttendance(response.data);
+	    })
+	    .catch((error) =>{
+            console.log(error);
+	    });
 
   if (!currentUser) {
     return <Redirect to="/login" />;

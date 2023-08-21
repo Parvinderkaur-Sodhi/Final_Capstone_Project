@@ -17,6 +17,7 @@ public interface AppliedJobsService {
 
 
     List<AppliedJobs> getJobByJobStatus(String status);
+    List<AppliedJobs> AppliedJobsforEmp(int empId);
 
     AppliedJobs applyForJob(int empId,int JobId,AppliedJobs Job);
 

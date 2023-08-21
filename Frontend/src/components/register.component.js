@@ -3,65 +3,70 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import { Container, Typography, TextField, Button, CircularProgress, Snackbar, Card, MenuItem, FormControl, InputLabel, Select } from "@mui/material";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import Alert from '@mui/material/Alert';
+import { styled } from '@mui/material/styles';
 
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
 
 const required = (value) => {
   if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
+    return "This field is required!";
   }
 };
 
 const email = (value) => {
   if (!isEmail(value)) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
-    );
+    return "This is not a valid email.";
   }
 };
 
 const vusername = (value) => {
   if (value.length < 3 || value.length > 20) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
-      </div>
-    );
+    return "The username must be between 3 and 20 characters.";
   }
 };
 
 const vpassword = (value) => {
   if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
+    return "The password must be between 6 and 40 characters.";
   }
 };
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  margin: "auto",
+  marginTop: theme.spacing(8),
+  padding: theme.spacing(4),
+  textAlign: "center",
+  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.2)",
+}));
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
+      role: "",
       username: "",
       email: "",
       password: "",
       successful: false,
     };
   }
+
+  onChangeRole(e) {
+    this.setState({
+      role: e.target.value,
+    });
+  }
+
 
   onChangeUsername(e) {
     this.setState({
@@ -93,7 +98,7 @@ class Register extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       this.props
         .dispatch(
-          register(this.state.username, this.state.email, this.state.password)
+          register(this.state.role, this.state.username, this.state.email, this.state.password)
         )
         .then(() => {
           this.setState({
@@ -113,11 +118,12 @@ class Register extends Component {
 
     return (
 
-      <div className="col-md-12">
-        <div className="card bg-light text-dark">
+      <div>
 
-          <h1><center>User Registration </center></h1>
-
+        <StyledCard>
+          <Typography variant="h4" align="center">
+            User Registration <PersonAddIcon color="default" fontSize="large" />
+          </Typography>
 
           <Form
             onSubmit={this.handleRegister}
@@ -127,53 +133,82 @@ class Register extends Component {
           >
             {!this.state.successful && (
               <div>
-                <div className="form-group">
-                  <label htmlFor="username">Username</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
-                  />
-                </div>
+                <FormControl required variant="outlined" fullWidth margin="dense">
+                  <InputLabel>Role</InputLabel>
+                  <Select
+                    name="role"
+                    onChange={(e) => {
+                      this.onChangeRole(e);
+                      this.setState({ role: e.target.value });
+                    }}
+                    value={this.state.role}
+                    label="Role"
+                  >
+                    <MenuItem value="">Select Role</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem>
+                    <MenuItem value="Manager">Manager</MenuItem>
+                    <MenuItem value="Employee">Employee</MenuItem>
+                  </Select>
+                </FormControl>
 
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
-                  />
-                </div>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Username"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}
+                  error={message}
+                  validations={[required, vusername]}
+                />
 
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <Input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
-                  />
-                </div>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChangeEmail}
+                  error={message}
+                  validations={[required, email]}
+                />
 
-                <div className="form-group">
-                  <button className="btn btn-dark btn-block">Sign Up</button>
-                </div>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                  error={message}
+                  validations={[required, vpassword]}
+                />
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  disabled={this.state.loading}
+                  style={{ marginTop: "16px", backgroundColor: 'black', color: 'white' }}
+                >
+                  {this.state.loading ? <CircularProgress size={24} /> : "Sign Up"}
+                </Button>
               </div>
             )}
 
             {message && (
-              <div className="form-group">
-                <div className={this.state.successful ? "alert alert-success" : "alert alert-danger"} role="alert">
+              <div style={{ marginTop: "16px" }}>
+                <Alert severity={this.state.successful ? "success" : "error"}>
                   {message}
-                </div>
+                </Alert>
               </div>
             )}
             <CheckButton
@@ -183,7 +218,8 @@ class Register extends Component {
               }}
             />
           </Form>
-        </div>
+        </StyledCard>
+
       </div>
     );
   }

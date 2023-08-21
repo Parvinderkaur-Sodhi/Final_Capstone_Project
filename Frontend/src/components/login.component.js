@@ -1,3 +1,4 @@
+// Working code 
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 
@@ -7,6 +8,11 @@ import CheckButton from "react-validation/build/button";
 
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
+
+import { Box, Typography, InputLabel, MenuItem, TextField, FormControl, Select } from "@mui/material";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import "./login.css"; // Import the CSS file
+
 
 const required = (value) => {
   if (!value) {
@@ -22,14 +28,22 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
+    this.onChangeErole = this.onChangeErole.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
+      erole: "",
       username: "",
       password: "",
       loading: false,
     };
+  }
+
+  onChangeErole(e) {
+    this.setState({
+      erole: e.target.value,
+    });
   }
 
   onChangeUsername(e) {
@@ -56,14 +70,9 @@ class Login extends Component {
     const { dispatch, history } = this.props;
 
     if (this.checkBtn.context._errors.length === 0) {
-      dispatch(login(this.state.username, this.state.password))
+      dispatch(login(this.state.username, this.state.password, this.state.erole))
         .then(() => {
-          // history.push("/profile");
-          if (this.state.username == "Admin" && this.state.email == "admin@gmail.com") {
-            history.push("/admin-dashboard");
-          } else {
-            history.push("/profile");
-          }
+          history.push("/profile");
           window.location.reload();
         })
         .catch(() => {
@@ -81,78 +90,106 @@ class Login extends Component {
   render() {
     const { isLoggedIn, message } = this.props;
 
-    // if (isLoggedIn) {
-    //   return <Redirect to="/profile" />;
-    // }
-
     if (isLoggedIn) {
-      return <Redirect to={this.state.username === "Admin" && this.state.email === "admin@gmail.com" ? "/admin-dashboard" : "/profile"} />;
+      return <Redirect to="/profile" />;
     }
 
     return (
-      <div className="col-md-12">
-        <div className="card bg-light text-dark">
-          <h1><center>Login</center></h1>
-
-
-          <Form
-            onSubmit={this.handleLogin}
-            ref={(c) => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <button
-                className="btn btn-dark btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
+      <Box>
+        <div className="login-container">
+          <div className="login-form">
+            <Typography variant="h4" align="center">
+              Login <LockOpenIcon color="default" fontSize="large" />
+            </Typography>
+            <br></br>
+            <Form
+              onSubmit={this.handleLogin}
               ref={(c) => {
-                this.checkBtn = c;
+                this.form = c;
               }}
-            />
-          </Form>
+            >
+              <div className="form-group">
+                <FormControl required variant="outlined" fullWidth>
+                  <InputLabel required>Role</InputLabel>
+                  <Select
+                    fullWidth
+                    label="role"
+                    name="erole"
+                    value={this.state.erole}
+                    onChange={this.onChangeErole}
+                  >
+                    <MenuItem value="">Select Role</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem>
+                    <MenuItem value="Manager">Manager</MenuItem>
+                    <MenuItem value="Employee">Employee</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className="form-group">
+                <TextField
+                  required
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  label="Username"
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}
+                  validations={[required]}
+                />
+              </div>
+
+              <div className="form-group">
+                <TextField
+                  required
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                  validations={[required]}
+                />
+              </div>
+              <br></br>
+              <div className="form-group">
+                <button
+                  className="btn btn-dark btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Login</span>
+                </button>
+              </div>
+
+              {message && (
+                <div className="form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={(c) => {
+                  this.checkBtn = c;
+                }}
+              />
+            </Form>
+          </div>
+          <div className="login-bg">
+            <img src="./bg.png"></img>
+          </div>
         </div>
-      </div>
+      </Box>
     );
   }
 }

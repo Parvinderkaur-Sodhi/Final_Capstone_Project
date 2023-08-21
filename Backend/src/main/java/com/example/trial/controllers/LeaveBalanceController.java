@@ -51,7 +51,7 @@ public class LeaveBalanceController {
         leaveBalanceService.deleteLeaveBalance(leaveBalanceId);
     }
 
-    @GetMapping("/employeeby/{employeeId}")
+    @GetMapping("/balance/{employeeId}")
     public List<LeaveBalance> getLeaveBalancesByEmployeeId(@PathVariable int employeeId) {
         return leaveBalanceService.getLeaveBalancesByEmployeeId(employeeId);
     }

@@ -16,9 +16,10 @@ public interface JobService {
     
     List<Jobs> getJobByJobProfile(String profile);
 
-    List<Jobs> getJobByJobType(String category);
+    List<Jobs> getJobByJobType(String jobtype);
+    List<Jobs> getJobByCategory(String category);
 
-
+List<Jobs>getSalaryRangeJobs(int min,int max);
     Jobs saveJob(Jobs Job);
 
     Jobs updateJob(int JobId, Jobs Job);

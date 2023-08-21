@@ -14,7 +14,10 @@ import com.example.trial.models.Jobs;
 		// TODO Auto-generated constructor stub
 	List<Jobs> getJobByJobProfile(String profile);
 
-    List<Jobs> getJobByJobType(String category);
+    List<Jobs> getJobByCategory(String category);
+    List<Jobs>findBySalaryBetween(int min,int max);
+    List<Jobs> getJobByJobType(String jobtype);
+
 	}
 
 

@@ -41,7 +41,6 @@ function UserList(props) {
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                {/* Additional user fields can be displayed here */}
               </TableRow>
             ))}
           </TableBody>

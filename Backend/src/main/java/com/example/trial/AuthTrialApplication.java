@@ -15,8 +15,6 @@ public class AuthTrialApplication {
 		
 	}
 	
-
-	
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // Change this to match your API endpoints
                 .allowedOrigins("http://localhost:3000") // Allow requests from this origin

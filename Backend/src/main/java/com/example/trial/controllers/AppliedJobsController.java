@@ -83,6 +83,8 @@ public class AppliedJobsController {
     }
 
 
-    
-    
+    @GetMapping("/viewByEmp/{empId}")
+    public List<AppliedJobs> viewAppliedJobsforEmp(@PathVariable int empId) {
+        return AppliedJobsService.AppliedJobsforEmp(empId);
+    }
 }
