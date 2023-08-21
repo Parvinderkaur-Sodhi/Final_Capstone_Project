@@ -35,17 +35,16 @@ public class AttendanceController {
 	@PostMapping("/addattendance/{employeeId}")
 	public ResponseEntity<Attendance> markAttendance(@PathVariable int employeeId, @RequestBody Attendance attendance){
 		
-		Employee employee= attendanceService.getEmployeeById(employeeId);
-		if(employee==null) {
-			return ResponseEntity.notFound().build();
-		}
-		attendance.setEmployee(employee);
 		
-		
-		Attendance savedAttendance=attendanceService.markAttendance(attendance);
-		
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(savedAttendance);
+		Employee employee = attendanceService.getEmployeeById(employeeId);
+        if (employee == null) {
+            return ResponseEntity.notFound().build();
+        }
+        attendance.setEmployee(employee);
+        
+        Attendance markedAttendance = attendanceService.markAttendance(attendance);
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(markedAttendance);
 		
 	}
 	
@@ -69,6 +68,47 @@ public class AttendanceController {
 		}
 		return ResponseEntity.ok(attendanceList);
 	}
+	
+	
+	
+	 @PutMapping("/approve/{attendanceId}")
+	    public ResponseEntity<Attendance> approveAttendance(@PathVariable int attendanceId) {
+	        Attendance approvedAttendance = attendanceService.approveAttendance(attendanceId);
+	        if (approvedAttendance != null) {
+	            return ResponseEntity.ok(approvedAttendance);
+	        }
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    @PutMapping("/reject/{attendanceId}")
+	    public ResponseEntity<Attendance> rejectAttendance(@PathVariable int attendanceId) {
+	        Attendance rejectedAttendance = attendanceService.rejectAttendance(attendanceId);
+	        if (rejectedAttendance != null) {
+	            return ResponseEntity.ok(rejectedAttendance);
+	        }
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    @GetMapping("/pending")
+	    public ResponseEntity<List<Attendance>> getPendingAttendances() {
+	        List<Attendance> pendingAttendances = attendanceService.getPendingAttendances();
+	        return ResponseEntity.ok(pendingAttendances);
+	    }
+	    
+	    
+	    @PutMapping("/{attendanceId}/update-absence-reason")
+	    public ResponseEntity<Attendance> updateAbsenceReason(@PathVariable int attendanceId, @RequestBody Attendance updatedAttendance) {
+	        Attendance existingAttendance = attendanceService.getAttendanceById(attendanceId);
+	        if (existingAttendance == null) {
+	            return ResponseEntity.notFound().build();
+	        }
+	        
+	        existingAttendance.setAbsenceReason(updatedAttendance.getAbsenceReason());
+	        Attendance updatedAttendanceRecord = attendanceService.updateAbsenceReason(existingAttendance);
+	        
+	        return ResponseEntity.ok(updatedAttendanceRecord);
+	    }
+
 	
 
 

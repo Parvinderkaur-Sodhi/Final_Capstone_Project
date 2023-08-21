@@ -29,6 +29,8 @@ import AttendanceList from "./components/Attendancecomponents/AttendanceList";
 import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
 import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
 import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
+
 //import EmployeeNavbar from "./employeeNavbar";
 
 class App extends Component {
@@ -133,20 +135,20 @@ class App extends Component {
               <Route exact path="/user" component={User} />
               <Route exact path="/job" component={AllJob}/>
 
-              <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user}/>} />
+              <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user}/>} />
+              <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} /> 
+              <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
+              <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
+              <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
 
 
               <Route exact path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route exact path="/add-employee" render={(props) => <AddEmployee {...props} user={this.props.user} />} />
               <Route exact path="/update-employee/:employeeId" render={(props) => <UpdateEmployee {...props} user={this.props.user} />} />
               <Route exact path="/employee-list-user" render={(props) => <EmployeeListUser {...props} user={this.props.user} />} />
-              <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
-              <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
-              
               <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
                
-              <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
               <Route exact path="/leave-types" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
               <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
               <Route exact path="/addLeaveTypes" render={(props) => <AddLeaveType {...props} user={this.props.user} />} />

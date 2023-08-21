@@ -53,7 +53,7 @@ public class Employee {
 
     @Lob
     private byte[] resume;
-
+   
     private long userId;
 
 //	public LeaveBalance getLeaveBalanceByType(LeaveType leaveTypeName) {
