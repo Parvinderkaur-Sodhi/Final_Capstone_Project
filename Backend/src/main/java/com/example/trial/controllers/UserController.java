@@ -4,12 +4,10 @@ import com.example.trial.repository.UserRepository;
 import com.example.trial.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 4800)
@@ -37,6 +35,34 @@ public class UserController {
     public MessageResponse userAccess() {
 
         return new MessageResponse("Congratulations! You are an authenticated user.");
+    }
+
+    @GetMapping("/{userId}")
+    public User getUserById(@PathVariable Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        } else {
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
+    }
+
+    @PutMapping("/{userId}")
+    public MessageResponse updateUserById(@PathVariable Long userId, @RequestBody User updatedUser) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setUsername(updatedUser.getUsername());
+            user.setEmail(updatedUser.getEmail());
+            user.setRole(updatedUser.getRole());
+            user.setPassword(updatedUser.getPassword());
+
+            userRepository.save(user);
+
+            return new MessageResponse("User updated successfully.");
+        } else {
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
     }
 
 }

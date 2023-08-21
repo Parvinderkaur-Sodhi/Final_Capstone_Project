@@ -11,8 +11,6 @@ public class AuthTrialApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthTrialApplication.class, args);
-		
-		
 	}
 	
     public void addCorsMappings(CorsRegistry registry) {

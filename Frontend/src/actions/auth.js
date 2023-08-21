@@ -79,6 +79,7 @@ export const login = (username, password, role) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
   AuthService.logout();
+  window.location.reload();
 
   dispatch({
     type: LOGOUT,

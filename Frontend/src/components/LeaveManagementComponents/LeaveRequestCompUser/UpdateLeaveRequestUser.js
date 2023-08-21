@@ -29,10 +29,15 @@ function UpdateLeaveRequestUser(props) {
         employeeService.getLeaveRequestById(requestId)
             .then((response) => {
                 const { leaveTypeName, startDate, endDate, reason } = response.data;
+
+                // Convert the date strings to "YYYY-MM-DD" format
+                const formattedStartDate = new Date(startDate).toISOString().split('T')[0];
+                const formattedEndDate = new Date(endDate).toISOString().split('T')[0];
+
                 setLeaveRequest({
                     leaveTypeId: leaveTypeName.typeId,
-                    startDate,
-                    endDate,
+                    startDate: formattedStartDate,
+                    endDate: formattedEndDate,
                     reason,
                 });
             })

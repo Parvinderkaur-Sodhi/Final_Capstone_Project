@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Redirect, Link } from 'react-router-dom';
 import {
   Typography, Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button,
-  Card, CardContent, CardActions, Box, Dialog, DialogTitle, DialogContent, DialogActions,
-  TextField, FormControl, Select, InputLabel, Grid, MenuItem, IconButton
+  Card, CardContent, CardActions, Box, Dialog, DialogTitle, DialogContent, DialogActions
+  , FormControl, Select, InputLabel, Grid, MenuItem, IconButton, CardHeader
 } from "@mui/material";
 import { AddCircleOutline, Create, Delete, ViewList, CalendarToday } from '@mui/icons-material';
 import CalendarView from "../../CalenderView";
@@ -37,12 +37,12 @@ function LeaveRequestListUser(props) {
     }
 
     EmployeeService.getAllLeaveTypes()
-    .then((response) => {
-      setLeaveTypes(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        setLeaveTypes(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
   }, [employeeId]);
 
@@ -91,10 +91,9 @@ function LeaveRequestListUser(props) {
     <div>
       <Card>
         <CardContent>
-          <Typography variant="h5" gutterBottom>
-            Leave Requests
-          </Typography>
+          <CardHeader className="title" title="Leaves" />
           <Grid container spacing={2} alignItems="center">
+            <Grid item xs={4}></Grid>
             <Grid item xs={4}>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel>Status</InputLabel>
@@ -111,7 +110,7 @@ function LeaveRequestListUser(props) {
               </FormControl>
             </Grid>
             <Grid item xs={4}>
-            <FormControl variant="outlined" fullWidth>
+              <FormControl variant="outlined" fullWidth>
                 <InputLabel>Type</InputLabel>
                 <Select
                   value={filterType}
@@ -171,12 +170,12 @@ function LeaveRequestListUser(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                {filteredLeaveRequests.map((request) => (
+                  {filteredLeaveRequests.map((request) => (
                     <TableRow key={request.requestId}>
                       <TableCell>{request.requestId}</TableCell>
                       <TableCell>{request.leaveTypeName.typeName}</TableCell>
-                      <TableCell>{request.startDate}</TableCell>
-                      <TableCell>{request.endDate}</TableCell>
+                      <TableCell>{new Date(request.startDate).toLocaleDateString()}</TableCell>
+                      <TableCell>{new Date(request.endDate).toLocaleDateString()}</TableCell>
                       <TableCell>{request.reason}</TableCell>
                       <TableCell>{request.status}</TableCell>
                       <TableCell>
