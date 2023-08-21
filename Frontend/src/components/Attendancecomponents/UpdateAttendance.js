@@ -1,108 +1,119 @@
 import React, { useState, useEffect } from 'react';
-import HrService from "../../services/hr.service";
-import {Redirect, useParams} from 'react-router-dom';
-import {TextField, Button, Box, Card, CardContent, CardActions, CardHeader } from '@mui/material';
-import {Done} from '@mui/icons-material'
+import { Redirect, useParams } from 'react-router-dom';
+import {TextField, Button, Box, Card, CardContent, CardActions, CardHeader} from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
+import { Done } from '@mui/icons-material';
 
+import HrService from '../../services/hr.service';
 
+const useStyles = makeStyles((theme) => ({
+  card: {
+    backgroundColor:'lightgrey',
+  },
+  cardHeader: {
+    backgroundColor: 'primary',
+    color: '#fff',
+  },
+  inputField: {
+    marginBottom: '16px',
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  },
+}));
 
-function UpdateAttendance(props){
-    const {user: currentUser} =props;
-    const {attendanceId} =useParams();
-    const {employeeId}=useParams();
-    const [attendance, setAttendance]= useState({});
-    const [present, setPresent]=useState("");
-    const [absenceReason, setAbsenceReason]=useState("");
-    const [redirectToList, setRedirectToList]=useState(false);
+function UpdateAttendance(props) {
+  const { user: currentUser } = props;
+  const { attendanceId, employeeId } = useParams();
+  const [attendance, setAttendance] = useState({});
+  const [present, setPresent] = useState('');
+  const [absenceReason, setAbsenceReason] = useState('');
+  const [redirectToList, setRedirectToList] = useState(false);
+  const classes = useStyles();
 
-
-   useEffect(() =>{
+  useEffect(() => {
     HrService.getAttendanceByEmployeeId(employeeId)
-       .then((response) =>{
-        const attendanceData=response.data;
+      .then((response) => {
+        const attendanceData = response.data;
         setAttendance(attendanceData);
         setPresent(attendanceData.present);
         setAbsenceReason(attendanceData.absenceReason);
-       })
-       .catch((error) =>{
-        console.log("Error fetching data", error);
-       });
-   }, [attendanceId]);
+      })
+      .catch((error) => {
+        console.log('Error fetching data', error);
+      });
+  }, [employeeId]);
 
-   const handleUpdateAttendance =() =>{
-    console.log("Updating attendance with Id: ", attendanceId)
-    const updatedAttendance={
-        attendanceId,
-        present: present,
-        absenceReason: absenceReason
+  const handleUpdateAttendance = () => {
+    const updatedAttendance = {
+      attendanceId,
+      present: present,
+      absenceReason: absenceReason,
     };
 
-    console.log("Updated attendance data:", updatedAttendance);
-
     HrService.updateAttendance(attendanceId, updatedAttendance)
-       .then((response) =>{
-        console.log("Attendance updated successfully", response.data);
+      .then((response) => {
+        console.log('Attendance updated successfully', response.data);
         setRedirectToList(true);
-       })
-       .catch((error) =>{
-          console.log("error updating data", error);
-       });
+      })
+      .catch((error) => {
+        console.log('Error updating data', error);
+      });
+  };
 
-   };
-
-   if(!currentUser){
-    return <Redirect to="/login" />
+  if (!currentUser) {
+    return <Redirect to="/login" />;
   }
-  if(redirectToList){
-    return <Redirect to="/attendance-list" />
+  if (redirectToList) {
+    return <Redirect to="/attendance-list" />;
   }
 
-  return(
-    <div>
-      <Card>
-        <CardHeader title={`Update Attendance - ${attendance.present}`} />
-        <hr></hr>
-        <CardContent>
-          <Box textAlign='center' margin={1} >
+  return (
+    
+      <div>
+        <Card className={classes.card}>
+          <CardHeader
+            title={`Update Attendance `}
+          />
+          <hr />
+          <CardContent>
+            <Box textAlign='center' margin={1}>
               <TextField
-                    label="Present"
-                   
-                    varient='outlined'
-                    value={present}
-                    onChange={(e) => setPresent(e.target.value)}
+                label="Present"
+                variant='outlined'
+                color='primary'
+                value={present}
+                onChange={(e) => setPresent(e.target.value)}
+                className={classes.inputField}
               />
-              &nbsp; &nbsp;
               <TextField
-                    label="Absence Reason"
-                    
-                    varient='outlined'
-                    value={absenceReason}
-                    onChange={(e) => setAbsenceReason(e.target.value)}
+                label="Absence Reason"
+                variant='outlined'
+                color='primary'
+                value={absenceReason}
+                onChange={(e) => setAbsenceReason(e.target.value)}
               />
-             
-
-
-          </Box>
-
-        </CardContent>
-        <CardActions>
-          <Box display='flex' justifyContent="center" width="100%">
-            <Button
-                 variant='outlined'
-                 color='success'
-                 startIcon={<Done />}
-                 onClick={handleUpdateAttendance}>
-                  Update Attendance
-                 </Button>
-
-          </Box>
-        </CardActions>
- 
-        
-      </Card>
-    </div>
+            </Box>
+          </CardContent>
+          <CardActions>
+            <Box  className={classes.buttonContainer}>
+              <Button
+                variant='contained'
+                color='secondary'
+                startIcon={<Done />}
+                onClick={handleUpdateAttendance}
+              >
+                Update Attendance
+              </Button>
+            </Box>
+          </CardActions>
+        </Card>
+      </div>
+    
   );
 }
 
-
 export default UpdateAttendance;
+

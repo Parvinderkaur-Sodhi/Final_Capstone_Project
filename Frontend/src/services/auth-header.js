@@ -8,3 +8,26 @@ export default function authHeader() {
     return {};
   }
 }
+
+/*export default function authHeader() {
+  const userJSON = localStorage.getItem("user");
+
+  if (userJSON) {
+    try {
+      const user = JSON.parse(userJSON);
+
+      if (user && user.accessToken) {
+        return { Authorization: "Bearer " + user.accessToken };
+      } else {
+        return {};
+      }
+    } catch (error) {
+      // Handle the case where JSON parsing fails
+      console.error("Error parsing user JSON:", error);
+      return {};
+    }
+  } else {
+    return {};
+  }
+}*/
+

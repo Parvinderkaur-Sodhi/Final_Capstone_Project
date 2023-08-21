@@ -8,6 +8,14 @@ const API_URL_REQ = "http://localhost:8080/api/leave-requests";
 const API_URL_BAL = "http://localhost:8080/api/leave-balances";
 const API_URL_ATND="http://localhost:8080/api/attendance";
 const API_URL_MARKATND="http://localhost:8080/api/attendance/addattendance";
+<<<<<<< HEAD
+=======
+const API_URL_MARK="http://localhost:8080/api/attendance"
+//--
+
+
+
+>>>>>>> 5594ec06371aa15f842318ab7a2db32db634b201
 const API_URL_USER = "http://localhost:8080/api/test";
 
 class HrService {
@@ -79,6 +87,10 @@ setStatusLeaveRequest(requestId, status) {
 getAllLeaveBalances() {
   return axios.get(API_URL_BAL, { headers: authHeader() });
 }
+//attendance
+getAllAttendances(){
+    return axios.get(API_URL_ATND, {headers: authHeader() });
+}
 
  getAllJobs(){
   console.log("fcdx");
@@ -138,9 +150,35 @@ getAllLeaveBalances() {
 //     return axios.get(API_URL_ATND, {headers: authHeader() });
 // }
 
-markAttendance(employeeId, typedata){
+/*markAttendance(employeeId, typedata){
     const url=`${API_URL_MARKATND}/${employeeId}`;
     return axios.post(url, typedata, {headers: authHeader()});
+}*/
+approveAttendance(attendanceId) {
+  const url = `${API_URL_MARK}/approve/${attendanceId}`;
+  return axios.put(url, null, { headers: authHeader() })
+    .then(response => response.data)
+    .catch(error => {
+      throw error;
+    });
+}
+
+rejectAttendance(attendanceId) {
+  const url = `${API_URL_MARK}/reject/${attendanceId}`;
+  return axios.put(url, null, { headers: authHeader() })
+    .then(response => response.data)
+    .catch(error => {
+      throw error;
+    });
+}
+
+getPendingAttendances() {
+  const url = `${API_URL_MARK}/pending`;
+  return axios.get(url, { headers: authHeader() })
+    .then(response => response.data)
+    .catch(error => {
+      throw error;
+    });
 }
 
 
@@ -154,7 +192,7 @@ getAttendanceByEmployeeId(employeeId){
    return axios.get(url, {headers: authHeader()} );
 }
 
-
+//---------
 
 
 //export default new HrService();

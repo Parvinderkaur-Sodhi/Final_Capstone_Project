@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+
 import com.example.trial.models.Attendance;
+import com.example.trial.models.Attendance.ApprovalStatus;
 import com.example.trial.models.Employee;
 import com.example.trial.repository.AttendanceRepository;
 import com.example.trial.repository.EmployeeRepository;
@@ -28,8 +30,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
     @Override
     public Attendance markAttendance(Attendance attendance) {
+    	//attendance.setAttendanceDate(LocalDate.now());
+    	//return attendancerepo.save(attendance);
+    	
     	attendance.setAttendanceDate(LocalDate.now());
-    	return attendancerepo.save(attendance);
+        attendance.setApprovalStatus(ApprovalStatus.PENDING); // New attendance will be pending approval
+        return attendancerepo.save(attendance);
     }
 
     @Override
@@ -65,6 +71,47 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public Employee getEmployeeById(int employeeId) {
         return empRepo.findById(employeeId).orElse(null);
+    }
+    
+    
+    
+    @Override
+    public Attendance approveAttendance(int attendanceId) {
+        Attendance attendance = attendancerepo.findById(attendanceId).orElse(null);
+        if (attendance != null) {
+            attendance.setApprovalStatus(ApprovalStatus.APPROVED);
+            attendance.setPresent("present"); // Set present status to "No" when rejected
+            attendance.setAbsenceReason("NA");
+            return attendancerepo.save(attendance);
+        }
+        return null;
+    }
+
+    @Override
+    public Attendance rejectAttendance(int attendanceId) {
+        Attendance attendance = attendancerepo.findById(attendanceId).orElse(null);
+        if (attendance != null) {
+            attendance.setApprovalStatus(ApprovalStatus.REJECTED);
+            attendance.setPresent("absent"); 
+            attendance.setAbsenceReason("No reason mentioned");
+            return attendancerepo.save(attendance);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Attendance> getPendingAttendances() {
+        return attendancerepo.findByApprovalStatus(ApprovalStatus.PENDING);
+    }
+    
+    @Override
+    public Attendance updateAbsenceReason(Attendance attendance) {
+        return attendancerepo.save(attendance);
+    }
+    
+    @Override
+    public Attendance getAttendanceById(int attendanceId) {
+        return attendancerepo.findById(attendanceId).orElse(null);
     }
 
 }

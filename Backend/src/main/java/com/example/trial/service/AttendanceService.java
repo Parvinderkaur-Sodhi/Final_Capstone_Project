@@ -14,5 +14,11 @@ public interface AttendanceService {
 	List<Attendance> getAllAttendances();
     Attendance updateAttendance(int attendanceId, Attendance attendance);
     List<Attendance> getAttendanceByEmployeeId(int employeeId);
+    
+    Attendance approveAttendance(int attendanceId);
+    Attendance rejectAttendance(int attendanceId);
+    List<Attendance> getPendingAttendances();
+    Attendance updateAbsenceReason(Attendance attendance);
+    Attendance getAttendanceById(int attendanceId);
 
 }
