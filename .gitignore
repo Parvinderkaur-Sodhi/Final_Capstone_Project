@@ -5,8 +5,5 @@ node_modules/
 **.cache
 application.properties
 **.properties
-**resources/
-package-lock.json
-**.eslintcache
-.eslintcache
-.cache
+**resources/**
+
