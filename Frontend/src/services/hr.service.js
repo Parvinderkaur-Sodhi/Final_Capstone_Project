@@ -1,24 +1,29 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+
 const API_URL="http://localhost:8080/api/";
-
-
 const API_URL_EMP = "http://localhost:8080/api/employees";
 const API_URL_TYPE = "http://localhost:8080/api/leave-types";
 const API_URL_REQ = "http://localhost:8080/api/leave-requests";
 const API_URL_BAL = "http://localhost:8080/api/leave-balances";
-
-//--
 const API_URL_ATND="http://localhost:8080/api/attendance";
 const API_URL_MARKATND="http://localhost:8080/api/attendance/addattendance";
+<<<<<<< HEAD
+=======
 const API_URL_MARK="http://localhost:8080/api/attendance"
 //--
 
 
 
+>>>>>>> 5594ec06371aa15f842318ab7a2db32db634b201
 const API_URL_USER = "http://localhost:8080/api/test";
 
 class HrService {
+
+//Service
+getUserById(UserId) {
+  return axios.get(`${API_URL_USER}/${UserId}`, { headers: authHeader() });
+}
 
 //Employees
 getAllEmployees() {

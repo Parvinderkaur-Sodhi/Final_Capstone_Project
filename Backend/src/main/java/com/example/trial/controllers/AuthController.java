@@ -20,8 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
@@ -52,6 +50,7 @@ public class AuthController {
         return ResponseEntity.ok(employeeId);
     }
 
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateuser(@RequestBody LoginRequest loginRequest) {
 
@@ -71,9 +70,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Error: Unauthorized"));
         }
 
-//        return ResponseEntity
-//                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getRole(), userDetails.getUsername(), userDetails.getEmail()));
-//
 }
 
     @PostMapping("/signup")

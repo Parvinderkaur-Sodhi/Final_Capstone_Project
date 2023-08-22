@@ -5,8 +5,6 @@ target/
 !**/src/test/**/target/
 !**babel-loader/
 **node_modules/
-.cache
-package-lock.json
 
 ### STS ###
 .apt_generated

@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Link } from 'react-router-dom';
 import HrService from "../../services/hr.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Card, CardContent, CardActions, CardHeader, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
-import { Delete, Create, AddCircleOutline } from '@mui/icons-material';
+import {
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Card, CardContent,
+  CardActions, CardHeader, Dialog, DialogTitle, DialogContent, DialogActions, TextField, InputAdornment, Grid
+} from "@mui/material";
+import { Delete, Create, AddCircleOutline, Search } from '@mui/icons-material';
+import Pagination from '@mui/material/Pagination';
 
 function EmployeeList(props) {
   const [employees, setEmployees] = useState([]);
   const { user: currentUser } = props;
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+  const employeesPerPage = 4;
+  const totalPageCount = Math.ceil(employees.length / employeesPerPage);
 
   useEffect(() => {
     HrService.getAllEmployees()
@@ -45,6 +54,22 @@ function EmployeeList(props) {
     setDeleteDialogOpen(false);
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const filteredEmployees = employees.filter((employee) =>
+    employee.fname?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+    employee.lname?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+    employee.department?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+    employee.email?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+    employee.username?.toLowerCase().includes(searchKeyword.toLowerCase())
+  );
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -54,6 +79,32 @@ function EmployeeList(props) {
       <Card>
         <CardHeader className="title" title="Employee List" />
         <CardContent>
+          <Grid container spacing={2} alignItems="center">
+          <Grid item xs={4}></Grid>
+          <Grid item xs={4}></Grid>
+            <Grid item xs={4}>
+              <TextField
+                label="Search"
+                variant="outlined"
+                size="small"
+                fullWidth
+                margin="dense"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </Grid>
+          <br></br>
           <TableContainer component={Paper} style={{ width: "100%" }}>
             <Table stickyHeader>
               <TableHead>
@@ -64,44 +115,53 @@ function EmployeeList(props) {
                   <TableCell>Department</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Username</TableCell>
-                  <TableCell>Employee Status</TableCell>
-                  <TableCell width={"20px"}>Actions</TableCell>
+                  <TableCell width={"20px"}>Employee Status</TableCell>
+                  <TableCell width={"220px"}>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employees.map((employee) => (
+                {currentEmployees.map((employee) => (
                   <TableRow key={employee.employeeId}>
                     <TableCell>{employee.employeeId}</TableCell>
-                    <TableCell>{employee.fname}</TableCell>
-                    <TableCell>{employee.lname}</TableCell>
-                    <TableCell>{employee.department}</TableCell>
-                    <TableCell>{employee.email}</TableCell>
-                    <TableCell>{employee.username}</TableCell>
-                    <TableCell>{employee.employeeStatus}</TableCell>
+                    <TableCell>{employee.fname ? employee.fname : "N/A"}</TableCell>
+                    <TableCell>{employee.lname ? employee.lname : "N/A"}</TableCell>
+                    <TableCell>{employee.department ? employee.department : "N/A"}</TableCell>
+                    <TableCell>{employee.email ? employee.email : "N/A"}</TableCell>
+                    <TableCell>{employee.username ? employee.username : "N/A"}</TableCell>
+                    <TableCell>{employee.employeeStatus ? employee.employeeStatus : "N/A"}</TableCell>
+
                     <TableCell>
                       <Link to={`/update-employee/${employee.employeeId}`}>
-                        <Button style={{ marginBottom: "10px" }} variant="outlined" startIcon={<Create />}>MORE</Button>
+                        <Button style={{ marginBottom: "10px" }} variant="outlined" startIcon={<Create />}>Edit</Button>
                       </Link>
                       &nbsp;
-                      <Button variant="outlined" color="error" startIcon={<Delete />} onClick={() => handleDeleteClick(employee)}>
+                      <Link to={`/view-employee/${employee.employeeId}`}>
+                        <Button color="success" style={{ marginBottom: "10px" }} variant="outlined" startIcon={<Create />}>View</Button>
+                      </Link>
+                      {/* <Button variant="outlined" color="error" startIcon={<Delete />} onClick={() => handleDeleteClick(employee)}>
                         Delete
-                      </Button>
+                      </Button> */}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-          <br></br>
+          <br />
           <CardActions>
-            <Box display="flex" justifyContent="flex-end" width="100%">
+            <Box display="flex" justifyContent="space-between" width="100%">
+            <Box>
               <Link to="/register">
                 <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Register New Employee</Button>
               </Link>
-              &nbsp;
+            &nbsp;
               <Link to="/add-employee">
                 <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Employee</Button>
               </Link>
+              </Box>
+              <Box>
+                <Pagination count={totalPageCount} page={currentPage} onChange={handlePageChange} color="primary" />
+              </Box>
             </Box>
           </CardActions>
         </CardContent>

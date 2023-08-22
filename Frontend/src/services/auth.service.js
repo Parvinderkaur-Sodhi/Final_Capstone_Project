@@ -18,7 +18,6 @@ class AuthService {
             params: { userId: response.data.id }
 
           }).then((employeeResponse) => {
-
             // Store the employee ID in local storage
             localStorage.setItem("employeeId", employeeResponse.data);
           });

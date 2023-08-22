@@ -3,12 +3,9 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
-
 import { Box, Typography, InputLabel, MenuItem, TextField, FormControl, Select } from "@mui/material";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import "./login.css"; // Import the CSS file
@@ -72,7 +69,16 @@ class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       dispatch(login(this.state.username, this.state.password, this.state.erole))
         .then(() => {
-          history.push("/profile");
+          if (this.state.erole === "Admin") {
+            history.push("/hr-home");
+          } else if (this.state.erole === "Manager") {
+            history.push("/manager-home");
+          } else if (this.state.erole === "Employee") {
+            history.push("/employee-home")
+          } else {
+            alert("Oops! Reload and Retry!");
+            history.push("/login");
+          }
           window.location.reload();
         })
         .catch(() => {

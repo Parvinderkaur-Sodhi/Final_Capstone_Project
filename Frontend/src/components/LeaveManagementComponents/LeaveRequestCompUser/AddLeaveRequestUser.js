@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, useHistory } from 'react-router-dom';
 import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
-import employeeService from "../../../services/employee.service";
+import EmployeeService from "../../../services/employee.service";
 
 function AddLeaveRequestUser(props) {
     const { user: currentUser } = props;
     const history = useHistory();
     const [leaveTypes, setLeaveTypes] = useState([]);
+    const [leaveBalances, setLeaveBalances] = useState([]);
     const [leaveRequest, setLeaveRequest] = useState({
         leaveTypeId: "",
         startDate: "",
@@ -15,11 +16,29 @@ function AddLeaveRequestUser(props) {
     });
     const [startDateError, setStartDateError] = useState(false);
     const [endDateError, setEndDateError] = useState(false);
+    const [leaveBalanceError, setLeaveBalanceError] = useState("");
+
+    const calculateDateDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const timeDiff = Math.abs(end - start);
+        return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    };
 
     useEffect(() => {
-        employeeService.getAllLeaveTypes()
+        EmployeeService.getAllLeaveTypes()
             .then((response) => {
                 setLeaveTypes(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        EmployeeService.getLeaveBalancesByEmpId(localStorage.getItem("employeeId"))
+            .then((response) => {
+                setLeaveBalances(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -33,7 +52,7 @@ function AddLeaveRequestUser(props) {
             const today = new Date();
             const newStartDate = new Date(value);
 
-            if (newStartDate < today) {
+            if (newStartDate <= today) {
                 setStartDateError(true);
             } else {
                 setStartDateError(false);
@@ -58,10 +77,23 @@ function AddLeaveRequestUser(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (startDateError || endDateError) {
-            return;
+        // Validate leave balance
+        const requestedDuration = calculateDateDifference(leaveRequest.startDate, leaveRequest.endDate);
+        const selectedLeaveType = leaveTypes.find(type => type.typeId === leaveRequest.leaveTypeId);
+
+        if (selectedLeaveType && leaveBalances.length > 0) {
+            const leaveBalance = leaveBalances.find(balance => balance.leaveType.typeId === selectedLeaveType.typeId);
+
+            if (leaveBalance && requestedDuration > leaveBalance.balance) {
+                setLeaveBalanceError("Not enough leave balance for the requested leave");
+                return; // Exit if balance validation fails
+            } else {
+                setLeaveBalanceError("");
+                Redirect("./add-leave-request");
+            }
         }
 
+        // Proceed with leave request submission
         const requestData = {
             employeeId: {
                 employeeId: localStorage.getItem("employeeId")
@@ -72,7 +104,7 @@ function AddLeaveRequestUser(props) {
             reason: leaveRequest.reason,
         };
 
-        employeeService.saveLeaveRequest(requestData)
+        EmployeeService.saveLeaveRequest(requestData)
             .then(() => {
                 console.log("Leave request added successfully");
                 history.push("/leave-request-user");
@@ -95,6 +127,9 @@ function AddLeaveRequestUser(props) {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
+                            {leaveBalanceError && (
+                                <Box color="error.main">{leaveBalanceError}</Box>
+                            )}
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel>Leave Type</InputLabel>
                                 <Select
