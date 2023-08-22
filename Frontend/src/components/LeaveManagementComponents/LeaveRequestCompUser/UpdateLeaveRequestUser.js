@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, useParams, useHistory } from 'react-router-dom';
 import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
-import employeeService from "../../../services/employee.service";
+import EmployeeService from "../../../services/employee.service";
 
 function UpdateLeaveRequestUser(props) {
     const { user: currentUser } = props;
@@ -27,7 +27,7 @@ function UpdateLeaveRequestUser(props) {
     };
 
     useEffect(() => {
-        employeeService.getAllLeaveTypes()
+        EmployeeService.getAllLeaveTypes()
             .then((response) => {
                 setLeaveTypes(response.data);
             })
@@ -35,7 +35,7 @@ function UpdateLeaveRequestUser(props) {
                 console.log(error);
             });
 
-        employeeService.getLeaveRequestById(requestId)
+        EmployeeService.getLeaveRequestById(requestId)
             .then((response) => {
                 const { leaveTypeName, startDate, endDate, reason } = response.data;
 
@@ -72,7 +72,7 @@ function UpdateLeaveRequestUser(props) {
             const today = new Date();
             const newStartDate = new Date(value);
 
-            if (newStartDate < today) {
+            if (newStartDate <= today) {
                 setStartDateError(true);
             } else {
                 setStartDateError(false);
@@ -90,7 +90,7 @@ function UpdateLeaveRequestUser(props) {
             const newEndDate = new Date(value);
             const startDate = new Date(leaveRequest.startDate);
 
-            if (newEndDate <= startDate) {
+            if (newEndDate < startDate) {
                 setEndDateError(true);
             } else {
                 setEndDateError(false);
@@ -111,12 +111,12 @@ function UpdateLeaveRequestUser(props) {
         setStartDateError(false);
         setEndDateError(false);
 
-        if (startDate < today) {
+        if (startDate <= today) {
             setStartDateError(true);
             return false;
         }
 
-        if (startDate > endDate) {
+        if (startDate >= endDate) {
             setStartDateError(true);
             setEndDateError(true);
             return false;
@@ -131,23 +131,33 @@ function UpdateLeaveRequestUser(props) {
         if (!validateDateRange()) {
             return;
         }
-
+    
         // Validate leave balance
         const requestedDuration = calculateDateDifference(leaveRequest.startDate, leaveRequest.endDate);
         const selectedLeaveType = leaveTypes.find(type => type.typeId === leaveRequest.leaveTypeId);
-
-        if (selectedLeaveType && leaveBalances.length > 0) {
+        console.log("leaveTypes:", selectedLeaveType);
+        
+        if (selectedLeaveType) {
             const leaveBalance = leaveBalances.find(balance => balance.leaveType.typeId === selectedLeaveType.typeId);
-
-            if (leaveBalance && requestedDuration > leaveBalance.balance) {
-                setLeaveBalanceError("Not enough leave balance for the requested leave");
-                return; // Exit if balance validation fails
+    
+            if (leaveBalance) {
+                if (requestedDuration > leaveBalance.balance) {
+                    setLeaveBalanceError("Not enough leave balance for the requested leave");
+                    return;
+                } else {
+                    setLeaveBalanceError("");
+                }
             } else {
-                setLeaveBalanceError("");
-                Redirect("./add-leave-request");
+                // Check allowed leave count from leave types
+                if (requestedDuration > selectedLeaveType.countAllowed) {
+                    setLeaveBalanceError("Not enough allowed leave count for the requested leave");
+                    return;
+                } else {
+                    setLeaveBalanceError("");
+                }
             }
-        }
-
+    
+        // Proceed with leave request submission
         const requestData = {
             leaveTypeName: { typeId: leaveRequest.leaveTypeId },
             startDate: leaveRequest.startDate,
@@ -155,7 +165,7 @@ function UpdateLeaveRequestUser(props) {
             reason: leaveRequest.reason,
         };
 
-        employeeService.updateLeaveRequest(requestId, requestData)
+        EmployeeService.updateLeaveRequest(requestId, requestData)
             .then(() => {
                 console.log("Leave request updated successfully");
                 history.push("/leave-request-user");
@@ -163,6 +173,7 @@ function UpdateLeaveRequestUser(props) {
             .catch((error) => {
                 console.log("Error updating leave request:", error);
             });
+        }
     };
 
     if (!currentUser) {
