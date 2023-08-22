@@ -12,7 +12,6 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
-import AllJob from "./components/JobManagementComponents/AllJob";
 
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
 import EmployeeListUser from "./components/EmployeeComponents/EmployeeListUser";
@@ -44,6 +43,8 @@ import AttendanceList from "./components/Attendancecomponents/AttendanceList";
 import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
 import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
 import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import { Details } from "@mui/icons-material";
+import Deatils from "./components/JobManagementComponents/HrJobPortal/Deatils";
 //import EmployeeNavbar from "./employeeNavbar";
 
 class App extends Component {
@@ -149,6 +150,7 @@ class App extends Component {
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
                             <Route exact path="/Hrjob" component={HrJobPortal}/>
 <Route exact path="/trackStatus/:empid" component={TrackStatus}/>
+<Route exact path="/AppliedJobs/:jobProfile" component={Deatils}/>
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
@@ -156,7 +158,6 @@ class App extends Component {
               <Route path="/type-list-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
 
-              <Route exact path="/job" component={AllJob} />
 
 
               <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />

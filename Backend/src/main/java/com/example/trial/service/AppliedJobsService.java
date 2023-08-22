@@ -18,11 +18,12 @@ public interface AppliedJobsService {
 
     List<AppliedJobs> getJobByJobStatus(String status);
     List<AppliedJobs> AppliedJobsforEmp(int empId);
+    List<AppliedJobs> getJobByProfileAndStatus(String profile,String status);
 
     AppliedJobs applyForJob(int empId,int JobId,AppliedJobs Job);
 
 
-	AppliedJobs updateStatus(int applicationno, String status);
+	AppliedJobs updateStatus(int applicationno, AppliedJobs job);
 
 //    void deleteJob(int JobId);
 }

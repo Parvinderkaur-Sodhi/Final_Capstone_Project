@@ -110,4 +110,9 @@ public class JobController {
         }
         return Job;
     }
+    
+    @GetMapping("/experience/{exp}")
+    public List<Jobs> getJobByExperience(@PathVariable int exp) {
+    	return JobService.getJobByExperience(exp);
+    }
     }

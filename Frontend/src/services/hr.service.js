@@ -105,7 +105,7 @@ getAllLeaveBalances() {
   }
 
   postJob(job){
-    return axios.post(API_URL+'/postJob',job,{headers:{"Authorization":authHeader()}});
+    return axios.post(API_URL+'Jobs/postJob',job,{headers:authHeader()});
   }
 
   updateJob(id){
@@ -118,7 +118,7 @@ getAllLeaveBalances() {
   }
 
   viewAppliedJobs(){
-     return axios.get(API_URL+'AppliedJobs/view',{headers:{"Authorization":authHeader()}});
+     return axios.get(API_URL+'AppliedJobs/view',{headers:authHeader()});
 
   }
 
@@ -131,9 +131,13 @@ getAllLeaveBalances() {
      return axios.get(API_URL+'AppliedJobs/searchByStatus/'+status,{headers:{"Authorization":authHeader()}});
   }
 
-  updateStatus(id,status){
-    return axios.put(API_URL+'AppliedJobs/updateStatus'+id+status,{headers:{"Authorization":authHeader()}});
+  searchByProfilenStatus(profile,status){
+     return axios.get(API_URL+'AppliedJobs/ViewApplication/'+profile+'/'+status,{headers:authHeader()});
   }
+
+  updateStatus(id,obj){
+  const url = `${API_URL}AppliedJobs/updateStatus/${id}`;
+  return axios.put(url, obj, { headers: authHeader() });  }
 
 // markAttendance(employeeId){
 //    return axios.post(`${API_URL_ANTD}addattendance/${employeeId}`, {headers: authHeader()});

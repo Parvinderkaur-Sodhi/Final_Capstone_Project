@@ -90,6 +90,12 @@ existingjob.setLastdate(Job.getLastdate());
 				   return credentials;
 				   }
 
+			@Override
+			public List<Jobs> getJobByExperience(int exp) {
+				// TODO Auto-generated method stub
+				return jobrepo.getJobByExperience(exp);
+			}
+
 		    
 	}
 

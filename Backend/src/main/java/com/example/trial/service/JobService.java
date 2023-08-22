@@ -18,6 +18,7 @@ public interface JobService {
 
     List<Jobs> getJobByJobType(String jobtype);
     List<Jobs> getJobByCategory(String category);
+    List<Jobs> getJobByExperience(int exp);
 
 List<Jobs>getSalaryRangeJobs(int min,int max);
     Jobs saveJob(Jobs Job);
@@ -25,6 +26,8 @@ List<Jobs>getSalaryRangeJobs(int min,int max);
     Jobs updateJob(int JobId, Jobs Job);
 
     void deleteJob(int JobId);
+    
+    
 }
 
 

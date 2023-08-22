@@ -77,14 +77,20 @@ public class AppliedJobsController {
     }
 
     //edit AppliedJobs details
-    @PutMapping("/updateStatus/{AppliedJobId}/{status}")
-    public AppliedJobs updateAppliedJobs(@PathVariable int AppliedJobId, @PathVariable String status) {
-        return AppliedJobsService.updateStatus(AppliedJobId, status);
+    @PutMapping("/updateStatus/{AppliedJobId}")
+    public AppliedJobs updateAppliedJobs(@PathVariable int AppliedJobId,@RequestBody AppliedJobs job) {
+    	System.out.println("hii");
+        return AppliedJobsService.updateStatus(AppliedJobId,job);
     }
 
 
     @GetMapping("/viewByEmp/{empId}")
     public List<AppliedJobs> viewAppliedJobsforEmp(@PathVariable int empId) {
         return AppliedJobsService.AppliedJobsforEmp(empId);
+    }
+    
+    @GetMapping("/ViewApplication/{profile}/{status}")
+    public List<AppliedJobs> viewAppliedJobbyProfileAndStatus(@PathVariable String profile,@PathVariable String status){
+    	return AppliedJobsService.getJobByProfileAndStatus(profile, status);
     }
 }

@@ -61,17 +61,19 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 			}
 
 			@Override
-			public AppliedJobs updateStatus(int applicationno, String status) {
+			public AppliedJobs updateStatus(int applicationno,AppliedJobs job) {
 				// TODO Auto-generated method stub
 				String currstatus="accept";
+				System.out.println(job);
 				 AppliedJobs existingappliedjob = appliedjobrepo.findById(applicationno).orElse(null);
+				 System.out.println(existingappliedjob);
 			        if (existingappliedjob != null) {
 			            // Update properties of existingJobs using jobs object
 			        	
-			            existingappliedjob.setStatus(status);	
-			            System.out.println(status);
+			            existingappliedjob.setStatus(job.getStatus());	
+			            System.out.println(job.getStatus());
 			            System.out.println(currstatus);
-			            if(status.equals(currstatus)){
+			            if(job.getStatus().equals(currstatus)){
 							System.out.println("working");
 						
 							Jobs job1=jobservice.getJobById(existingappliedjob.getJob().getJobId());
@@ -79,9 +81,9 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 							System.out.println(job1);
 							jobservice.saveJob(job1);
 						}
-			            return appliedjobrepo.save(existingappliedjob);
 			            }
-			        return null;
+		            return appliedjobrepo.save(existingappliedjob);
+
 			}
 
 			@Override
@@ -104,6 +106,12 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 			public List<AppliedJobs> AppliedJobsforEmp(int empId) {
 				// TODO Auto-generated method stub
 				return appliedjobrepo.findAllByEmpEmployeeId(empId);
+			}
+
+			@Override
+			public List<AppliedJobs> getJobByProfileAndStatus(String profile, String status) {
+				// TODO Auto-generated method stub
+				return appliedjobrepo.findAllByJobJobProfileAndStatus(profile, status);
 			}
 
 			        
