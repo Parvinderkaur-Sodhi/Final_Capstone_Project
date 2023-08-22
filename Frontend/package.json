@@ -12,10 +12,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/lab": "^5.0.0-alpha.139",
     "@mui/material": "^5.14.5",
-<<<<<<< HEAD
-=======
     "@mui/styles": "^5.14.5",
->>>>>>> 5594ec06371aa15f842318ab7a2db32db634b201
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -27,11 +24,8 @@
     "react": "^17.0.1",
     "react-big-calendar": "^1.8.2",
     "react-bootstrap": "^2.8.0",
-<<<<<<< HEAD
     "react-calendar": "^4.6.0",
-=======
     "react-chartjs-2": "^5.2.0",
->>>>>>> 5594ec06371aa15f842318ab7a2db32db634b201
     "react-datepicker": "^4.16.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.10.1",

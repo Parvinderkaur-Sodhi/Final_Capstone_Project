@@ -8,14 +8,11 @@ const API_URL_REQ = "http://localhost:8080/api/leave-requests";
 const API_URL_BAL = "http://localhost:8080/api/leave-balances";
 const API_URL_ATND="http://localhost:8080/api/attendance";
 const API_URL_MARKATND="http://localhost:8080/api/attendance/addattendance";
-<<<<<<< HEAD
-=======
 const API_URL_MARK="http://localhost:8080/api/attendance"
 //--
 
 
 
->>>>>>> 5594ec06371aa15f842318ab7a2db32db634b201
 const API_URL_USER = "http://localhost:8080/api/test";
 
 class HrService {
@@ -144,11 +141,12 @@ getAllAttendances(){
     return axios.put(API_URL+'AppliedJobs/updateStatus'+id+status,{headers:{"Authorization":authHeader()}});
   }
 
-// markAttendance(employeeId){
-//    return axios.post(`${API_URL_ANTD}addattendance/${employeeId}`, {headers: authHeader()});
-// getAllAttendances(){
-//     return axios.get(API_URL_ATND, {headers: authHeader() });
-// }
+markAttendance(employeeId){
+     return axios.post(`${API_URL_ATND}addattendance/${employeeId}`, {headers: authHeader()});
+ }
+ getAllAttendances(){
+     return axios.get(API_URL_ATND, {headers: authHeader() });
+ }
 
 /*markAttendance(employeeId, typedata){
     const url=`${API_URL_MARKATND}/${employeeId}`;
