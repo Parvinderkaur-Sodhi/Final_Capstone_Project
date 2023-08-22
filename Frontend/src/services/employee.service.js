@@ -55,7 +55,8 @@ class EmployeeService {
     const url = `${API_URL_ATND}/${attendanceId}/update-absence-reason`;
     const updatedAttendance = { absenceReason: updatedReason };
     return axios.put(url, updatedAttendance, { headers: authHeader() });
-  getLeaveRequestByEmployeeId(employeeId) {
+  }
+    getLeaveRequestByEmployeeId(employeeId) {
     return axios.get(`${API_URL_REQ}/leaves/${employeeId}`, { headers: authHeader() });
   }
 
