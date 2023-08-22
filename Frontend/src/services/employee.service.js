@@ -7,6 +7,7 @@ const API_URL_REQ = "http://localhost:8080/api/leave-requests";
 const API_URL_TYPE = "http://localhost:8080/api/leave-types";
 const API_URL_BAL = "http://localhost:8080/api/leave-balances";
 
+
 class EmployeeService {
 
   getAllEmployeeById(id) {
@@ -33,7 +34,29 @@ class EmployeeService {
     return axios.get(url, {headers: authHeader()} );
  }
   //Leave Requests
-  getLeaveRequestByEmployeeId(employeeId) {
+  /*getLeaveRequestByEmployeeId() {
+    return axios.get(`${API_URL_REQ}/employee/${employeeIdd}`, { headers: authHeader() });
+  }*/
+
+
+  markAttendance(employeeId, attendanceData)  {
+    const url = `${API_URL_ATND}/addattendance/${employeeId}`;
+    return axios.post(url, attendanceData, { headers: authHeader() })
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+  
+
+  updateAbsenceReason(attendanceId, updatedReason) {
+    const url = `${API_URL_ATND}/${attendanceId}/update-absence-reason`;
+    const updatedAttendance = { absenceReason: updatedReason };
+    return axios.put(url, updatedAttendance, { headers: authHeader() });
+  }
+    getLeaveRequestByEmployeeId(employeeId) {
     return axios.get(`${API_URL_REQ}/leaves/${employeeId}`, { headers: authHeader() });
   }
 

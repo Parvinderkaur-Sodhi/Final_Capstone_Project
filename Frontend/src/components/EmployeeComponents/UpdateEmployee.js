@@ -220,9 +220,18 @@ function UpdateEmployee(props) {
 
                         <Grid item xs={12} md={6}>
                             <TextField
-                                label="Addhar/Pan Card number"
+                                label="Addhar ID"
                                 value={employee.idNo || ""}
                                 onChange={(e) => handleFieldChange("idNo", e.target.value)}
+                                fullWidth
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <TextField
+                                label="Pan Card number"
+                                value={employee.other || ""}
+                                onChange={(e) => handleFieldChange("other", e.target.value)}
                                 fullWidth
                                 variant="outlined"
                             />
@@ -269,15 +278,6 @@ function UpdateEmployee(props) {
                                 label="Resume"
                                 value={employee.resume || ""}
                                 onChange={(e) => handleFieldChange("resume", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Other"
-                                value={employee.other || ""}
-                                onChange={(e) => handleFieldChange("other", e.target.value)}
                                 fullWidth
                                 variant="outlined"
                             />

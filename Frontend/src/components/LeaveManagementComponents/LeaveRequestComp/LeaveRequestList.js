@@ -4,13 +4,14 @@ import HrService from "../../../services/hr.service";
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button,
   FormControl, Select, InputLabel, TextField, Grid, MenuItem, Card, CardContent, Typography,
-  Box, IconButton, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
+  Box, IconButton, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, CardHeader, CardActions
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import CalendarView from "../../CalenderView";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import Pagination from '@mui/material/Pagination';
 
 function LeaveRequestList(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -22,6 +23,8 @@ function LeaveRequestList(props) {
   const [filterStatus, setFilterStatus] = useState("");
   const [filterType, setFilterType] = useState("");
   const [calendarView, setCalendarView] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Added state for pagination
+  const leaveRequestsPerPage = 4;
 
   const { user: currentUser } = props;
 
@@ -33,7 +36,7 @@ function LeaveRequestList(props) {
       .catch((error) => {
         console.log(error);
       });
-  
+
     HrService.getAllLeaveTypes()
       .then((response) => {
         setLeaveTypes(response.data);
@@ -41,7 +44,7 @@ function LeaveRequestList(props) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);  
+  }, []);
 
   const handleAccept = (requestId) => {
     setSelectedRequestId(requestId);
@@ -70,7 +73,7 @@ function LeaveRequestList(props) {
           }
           return leaveRequest;
         });
-  
+
         setLeaveRequests(updatedLeaveRequests);
         setConfirmationOpen(false);
         setSelectedRequestId(null);
@@ -80,11 +83,7 @@ function LeaveRequestList(props) {
         console.log("Error updating leave request status:", error);
       });
   };
-  
 
-  if (!currentUser) {
-    return <Redirect to="/login" />;
-  }
 
   const filteredLeaveRequests = leaveRequests.filter((leaveRequest) => {
     const statusMatches = filterStatus === "" || leaveRequest.status === filterStatus;
@@ -99,14 +98,26 @@ function LeaveRequestList(props) {
     );
   });
 
+  // Calculate pagination
+  const indexOfLastRequest = currentPage * leaveRequestsPerPage;
+  const indexOfFirstRequest = indexOfLastRequest - leaveRequestsPerPage;
+  const currentLeaveRequests = filteredLeaveRequests.slice(indexOfFirstRequest, indexOfLastRequest);
+
+  // Handle page change
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+
+  if (!currentUser) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div>
       <Card>
         <CardContent>
-          <Typography variant="h4" gutterBottom>
-            Leave Request List
-          </Typography>
-
+          <CardHeader className="title" title="All Leaves" />
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={4}>
               <TextField
@@ -177,14 +188,13 @@ function LeaveRequestList(props) {
             </IconButton>
           </Box>
           <br></br>
-          <br></br>
 
           {calendarView ? (
             <CalendarView leaveRequests={filteredLeaveRequests} />
           ) : (
             <TableContainer component={Paper}>
               <Table>
-                <TableHead style={{color: "#FFFF"}}>
+                <TableHead style={{ color: "#FFFF" }}>
                   <TableRow>
                     <TableCell style={{ width: "5%" }}>ID</TableCell>
                     <TableCell style={{ width: "15%" }}>Employee Name</TableCell>
@@ -197,13 +207,13 @@ function LeaveRequestList(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredLeaveRequests.map((leaveRequest) => (
+                  {currentLeaveRequests.map((leaveRequest) => (
                     <TableRow key={leaveRequest.requestId}>
                       <TableCell>{leaveRequest.requestId}</TableCell>
                       <TableCell>{leaveRequest.employeeId.fname}</TableCell>
                       <TableCell>{leaveRequest.leaveTypeName.typeName}</TableCell>
-                      <TableCell>{leaveRequest.startDate}</TableCell>
-                      <TableCell>{leaveRequest.endDate}</TableCell>
+                      <TableCell>{new Date(leaveRequest.startDate).toLocaleDateString()}</TableCell>
+                      <TableCell>{new Date(leaveRequest.endDate).toLocaleDateString()}</TableCell>
                       <TableCell>{leaveRequest.reason}</TableCell>
                       <TableCell>{leaveRequest.status}</TableCell>
                       <TableCell>
@@ -233,6 +243,16 @@ function LeaveRequestList(props) {
               </Table>
             </TableContainer>
           )}
+          <CardActions>
+            <Box style={{}}>
+              <Pagination
+                count={Math.ceil(filteredLeaveRequests.length / leaveRequestsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+              />
+            </Box>
+          </CardActions>
         </CardContent>
       </Card>
 

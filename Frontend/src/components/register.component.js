@@ -3,7 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import { Container, Typography, TextField, Button, CircularProgress, Snackbar, Card } from "@mui/material";
+import { Container, Typography, TextField, Button, CircularProgress, Snackbar, Card, MenuItem, FormControl, InputLabel, Select } from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Alert from '@mui/material/Alert';
 import { styled } from '@mui/material/styles';
@@ -47,17 +47,26 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
+      role: "",
       username: "",
       email: "",
       password: "",
       successful: false,
     };
   }
+
+  onChangeRole(e) {
+    this.setState({
+      role: e.target.value,
+    });
+  }
+
 
   onChangeUsername(e) {
     this.setState({
@@ -89,7 +98,7 @@ class Register extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       this.props
         .dispatch(
-          register(this.state.username, this.state.email, this.state.password)
+          register(this.state.role, this.state.username, this.state.email, this.state.password)
         )
         .then(() => {
           this.setState({
@@ -124,6 +133,24 @@ class Register extends Component {
           >
             {!this.state.successful && (
               <div>
+                <FormControl required variant="outlined" fullWidth margin="dense">
+                  <InputLabel>Role</InputLabel>
+                  <Select
+                    name="role"
+                    onChange={(e) => {
+                      this.onChangeRole(e);
+                      this.setState({ role: e.target.value });
+                    }}
+                    value={this.state.role}
+                    label="Role"
+                  >
+                    <MenuItem value="">Select Role</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem>
+                    <MenuItem value="Manager">Manager</MenuItem>
+                    <MenuItem value="Employee">Employee</MenuItem>
+                  </Select>
+                </FormControl>
+
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -170,7 +197,7 @@ class Register extends Component {
                   variant="contained"
                   color="primary"
                   disabled={this.state.loading}
-                  style={{ marginTop: "16px", backgroundColor: 'black', color: 'white'  }}
+                  style={{ marginTop: "16px", backgroundColor: 'black', color: 'white' }}
                 >
                   {this.state.loading ? <CircularProgress size={24} /> : "Sign Up"}
                 </Button>

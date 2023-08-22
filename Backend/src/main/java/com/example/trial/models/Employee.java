@@ -44,6 +44,7 @@ public class Employee {
     private String employeeStatus;
     private String address;
     private String pAddress;
+    private String empRole;
     private Long idNo;
 
     private String other;
@@ -53,7 +54,7 @@ public class Employee {
 
     @Lob
     private byte[] resume;
-
+   
     private long userId;
 
 //	public LeaveBalance getLeaveBalanceByType(LeaveType leaveTypeName) {

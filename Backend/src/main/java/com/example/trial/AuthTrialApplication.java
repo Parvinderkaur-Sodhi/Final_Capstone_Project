@@ -11,11 +11,7 @@ public class AuthTrialApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthTrialApplication.class, args);
-		
-		
 	}
-	
-
 	
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // Change this to match your API endpoints

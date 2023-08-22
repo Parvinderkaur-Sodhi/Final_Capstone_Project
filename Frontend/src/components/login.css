@@ -1,0 +1,22 @@
+/* login.css */
+.login-container {
+    display: flex;
+    margin-top: 60px;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-form {
+    flex: 1;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.login-bg {
+    flex: 1;
+    align-items: flex-end;
+    height: fit-content;
+}
