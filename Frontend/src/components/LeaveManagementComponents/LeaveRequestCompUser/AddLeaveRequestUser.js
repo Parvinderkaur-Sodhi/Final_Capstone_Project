@@ -127,9 +127,6 @@ function AddLeaveRequestUser(props) {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            {leaveBalanceError && (
-                                <Box color="error.main">{leaveBalanceError}</Box>
-                            )}
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel>Leave Type</InputLabel>
                                 <Select
@@ -145,6 +142,9 @@ function AddLeaveRequestUser(props) {
                                     ))}
                                 </Select>
                             </FormControl>
+                            {leaveBalanceError && (
+                                <Box color="error.main">{leaveBalanceError}</Box>
+                            )}
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField

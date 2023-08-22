@@ -39,10 +39,10 @@ public class LeaveRequest {
     private Date endDate;
 
     private String reason;
-    
-      
 
-	public void updateStatus(String newStatus, LeaveBalanceController leaveBalanceController) {
+
+
+    public void updateStatus(String newStatus, LeaveBalanceController leaveBalanceController) {
         if ("Rejected".equals(newStatus) || "Accepted".equals(newStatus)) {
             this.status = newStatus;
 
@@ -67,28 +67,36 @@ public class LeaveRequest {
                             .orElse(null);
 
                     if (leaveBalance != null) {
-                        // Check if the balance will go into negative
-                        if (balance < 0) {
-                            throw new IllegalArgumentException("Leave balance will go into negative");
-                        }
+                        try {
+                            // Check if the balance will go into negative
+                            if (balance < 0) {
+                                throw new IllegalArgumentException("Leave balance will go into negative");
+                            }
 
-                        // Leave balance entry already exists, update the balance
-                        leaveBalance.setBalance(balance);
-                        // Update the leave balance through the existing endpoint
-                        leaveBalanceController.updateLeaveBalance(leaveBalance.getBalanceId(), leaveBalance);
+                            // Leave balance entry already exists, update the balance
+                            leaveBalance.setBalance(balance);
+                            // Update the leave balance through the existing endpoint
+                            leaveBalanceController.updateLeaveBalance(leaveBalance.getBalanceId(), leaveBalance);
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println("Error: " + ex.getMessage());
+                        }
                     } else {
-                        // Leave balance entry doesn't exist, create a new entry
-                        LeaveBalance newLeaveBalance = new LeaveBalance();
-                        newLeaveBalance.setEmployee(employeeId);
-                        newLeaveBalance.setLeaveType(leaveTypeName);
+                        try {
+                            // Check if the balance will go into negative
+                            if (balance < 0) {
+                                throw new IllegalArgumentException("Leave balance will go into negative");
+                            }
 
-                        // Check if the balance will go into negative
-                        if (balance < 0) {
-                            throw new IllegalArgumentException("Leave balance will go into negative");
+                            // Leave balance entry doesn't exist, create a new entry
+                            LeaveBalance newLeaveBalance = new LeaveBalance();
+                            newLeaveBalance.setEmployee(employeeId);
+                            newLeaveBalance.setLeaveType(leaveTypeName);
+
+                            newLeaveBalance.setBalance(balance);
+                            leaveBalanceController.saveLeaveBalance(newLeaveBalance);
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println("Error: " + ex.getMessage());
                         }
-
-                        newLeaveBalance.setBalance(balance);
-                        leaveBalanceController.saveLeaveBalance(newLeaveBalance);
                     }
                 }
             }
@@ -96,6 +104,7 @@ public class LeaveRequest {
             throw new IllegalArgumentException("Invalid status: " + newStatus);
         }
     }
+
 
 
 }

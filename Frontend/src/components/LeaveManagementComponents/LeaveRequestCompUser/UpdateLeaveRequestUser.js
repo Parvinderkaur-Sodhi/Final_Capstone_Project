@@ -6,7 +6,8 @@ import employeeService from "../../../services/employee.service";
 function UpdateLeaveRequestUser(props) {
     const { user: currentUser } = props;
     const { requestId } = useParams();
-    const history = useHistory(); // Initialize history
+    const history = useHistory();
+    const [leaveBalances, setLeaveBalances] = useState([]);
     const [leaveTypes, setLeaveTypes] = useState([]);
     const [leaveRequest, setLeaveRequest] = useState({
         leaveTypeId: "",
@@ -16,6 +17,14 @@ function UpdateLeaveRequestUser(props) {
     });
     const [startDateError, setStartDateError] = useState(false);
     const [endDateError, setEndDateError] = useState(false);
+    const [leaveBalanceError, setLeaveBalanceError] = useState("");
+
+    const calculateDateDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const timeDiff = Math.abs(end - start);
+        return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    };
 
     useEffect(() => {
         employeeService.getAllLeaveTypes()
@@ -45,6 +54,16 @@ function UpdateLeaveRequestUser(props) {
                 console.log(error);
             });
     }, [requestId]);
+
+    useEffect(() => {
+        EmployeeService.getLeaveBalancesByEmpId(localStorage.getItem("employeeId"))
+            .then((response) => {
+                setLeaveBalances(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -113,6 +132,22 @@ function UpdateLeaveRequestUser(props) {
             return;
         }
 
+        // Validate leave balance
+        const requestedDuration = calculateDateDifference(leaveRequest.startDate, leaveRequest.endDate);
+        const selectedLeaveType = leaveTypes.find(type => type.typeId === leaveRequest.leaveTypeId);
+
+        if (selectedLeaveType && leaveBalances.length > 0) {
+            const leaveBalance = leaveBalances.find(balance => balance.leaveType.typeId === selectedLeaveType.typeId);
+
+            if (leaveBalance && requestedDuration > leaveBalance.balance) {
+                setLeaveBalanceError("Not enough leave balance for the requested leave");
+                return; // Exit if balance validation fails
+            } else {
+                setLeaveBalanceError("");
+                Redirect("./add-leave-request");
+            }
+        }
+
         const requestData = {
             leaveTypeName: { typeId: leaveRequest.leaveTypeId },
             startDate: leaveRequest.startDate,
@@ -158,6 +193,9 @@ function UpdateLeaveRequestUser(props) {
                                     ))}
                                 </Select>
                             </FormControl>
+                            {leaveBalanceError && (
+                                <Box color="error.main">{leaveBalanceError}</Box>
+                            )}
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
