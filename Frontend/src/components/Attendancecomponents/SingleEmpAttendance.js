@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { Redirect,  useParams } from "react-router-dom";
-import EmployeeService from "../../services/Employee.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-
+import { Redirect,  useParams, Link } from "react-router-dom";
+import EmployeeService from "../../services/employee.service";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
+import { makeStyles } from '@material-ui/core/styles';
 //--
 function formatDate(dateString) {
   const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -10,23 +10,55 @@ function formatDate(dateString) {
 }
 
 //--
+const useStyles = makeStyles({
+
+  root: {
+      "& .MuiTableCell-head": {
+          color: "black",
+          backgroundColor: "lightpink",
+          fontWeight: "bold"
+      },
+  },
+  pageBackground: {
+    backgroundColor: "lightblue", // Change this color to the desired background color
+    //minHeight: "100vh", // Ensure the background color covers the entire viewport height
+  },
+  editButton: {
+    backgroundColor: "primary", // Example primary color
+    color: "black", // Contrasting text color
+    '&:hover': {
+      backgroundColor: "#1565c0", // Darker color on hover
+    },
+  }
+
+ 
+});
 
 
 function SingleEmpAttendance(props){
 	const {employeeId}=useParams();
 	const [attendance, setAttendance]=useState([]);
 	const {user: currentUser}=props;
+  const [attendancePercentage, setAttendancePercentage] = useState(0);
+  const classes = useStyles();
 
-        useEffect(() =>{
+  useEffect(() => {
+    EmployeeService.getAttendanceByEmployeeId(employeeId)
+      .then((response) => {
+        setAttendance(response.data);
 
-          EmployeeService.getAttendanceByEmployeeId(employeeId)
-            .then((response) =>{
-	        console.log("Data", response.data);	
-	        setAttendance(response.data);
-	    })
-	    .catch((error) =>{
-            console.log(error);
-	    });
+        const presentDays = response.data.filter(
+          (record) => record.present.toLowerCase() === "present"
+        ).length;
+        console.log("Present Days:", presentDays); // Add this line
+        const percentage = (presentDays / response.data.length) * 100 || 0;
+        console.log("Percentage:", percentage); // Add this line
+        setAttendancePercentage(percentage);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [employeeId]);
 
   if (!currentUser) {
     return <Redirect to="/login" />;
