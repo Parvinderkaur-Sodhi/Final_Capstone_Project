@@ -12,7 +12,6 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
-import AllJob from "./components/JobManagementComponents/AllJob";
 
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
 import EmployeeListUser from "./components/EmployeeComponents/EmployeeListUser";
@@ -48,6 +47,8 @@ import SideNavbar from "./components/SideNavbar";
 import AttendanceList from "./components/AttendanceComponents/AttendanceList";
 import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
 import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+import { Details } from "@mui/icons-material";
+import Deatils from "./components/JobManagementComponents/HrJobPortal/Deatils";
 import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
 import PendingList from "./components/AttendanceComponents/PendingList";
 //import EmployeeNavbar from "./employeeNavbar";
@@ -157,7 +158,6 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/user" component={User} />
-
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
               <Route exact path="/Hrjob" component={HrJobPortal} />
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
@@ -165,6 +165,14 @@ class App extends Component {
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
               <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
 
+
+
+              <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
+
+
+              
+              {/* <Route exact path="/job" component={AllJob} /> */}
+              
 
               <Route exact path="/job" component={AllJob} />
 

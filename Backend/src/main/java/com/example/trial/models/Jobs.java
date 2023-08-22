@@ -29,8 +29,8 @@ public class Jobs {
     private String jobType;
     private String category;
     private String position;
-//    private int experience;
-//    private List<String> specialization=new ArrayList<>();
+    private int experience;
+    private String specialization;
     private int salary;
     private LocalDate lastdate;
     

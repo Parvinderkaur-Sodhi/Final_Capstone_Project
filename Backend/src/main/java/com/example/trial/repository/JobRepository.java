@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
+import com.example.trial.models.AppliedJobs;
 import com.example.trial.models.Jobs;
 
 @Repository
@@ -17,6 +18,8 @@ import com.example.trial.models.Jobs;
     List<Jobs> getJobByCategory(String category);
     List<Jobs>findBySalaryBetween(int min,int max);
     List<Jobs> getJobByJobType(String jobtype);
+    List<Jobs>getJobByExperience(int experience);
+//    List<AppliedJobs>findAllByJobJobProfileOrJobStatus(String profile,String status);
 
 	}
 
