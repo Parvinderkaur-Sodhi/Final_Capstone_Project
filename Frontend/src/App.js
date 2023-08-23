@@ -47,9 +47,11 @@ import AttendanceList from "./components/Attendancecomponents/AttendanceList";
 import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
 import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
 import { Details } from "@mui/icons-material";
-import Deatils from "./components/JobManagementComponents/HrJobPortal/Deatils";
+import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
 import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
 import PendingList from "./components/Attendancecomponents/PendingList";
+import example from "./components/JobManagementComponents/HrJobPortal/example";
+import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 //import EmployeeNavbar from "./employeeNavbar";
 
 class App extends Component {
@@ -145,7 +147,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3">
+          <div>
             <Switch>
               {currentUser && currentUser.username === "Admin" && currentUser.email === "admin@gmail.com" && (
                 <Route exact path="/admin-dashboard" component={AdminDashboard} />
@@ -158,7 +160,7 @@ class App extends Component {
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
                             <Route exact path="/Hrjob" component={HrJobPortal}/>
 <Route exact path="/trackStatus/:empid" component={TrackStatus}/>
-<Route exact path="/AppliedJobs/:jobProfile" component={Deatils}/>
+<Route exact path="/AppliedJobs/:jobProfile" component={JobDetails}/>
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />

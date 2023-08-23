@@ -19,6 +19,7 @@ import com.example.trial.models.Jobs;
     List<Jobs>findBySalaryBetween(int min,int max);
     List<Jobs> getJobByJobType(String jobtype);
     List<Jobs>getJobByExperience(int experience);
+    List<Jobs>getJobByPosition(String position);
 //    List<AppliedJobs>findAllByJobJobProfileOrJobStatus(String profile,String status);
 
 	}

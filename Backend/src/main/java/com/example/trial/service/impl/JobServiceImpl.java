@@ -96,6 +96,12 @@ existingjob.setLastdate(Job.getLastdate());
 				return jobrepo.getJobByExperience(exp);
 			}
 
+			@Override
+			public List<Jobs> getJobByPosition(String position) {
+				// TODO Auto-generated method stub
+				return jobrepo.getJobByPosition(position);
+			}
+
 		    
 	}
 

@@ -59,83 +59,7 @@ history.push(`/AppliedJobs/${jobProfile}`);
     }
   return (
       <>
-      <Stack direction="row">
-      <FormControl fullWidth>
-  <InputLabel sx={{mt:-1}}>Category</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={category}
-    label="Category"
-    onChange={(e)=>handleChangeCategory(e)}
-    sx={{width:150,height:40,p:1}}
-  >
-    {categoryList.map((i)=>
-    <MenuItem value={i}>{i}</MenuItem>
-    )}
-  </Select>
-</FormControl>
-  <FormControl fullWidth>
-  <InputLabel sx={{mt:-1}}>Seniority</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={category}
-    label="Category"
-    onChange={(e)=>handleChangeCategory(e)}
-    sx={{width:150,height:40,p:1}}
-  >
-    {seniorityList.map((i)=>
-    <MenuItem value={i}>{i}</MenuItem>
-    )}
-  </Select>
-</FormControl>
-  <FormControl fullWidth>
-  <InputLabel sx={{mt:-1}}>Salary</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={category}
-    label="Category"
-    onChange={(e)=>handleChangeCategory(e)}
-    sx={{width:150,height:40,p:1}}
-  >
-    {categoryList.map((i)=>
-    <MenuItem value={i}>{i}</MenuItem>
-    )}
-  </Select>
-</FormControl>
- <FormControl fullWidth>
-  <InputLabel sx={{mt:-1}}>Experience</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={category}
-    label="Category"
-    onChange={(e)=>handleChangeCategory(e)}
-    sx={{width:150,height:40,p:1}}
-  >
-    {experience.map((i)=>
-    <MenuItem value={i}>{i}</MenuItem>
-    )}
-  </Select>
-</FormControl>
- <FormControl fullWidth>
-  <InputLabel sx={{mt:-1}}>Type</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={category}
-    label="Category"
-    onChange={(e)=>handleChangeCategory(e)}
-    sx={{width:150,height:40,p:1}}
-  >
-    {jobType.map((i)=>
-    <MenuItem value={i}>{i}</MenuItem>
-    )}
-  </Select>
-</FormControl>
-</Stack>
+     
     <h4 style={{margin:"50px 34px"}}>Recommended Jobs :</h4>
     <Grid container sx={{mt:-4,ml:1}}>
 
@@ -150,23 +74,18 @@ job &&  job.map((j,index)=>
       return (
     <>
     
-          <Card style={{width:320,height:200,border:"2px solid",margin:"5px 10px 10px",borderColor:"#E72A63",borderRadius:10,backgroundColor:"white"}}>
-            <Stack>
-              <Typography variant="contained" sx={{bgcolor:"white",margin:"10px 20px",width:"100px",height:30,color:"black",border:"0px solid white",borderRadius:2,fontSize:10}} >{diff} days ago</Typography>
-               <Typography style={{fontSize:10,margin:"10px 20px 0px "}}>{j.category}</Typography>   
-    <Typography style={{fontSize:20,fontWeight:'bolder',color:"black",margin:"0px 20px"}}>{j.jobProfile}</Typography> 
-    <Stack direction="row" mt={1} ml={3}>
-      <Button variant="outlined" sx={{width:"100px",fontSize:10}}>Part Time</Button>
-            <Button variant="outlined" sx={{width:"100px",fontSize:10,ml:2}}>Part Time</Button>
-
-      </Stack>  
+          <Card style={{width:320,height:100,margin:"5px 10px 10px",borderRadius:10,backgroundColor:"white"}}>
+              <Stack direction="row">
+               <Typography style={{fontSize:12,margin:"10px 20px"}}>{j.category}</Typography>
+              <Typography  style={{bgcolor:"white",margin:"10px 70px",color:"black",fontSize:12}} >{diff} days ago</Typography>
+   </Stack>
+    <Typography style={{fontSize:20,fontWeight:'bolder',color:"#88304E",margin:"-15px 20px"}}>{j.jobProfile}</Typography> 
+   
 <Stack direction="row">
   <Stack>
-           <Typography style={{fontSize:10,margin:"15px 20px"}}>Last date : </Typography>   
-
-       <Typography style={{fontSize:12,margin:"-10px 20px",fontWeight:"bolder"}}>{j.lastdate}</Typography>   
+       <Typography style={{fontSize:12,margin:"30px 20px",fontWeight:"bolder"}}>1 Opening</Typography>   
 </Stack>
-<Button variant="contained"  onClick={()=>{openDrawer(index)}} style={{width:70,height:30,backgroundColor:"black",color:"white",margin:"15px 20px"}}>
+<Button variant="outlined"  onClick={()=>{openDrawer(index)}} style={{width:70,height:30,backgroundColor:"#88304E",color:"white",margin:"25px 70px"}}>
   <Typography style={{fontSize:10}} onClick={()=>{ViewAppliedJobs(j.jobProfile)}}>Details</Typography></Button>  
   
 
@@ -174,7 +93,6 @@ job &&  job.map((j,index)=>
  
 
   
-            </Stack>
 </Card>
 
 
