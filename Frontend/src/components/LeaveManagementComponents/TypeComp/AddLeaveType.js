@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import HrService from "../../../services/hr.service";
 import { TextField, Button, Box, Card, CardContent, CardActions, CardHeader } from "@mui/material";
 import { Done } from '@mui/icons-material';
+import HrNavbar from "../../DashBoardComponents/HrNavbar";
 
 function AddLeaveType(props) {
     const [newLeaveType, setNewLeaveType] = useState('');
@@ -35,6 +36,7 @@ function AddLeaveType(props) {
 
     return (
         <div>
+            <HrNavbar/>
             <Card>
             <CardHeader className="title" title="Add New Leave Type" />
             <hr></hr>

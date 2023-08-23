@@ -12,6 +12,7 @@ import CalendarView from "../../CalenderView";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import Pagination from '@mui/material/Pagination';
+import HrNavbar from "../../DashBoardComponents/HrNavbar";
 
 function LeaveRequestList(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -24,7 +25,7 @@ function LeaveRequestList(props) {
   const [filterType, setFilterType] = useState("");
   const [calendarView, setCalendarView] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); // Added state for pagination
-  const leaveRequestsPerPage = 4;
+  const leaveRequestsPerPage = 2;
 
   const { user: currentUser } = props;
 
@@ -115,144 +116,156 @@ function LeaveRequestList(props) {
 
   return (
     <div>
+      <HrNavbar />
       <Card>
         <CardContent>
-          <CardHeader className="title" title="All Leaves" />
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={4}>
-              <TextField
-                label="Search"
-                variant="outlined"
-                fullWidth
-                value={filterText}
-                onChange={(e) => setFilterText(e.target.value)}
-              />
+          <div style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
+            <CardHeader className="title" title="All Leaves" />
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={4}>
+                <TextField
+                  label="Search"
+                  variant="outlined"
+                  fullWidth
+                  value={filterText}
+                  onChange={(e) => setFilterText(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel>Status</InputLabel>
+                  <Select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    label="Status"
+                  >
+                    <MenuItem value="">All</MenuItem>
+                    <MenuItem value="Pending">Pending</MenuItem>
+                    <MenuItem value="Accepted">Accepted</MenuItem>
+                    <MenuItem value="Rejected">Rejected</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={4}>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel>Type</InputLabel>
+                  <Select
+                    value={filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                    label="Type"
+                  >
+                    <MenuItem value="">All</MenuItem>
+                    {leaveTypes.map((type) => (
+                      <MenuItem key={type.id} value={type.typeName}>
+                        {type.typeName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel>Status</InputLabel>
-                <Select
-                  value={filterStatus}
-                  onChange={(e) => setFilterStatus(e.target.value)}
-                  label="Status"
-                >
-                  <MenuItem value="">All</MenuItem>
-                  <MenuItem value="Pending">Pending</MenuItem>
-                  <MenuItem value="Accepted">Accepted</MenuItem>
-                  <MenuItem value="Rejected">Rejected</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel>Type</InputLabel>
-                <Select
-                  value={filterType}
-                  onChange={(e) => setFilterType(e.target.value)}
-                  label="Type"
-                >
-                  <MenuItem value="">All</MenuItem>
-                  {leaveTypes.map((type) => (
-                    <MenuItem key={type.id} value={type.typeName}>
-                      {type.typeName}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
 
-          <Box
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-            marginTop={1}
-          >
-
-            <IconButton
-              color="primary"
-              aria-label="toggle-view"
-              onClick={() => setCalendarView(!calendarView)}
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+              marginTop={1}
             >
-              {calendarView ? (
-                <>
-                  <ViewListIcon /> &nbsp;
-                  <Typography variant="body2">List View</Typography>
-                </>
-              ) : (
-                <>
-                  <CalendarTodayIcon /> &nbsp;
-                  <Typography variant="body2">Calendar View</Typography>
-                </>
-              )}
-            </IconButton>
-          </Box>
-          <br></br>
 
-          {calendarView ? (
-            <CalendarView leaveRequests={filteredLeaveRequests} />
-          ) : (
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead style={{ color: "#FFFF" }}>
-                  <TableRow>
-                    <TableCell style={{ width: "5%" }}>ID</TableCell>
-                    <TableCell style={{ width: "15%" }}>Employee Name</TableCell>
-                    <TableCell style={{ width: "15%" }}>Leave Type</TableCell>
-                    <TableCell style={{ width: "10%" }} >Start Date</TableCell>
-                    <TableCell style={{ width: "10%" }} >End Date</TableCell>
-                    <TableCell style={{ width: "auto" }} >Reason</TableCell>
-                    <TableCell style={{ width: "5%" }} >Status</TableCell>
-                    <TableCell style={{ width: "10%" }} >Action</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {currentLeaveRequests.map((leaveRequest) => (
-                    <TableRow key={leaveRequest.requestId}>
-                      <TableCell>{leaveRequest.requestId}</TableCell>
-                      <TableCell>{leaveRequest.employeeId.fname}</TableCell>
-                      <TableCell>{leaveRequest.leaveTypeName.typeName}</TableCell>
-                      <TableCell>{new Date(leaveRequest.startDate).toLocaleDateString()}</TableCell>
-                      <TableCell>{new Date(leaveRequest.endDate).toLocaleDateString()}</TableCell>
-                      <TableCell>{leaveRequest.reason}</TableCell>
-                      <TableCell>{leaveRequest.status}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="outlined"
-                          color="success"
-                          startIcon={<CheckIcon />}
-                          onClick={() => handleAccept(leaveRequest.requestId)}
-                          disabled={leaveRequest.status !== "Pending"}
-                          style={{ marginBottom: "10px" }}
-                        >
-                          Accept
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          startIcon={<ClearIcon />}
-                          onClick={() => handleReject(leaveRequest.requestId)}
-                          disabled={leaveRequest.status !== "Pending"}
-                        >
-                          Reject
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
-          <CardActions>
-            <Box style={{}}>
-              <Pagination
-                count={Math.ceil(filteredLeaveRequests.length / leaveRequestsPerPage)}
-                page={currentPage}
-                onChange={handlePageChange}
+              <IconButton
                 color="primary"
-              />
+                aria-label="toggle-view"
+                onClick={() => setCalendarView(!calendarView)}
+              >
+                {calendarView ? (
+                  <>
+                    <ViewListIcon /> &nbsp;
+                    <Typography variant="body2">List View</Typography>
+                  </>
+                ) : (
+                  <>
+                    <CalendarTodayIcon /> &nbsp;
+                    <Typography variant="body2">Calendar View</Typography>
+                  </>
+                )}
+              </IconButton>
             </Box>
-          </CardActions>
+            <br></br>
+
+            {calendarView ? (
+              <CalendarView leaveRequests={filteredLeaveRequests} />
+            ) : (
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead style={{ color: "#FFFF" }}>
+                    <TableRow>
+                      <TableCell style={{ width: "5%" }}>ID</TableCell>
+                      <TableCell style={{ width: "15%" }}>Employee Name</TableCell>
+                      <TableCell style={{ width: "15%" }}>Leave Type</TableCell>
+                      <TableCell style={{ width: "10%" }} >Start Date</TableCell>
+                      <TableCell style={{ width: "10%" }} >End Date</TableCell>
+                      <TableCell style={{ width: "auto" }} >Reason</TableCell>
+                      <TableCell style={{ width: "5%" }} >Status</TableCell>
+                      <TableCell style={{ width: "10%" }} >Action</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {currentLeaveRequests.map((leaveRequest) => (
+                      <TableRow key={leaveRequest.requestId}>
+                        <TableCell>{leaveRequest.requestId}</TableCell>
+                        <TableCell>{leaveRequest.employeeId.fname}</TableCell>
+                        <TableCell>{leaveRequest.leaveTypeName.typeName}</TableCell>
+                        <TableCell>{new Date(leaveRequest.startDate).toLocaleDateString()}</TableCell>
+                        <TableCell>{new Date(leaveRequest.endDate).toLocaleDateString()}</TableCell>
+                        <TableCell>{leaveRequest.reason}</TableCell>
+                        <TableCell>{leaveRequest.status}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="outlined"
+                            color="success"
+                            startIcon={<CheckIcon />}
+                            onClick={() => handleAccept(leaveRequest.requestId)}
+                            disabled={leaveRequest.status !== "Pending"}
+                            style={{ marginBottom: "10px" }}
+                          >
+                            Accept
+                          </Button>
+                          <Button
+                            variant="outlined"
+                            color="error"
+                            startIcon={<ClearIcon />}
+                            onClick={() => handleReject(leaveRequest.requestId)}
+                            disabled={leaveRequest.status !== "Pending"}
+                          >
+                            Reject
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+            <CardActions>
+              <Grid container>
+                <Grid item xs={12} md={6}>
+                  {/* Content for the first Grid item */}
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Grid container justifyContent="flex-end" marginTop="10px">
+                    <Pagination
+                      count={Math.ceil(filteredLeaveRequests.length / leaveRequestsPerPage)}
+                      page={currentPage}
+                      onChange={handlePageChange}
+                      color="primary"
+                      boundaryCount={1} // Show only the first and last page buttons
+                      siblingCount={0}  // Show only previous and next buttons
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </div>
         </CardContent>
       </Card>
 

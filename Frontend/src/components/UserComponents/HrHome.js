@@ -14,6 +14,7 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HrService from "../../services/hr.service";
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
+import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 function HrHome(props) {
   const { user: currentUser } = props;
@@ -45,6 +46,7 @@ function HrHome(props) {
 
   return (
     <div>
+      <HrNavbar />
       {/* Notification Bar */}
       <Box
         display="flex"

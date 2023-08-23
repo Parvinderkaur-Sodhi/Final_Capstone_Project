@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
 
 function EmployeeHome(props) {
@@ -15,6 +16,7 @@ function EmployeeHome(props) {
 
   return (
     <div>
+      <EmployeeNavbar/>
         <h1>Hello employee with employee ID</h1>
     </div>
   );
