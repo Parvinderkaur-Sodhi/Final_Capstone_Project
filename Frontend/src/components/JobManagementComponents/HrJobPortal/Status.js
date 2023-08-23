@@ -12,6 +12,7 @@ import { CancelOutlined, Done } from '@mui/icons-material';
 import ApplicationInfo from './ApplicationInfo';
 const Status = (props) => {
     const [applicationJob,setApplicationJob]=useState([]);
+    const [d,setD]=useState();
       const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
 const [open,setOpen]=useState(false);
     useEffect(()=>{
@@ -49,6 +50,12 @@ const changeStatus=(id,status)=>{
         viewByprofileandStatus();
     })
 }
+
+ const openDrawer=(index)=>{
+setOpen(true);
+setD(index);
+    }
+
   return (
     <>
     
@@ -88,10 +95,10 @@ const changeStatus=(id,status)=>{
               <TableCell component="th" scope="row">{j.applicationId}</TableCell>
               <TableCell>{j.emp["fname"]+" " +j.emp["lname"]}</TableCell>
               <TableCell >{j.job["jobProfile"]}</TableCell>
-              <TableCell ><Box width={80} height={40} boxShadow={4} border="0px solid green" borderRadius={6} padding={1} style={{backgroundColor:`${checkColor(j.status)}`}}>{j.status}</Box></TableCell>
-              {/* <TableCell>{j.job["salary"]}</TableCell>  */}
-  
-            {/* <TableCell><Button onClick={()=>{changeStatus(j.applicationId,"Accepted")}}>Info</Button></TableCell>  */}
+              <TableCell >
+                <Box width={80} height={40} boxShadow={4}  borderRadius={6} padding={1} style={{backgroundColor:`${checkColor(j.status)}`}}>
+                {j.status}</Box></TableCell>
+            
  {props.status !=="Rejected" && props.status!=="Accepted" &&
 <TableCell>
 <Button variant="outlined" startIcon={<CancelOutlined/>} onClick={()=>{changeStatus(j.applicationId,"Rejected")}}>
@@ -102,16 +109,18 @@ Reject</Button>
 Next Stage</Button>
 </TableCell>
 }
-         <TableCell><Button onClick={()=>setOpen(true)}>Info</Button></TableCell> 
- <Drawer
+         <TableCell><Button onClick={()=>openDrawer(j.emp.employeeId)}>Info</Button></TableCell> 
+{d!=null && <Drawer
  variant="persistent"
       anchor='right'
       open={open}
       onClose={()=>setOpen(false)}
-      PaperProps={{sx:{width:600,height:800}}}
+      PaperProps={{sx:{width:400,height:680}}}
     >
-        <ApplicationInfo/>
+
+        <ApplicationInfo index={d} setOpen={setOpen} setD={setD}/>
     </Drawer>
+}
             </TableRow>
             </>
        )
