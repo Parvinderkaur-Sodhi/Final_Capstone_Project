@@ -96,7 +96,7 @@ setD(index);
               <TableCell>{j.emp["fname"]+" " +j.emp["lname"]}</TableCell>
               <TableCell >{j.job["jobProfile"]}</TableCell>
               <TableCell >
-                <Box width={80} height={40} boxShadow={4} border="0px solid green" borderRadius={6} padding={1} style={{backgroundColor:`${checkColor(j.status)}`}}>
+                <Box width={80} height={40} boxShadow={4}  borderRadius={6} padding={1} style={{backgroundColor:`${checkColor(j.status)}`}}>
                 {j.status}</Box></TableCell>
             
  {props.status !=="Rejected" && props.status!=="Accepted" &&

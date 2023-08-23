@@ -1,10 +1,11 @@
 import React from 'react'
 
 
-import {MenuItem,  FormControl, MenuList, Stack, styled, InputLabel, Select} from '@mui/material';
+import {  FormControl, Stack, styled, InputLabel, Select} from '@mui/material';
 
 import { useState } from 'react';
 import hrService from '../../../services/hr.service';
+import { MenuItem } from '@material-ui/core';
 
 const FilterHrJob = (props) => {
      const categoryList=["design","development","testing","sales"];

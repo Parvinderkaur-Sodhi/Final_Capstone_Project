@@ -129,7 +129,7 @@ getAllAttendances(){
   }
 
   searchByProfile(profile){
-     return axios.get(API_URL+'AppliedJobs/searchByprofile/'+profile,{headers:{"Authorization":authHeader()}});
+     return axios.get(API_URL+'AppliedJobs/searchByprofile/'+profile,{headers:authHeader()});
 
   }
 

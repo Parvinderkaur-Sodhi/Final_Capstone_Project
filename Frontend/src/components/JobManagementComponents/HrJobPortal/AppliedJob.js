@@ -69,7 +69,7 @@ const changeStatus=(id,status)=>{
             <TableCell >Status</TableCell>
             <TableCell >Salary</TableCell>
             <TableCell>Action</TableCell>
-<TableCell>More</TableCell>
+<TableCell>More..</TableCell>
         </TableRow>
         </TableHead>
         <TableBody>

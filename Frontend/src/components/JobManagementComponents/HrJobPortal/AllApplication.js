@@ -6,14 +6,12 @@ import Typography from '@mui/material/Typography';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-// import ApplicationInfo from './ApplicationInfo';
-import AppliedJobs from './AppliedJob';
 import Status from './Status';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const AllApplication = (props) => {
   const [value, setValue] = React.useState('Inprocess');
-  const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
+  const JobStatus=["Inprocess","Interviewed","Accepted","Rejected"];
   const {jobProfile}=useParams();
   console.log(jobProfile);
   const handleChange = (event, newValue) => {

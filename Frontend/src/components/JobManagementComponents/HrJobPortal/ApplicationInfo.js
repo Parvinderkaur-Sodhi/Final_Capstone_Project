@@ -93,7 +93,7 @@ hrService.getEmployeeById(props.index).then((response)=>{
 </Stack>
    <Stack ml={8}>
             <Typography>Skills set</Typography>
-            <Typography>Ui/Ux Designer</Typography>
+            <Typography>cpp</Typography>
 </Stack>
         </Stack>
         

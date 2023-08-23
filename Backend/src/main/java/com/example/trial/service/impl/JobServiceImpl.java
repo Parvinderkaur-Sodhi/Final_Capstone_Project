@@ -97,9 +97,9 @@ existingjob.setLastdate(Job.getLastdate());
 			}
 
 			@Override
-			public List<Jobs> getJobByPosition(String position) {
+			public List<Jobs> getJobByPosition(String positio) {
 				// TODO Auto-generated method stub
-				return jobrepo.getJobByPosition(position);
+				return jobrepo.getJobByPosition(positio);
 			}
 
 		    

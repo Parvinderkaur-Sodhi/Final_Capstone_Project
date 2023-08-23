@@ -60,7 +60,7 @@ history.push(`/AppliedJobs/${jobProfile}`);
   return (
       <>
      
-    <h4 style={{margin:"50px 34px"}}>Recommended Jobs :</h4>
+    <h4 style={{margin:"50px 34px"}}>Recommended Jobs </h4>
     <Grid container sx={{mt:-4,ml:1}}>
 
 {

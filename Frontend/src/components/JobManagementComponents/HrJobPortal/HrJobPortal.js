@@ -14,6 +14,7 @@ const HrJobPortal = () => {
   return (
     <>
   <Stack direction="row">
+    <h1>chkxudhcu</h1>
     <SideNavbar/>
     <div  style={{width:1300,backgroundColor:"#F1F1F1"}}>
       <div style={{margin:"30px 100px"}}>

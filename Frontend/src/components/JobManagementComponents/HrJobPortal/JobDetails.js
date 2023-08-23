@@ -26,7 +26,7 @@ const JobDetails = () => {
           <Tabs onChange={handleChange} aria-label="lab API tabs example"
           TabIndicatorProps={{
             style:{
-              color:"green"
+              color:"yellow"
             }
           }}
           

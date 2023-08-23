@@ -45,7 +45,7 @@ hrService.getJobByprofile("backend developer").then((response)=>{
         </div>
       </Stack>
 
-      <h4>Description</h4>
+      <h4>Descriptions</h4>
       <Typography color="#5d6c72">{jobInfo[0].description}</Typography>
       <Typography mt={4} color="#5d6c72">{jobInfo[0].experience}</Typography>
       <Divider mt={3}/> 
