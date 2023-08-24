@@ -16,8 +16,7 @@ import employeeService from '../../../services/employee.service';
 import hrService from '../../../services/hr.service';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const ViewJob = () => {
-    const [job, setJob] = useState([]);
+const ViewJob = (props) => {
     const categoryList=["design","development","testing","sales"];
     const seniorityList=["Senior","Junior","Middle"];
     const jobType=["Full time","Part Time","Remote","Internship"];
@@ -39,7 +38,7 @@ setD(index);
     }
     const getAllCustomerDetails = (token) => {
         employeeService.getAllJobs(token).then((response) => {
-            setJob(response.data)
+            props.setJob(response.data)
             console.log(response.data);
         }).catch(error =>{
             console.log(error);
@@ -47,14 +46,10 @@ setD(index);
     }
 
 
-    const handleChangeCategory=(e)=>{
-      console.log(e.target.value)
-      hrService.getJobBycategory(e.target.value).then((response)=>{
-        setJob(response.data);
-      })
-    }
+   
 
     const ViewAppliedJobs=(jobProfile)=>{
+      console.log(jobProfile);
 history.push(`/AppliedJobs/${jobProfile}`);
     }
   return (
@@ -64,7 +59,7 @@ history.push(`/AppliedJobs/${jobProfile}`);
     <Grid container sx={{mt:-4,ml:1}}>
 
 {
-job &&  job.map((j,index)=>
+props.job &&  props.job.map((j,index)=>
     {
     
       const date=new Date(j.publish_date);

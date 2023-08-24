@@ -14,13 +14,13 @@ const useStyles = makeStyles({
     root: {
         "& .MuiTableCell-head": {
             color: "black",
-            backgroundColor: "lightpink",
+            backgroundColor: "white",
             fontWeight: "bold"
         },
     },
 
     pageBackground: {
-        backgroundColor: "lightblue", 
+        backgroundColor: "#98144d", 
       },
 
     evenRow: {
@@ -57,6 +57,7 @@ function AttendanceList(props){
   
     return(
         <div className={classes.pageBackground}>
+            
             <h2 style={{ padding: "10px", color: "black", textAlign: "center" }}>Attendance List</h2>
 
             <TableContainer component={Paper}>

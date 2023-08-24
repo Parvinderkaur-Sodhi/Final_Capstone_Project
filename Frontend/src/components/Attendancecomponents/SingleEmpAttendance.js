@@ -3,35 +3,27 @@ import { Redirect,  useParams, Link } from "react-router-dom";
 import EmployeeService from "../../services/employee.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
-//--
+
 function formatDate(dateString) {
   const options = { year: "numeric", month: "numeric", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
-//--
 const useStyles = makeStyles({
 
   root: {
       "& .MuiTableCell-head": {
           color: "black",
-          backgroundColor: "lightpink",
+          backgroundColor: "lightgrey",
           fontWeight: "bold"
       },
   },
   pageBackground: {
-    backgroundColor: "lightblue", // Change this color to the desired background color
-    //minHeight: "100vh", // Ensure the background color covers the entire viewport height
+    backgroundColor: "#98144d",
+    color: "white",
+     
   },
-  editButton: {
-    backgroundColor: "primary", // Example primary color
-    color: "black", // Contrasting text color
-    '&:hover': {
-      backgroundColor: "#1565c0", // Darker color on hover
-    },
-  }
 
- 
 });
 
 
@@ -59,6 +51,11 @@ function SingleEmpAttendance(props){
         console.log(error);
       });
   }, [employeeId]);
+
+  let attendanceStatus = "Good";
+  if (attendancePercentage < 50) {
+    attendanceStatus = "Poor";
+  }
 
   if (!currentUser) {
     return <Redirect to="/login" />;
@@ -109,6 +106,9 @@ function SingleEmpAttendance(props){
       <p style={attendancePercentage < 50 ? styles.redText : {}}>
         Attendance Percentage: {attendancePercentage.toFixed(2)}%
       </p>
+      <p>
+        Attendance Status: {attendanceStatus}
+      </p>
       
       
       <TableContainer component={Paper}>
@@ -141,7 +141,6 @@ function SingleEmpAttendance(props){
                   {attendanceRecord.approvalStatus === "REJECTED" && (
                     <Button
                       variant="contained"
-                      //className={classes.editButton}
                       color="primary"
                       onClick={() => {
                         const updatedReason = prompt(

@@ -39,10 +39,16 @@ import FilterByCategory from "./components/JobManagementComponents/CustomerJobPo
 import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
+<<<<<<< HEAD
+//import EmployeeHome from "./components/UserComponents/EmployeeHome";
+//import UserList from "./components/UserComponentsAdmin/UserList";
+=======
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
+>>>>>>> 5f986b0c3be79b38579b7712d15e5a9a7bda20c4
 //import AdminDashboard from "./components/adminDashboard.component";
-import SideNavbar from "./components/SideNavbar";
+import SideNavbar from "./components/DashBoardComponents/SideNavbar";
+import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboard";
 
 // import AttendanceList from "./components/AttendanceComponents/AttendanceList";
 // import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
@@ -58,10 +64,13 @@ import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDeta
 import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
 //import EmployeeNavbar from "./employeeNavbar";
 
+import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
+import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
 import ALL from "./components/DashBoardComponents/All";
 import Contact from "./components/Contact";
 import { Typography } from "@mui/material";
+// >>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
 
 class App extends Component {
   constructor(props) {
@@ -175,6 +184,11 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/all" component={ALL} />
               <Route exact path="/user" component={User} />
+              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
+                            <Route exact path="/Hrjob" component={HrJobPortal}/>
+<Route exact path="/trackStatus/:empid" component={TrackStatus}/>
+<Route exact path="/AppliedJobs/:jobProfile" component={JobDetails}/>
+<Route exact path="/PostJob" component={PostJob}/>
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
               <Route exact path="/Hrjob" component={HrJobPortal} />
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
@@ -189,7 +203,6 @@ class App extends Component {
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
 
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
-              <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
 
               <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
 
@@ -199,6 +212,13 @@ class App extends Component {
               <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
               <Route path="/side-navbar" render={(props) => <SideNavbar {...props} user={this.props.user} />} />
               <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
+              <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
+              <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
+              <Route path="/employee-dashboard" render={(props) => <EmployeeDashboard {...props} user={this.props.user} />} />
+              <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
+
+              <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
+
               {/* <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
               <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} /> */}
 
@@ -210,6 +230,10 @@ class App extends Component {
               {/* <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
               <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
                */}
+              <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
+              <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
+               
+              
 
               <Route exact path="/leave-requests" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-request-user" render={(props) => <LeaveRequestListUser {...props} user={this.props.user} />} />

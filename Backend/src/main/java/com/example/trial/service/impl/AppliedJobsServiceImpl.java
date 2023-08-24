@@ -53,7 +53,7 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 				}
 					appliedJob.setJob(job);
 			
-				appliedJob.setStatus("inprocess");
+				appliedJob.setStatus("Inprocess");
 				appliedJob.setEmp(emp);
 				
 				 return appliedjobrepo.save(appliedJob);
@@ -63,7 +63,7 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 			@Override
 			public AppliedJobs updateStatus(int applicationno,AppliedJobs job) {
 				// TODO Auto-generated method stub
-				String currstatus="accept";
+				String currstatus="Accepted";
 				System.out.println(job);
 				 AppliedJobs existingappliedjob = appliedjobrepo.findById(applicationno).orElse(null);
 				 System.out.println(existingappliedjob);
