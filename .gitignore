@@ -24,6 +24,8 @@ node_modules/
 *.iws
 *.iml
 *.ipr
+**.properties
+.properties
 application.properties
 *resources
 target/
