@@ -85,11 +85,6 @@ setStatusLeaveRequest(requestId, status) {
 getAllLeaveBalances() {
   return axios.get(API_URL_BAL, { headers: authHeader() });
 }
-//attendance
-/*getAllAttendances(){
-    return axios.get(API_URL_ATND, {headers: authHeader() });
-}*/
-
  getAllJobs(){
   console.log("fcdx");
      return axios.get(API_URL+'Jobs/viewJob',{headers:authHeader() });
@@ -161,11 +156,12 @@ getAllLeaveBalances() {
   const url = `${API_URL}AppliedJobs/updateStatus/${id}`;
   return axios.put(url, obj, { headers: authHeader() });  }
 
-// markAttendance(employeeId){
-//    return axios.post(`${API_URL_ANTD}addattendance/${employeeId}`, {headers: authHeader()});
-// getAllAttendances(){
-//     return axios.get(API_URL_ATND, {headers: authHeader() });
-// }
+markAttendance(employeeId){
+   return axios.post(`${API_URL_ANTD}addattendance/${employeeId}`, {headers: authHeader()});
+}
+getAllAttendances(){
+    return axios.get(API_URL_ATND, {headers: authHeader() });
+}
 
 
 approveAttendance(attendanceId) {
