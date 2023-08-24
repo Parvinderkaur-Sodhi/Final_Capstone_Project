@@ -39,13 +39,10 @@ import FilterByCategory from "./components/JobManagementComponents/CustomerJobPo
 import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
-<<<<<<< HEAD
 //import EmployeeHome from "./components/UserComponents/EmployeeHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
-=======
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
->>>>>>> 5f986b0c3be79b38579b7712d15e5a9a7bda20c4
 //import AdminDashboard from "./components/adminDashboard.component";
 import SideNavbar from "./components/DashBoardComponents/SideNavbar";
 import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboard";
@@ -55,8 +52,8 @@ import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboar
 // import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
 import { Details } from "@mui/icons-material";
 import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 // import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
