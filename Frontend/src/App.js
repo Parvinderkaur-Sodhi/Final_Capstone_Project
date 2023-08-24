@@ -40,7 +40,7 @@ import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
-//import UserList from "./components/UserComponentsAdmin/UserList";
+import UserList from "./components/UserComponentsAdmin/UserList";
 //import AdminDashboard from "./components/adminDashboard.component";
 import SideNavbar from "./components/SideNavbar";
 
@@ -49,8 +49,8 @@ import SideNavbar from "./components/SideNavbar";
 // import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
 import { Details } from "@mui/icons-material";
 import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
-import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
-import PendingList from "./components/Attendancecomponents/PendingList";
+import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+import PendingList from "./components/AttendanceComponents/PendingList";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 // import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
@@ -147,13 +147,13 @@ class App extends Component {
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to={"/dev"} className="nav-link">
-                  <Typography>Contact Us</Typography> 
+                    <Typography>Contact Us</Typography>
                   </Link>
                 </li>
 
                 <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
-                    <Typography>Login</Typography> 
+                    <Typography>Login</Typography>
                   </Link>
                 </li>
 
@@ -166,7 +166,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div>
+          <div className="container mt-3">
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
               <Route exact path="/login" component={Login} />
@@ -175,10 +175,10 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/all" component={ALL} />
               <Route exact path="/user" component={User} />
-              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
-                            <Route exact path="/Hrjob" component={HrJobPortal}/>
-<Route exact path="/trackStatus/:empid" component={TrackStatus}/>
-<Route exact path="/AppliedJobs/:jobProfile" component={JobDetails}/>
+              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
+              <Route exact path="/Hrjob" component={HrJobPortal} />
+              <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
@@ -193,10 +193,6 @@ class App extends Component {
 
               <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
 
-
-              
-              {/* <Route exact path="/job" component={AllJob} /> */}
-              
 
               {/* <Route exact path="/job" component={AllJob} /> */}
 
@@ -229,7 +225,7 @@ class App extends Component {
               <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
               <Route exact path="/addLeaveTypes" render={(props) => <AddLeaveType {...props} user={this.props.user} />} />
               <Route exact path="/updateLeaveType/:typeId" render={(props) => <UpdateLeaveType {...props} user={this.props.user} />} />
-              {/* <Route exact path="/user-list" render={(props) => <UserList {...props} user={this.props.user} />} /> */}
+              <Route exact path="/user-list" render={(props) => <UserList {...props} user={this.props.user} />} />
             </Switch>
           </div>
         </div>

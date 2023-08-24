@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import HrService from "../../services/hr.service";
 import { Redirect } from "react-router-dom";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 function UserList(props) {
   const [users, setUsers] = useState([]);
@@ -24,6 +25,7 @@ function UserList(props) {
 
   return (
     <div>
+      <HrNavbar />
       <h2>User List</h2>
       <TableContainer component={Paper}>
         <Table>
@@ -32,6 +34,7 @@ function UserList(props) {
               <TableCell>ID</TableCell>
               <TableCell>Username</TableCell>
               <TableCell>Email</TableCell>
+              <TableCell>Role</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -41,6 +44,7 @@ function UserList(props) {
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
               </TableRow>
             ))}
           </TableBody>

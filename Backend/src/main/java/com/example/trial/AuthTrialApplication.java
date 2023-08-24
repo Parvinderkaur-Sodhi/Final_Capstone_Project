@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableWebMvc
-public class AuthTrialApplication {
+public class  AuthTrialApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthTrialApplication.class, args);
