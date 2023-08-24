@@ -60,7 +60,6 @@ import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
 import ALL from "./components/DashBoardComponents/All";
 import Contact from "./components/Contact";
 import { Typography } from "@mui/material";
-// >>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
 
 class App extends Component {
   constructor(props) {
@@ -174,11 +173,11 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/all" component={ALL} />
               <Route exact path="/user" component={User} />
-              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
-                            <Route exact path="/Hrjob" component={HrJobPortal}/>
-<Route exact path="/trackStatus/:empid" component={TrackStatus}/>
-<Route exact path="/AppliedJobs/:jobProfile" component={JobDetails}/>
-<Route exact path="/PostJob" component={PostJob}/>
+              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
+              <Route exact path="/Hrjob" component={HrJobPortal} />
+              <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
+              <Route exact path="/PostJob" component={PostJob} />
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
               <Route exact path="/Hrjob" component={HrJobPortal} />
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
@@ -222,8 +221,8 @@ class App extends Component {
                */}
               <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
-               
-              
+
+
 
               <Route exact path="/leave-requests" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-request-user" render={(props) => <LeaveRequestListUser {...props} user={this.props.user} />} />
