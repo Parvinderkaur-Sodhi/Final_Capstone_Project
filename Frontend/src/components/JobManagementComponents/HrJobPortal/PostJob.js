@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 // import HrService from "../../services/hr.service";
 import {
-    Card, CardContent, CardHeader, TextField, Button, Grid, Box, MenuItem, FormControl, InputLabel, Select,
+    Card, CardContent, CardHeader,  Button, Grid, Box, FormControl, InputLabel, Select, Typography,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { DatePicker } from '@mui/lab/DatePicker';
 import "react-datepicker/dist/react-datepicker.css";
 import hrService from "../../../services/hr.service";
+import { MenuItem, TextField } from "@material-ui/core";
 
 function PostJob(props) {
     const [job, setJob] = useState({});
@@ -20,28 +21,15 @@ function PostJob(props) {
         const v=`"${fieldName}"`;
         setJob((prevJob) => ({
             ...prevJob,
-           [v]: value,
+           [fieldName]: value,
         }));
     
     };
 
-    const handleAdd = () => {
-        setJob((prevJob)=>({
-            ...prevJob,
-            "publish_date":new Date(),
-        }))
-        console.log(job);
-        // Validate the phone number
-        // if (Job.phoneNumber && Job.phoneNumber.length !== 10) {
-        //     alert("Phone number must be 10 digits.");
-        //     return;
-        // }
+    const handleAdd = (e) => {
+        e.preventDefault();
 
-        // // Validate email format
-        // if (Job.email && !isValidEmail(Job.email)) {
-        //     alert("Invalid email format.");
-        //     return;
-        // }
+        
 
         hrService.postJob(job)
             .then((response) => {
@@ -54,22 +42,18 @@ function PostJob(props) {
 
     };
 
-    // if (addSuccess) {
-    //     return <Redirect to="/Job-list" />;
-    // }
-
-    // if (!currentUser) {
-    //     return <Redirect to="/login" />;
-    // }
+  
 
     return (
         <div>
             <Card>
                 <CardHeader className="title" title="Add New Job" />
                 <CardContent>
+                    <form onSubmit={handleAdd}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={6}>
                             <TextField
+                            required={true}
                                 label="Job Profile"
                                 // value={Job.fname || ""}
                                 onChange={(e) => handleFieldChange("jobProfile", e.target.value)}
@@ -78,40 +62,67 @@ function PostJob(props) {
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
+                 <FormControl fullWidth variant="outlined" required>
+                                <InputLabel>category</InputLabel>
+                                <Select
+                                    label="category"
+                                    // value={Job.gender || ""}
+                                    onChange={(e) => handleFieldChange("category", e.target.value)}
+                                >
+                                    <MenuItem value="Design">Design</MenuItem>
+                                    <MenuItem value="Development">Development</MenuItem>
+                                    <MenuItem value="Testing">Testing</MenuItem>
+                                    <MenuItem value="Sales">Banking</MenuItem>
+                                <MenuItem value="Sales">Marketing</MenuItem>
+
+
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
                             <TextField
-                                label="Job Category"
-                                // value={Job.lname || ""}
-                                onChange={(e) => handleFieldChange("category", e.target.value)}
+                            multiline={true}
+                                label="description"
+                                required={true}
+                                // value={Job.paddress || ""}
+                                onChange={(e) => handleFieldChange("description", e.target.value)}
                                 fullWidth
                                 variant="outlined"
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <FormControl fullWidth variant="outlined">
+                            <FormControl fullWidth variant="outlined" required>
                                 <InputLabel>Job Type</InputLabel>
                                 <Select
-                                    label="Gender"
                                     // value={Job.gender || ""}
                                     onChange={(e) => handleFieldChange("jobType", e.target.value)}
                                 >
-                                    <MenuItem value="Female">Female</MenuItem>
-                                    <MenuItem value="Male">Male</MenuItem>
-                                    <MenuItem value="Other">Other</MenuItem>
+                                    <MenuItem value="Part time">Part time</MenuItem>
+                                    <MenuItem value="Full time">Full time</MenuItem>
+                                    <MenuItem value="Remote">Remote</MenuItem>
+                                <MenuItem value="Internship">Internship</MenuItem>
+
                                 </Select>
                             </FormControl>
                         </Grid>
                         
                         <Grid item xs={12} md={6}>
-                            <TextField
-                                label="position"
-                                // value={Job.department || ""}
-                                onChange={(e) => handleFieldChange("position", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
+                            <FormControl fullWidth variant="outlined" required>
+                                <InputLabel>Job Type</InputLabel>
+                                <Select
+                                    // value={Job.gender || ""}
+                                    onChange={(e) => handleFieldChange("position", e.target.value)}
+                                >
+                                    <MenuItem value="Senior">Senior</MenuItem>
+                                    <MenuItem value="Junior">Junior</MenuItem>
+                                    
+
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
+                            required={true}
                                 label="specialization"
                                 // value={Job.email || ""}
                                 onChange={(e) => handleFieldChange("specialization", e.target.value)}
@@ -121,7 +132,10 @@ function PostJob(props) {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
+                            required={true}
                                 label="Experience"
+                                type="number"
+
                                 // value={Job.phoneNumber || ""}
                                 onChange={(e) => handleFieldChange("experience", e.target.value)}
                                 fullWidth
@@ -130,6 +144,7 @@ function PostJob(props) {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
+                            required={true}
                                 label="Last date"
                                 type="date"
                                 // value={Job.doJoining || ""}
@@ -141,6 +156,8 @@ function PostJob(props) {
                         <Grid item xs={12} md={6}>
                             <TextField
                                 label="Salary"
+                             type="number"
+required={true}
                                 // value={Job.jobTitle || ""}
                                 onChange={(e) => handleFieldChange("salary", e.target.value)}
                                 fullWidth
@@ -149,33 +166,25 @@ function PostJob(props) {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
+                            required={true}
                                 label="Vacancy"
+                                type="number"
                                 // value={Job.address || ""}
                                 onChange={(e) => handleFieldChange("vacancy", e.target.value)}
                                 fullWidth
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="description"
-                                // value={Job.paddress || ""}
-                                onChange={(e) => handleFieldChange("description", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        </Grid>
+                        
                          <Box display="flex" justifyContent="flex-end">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<Add />}
-                            onClick={handleAdd}
-                        >
-                            Post Job
-                        </Button>
+                            <Button variant="outlined"  type="submit" startIcon={<Add />}
+style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"white"}}>
+  <Typography style={{fontSize:15,fontWeight:'bolder'}}>Post Job</Typography></Button>  
+                      
                     </Box>
+                 </Grid>
+
+                    </form>
                 </CardContent>
             </Card>
         </div>

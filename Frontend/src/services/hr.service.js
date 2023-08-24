@@ -94,6 +94,11 @@ getAllAttendances(){
      return axios.get(API_URL+'Jobs/viewJob',{headers:authHeader() });
   }
 
+  getJobById(id){
+    return axios.get(API_URL+'Jobs/viewJob/'+id,{headers:authHeader()});
+  }
+
+
    getJobByprofile(profile){
      return axios.get(API_URL+'Jobs/viewJobProfile/'+profile,{headers:authHeader()});
   }
@@ -106,11 +111,21 @@ getAllAttendances(){
      return axios.get(API_URL+'Jobs/viewByJobCategory/'+category,{headers:authHeader()});
   }
 
+  getJobByExperience(exp){
+     return axios.get(API_URL+'Jobs/experience/'+exp,{headers:authHeader()});
+  }
+
+  getJobByPosition(position){
+     return axios.get(API_URL+'Jobs/Position/'+position,{headers:authHeader()});
+  }
+
    getJobBySalary(min,max){
      return axios.get(API_URL+'Jobs/Salary/'+min+'/'+max,{headers:authHeader()});
   }
 
   postJob(job){
+
+    console.log(job);
     return axios.post(API_URL+'Jobs/postJob',job,{headers:authHeader()});
   }
 
@@ -134,7 +149,7 @@ getAllAttendances(){
   }
 
    searchByStatus(status){
-     return axios.get(API_URL+'AppliedJobs/searchByStatus/'+status,{headers:{"Authorization":authHeader()}});
+     return axios.get(API_URL+'AppliedJobs/searchByStatus/'+status,{headers:authHeader()});
   }
 
   searchByProfilenStatus(profile,status){

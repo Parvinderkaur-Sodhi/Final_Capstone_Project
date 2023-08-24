@@ -58,6 +58,7 @@ import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDeta
 //import EmployeeNavbar from "./employeeNavbar";
 
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
+import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
 
 class App extends Component {
   constructor(props) {
@@ -166,6 +167,7 @@ class App extends Component {
                             <Route exact path="/Hrjob" component={HrJobPortal}/>
 <Route exact path="/trackStatus/:empid" component={TrackStatus}/>
 <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails}/>
+<Route exact path="/PostJob" component={PostJob}/>
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />

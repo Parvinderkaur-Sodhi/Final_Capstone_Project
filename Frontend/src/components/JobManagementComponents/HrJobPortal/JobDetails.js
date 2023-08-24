@@ -1,11 +1,6 @@
 import React from 'react'
-import { Box, Tab, Tabs } from '@mui/material'
-import PropTypes from 'prop-types';
-import Typography from '@mui/material/Typography';
+import { Box, Stack, Tab, Tabs, styled } from '@mui/material'
 
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 // import ApplicationInfo from './ApplicationInfo';
 import AppliedJobs from './AppliedJob';
 import Status from './Status';
@@ -14,41 +9,91 @@ import { Details } from '@mui/icons-material';
 import Deatils from './AllApplication';
 import AllApplication from './AllApplication';
 import JobInfo from './JobInfo';
+import SideNavbar from '../../SideNavbar';
+import TabPanel from '@mui/lab/TabPanel/TabPanel';
+import TabContext from '@mui/lab/TabContext/TabContext';
+import TabList from '@mui/lab/TabList/TabList';
+const StyledTab = styled((props) => (
+  <Tab disableRipple {...props} />
+))(({ theme }) => ({
+  textTransform: 'none',
+  fontWeight: theme.typography.fontWeightRegular,
+  fontSize: theme.typography.pxToRem(15),
+  marginRight: theme.spacing(1),
+  color: 'black',
+  '&.Mui-selected': {
+    color:"#98144d",
+    fontSize:24
+  },
+  '&.Mui-focusVisible': {
+    backgroundColor: 'red',
+  },
+}));
+
+const StyledTabList = styled((props) => (
+  <TabList
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    maxWidth: 40,
+    width: '100%',
+    backgroundColor: '#97144d',
+  },
+});
 const JobDetails = () => {
       const [value, setValue] = React.useState("Job Details");
+        const JobStatus=["Inprocess","Interviewed","Accepted","Rejected"];
+  const {jobProfile}=useParams();
+
  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  
   return (
-      <Box sx={{ width: '100%', typography: 'body1' }}>
-      <TabContext value={value} sx={{backgroundColor:"green"}}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs onChange={handleChange} aria-label="lab API tabs example"
-          TabIndicatorProps={{
-            style:{
-              color:"yellow"
-            }
-          }}
-          
-  indicatorColor="311D3F">
+    <Stack direction="row">
+    <SideNavbar/>
+      <Box sx={{ width:'100%'}}>
+                  <TabContext value={value}>
+<Box sx={{borderBottom:1,borderColor:'divider',padding:2}}>
+         <StyledTabList
+  onChange={handleChange}
+
+  aria-label="secondary tabs example"
+>
     
                     
-<Tab label="Job Details" value="Job Details"/>
-    <Tab label="Employee" value="Employee" />
-            
-          </Tabs>
-        </Box>
-        
+<StyledTab label="Job Details" value="Job Details" style={{margin:"10px"}}/>
+   {
+              JobStatus.map((i)=>(
+                    <StyledTab label={i} value={i} style={{margin:"10px"}}/>
 
-        <TabPanel value="Employee"><AllApplication/></TabPanel>
-                <TabPanel value="Job Details"><JobInfo/></TabPanel>
+              ))
+            }
+          </StyledTabList>
+          </Box>
+         {/* <CustomTabPanel value={value} index={1}>
+        Item Two
+      </CustomTabPanel> */}
 
-        {/* <TabPanel value="2"><Status status="interviewed"/></TabPanel>
-        <TabPanel value="3"><Status status="Accepted"/></TabPanel>
-                <TabPanel value="4"><Status status="Rejected"/></TabPanel> */}
+    {
+              JobStatus.map((i)=>(
 
-      </TabContext>
+        <TabPanel value={i}><Status jobProfile={jobProfile} status={i}/></TabPanel>
+              ))}                
+              <TabPanel value="Job Details"><JobInfo/></TabPanel>
+
+     </TabContext>
+
     </Box>
+    </Stack>
   )
 }
 
