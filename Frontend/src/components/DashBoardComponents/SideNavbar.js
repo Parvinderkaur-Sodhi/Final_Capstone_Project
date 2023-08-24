@@ -32,18 +32,12 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: 240,
-<<<<<<< HEAD:Frontend/src/components/DashBoardComponents/SideNavbar.js
-     backgroundColor: "#98144d", 
+    backgroundColor: "#98144d",
     color: "white",
-=======
-<<<<<<< HEAD
-     backgroundColor: "black", 
+    backgroundColor: "black",
     color: "white",
-=======
-     backgroundColor: "lightblue", 
+    backgroundColor: "lightblue",
     color: "black",
->>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
->>>>>>> 5f986b0c3be79b38579b7712d15e5a9a7bda20c4:Frontend/src/components/SideNavbar.js
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -161,24 +155,11 @@ function SideNavbar() {
           </ListItem>
         </List>
       </Drawer>
-<<<<<<< HEAD
-      <main>
-=======
-      <main style={{ marginLeft: isOpen ? 240 : 0 }}>
->>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
-        <button onClick={toggleDrawer}>Toggle Drawer</button>
-      </main>
-    </div>
+  <main>
+      <button onClick={toggleDrawer}>Toggle Drawer</button>
+    </main>
+  </div>
   );
 }
-<<<<<<< HEAD
 
 export default SideNavbar;
-=======
->>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
-
-<<<<<<< HEAD:Frontend/src/components/DashBoardComponents/SideNavbar.js
-export default SideNavbar;
-=======
-export default SideNavbar;
->>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b:Frontend/src/components/SideNavbar.js
