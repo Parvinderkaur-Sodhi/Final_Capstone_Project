@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, useHistory } from 'react-router-dom';
-import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
+import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Card, CardContent, CardHeader } from "@mui/material";
 import EmployeeService from "../../../services/employee.service";
+import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
 
 function AddLeaveRequestUser(props) {
     const { user: currentUser } = props;
@@ -135,83 +136,88 @@ function AddLeaveRequestUser(props) {
 
     return (
         <div>
-            <Typography variant="h5" gutterBottom>
-                Add Leave Request
-            </Typography>
-            <Paper elevation={3} sx={{ padding: 2 }}>
-                <form onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel>Leave Type</InputLabel>
-                                <Select
-                                    name="leaveTypeId"
-                                    value={leaveRequest.leaveTypeId}
-                                    onChange={handleInputChange}
-                                    label="Leave Type"
-                                >
-                                    {leaveTypes.map((leaveType) => (
-                                        <MenuItem key={leaveType.typeId} value={leaveType.typeId}>
-                                            {leaveType.typeName}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            {leaveBalanceError && (
-                                <Box color="error.main">{leaveBalanceError}</Box>
-                            )}
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                fullWidth
-                                name="startDate"
-                                label="Start Date"
-                                type="date"
-                                value={leaveRequest.startDate}
-                                onChange={handleInputChange}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                error={startDateError}
-                                helperText={startDateError && "Start date must be today or later"}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                fullWidth
-                                name="endDate"
-                                label="End Date"
-                                type="date"
-                                value={leaveRequest.endDate}
-                                onChange={handleInputChange}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                error={endDateError}
-                                helperText={endDateError && "End date must be on or after start date"}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                name="reason"
-                                label="Reason"
-                                multiline
-                                rows={4}
-                                value={leaveRequest.reason}
-                                onChange={handleInputChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box display="flex" justifyContent="flex-start">
-                                <Button variant="contained" color="primary" type="submit">
-                                    Add Request
-                                </Button>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </form>
-            </Paper>
+            <EmployeeNavbar />
+            <Card style={{ padding: "10px", paddingBottom: "60px"}}>
+                <CardContent>
+                    <CardHeader className="title" title="Add Leave Request" />
+                    <br></br>
+                    {/* <Paper elevation={3} sx={{ padding: 2 }}> */}
+                        <form onSubmit={handleSubmit}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FormControl fullWidth variant="outlined">
+                                        <InputLabel>Leave Type</InputLabel>
+                                        <Select
+                                            name="leaveTypeId"
+                                            value={leaveRequest.leaveTypeId}
+                                            onChange={handleInputChange}
+                                            label="Leave Type"
+                                        >
+                                            {leaveTypes.map((leaveType) => (
+                                                <MenuItem key={leaveType.typeId} value={leaveType.typeId}>
+                                                    {leaveType.typeName}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    {leaveBalanceError && (
+                                        <Box color="error.main">{leaveBalanceError}</Box>
+                                    )}
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        name="startDate"
+                                        label="Start Date"
+                                        type="date"
+                                        value={leaveRequest.startDate}
+                                        onChange={handleInputChange}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        error={startDateError}
+                                        helperText={startDateError && "Start date must be today or later"}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        name="endDate"
+                                        label="End Date"
+                                        type="date"
+                                        value={leaveRequest.endDate}
+                                        onChange={handleInputChange}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        error={endDateError}
+                                        helperText={endDateError && "End date must be on or after start date"}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        name="reason"
+                                        label="Reason"
+                                        multiline
+                                        rows={4}
+                                        value={leaveRequest.reason}
+                                        onChange={handleInputChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <br></br>
+                                    <Box display="flex" justifyContent="center">
+                                        <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: '#98144d', color: "white" }}>
+                                            Add Request
+                                        </Button>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    {/* </Paper> */}
+                </CardContent>
+            </Card>
         </div>
     );
 }

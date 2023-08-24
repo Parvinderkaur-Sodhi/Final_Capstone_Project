@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import HrService from "../../../services/hr.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Card,
+  CardHeader,
+  CardContent,
+  Box,
+} from "@mui/material";
+import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
+import Pagination from '@mui/material/Pagination';
 
 function LeaveTypeListUser(props) {
   const [leaveTypes, setLeaveTypes] = useState([]);
   const { user: currentUser } = props;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const leaveTypesPerPage = 5;
 
   useEffect(() => {
     HrService.getAllLeaveTypes()
@@ -18,34 +36,56 @@ function LeaveTypeListUser(props) {
       });
   }, []);
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
 
   return (
     <div>
-      <h2>Leave Type List</h2>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Allowed Count</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {leaveTypes.map((leaveType) => (
-              <TableRow key={leaveType.typeId}>
-                <TableCell>{leaveType.typeId}</TableCell>
-                <TableCell>{leaveType.typeName}</TableCell>
-                <TableCell>{leaveType.countAllowed}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+      <EmployeeNavbar />
+      <Card>
+        <div style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px" }}>
+          <CardContent>
+            <CardHeader className="title" title="Leave Type List" />
+            <TableContainer component={Paper} style={{ width: "80%", padding: "40px", margin: "auto" }}>
+              <Table stickyHeader>
+                <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}>
+                  <TableRow>
+                    <TableCell style={{ width: "50%" }}>Name</TableCell>
+                    <TableCell style={{ width: "50%" }}>Allowed Count</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {leaveTypes.slice((currentPage - 1) * leaveTypesPerPage, currentPage * leaveTypesPerPage).map((leaveType) => (
+                    <TableRow key={leaveType.typeId}>
+                      <TableCell>{leaveType.typeName}</TableCell>
+                      <TableCell>{leaveType.countAllowed}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Box display="flex" justifyContent="flex-end" alignItems="center" width="100%" padding={2}>
+              <Pagination
+                count={Math.ceil(leaveTypes.length / leaveTypesPerPage)}
+                page={currentPage}
+                onChange={(event, value) => setCurrentPage(value)}
+                color="primary"
+              />
+            </Box>
+          </CardContent>
+        </div>
+      </Card>
+    </div >
   );
 }
 

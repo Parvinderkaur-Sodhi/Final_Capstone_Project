@@ -154,11 +154,11 @@ function EmployeeList(props) {
               <Box display="flex" justifyContent="space-between" width="100%">
                 <Box>
                   <Link to="/register">
-                    <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Register New Employee</Button>
+                    <Button variant="outlined" color="success" style={{ backgroundColor: '#98144d', color: "white" }} startIcon={<AddCircleOutline />}>Register New Employee</Button>
                   </Link>
                   &nbsp;
                   <Link to="/add-employee">
-                    <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Employee</Button>
+                    <Button variant="outlined" color="success" style={{ backgroundColor: '#98144d', color: "white" }} startIcon={<AddCircleOutline />}>Add New Employee</Button>
                   </Link>
                 </Box>
                 <Box>

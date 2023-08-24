@@ -58,12 +58,12 @@ function LeaveTypeList(props) {
   return (
     <div>
       <HrNavbar />
-      <Card>
+      <Card style={{ height: "80vh", overflowY: "auto", paddingRight: "17px" }}>
         <CardHeader className="title" title="Leave Type List" />
         <CardContent>
           <TableContainer component={Paper} style={{ width: "100%" }}>
             <Table stickyHeader>
-              <TableHead>
+              <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}>
                 <TableRow>
                   <TableCell style={{ width: "10%" }}>ID</TableCell>
                   <TableCell style={{ width: "30%" }}>Name</TableCell>
@@ -95,7 +95,7 @@ function LeaveTypeList(props) {
           <CardActions>
             <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
               <Link to="/addLeaveTypes">
-                <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Leave Type</Button>
+                <Button variant="outlined" color="success" style={{ backgroundColor: '#98144d', color: "white" }} startIcon={<AddCircleOutline />}>Add New Leave Type</Button>
               </Link>
               <Pagination
                 count={Math.ceil(leaveTypes.length / leaveTypesPerPage)}
