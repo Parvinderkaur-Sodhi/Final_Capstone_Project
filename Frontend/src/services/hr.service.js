@@ -85,9 +85,9 @@ getAllLeaveBalances() {
   return axios.get(API_URL_BAL, { headers: authHeader() });
 }
 //attendance
-getAllAttendances(){
+/*getAllAttendances(){
     return axios.get(API_URL_ATND, {headers: authHeader() });
-}
+}*/
 
  getAllJobs(){
   console.log("fcdx");
@@ -148,10 +148,7 @@ markAttendance(employeeId){
      return axios.get(API_URL_ATND, {headers: authHeader() });
  }
 
-/*markAttendance(employeeId, typedata){
-    const url=`${API_URL_MARKATND}/${employeeId}`;
-    return axios.post(url, typedata, {headers: authHeader()});
-}*/
+
 approveAttendance(attendanceId) {
   const url = `${API_URL_MARK}/approve/${attendanceId}`;
   return axios.put(url, null, { headers: authHeader() })

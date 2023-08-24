@@ -34,8 +34,7 @@ public class AttendanceController {
 	
 	@PostMapping("/addattendance/{employeeId}")
 	public ResponseEntity<Attendance> markAttendance(@PathVariable int employeeId, @RequestBody Attendance attendance){
-		
-		
+       
 		Employee employee = attendanceService.getEmployeeById(employeeId);
         if (employee == null) {
             return ResponseEntity.notFound().build();
@@ -68,8 +67,6 @@ public class AttendanceController {
 		}
 		return ResponseEntity.ok(attendanceList);
 	}
-	
-	
 	
 	 @PutMapping("/approve/{attendanceId}")
 	    public ResponseEntity<Attendance> approveAttendance(@PathVariable int attendanceId) {

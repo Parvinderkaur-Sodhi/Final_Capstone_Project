@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import EmployeeService from '../../services/employee.service';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, Typography, TextField } from "@mui/material";
+//import SideNavbar from '../DashBoardComponents/SideNavbar'; // Import the SideNavbar component
+
 
 const useStyles = makeStyles({
   root: {
@@ -12,7 +14,7 @@ const useStyles = makeStyles({
     },
   },
   pageBackground: {
-    backgroundColor: "lightblue", 
+    backgroundColor: "#98144d", 
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     minHeight: "100vh",
@@ -65,6 +67,7 @@ const MarkAttendance = () => {
 
   return (
     <div className={classes.pageBackground}>
+    {/* <SideNavbar />  */}
     <Card className={classes.card}>
       <CardContent>
         <Typography style={{ fontWeight: 'bold' }} className={classes.welcomeHeading} variant="h5" gutterBottom>

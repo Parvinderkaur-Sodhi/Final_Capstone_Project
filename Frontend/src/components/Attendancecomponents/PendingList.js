@@ -12,13 +12,14 @@ const useStyles = makeStyles({
   root: {
       "& .MuiTableCell-head": {
           color: "black",
-          backgroundColor: "lightpink",
+          backgroundColor: "lightgrey",
           fontWeight: "bold"
       },
   },
 
   pageBackground: {
-    backgroundColor: "lightblue", 
+    color: "white",
+    backgroundColor: "#98144d", 
     
   },
  

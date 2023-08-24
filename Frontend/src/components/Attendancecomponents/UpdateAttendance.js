@@ -8,11 +8,11 @@ import HrService from '../../services/hr.service';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor:'lightgrey',
+    backgroundColor:"#98144d",
   },
   cardHeader: {
     backgroundColor: 'primary',
-    color: '#fff',
+    color: 'white',
   },
   inputField: {
     marginBottom: '16px',
@@ -46,6 +46,8 @@ function UpdateAttendance(props) {
       });
   }, [employeeId]);
 
+ 
+
   const handleUpdateAttendance = () => {
     const updatedAttendance = {
       attendanceId,
@@ -72,9 +74,9 @@ function UpdateAttendance(props) {
 
   return (
     
-      <div>
-        <Card className={classes.card}>
-          <CardHeader
+      <div >
+        <Card style={{ backgroundColor: "lightgrey" }}>
+          <CardHeader 
             title={`Update Attendance `}
           />
           <hr />
