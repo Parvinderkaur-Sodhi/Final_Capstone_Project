@@ -25,8 +25,8 @@ node_modules/
 *.iml
 *.ipr
 *.properties
+resources/
 application.properties
-*resources/
 target/
 
 ### NetBeans ###
