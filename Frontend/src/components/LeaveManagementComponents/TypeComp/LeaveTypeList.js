@@ -4,12 +4,16 @@ import { Redirect, Link } from 'react-router-dom';
 import HrService from "../../../services/hr.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Card, CardContent, CardActions, CardHeader, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Delete, Create, AddCircleOutline } from '@mui/icons-material';
+import HrNavbar from "../../DashBoardComponents/HrNavbar";
+import Pagination from '@mui/material/Pagination';
 
 function LeaveTypeList(props) {
   const [leaveTypes, setLeaveTypes] = useState([]);
   const { user: currentUser } = props;
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedLeaveType, setSelectedLeaveType] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const leaveTypesPerPage = 5;
 
   useEffect(() => {
     HrService.getAllLeaveTypes()
@@ -53,6 +57,7 @@ function LeaveTypeList(props) {
 
   return (
     <div>
+      <HrNavbar />
       <Card>
         <CardHeader className="title" title="Leave Type List" />
         <CardContent>
@@ -67,7 +72,7 @@ function LeaveTypeList(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {leaveTypes.map((leaveType) => (
+              {leaveTypes.slice((currentPage - 1) * leaveTypesPerPage, currentPage * leaveTypesPerPage).map((leaveType) => (
                   <TableRow key={leaveType.typeId}>
                     <TableCell>{leaveType.typeId}</TableCell>
                     <TableCell>{leaveType.typeName}</TableCell>
@@ -82,16 +87,22 @@ function LeaveTypeList(props) {
                       </Button>
                     </TableCell>
                   </TableRow>
-                ))}
+              ))}
               </TableBody>
             </Table>
           </TableContainer>
           <br></br>
           <CardActions>
-            <Box display="flex" justifyContent="flex-end" width="100%">
+            <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
               <Link to="/addLeaveTypes">
                 <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Leave Type</Button>
               </Link>
+              <Pagination
+                count={Math.ceil(leaveTypes.length / leaveTypesPerPage)}
+                page={currentPage}
+                onChange={(event, value) => setCurrentPage(value)}
+                color="primary"
+              />
             </Box>
           </CardActions>
         </CardContent>

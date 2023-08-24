@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
+import HrNavbar from "./DashBoardComponents/HrNavbar";
 
 const required = (value) => {
   if (!value) {
@@ -120,6 +121,8 @@ class Register extends Component {
 
       <div>
 
+        <HrNavbar/>
+
         <StyledCard>
           <Typography variant="h4" align="center">
             User Registration <PersonAddIcon color="default" fontSize="large" />
@@ -209,6 +212,18 @@ class Register extends Component {
                 <Alert severity={this.state.successful ? "success" : "error"}>
                   {message}
                 </Alert>
+                {this.state.successful && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{ marginTop: "16px" }}
+                    onClick={() => {
+                      this.props.history.push("/employee-list");
+                    }}
+                  >
+                    Go to Employee List
+                  </Button>
+                )}
               </div>
             )}
             <CheckButton

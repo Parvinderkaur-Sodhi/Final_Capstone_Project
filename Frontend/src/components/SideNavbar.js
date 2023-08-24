@@ -32,8 +32,13 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: 240,
+<<<<<<< HEAD
      backgroundColor: "black", 
     color: "white",
+=======
+     backgroundColor: "lightblue", 
+    color: "black",
+>>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -151,12 +156,20 @@ function SideNavbar() {
           </ListItem>
         </List>
       </Drawer>
+<<<<<<< HEAD
       <main>
+=======
+      <main style={{ marginLeft: isOpen ? 240 : 0 }}>
+>>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
         <button onClick={toggleDrawer}>Toggle Drawer</button>
       </main>
     </div>
   );
 }
+<<<<<<< HEAD
 
 export default SideNavbar;
+=======
+>>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
 
+export default SideNavbar;

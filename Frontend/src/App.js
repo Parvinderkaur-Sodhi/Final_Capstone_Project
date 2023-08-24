@@ -55,10 +55,17 @@ import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 // import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
 // import PendingList from "./components/AttendanceComponents/PendingList";
+import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
 //import EmployeeNavbar from "./employeeNavbar";
 
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
+<<<<<<< HEAD
 import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
+=======
+import ALL from "./components/DashBoardComponents/All";
+import Contact from "./components/Contact";
+import { Typography } from "@mui/material";
+>>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b
 
 class App extends Component {
   constructor(props) {
@@ -67,6 +74,7 @@ class App extends Component {
 
     this.state = {
       currentUser: undefined,
+      sidebarOpen: false,
     };
 
     history.listen((location) => {
@@ -142,16 +150,22 @@ class App extends Component {
             ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
-                    Login
+                  <Link to={"/dev"} className="nav-link">
+                  <Typography>Contact Us</Typography> 
                   </Link>
                 </li>
 
                 <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">
+                    <Typography>Login</Typography> 
+                  </Link>
+                </li>
+
+                {/* <li className="nav-item">
                   <Link to={"/register"} className="nav-link">
                     Sign Up
                   </Link>
-                </li>
+                </li> */}
               </div>
             )}
           </nav>
@@ -160,8 +174,10 @@ class App extends Component {
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/dev" component={Contact} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/all" component={ALL} />
               <Route exact path="/user" component={User} />
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
                             <Route exact path="/Hrjob" component={HrJobPortal}/>
@@ -179,8 +195,6 @@ class App extends Component {
 
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
               <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
-
-
 
               <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
 

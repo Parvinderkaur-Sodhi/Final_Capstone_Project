@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import { Update } from "@mui/icons-material";
 import "react-datepicker/dist/react-datepicker.css";
+import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 
 function UpdateEmployee(props) {
@@ -70,230 +71,233 @@ function UpdateEmployee(props) {
 
     return (
         <div>
+            <HrNavbar />
             <Card>
                 <CardHeader className="title" title="Employee Details" />
                 <CardContent>
-                    <Grid container spacing={3}>
-                    <Grid item xs={12} md={6}>
-                            <TextField
-                                label="User Id"
-                                value={employee.userId || ""}
-                                onChange={(e) => handleFieldChange("userId", e.target.value)}
-                                fullWidth
-                                disabled
-                                variant="outlined"
-                            />
-                        </Grid>
+                    <div style={{ maxHeight: "70vh", overflowY: "auto", paddingRight: "17px" }}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="User Id"
+                                    value={employee.userId || ""}
+                                    onChange={(e) => handleFieldChange("userId", e.target.value)}
+                                    fullWidth
+                                    disabled
+                                    variant="outlined"
+                                />
+                            </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Email"
-                                value={employee.email || ""}
-                                onChange={(e) => handleFieldChange("email", e.target.value)}
-                                fullWidth
-                                disabled
-                                variant="outlined"
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Email"
+                                    value={employee.email || ""}
+                                    onChange={(e) => handleFieldChange("email", e.target.value)}
+                                    fullWidth
+                                    disabled
+                                    variant="outlined"
+                                />
+                            </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Username"
-                                value={employee.username || ""}
-                                onChange={(e) => handleFieldChange("username", e.target.value)}
-                                fullWidth
-                                disabled
-                                variant="outlined"
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Username"
+                                    value={employee.username || ""}
+                                    onChange={(e) => handleFieldChange("username", e.target.value)}
+                                    fullWidth
+                                    disabled
+                                    variant="outlined"
+                                />
+                            </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="First Name"
-                                value={employee.fname || ""}
-                                onChange={(e) => handleFieldChange("fname", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Last Name"
-                                value={employee.lname || ""}
-                                onChange={(e) => handleFieldChange("lname", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel>Gender</InputLabel>
-                                <Select
-                                    label="Gender"
-                                    value={employee.gender || ""}
-                                    onChange={(e) => handleFieldChange("gender", e.target.value)}
-                                >
-                                    <MenuItem value="Female">Female</MenuItem>
-                                    <MenuItem value="Male">Male</MenuItem>
-                                    <MenuItem value="Other">Other</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Date of Birth"
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={employee.dob || ""}
-                                onChange={(e) => handleFieldChange("dob", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Department"
-                                value={employee.department || ""}
-                                onChange={(e) => handleFieldChange("department", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="First Name"
+                                    value={employee.fname || ""}
+                                    onChange={(e) => handleFieldChange("fname", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Last Name"
+                                    value={employee.lname || ""}
+                                    onChange={(e) => handleFieldChange("lname", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel>Gender</InputLabel>
+                                    <Select
+                                        label="Gender"
+                                        value={employee.gender || ""}
+                                        onChange={(e) => handleFieldChange("gender", e.target.value)}
+                                    >
+                                        <MenuItem value="Female">Female</MenuItem>
+                                        <MenuItem value="Male">Male</MenuItem>
+                                        <MenuItem value="Other">Other</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Date of Birth"
+                                    type="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={employee.dob || ""}
+                                    onChange={(e) => handleFieldChange("dob", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Department"
+                                    value={employee.department || ""}
+                                    onChange={(e) => handleFieldChange("department", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Phone No"
-                                value={employee.phoneNumber || ""}
-                                onChange={(e) => handleFieldChange("phoneNumber", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-
-
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Date of Joining"
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={employee.doJoining || ""}
-                                onChange={(e) => handleFieldChange("doJoining", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Phone No"
+                                    value={employee.phoneNumber || ""}
+                                    onChange={(e) => handleFieldChange("phoneNumber", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
 
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Job Title"
-                                value={employee.jobTitle || ""}
-                                onChange={(e) => handleFieldChange("jobTitle", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Date of Joining"
+                                    type="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={employee.doJoining || ""}
+                                    onChange={(e) => handleFieldChange("doJoining", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Address"
-                                value={employee.address || ""}
-                                onChange={(e) => handleFieldChange("address", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Permanent Address"
-                                value={employee.paddress || ""}
-                                onChange={(e) => handleFieldChange("paddress", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Job Title"
+                                    value={employee.jobTitle || ""}
+                                    onChange={(e) => handleFieldChange("jobTitle", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
 
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Addhar ID"
-                                value={employee.idNo || ""}
-                                onChange={(e) => handleFieldChange("idNo", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Address"
+                                    value={employee.address || ""}
+                                    onChange={(e) => handleFieldChange("address", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Permanent Address"
+                                    value={employee.paddress || ""}
+                                    onChange={(e) => handleFieldChange("paddress", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Addhar ID"
+                                    value={employee.idNo || ""}
+                                    onChange={(e) => handleFieldChange("idNo", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Pan Card number"
+                                    value={employee.other || ""}
+                                    onChange={(e) => handleFieldChange("other", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel>Employee Status</InputLabel>
+                                    <Select
+                                        value={employee.employeeStatus || ""}
+                                        onChange={(e) =>
+                                            handleFieldChange("employeeStatus", e.target.value)
+                                        }
+                                        label="Employee Status"
+                                    >
+                                        <MenuItem value="Active">Active</MenuItem>
+                                        <MenuItem value="InActive">InActive</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Date of Leaving"
+                                    type="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    value={employee.doLeaving || ""}
+                                    onChange={(e) => handleFieldChange("doLeaving", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Employee Picture"
+                                    value={employee.employeePic || ""}
+                                    onChange={(e) => handleFieldChange("employeePic", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    label="Resume"
+                                    value={employee.resume || ""}
+                                    onChange={(e) => handleFieldChange("resume", e.target.value)}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Pan Card number"
-                                value={employee.other || ""}
-                                onChange={(e) => handleFieldChange("other", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel>Employee Status</InputLabel>
-                                <Select
-                                    value={employee.employeeStatus || ""}
-                                    onChange={(e) =>
-                                        handleFieldChange("employeeStatus", e.target.value)
-                                    }
-                                    label="Employee Status"
-                                >
-                                    <MenuItem value="Active">Active</MenuItem>
-                                    <MenuItem value="InActive">InActive</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Date of Leaving"
-                                type="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={employee.doLeaving || ""}
-                                onChange={(e) => handleFieldChange("doLeaving", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Employee Picture"
-                                value={employee.employeePic || ""}
-                                onChange={(e) => handleFieldChange("employeePic", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                label="Resume"
-                                value={employee.resume || ""}
-                                onChange={(e) => handleFieldChange("resume", e.target.value)}
-                                fullWidth
-                                variant="outlined"
-                            />
-                        </Grid>
-                    </Grid>
-                    <br />
-                    <Box display="flex" justifyContent="flex-end">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<Update />}
-                            onClick={handleUpdate}
-                        >
-                            Update
-                        </Button>
-                    </Box>
+                        <br />
+                        <Box display="flex" justifyContent="flex-end">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                startIcon={<Update />}
+                                onClick={handleUpdate}
+                            >
+                                Update
+                            </Button>
+                        </Box>
+                    </div>
                 </CardContent>
             </Card>
         </div>
