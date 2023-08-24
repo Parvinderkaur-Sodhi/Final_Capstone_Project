@@ -181,7 +181,7 @@ function LeaveRequestListUser(props) {
                       <TableCell>
                         {request.status === "Pending" && (
                           <React.Fragment>
-                            <Link to={`/updateLeaveRequest/${request.requestId}`}>
+                            <Link to={`/update-leave-request/${request.requestId}`}>
                               <Button variant="outlined" startIcon={<Create />}>Edit</Button>
                             </Link>
                             &nbsp;&nbsp;

@@ -158,4 +158,8 @@ function SideNavbar() {
   );
 }
 
+<<<<<<< HEAD:Frontend/src/components/DashBoardComponents/SideNavbar.js
 export default SideNavbar;
+=======
+export default SideNavbar;
+>>>>>>> a574bfd968ee93cc3250312da074c7994d80c53b:Frontend/src/components/SideNavbar.js

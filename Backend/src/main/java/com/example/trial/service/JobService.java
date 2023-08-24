@@ -18,13 +18,16 @@ public interface JobService {
 
     List<Jobs> getJobByJobType(String jobtype);
     List<Jobs> getJobByCategory(String category);
-
+    List<Jobs> getJobByExperience(int exp);
+List<Jobs>getJobByPosition(String positio);
 List<Jobs>getSalaryRangeJobs(int min,int max);
     Jobs saveJob(Jobs Job);
 
     Jobs updateJob(int JobId, Jobs Job);
 
     void deleteJob(int JobId);
+    
+    
 }
 
 

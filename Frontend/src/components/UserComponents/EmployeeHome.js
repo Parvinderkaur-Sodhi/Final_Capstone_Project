@@ -4,6 +4,8 @@ import { Card, CardContent, Typography, Grid } from "@mui/material";
 import { blue, green, red } from "@mui/material/colors";
 import EventIcon from "@mui/icons-material/Event"; 
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
+import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
+
 
 function EmployeeHome(props) {
   const { user: currentUser } = props;
@@ -143,6 +145,8 @@ function EmployeeHome(props) {
       </footer>
 
        
+      <EmployeeNavbar/>
+        <h1>Hello employee with employee ID</h1>
     </div>
   );
 }

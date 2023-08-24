@@ -33,7 +33,7 @@ function AddLeaveRequestUser(props) {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [currentUser]);
 
     useEffect(() => {
         EmployeeService.getLeaveBalancesByEmpId(localStorage.getItem("employeeId"))
@@ -43,7 +43,7 @@ function AddLeaveRequestUser(props) {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [currentUser]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -52,7 +52,10 @@ function AddLeaveRequestUser(props) {
             const today = new Date();
             const newStartDate = new Date(value);
 
-            if (newStartDate <= today) {
+            const todayString = today.toISOString().split('T')[0];
+            const newStartDateString = newStartDate.toISOString().split('T')[0];
+
+            if (newStartDateString < todayString) {
                 setStartDateError(true);
             } else {
                 setStartDateError(false);
@@ -61,7 +64,7 @@ function AddLeaveRequestUser(props) {
             const newEndDate = new Date(value);
             const startDate = new Date(leaveRequest.startDate);
 
-            if (newEndDate < startDate) {
+            if (newEndDate <= startDate) {
                 setEndDateError(true);
             } else {
                 setEndDateError(false);
@@ -80,39 +83,51 @@ function AddLeaveRequestUser(props) {
         // Validate leave balance
         const requestedDuration = calculateDateDifference(leaveRequest.startDate, leaveRequest.endDate);
         const selectedLeaveType = leaveTypes.find(type => type.typeId === leaveRequest.leaveTypeId);
+        console.log("leaveTypes:", selectedLeaveType);
 
-        if (selectedLeaveType && leaveBalances.length > 0) {
+        if (selectedLeaveType) {
             const leaveBalance = leaveBalances.find(balance => balance.leaveType.typeId === selectedLeaveType.typeId);
 
-            if (leaveBalance && requestedDuration > leaveBalance.balance) {
-                setLeaveBalanceError("Not enough leave balance for the requested leave");
-                return; // Exit if balance validation fails
+            if (leaveBalance) {
+                if (requestedDuration > leaveBalance.balance) {
+                    setLeaveBalanceError("Not enough leave balance for the requested leave");
+                    return;
+                } else {
+                    setLeaveBalanceError("");
+                }
             } else {
-                setLeaveBalanceError("");
-                Redirect("./add-leave-request");
+                // Check allowed leave count from leave types
+                if (requestedDuration > selectedLeaveType.countAllowed) {
+                    setLeaveBalanceError("Not enough allowed leave count for the requested leave");
+                    return;
+                } else {
+                    setLeaveBalanceError("");
+                }
             }
+
+
+            // Proceed with leave request submission
+            const requestData = {
+                employeeId: {
+                    employeeId: localStorage.getItem("employeeId")
+                },
+                leaveTypeName: { typeId: leaveRequest.leaveTypeId },
+                startDate: leaveRequest.startDate,
+                endDate: leaveRequest.endDate,
+                reason: leaveRequest.reason,
+            };
+
+            EmployeeService.saveLeaveRequest(requestData)
+                .then(() => {
+                    console.log("Leave request added successfully");
+                    history.push("/leave-request-user");
+                })
+                .catch((error) => {
+                    console.log("Error adding leave request:", error);
+                });
         }
-
-        // Proceed with leave request submission
-        const requestData = {
-            employeeId: {
-                employeeId: localStorage.getItem("employeeId")
-            },
-            leaveTypeName: { typeId: leaveRequest.leaveTypeId },
-            startDate: leaveRequest.startDate,
-            endDate: leaveRequest.endDate,
-            reason: leaveRequest.reason,
-        };
-
-        EmployeeService.saveLeaveRequest(requestData)
-            .then(() => {
-                console.log("Leave request added successfully");
-                history.push("/leave-request-user");
-            })
-            .catch((error) => {
-                console.log("Error adding leave request:", error);
-            });
     };
+
 
     if (!currentUser) {
         return <Redirect to="/login" />;
@@ -127,9 +142,6 @@ function AddLeaveRequestUser(props) {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            {leaveBalanceError && (
-                                <Box color="error.main">{leaveBalanceError}</Box>
-                            )}
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel>Leave Type</InputLabel>
                                 <Select
@@ -145,6 +157,9 @@ function AddLeaveRequestUser(props) {
                                     ))}
                                 </Select>
                             </FormControl>
+                            {leaveBalanceError && (
+                                <Box color="error.main">{leaveBalanceError}</Box>
+                            )}
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField

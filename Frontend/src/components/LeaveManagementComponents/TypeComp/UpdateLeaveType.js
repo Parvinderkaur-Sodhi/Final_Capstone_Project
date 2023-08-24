@@ -3,6 +3,7 @@ import { Redirect, useParams } from "react-router-dom";
 import HrService from "../../../services/hr.service";
 import { TextField, Button, Box, Card, CardContent, CardActions, CardHeader } from "@mui/material";
 import { Done } from "@mui/icons-material";
+import HrNavbar from "../../DashBoardComponents/HrNavbar";
 
 function UpdateLeaveType(props) {
     const { user: currentUser } = props;
@@ -51,6 +52,7 @@ function UpdateLeaveType(props) {
     
     return (
         <div>
+            <HrNavbar/>
             <Card>
                 <CardHeader title={`Update Leave Type - ${leaveType.typeName}`} />
                 <CardContent>
