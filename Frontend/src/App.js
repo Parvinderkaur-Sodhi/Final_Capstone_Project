@@ -39,7 +39,6 @@ import FilterByCategory from "./components/JobManagementComponents/CustomerJobPo
 import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
-//import EmployeeHome from "./components/UserComponents/EmployeeHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
@@ -47,21 +46,15 @@ import UserList from "./components/UserComponentsAdmin/UserList";
 import SideNavbar from "./components/DashBoardComponents/SideNavbar";
 import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboard";
 
-// import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-// import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-// import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
 import { Details } from "@mui/icons-material";
-import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
-import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
-import PendingList from "./components/Attendancecomponents/PendingList";
+import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+import PendingList from "./components/AttendanceComponents/PendingList";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
-// import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-// import PendingList from "./components/AttendanceComponents/PendingList";
 import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
-//import EmployeeNavbar from "./employeeNavbar";
-
-import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
 import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
 import ALL from "./components/DashBoardComponents/All";

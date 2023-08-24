@@ -16,10 +16,7 @@ function EmployeeHome(props) {
 
   return (
     <div>
-      
-        
-      
-
+      <EmployeeHome/>
       <Grid container spacing={3}>
 
         {/* Greeting */}
