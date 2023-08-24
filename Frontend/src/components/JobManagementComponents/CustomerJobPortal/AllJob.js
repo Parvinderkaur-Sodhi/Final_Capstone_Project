@@ -13,6 +13,8 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import employeeService from '../../../services/employee.service';
 const AllJob = (props) => {
       const [open,setOpen]=useState(false);
+      const[success,setSuccess]=useState(false);
+      const[error,setError]=useState(false);
       const[feedback,setFeedback]=useState(false);
       const[d,setD]=useState();
      const {empid}=useParams();
@@ -39,10 +41,20 @@ const randomColor=colors[Math.floor(Math.random()*colors.length)];
     const ApplyforJob=(jobId)=>{
       const obj={};
       employeeService.applyforJob(empid,jobId,obj).then((response)=>{
-        console.log(response.data);
-        setFeedback(true);
-        setApplied(true);
+        console.log(response.data.length);
+        if(response.data.length==0){
+          console.log("djcd");
+        setError(true);
+              setOpen(false);
 
+        }
+        else{
+setSuccess(true);
+      setOpen(false);
+
+        }
+        // setFeedback(true);
+        // setApplied(true);
       })
     }
     const openDrawer=(index)=>{
@@ -51,6 +63,9 @@ setD(index);
     }
   return (
     <>
+       {success && <Alert severity="success" onClose={()=>setSuccess(false)}>Successfully Applied</Alert>}
+  {error && <Alert severity="error" onClose={()=>setError(false)}>ALREADY Applied</Alert>}
+
     <h4 style={{margin:"50px 34px"}}>Recommended Jobs :</h4>
     <Grid container sx={{mt:-4,ml:1}}>
 
@@ -131,7 +146,7 @@ setD(index);
   <Typography style={{fontSize:15,fontWeight:'bolder'}}>Cancel</Typography></Button>  
 {/* {<Button variant="outlined"  disabled style={{width:150,height:40,backgroundColor:"purple",color:"white",marginLeft:10}}>
   <Typography style={{fontSize:15,fontWeight:'bolder'}}>Applied</Typography></Button>  } */}
-  {applied && <Button variant="outlined"  onClick={()=>{ApplyforJob(props.job[d].jobId)}} style={{width:150,height:40,backgroundColor:"purple",color:"white",marginLeft:10}}>
+  {applied && <Button variant="outlined"  onClick={()=>{ApplyforJob(props.job[d].jobId)}} style={{width:150,height:40,backgroundColor:"#98144d",color:"white",marginLeft:10}}>
   <Typography style={{fontSize:15,fontWeight:'bolder'}}>Apply now</Typography></Button>  }
   <Snackbar open={feedback} autoHideDuration={6000} onClose={()=>setFeedback(false)}>
   <Alert onClose={()=>setFeedback(false)} severity="success" sx={{ width: '100%' }}>
@@ -142,8 +157,7 @@ setD(index);
       </Stack>
     }
     </Drawer>  }
-    
-  
+
             </Stack>
 </Card>
 
@@ -153,6 +167,7 @@ setD(index);
     }
    ) }
    </Grid>
+
 </>
   )
 }

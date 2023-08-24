@@ -68,7 +68,7 @@ const Drawer = ({ open, onClose }) => {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/user-list" onClick={onClose} style={linkStyles}>
               <AccountCircleIcon style={iconStyles} />
               Users
             </RouterLink>

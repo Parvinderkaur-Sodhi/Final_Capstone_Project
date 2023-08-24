@@ -16,6 +16,7 @@ const Status = (props) => {
       const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
 const [open,setOpen]=useState(false);
     useEffect(()=>{
+      console.log(props.status);
 viewByprofileandStatus();
     },[])
 
@@ -115,7 +116,7 @@ Next Stage</Button>
       anchor='right'
       open={open}
       onClose={()=>setOpen(false)}
-      PaperProps={{sx:{width:400,height:680}}}
+      PaperProps={{sx:{width:350}}}
     >
 
         <ApplicationInfo index={d} setOpen={setOpen} setD={setD}/>

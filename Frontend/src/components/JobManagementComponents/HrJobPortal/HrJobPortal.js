@@ -11,19 +11,20 @@ import FilterHrJob from './FilterHrJob'
 
 const HrJobPortal = () => {
   const [job,setJob]=useState([]);
+  console.log(job);
   return (
     <>
   <Stack direction="row">
-    <h1>chkxudhcu</h1>
+    {/* <h1>chkxudhcu</h1> */}
     <SideNavbar/>
     <div  style={{width:1300,backgroundColor:"#F1F1F1"}}>
       <div style={{margin:"30px 100px"}}>
       <SearchJob job={job} setJob={setJob}/>
       </div>  
-      <FilterHrJob job={job} setJob={setJob}/>
+      {/* <FilterHrJob job={job} setJob={setJob}/> */}
       <ViewJob job={job} setJob={setJob}/>
         </div>
-
+        {/* <PostJob/> */}
         </Stack>
 </>  )
 }

@@ -1,5 +1,7 @@
 package com.example.trial.controllers;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +86,9 @@ public class JobController {
     //Add new Job
     @PostMapping("/postJob")
     public Jobs saveJob(@RequestBody Jobs Job) {
+    	System.out.println(Job);
+    	LocalDate date=LocalDate.now();
+    	Job.setPublish_date(date);
         return JobService.saveJob(Job);
     }
 
