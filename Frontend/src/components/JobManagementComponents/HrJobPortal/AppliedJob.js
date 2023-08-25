@@ -10,7 +10,7 @@ import Card from '@mui/material/Card';
 // import employeeService from '../../../services/employee.service';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import hrService from '../../../services/hr.service';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { CancelOutlined, Done } from '@mui/icons-material';
 const AppliedJobs = () => {
  
@@ -35,7 +35,7 @@ if(status=="Accepted")
 return "#92e3b4";
 if(status=="Rejected")
 return "#D04b4b";
-if(status=="Scheduled Interview")
+if(status=="Interview")
 return "purple";
 }
 
@@ -84,16 +84,18 @@ const changeStatus=(id,status)=>{
               </TableCell>
               <TableCell>{j.emp["fname"]+" " +j.emp["lname"]}</TableCell>
               <TableCell >{j.job["jobProfile"]}</TableCell>
-              <TableCell ><Box width={80} height={40} boxShadow={4} border="0px solid green" borderRadius={6} padding={1} style={{backgroundColor:`${checkColor(j.status)}`}}>{j.status}</Box></TableCell>
+              <TableCell ><Typography width={80} height={40} boxShadow={4} border="0px solid green" borderRadius={6} padding={1} style={{color:`${checkColor(j.status)}`}}>{j.status}</Typography></TableCell>
               <TableCell>{j.job["salary"]}</TableCell> 
             {/* <TableCell><Button onClick={()=>{changeStatus(j.applicationId,"Accepted")}}>Info</Button></TableCell>  */}
 <TableCell>
+  <Stack direction="row">
   <Button variant="outlined" startIcon={<CancelOutlined/>}>
 Reject</Button>
- <Button variant="outlined" startIcon={<Done/>}>
+ <Button variant="outlined" startIcon={<Done/>} style={{marginLeft:2}}>
 Next Stage</Button>
+"</Stack>
+
 </TableCell>
-"
             </TableRow>
           ))}  
         </TableBody>

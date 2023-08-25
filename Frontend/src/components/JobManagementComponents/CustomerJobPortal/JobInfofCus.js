@@ -58,11 +58,7 @@ hrService.getJobById(props.index).then((response)=>{
   <Typography style={{fontSize:15,fontWeight:'bolder'}}>Close</Typography></Button>  
 
  
-  {/* <Snackbar open={feedback} autoHideDuration={6000} onClose={()=>setFeedback(false)}>
-  <Alert onClose={()=>setFeedback(false)} severity="success" sx={{ width: '100%' }}>
-    This is a success message!
-  </Alert>s
-</Snackbar> */}
+ 
   </Stack>
       </Stack>
     }

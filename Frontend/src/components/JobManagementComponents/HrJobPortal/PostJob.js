@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 // import HrService from "../../services/hr.service";
 import {
-    Card, CardContent, CardHeader,  Button, Grid, Box, FormControl, InputLabel, Select, Typography,
+    Card, CardContent, CardHeader,  Button, Grid, Box,Modal, FormControl, InputLabel, Select, Typography, Dialog, Snackbar, Alert,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { DatePicker } from '@mui/lab/DatePicker';
@@ -12,7 +12,7 @@ import { MenuItem, TextField } from "@material-ui/core";
 
 function PostJob(props) {
     const [job, setJob] = useState({});
-    // const [addSuccess, setAddSuccess] = useState(false);
+    const [addSuccess, setAddSuccess] = useState(false);
     // const { user: currentUser } = props;
 
    
@@ -34,7 +34,7 @@ function PostJob(props) {
         hrService.postJob(job)
             .then((response) => {
                 console.log(response.data);
-                // setAddSuccess(true);
+                setAddSuccess(true);
             })
             .catch((error) => {
                 console.log("Error adding Job:", error);
@@ -42,6 +42,9 @@ function PostJob(props) {
 
     };
 
+    const handleClose=()=>{
+        setAddSuccess(false);
+    }
   
 
     return (
@@ -187,6 +190,16 @@ style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"
                     </form>
                 </CardContent>
             </Card>
+            <Snackbar open={addSuccess}
+            anchorOrigin={{vertical:"bottom",horizontal:"center"}}
+            onclose={()=>setAddSuccess(false)}
+            sx={{width:400,marginTop:20}}
+            autoHideDuration={5000}
+            >
+                <Alert severity="success" variant="filled">
+                    SuccessFully Added !
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

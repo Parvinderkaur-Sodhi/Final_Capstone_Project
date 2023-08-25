@@ -61,14 +61,16 @@ setD(index);
 
   return (
     <>
-      <FormControl style={{width:"120px"}}>
-  <InputLabel>Status</InputLabel>
+    <Stack direction="row" margin={4}>
+      <Typography sx={{fontSize:30,color:"#98144b"}}>Applied Jobs :</Typography>
+      <FormControl style={{borderColor:"#98144d",marginLeft:13}}>
+  <InputLabel style={{marginLeft:370,marginTop:-5}}>Status</InputLabel>
   <Select
    
     // value={category}
     label="Category"
     onChange={(e)=>handleChangeStatus(e)}
-    // sx={{width:150,height:40,p:1}}
+    sx={{borderColor:"#98144dd",marginLeft:120,width:120}}
   >
     <MenuItem value="None">None</MenuItem>
     {JobStatus.map((i)=>
@@ -76,6 +78,7 @@ setD(index);
     )}
   </Select>
 </FormControl>
+</Stack>
     {appliedJob.length>0 &&    <TableContainer component={Card}>
       <Table width="400px" aria-label="simple table">
         <colgroup>

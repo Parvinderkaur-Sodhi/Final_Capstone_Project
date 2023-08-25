@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const AllApplication = (props) => {
   const [value, setValue] = React.useState('Inprocess');
-  const JobStatus=["Inprocess","Interviewed","Accepted","Rejected"];
+  const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
   const {jobProfile}=useParams();
   console.log(jobProfile);
   const handleChange = (event, newValue) => {

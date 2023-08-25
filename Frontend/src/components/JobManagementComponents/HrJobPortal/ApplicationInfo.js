@@ -16,12 +16,12 @@ hrService.getEmployeeById(props.index).then((response)=>{
     emp && 
    <>
    <Box boxShadow={1} borderWidth='1px'  width="350px"  backgroundColor="#98144d">
-      <Typography style={{fontSize:25,fontWeight:'bolder',color:"white",margin:"0px 30px",textAlign:'center'}}>{emp['fname']} {emp['lname']} </Typography>  
+      <Typography style={{fontSize:25,fontWeight:'bolder',color:"white",margin:"20px 30px",textAlign:'center'}}>{emp['fname']} {emp['lname']} </Typography>  
       <TableContainer>
-    <Table aria-label="simple table" style={{margin:"10px 15px",color:"#DBDBDB",padding:2}}>
+    <Table aria-label="simple table" style={{margin:"40px 20px",color:"#DBDBDB",padding:2}}>
         <TableHead>
             <TableRow>
-<TableCell style={{color:"white"}}>Basic Info</TableCell>
+{/* <TableCell style={{color:"white",fontSize:10,fontWeight:"Bolder"}}>Basic Info</TableCell> */}
             </TableRow>
         </TableHead>
         
@@ -56,11 +56,10 @@ hrService.getEmployeeById(props.index).then((response)=>{
             <Typography>{emp.address}</Typography>
 </Stack>
     
-<TableCell style={{color:"white",margin:"30px 0px"}}>Professionals Details : </TableCell>
            
         
 
-        <Stack direction="row">
+        <Stack direction="row" mt={5}>
             <Stack>
             <Typography>Current Job Role</Typography>
             <Typography>{emp.jobTitle}</Typography>
@@ -84,7 +83,7 @@ hrService.getEmployeeById(props.index).then((response)=>{
     <Button variant="contained"  onClick={()=>{
               props.setOpen(false);
               props.setD()}} 
-              style={{width:110,height:40,color:'#98144d',backgroundColor:'white',margin:"30px 30px"}}>
+              style={{width:110,height:40,color:'#98144d',backgroundColor:'white',margin:"30px 0px"}}>
       <Typography style={{fontSize:15,fontWeight:'bolder'}}>Close</Typography></Button>  
          </Stack>
         </TableBody>
