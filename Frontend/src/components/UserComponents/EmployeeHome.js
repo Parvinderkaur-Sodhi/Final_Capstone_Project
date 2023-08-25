@@ -9,6 +9,15 @@ import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
 function EmployeeHome(props) {
   const { user: currentUser } = props;
+  const [employeeId, setEmployeeId] = useState(null);
+
+  useEffect(() => {
+    const storedEmployeeId = localStorage.getItem('employeeId');
+    if (storedEmployeeId) {
+      setEmployeeId(storedEmployeeId);
+    }
+  }, []);
+
 
   if (!currentUser) {
     return <Redirect to="/login" />;
@@ -16,10 +25,7 @@ function EmployeeHome(props) {
 
   return (
     <div>
-      
-        
-      
-
+      <EmployeeNavbar/>
       <Grid container spacing={3}>
 
         {/* Greeting */}
@@ -43,15 +49,7 @@ function EmployeeHome(props) {
               </Typography>
             </CardContent>
           </Card>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Data Analyst</Typography>
-              <Typography variant="body1" color="textSecondary">
-                DataCorp
-              </Typography>
-            </CardContent>
-          </Card>
-          {/* Add more saved job cards here */}
+        
         </Grid>
 
         {/* Job Offers */}
@@ -65,27 +63,10 @@ function EmployeeHome(props) {
               </Typography>
             </CardContent>
           </Card>
-          <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Marketing Specialist</Typography>
-              <Typography variant="body1" color="textSecondary">
-                MarketingPro
-              </Typography>
-            </CardContent>
-          </Card>
-          {/* Add more job offer cards here */}
         </Grid>
 
         <Grid item xs={3}>
           <h2>Job Applied </h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Software Engineer</Typography>
-              <Typography variant="body1" color="textSecondary">
-                TechCo
-              </Typography>
-            </CardContent>
-          </Card>
           <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
               <Typography variant="h6">Data Analyst</Typography>
@@ -94,7 +75,6 @@ function EmployeeHome(props) {
               </Typography>
             </CardContent>
           </Card>
-          {/* Add more saved job cards here */}
         </Grid>
          {/* Attendance Percentage */}
          
@@ -133,49 +113,9 @@ function EmployeeHome(props) {
             </CardContent>
           </Card>
         </Grid>
- 
-
-
       </Grid>
-
-      <footer style={{ marginTop: "2rem", textAlign: "center" }}>
-        <Typography variant="body2" color="textSecondary">
-          © {new Date().getFullYear()} Your Company Name. All rights reserved.
-        </Typography>
-      </footer>
-
-       
-      <EmployeeNavbar/>
-        <h1>Hello employee with employee ID</h1>
     </div>
   );
 }
 
 export default EmployeeHome;
-
-
-
-
-// import React, { useState, useEffect } from "react";
-// import { Redirect } from "react-router-dom";
-
-
-// function EmployeeHome(props) {
-//   const { user: currentUser } = props;
-
-
-//   useEffect(() => {
-//   }, []);
-
-//   if (!currentUser) {
-//     return <Redirect to="/login" />;
-//   }
-
-//   return (
-//     <div>
-//         <h1>Hello employee with employee ID</h1>
-//     </div>
-//   );
-// }
-
-// export default EmployeeHome;

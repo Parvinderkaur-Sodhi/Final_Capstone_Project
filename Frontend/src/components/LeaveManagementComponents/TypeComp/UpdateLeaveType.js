@@ -53,10 +53,14 @@ function UpdateLeaveType(props) {
     return (
         <div>
             <HrNavbar/>
-            <Card>
-                <CardHeader title={`Update Leave Type - ${leaveType.typeName}`} />
+            <Card style={{ height: "70vh"}}>
+                <hr></hr>
+                <CardHeader className="title" title={`Update Leave Type - ${leaveType.typeName}`} />
                 <CardContent>
                     <form>
+                        <hr></hr>
+                        <br></br>
+                        <br></br>
                         <Box display="flex" flexDirection="column" alignItems="center">
                             <TextField
                                 label="Leave Type Name"
@@ -77,6 +81,7 @@ function UpdateLeaveType(props) {
                                 variant="outlined"
                                 color="success"
                                 startIcon={<Done />}
+                                style={{ backgroundColor: '#98144d', color: "white" }}
                                 onClick={handleUpdateLeaveType}
                             >
                                 Update Leave Type

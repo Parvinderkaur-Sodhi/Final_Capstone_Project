@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
 import EmployeeService from "../../../services/employee.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, 
-  Grid, InputLabel, FormControl, Card, CardContent, Typography } from "@mui/material";
+import {
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem,
+  Grid, InputLabel, FormControl, Card, CardContent, Typography
+} from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
 
 function LeaveBalanceListUser(props) {
   const [leaveBalances, setLeaveBalances] = useState([]);
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [filterType, setFilterType] = useState("");
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const leaveBalancesPerPage = 6; // Number of leave balances per page
   const { user: currentUser } = props;
 
   EmployeeService.getAllLeaveTypes()
@@ -41,12 +47,23 @@ function LeaveBalanceListUser(props) {
     return typeMatches;
   });
 
+  // Calculate the index range for the current page
+  const indexOfLastBalance = currentPage * leaveBalancesPerPage;
+  const indexOfFirstBalance = indexOfLastBalance - leaveBalancesPerPage;
+  const currentBalances = filteredLeaveBalances.slice(indexOfFirstBalance, indexOfLastBalance);
+
+  // Change the page
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
 
   return (
     <div>
+      <EmployeeNavbar />
       <Card>
         <CardContent>
           <Typography variant="h5" gutterBottom>
@@ -74,7 +91,7 @@ function LeaveBalanceListUser(props) {
           <br></br>
           <TableContainer component={Paper}>
             <Table>
-              <TableHead>
+              <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}> 
                 <TableRow>
                   <TableCell style={{ width: "10%" }}>ID</TableCell>
                   <TableCell style={{ width: "10%" }}>Employee Name</TableCell>
@@ -96,6 +113,15 @@ function LeaveBalanceListUser(props) {
               </TableBody>
             </Table>
           </TableContainer>
+          {/* Pagination */}
+          <Grid container justifyContent="end" style={{ marginTop: "16px" }}>
+            <Pagination
+              count={Math.ceil(filteredLeaveBalances.length / leaveBalancesPerPage)}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Grid>
         </CardContent>
       </Card>
     </div>

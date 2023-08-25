@@ -16,7 +16,7 @@ function AddLeaveType(props) {
             typeName: newLeaveType,
             countAllowed: newLeaveTypeAllowedCount,
         };
-    
+
         HrService.saveLeaveType(typedata)
             .then((response) => {
                 setRedirectToList(true);
@@ -36,10 +36,12 @@ function AddLeaveType(props) {
 
     return (
         <div>
-            <HrNavbar/>
-            <Card>
-            <CardHeader className="title" title="Add New Leave Type" />
-            <hr></hr>
+            <HrNavbar />
+            <Card style={{ height: "70vh"}}>
+                <br></br>
+                <CardHeader className="title" title="Add New Leave Type" />
+                <hr></hr>
+                <br></br>
                 <CardContent>
                     <Box textAlign='center' margin={1}>
                         <TextField
@@ -63,6 +65,7 @@ function AddLeaveType(props) {
                         <Button
                             variant="outlined"
                             color="success"
+                            style={{ backgroundColor: '#98144d', color: "white" }}
                             startIcon={<Done />}
                             onClick={handleAddLeaveType}>
                             Add Leave Type

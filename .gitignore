@@ -1,5 +1,6 @@
 HELP.md
 target/
+resources/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -24,10 +25,10 @@ node_modules/
 *.iws
 *.iml
 *.ipr
-**.properties
 .properties
+.metadata
+resources/
 application.properties
-*resources
 target/
 
 ### NetBeans ###

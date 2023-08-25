@@ -39,7 +39,6 @@ import FilterByCategory from "./components/JobManagementComponents/CustomerJobPo
 import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
-//import EmployeeHome from "./components/UserComponents/EmployeeHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
@@ -55,17 +54,21 @@ import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboar
 import { Details } from "@mui/icons-material";
 import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
 
+
+import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+import { Details } from "@mui/icons-material";
+import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+import PendingList from "./components/AttendanceComponents/PendingList";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
-// import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-// import PendingList from "./components/AttendanceComponents/PendingList";
 import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
 //import EmployeeNavbar from "./employeeNavbar";
 
 //import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
 import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
-import ALL from "./components/DashBoardComponents/All";
 import Contact from "./components/Contact";
 import { Typography } from "@mui/material";
 
@@ -119,7 +122,7 @@ class App extends Component {
       <Router history={history}>
         <div>
 
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <nav className="navbar navbar-expand navbar-dark" style={{ backgroundColor: '#98144d' }}>
             <Link to={"/"} className="navbar-brand">
               <img src="./logo-cropped.webp" height={40}></img> &nbsp; HRMS/Job Portal System
             </Link>
@@ -173,24 +176,25 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3">
+          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "80vh"}}>
+          {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/dev" component={Contact} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
-              <Route exact path="/all" component={ALL} />
               <Route exact path="/user" component={User} />
-              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal}/>
-                            <Route exact path="/Hrjob" component={HrJobPortal}/>
-<Route exact path="/trackStatus/:empid" component={TrackStatus}/>
-<Route exact path="/AppliedJobs/:jobProfile" component={JobDetails}/>
-<Route exact path="/PostJob" component={PostJob}/>
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
               <Route exact path="/Hrjob" component={HrJobPortal} />
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
               <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
+              <Route exact path="/PostJob" component={PostJob} />
+              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
+              <Route exact path="/Hrjob" component={HrJobPortal} />
+              <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
+
               <Route path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route path="/request-list" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route path="/balance-list" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
@@ -212,7 +216,6 @@ class App extends Component {
               <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
               <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
               <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
-              <Route path="/employee-dashboard" render={(props) => <EmployeeDashboard {...props} user={this.props.user} />} />
               <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
 
               <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
@@ -226,8 +229,8 @@ class App extends Component {
               
               <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
-               
-              
+
+
 
               <Route exact path="/leave-requests" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-request-user" render={(props) => <LeaveRequestListUser {...props} user={this.props.user} />} />
@@ -246,6 +249,11 @@ class App extends Component {
               <Route exact path="/user-list" render={(props) => <UserList {...props} user={this.props.user} />} />
             </Switch>
           </div>
+          <footer style={{ margin: "4px", textAlign: "center" }}>
+            <Typography variant="body2" color="textSecondary">
+              © {new Date().getFullYear()} ARP. All rights reserved.
+            </Typography>
+          </footer>
         </div>
       </Router>
     );
