@@ -1,34 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Card, } from '@material-ui/core';
-import HrService from "../../services/hr.service";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Card } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import HrNavbar from '../DashBoardComponents/HrNavbar';
 import { Link } from 'react-router-dom';
+import HrService from "../../services/hr.service";
+//import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const useStyles = makeStyles({
-
-  root: {
-    "& .MuiTableCell-head": {
-      color: "black",
-      backgroundColor: "lightgrey",
-      fontWeight: "bold"
+const useStyles = makeStyles((theme) => ({
+  card: {
+    backgroundColor: "#98144d",
+    padding: theme.spacing(3),
+    color: 'white',
+    position: 'relative',
+  },
+  tableContainer: {
+    marginTop: theme.spacing(3),
+  },
+  tableHeaderCell: {
+    color: 'black',
+    backgroundColor: 'lightgrey',
+    fontWeight: 'bold',
+  },
+  actionButtons: {
+    '& > *': {
+      marginRight: theme.spacing(1),
     },
   },
-
-  pageBackground: {
-    color: "white",
-    backgroundColor: "#98144d",
-
+  viewAttendanceButton: {
+    position: 'absolute',
+    top: theme.spacing(2),
+    right: theme.spacing(2),
   },
-
-
-
-});
+}));
 
 const PendingList = () => {
   const classes = useStyles();
@@ -74,74 +81,74 @@ const PendingList = () => {
 
   return (
     <div>
-      {/* <HrNavbar /> */}
 
-
-      <Card>
-        <div className={classes.pageBackground}>
-
-          <h2>
-
-            Pending Attendance List
-
-          </h2>
-
-
-
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-
-                <TableRow className={classes.root}>
-                  <TableCell>Employee ID</TableCell>
-                  {/* <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell> */}
-                  <TableCell>Name</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Action</TableCell>
-
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link} // Use the Link component for navigation
-                    to="/attendance-list"
-                  // Specify the target route
-                  >
-                    View Attendance List
-                  </Button>
-                </TableRow>
-              </TableHead>
-              <TableBody >
-                {pendingAttendances.map(attendance => (
-                  <TableRow key={attendance.attendanceId} >
-                    <TableCell>{attendance.employee.employeeId}</TableCell>
-                    {/* <TableCell>{attendance.employee.fname}</TableCell>
-                <TableCell>{attendance.employee.lname}</TableCell> */}
-                    <TableCell>{attendance.employee.username}</TableCell>
-                    <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
-                    <TableCell>
-                      <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
-                      <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
-                      {attendance.approvalStatus === "REJECTED" && (
-                        <Button variant="outlined" color="primary" onClick={() => {
-                          const updatedReason = prompt("Enter new absence reason:");
-                          if (updatedReason !== null) {
-                            // can call edit absence reason function here
-                          }
-                        }}>
-                          Edit Absence Reason
-                        </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-      </Card>
+    {/* <HrNavbar /> */}
+    <Card className={classes.card}>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/attendance-list"
+        className={classes.viewAttendanceButton}
+      >
+        View Attendance List
+      </Button>
+      <h2>Pending Attendance List</h2>
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.tableHeaderCell}>Employee ID</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Name</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Date</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {pendingAttendances.map((attendance) => (
+              <TableRow key={attendance.attendanceId}>
+                <TableCell>{attendance.employee.employeeId}</TableCell>
+                <TableCell>{attendance.employee.username}</TableCell>
+                <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
+                <TableCell className={classes.actionButtons}>
+                  <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
+                  <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
+                  {attendance.approvalStatus === 'REJECTED' && (
+                    <Button variant="outlined" color="primary">
+                      Edit Absence Reason
+                    </Button>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      
+    </Card>
     </div>
   );
 };
 
 export default PendingList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
