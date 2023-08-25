@@ -55,7 +55,7 @@ history.push(`/AppliedJobs/${jobProfile}`);
       <>
      
     <h4 style={{margin:"50px 34px"}}>Recommended Jobs </h4>
-    <Grid container sx={{mt:-4,ml:1}}>
+    <Grid container sx={{mt:-4}}>
 
 {
 props.job &&  props.job.map((j,index)=>

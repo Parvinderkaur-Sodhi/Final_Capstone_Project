@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Stack, Tab, Tabs, styled } from '@mui/material'
+import { Box, Button, Card, Stack, Tab, Tabs, styled } from '@mui/material'
 
 // import ApplicationInfo from './ApplicationInfo';
 import AppliedJobs from './AppliedJob';
@@ -13,6 +13,7 @@ import JobInfo from './JobInfo';
 import TabPanel from '@mui/lab/TabPanel/TabPanel';
 import TabContext from '@mui/lab/TabContext/TabContext';
 import TabList from '@mui/lab/TabList/TabList';
+import HrNavbar from '../../DashBoardComponents/HrNavbar';
 const StyledTab = styled((props) => (
   <Tab disableRipple {...props} />
 ))(({ theme }) => ({
@@ -49,7 +50,7 @@ const StyledTabList = styled((props) => (
 });
 const JobDetails = () => {
       const [value, setValue] = React.useState("Job Details");
-        const JobStatus=["Inprocess","Interviewed","Accepted","Rejected"];
+        const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
   const {jobProfile}=useParams();
 const history=useHistory();
  const handleChange = (event, newValue) => {
@@ -61,9 +62,12 @@ const history=useHistory();
 
   }
   return (
+    <>
+<HrNavbar/>
+<Card style={{marginLeft:130}}>
     <Stack direction="row">
-    <Button onClick={()=>back() } style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"white"}}>Back</Button> 
-    <Stack direction="row" ml={4}>
+    <Button onClick={()=>back() } style={{width:150,height:40,backgroundColor:"#98144d",margin:"30px 8px",color:"white"}}>Back</Button> 
+    <Stack direction="row" ml={2}>
       <Box sx={{ width:'100%'}}>
                   <TabContext value={value}>
 <Box sx={{borderBottom:1,borderColor:'divider',padding:2}}>
@@ -99,6 +103,8 @@ const history=useHistory();
     </Box>
     </Stack>
     </Stack>
+    </Card>
+    </>
   )
 }
 

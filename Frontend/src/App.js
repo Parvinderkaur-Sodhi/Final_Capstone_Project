@@ -43,6 +43,16 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+// import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+//  import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+ import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+ import PendingList from "./components/Attendancecomponents/PendingList";
+
+import { Details } from "@mui/icons-material";
+// import PendingList from "./components/AttendanceComponents/PendingList";
 import AttendanceList from "./components/AttendanceComponents/AttendanceList";
 import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
 import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
@@ -177,7 +187,7 @@ class App extends Component {
               <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
               <Route exact path="/PostJob" component={PostJob} />
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-              <Route exact path="/Hrjob" component={HrJobPortal} />
+              <Route exact path="/Hrjob" render={(props)=><HrJobPortal {...props} user={this.props.user} />}/>
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
               <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
 
@@ -191,6 +201,8 @@ class App extends Component {
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
 
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
+
+              {/* <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} /> */}
 
 
               {/* <Route exact path="/job" component={AllJob} /> */}

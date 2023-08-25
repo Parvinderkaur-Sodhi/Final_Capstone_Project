@@ -54,7 +54,7 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
 <Stack mt={1} ml={5}>
       <h5>Descriptions</h5>
       <Typography color="#5d6c72">{jobInfo[0].description}</Typography>
-      <Typography mt={4} color="#5d6c72">{jobInfo[0].experience}</Typography>
+      <Typography mt={4} color="#5d6c72">{jobInfo[0].specializtion}</Typography>
             <Typography mt={10} color="#909fa5">Last Date to Apply :<strong>{jobInfo[0].lastdate[2]}-{jobInfo[0].lastdate[1]}-{jobInfo[0].lastdate[0]}</strong></Typography>
               <Typography mt={4} color="#909fa5">Total position Availabel:<strong>{jobInfo[0].vacancy}</strong></Typography>
 </Stack>

@@ -63,14 +63,14 @@ setD(index);
     <>
     <Stack direction="row" margin={4}>
       <Typography sx={{fontSize:30,color:"#98144b"}}>Applied Jobs :</Typography>
-      <FormControl style={{borderColor:"#98144d",marginLeft:13}}>
-  <InputLabel style={{marginLeft:370,marginTop:-5}}>Status</InputLabel>
+      <FormControl style={{borderColor:"#98144d",marginLeft:1}}>
+  <InputLabel style={{marginLeft:390,marginTop:-5}}>Status</InputLabel>
   <Select
    
     // value={category}
     label="Category"
     onChange={(e)=>handleChangeStatus(e)}
-    sx={{borderColor:"#98144dd",marginLeft:120,width:120}}
+    sx={{borderColor:"#98144dd",marginLeft:50,width:120}}
   >
     <MenuItem value="None">None</MenuItem>
     {JobStatus.map((i)=>
