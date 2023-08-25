@@ -103,7 +103,7 @@ setD(index);
     <Typography style={{fontSize:20,fontWeight:'bolder',color:"#98144d",margin:"0px 20px"}}>{j.jobProfile}</Typography>   
 <Stack direction="row">
   <Stack>
-           <Typography style={{fontSize:10,margin:"15px 20px"}}>Last date : </Typography>   
+           <Typography style={{fontSize:10,margin:"15px 20px"}}>Rs. {j.salary} </Typography>   
 
        {/* <Typography style={{fontSize:12,margin:"-10px 20px",fontWeight:"bolder"}}>{j.lastdate[2]}/{j.lastdate[1]}/{j.lastdate[0]}</Typography>    */}
 </Stack>
@@ -153,7 +153,7 @@ variant="persistent"
 <Stack ml={5} mt={2}>
       <h5>Description</h5>
       <Typography color="#5d6c72">{props.job[d].description}</Typography>
-      <Typography mt={4} color="#5d6c72">{props.job[d].experience}</Typography>
+      <Typography mt={4} color="#5d6c72">{props.job[d].specialization}</Typography>
       <Divider mt={3}/> 
             <Typography mt={4} color="#909fa5">Last Date to Apply :<strong>{props.job[d].lastdate[2]}/{props.job[d].lastdate[1]}/{props.job[d].lastdate[0]}</strong></Typography>
    <Typography mt={2} color="#909fa5">No of Vacancy:<strong>{props.job[d].vacancy}</strong></Typography>

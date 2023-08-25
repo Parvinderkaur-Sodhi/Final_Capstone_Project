@@ -78,7 +78,7 @@ function HrHome(props) {
 
         <Grid item xs={4}>
           <h2>Attendance</h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+          {/* <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
               <Box display="flex" justifyContent="center" alignItems="center">
                 <CircularProgress
@@ -93,7 +93,7 @@ function HrHome(props) {
                 </Typography>
               </Box>
             </CardContent>
-          </Card>
+          </Card> */}
         </Grid>
         {/* Attendance Percentage */}
 

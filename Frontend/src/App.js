@@ -14,7 +14,7 @@ import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
 
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
-import EmployeeListUser from "./components/EmployeeComponents/EmployeeListUser";
+import EmployeeDetails from "./components/EmployeeComponents/EmployeeDetails";
 import AddEmployee from "./components/EmployeeComponents/AddEmployee";
 import ViewEmployee from "./components/EmployeeComponents/ViewEmployee";
 import UpdateEmployee from "./components/EmployeeComponents/UpdateEmployee";
@@ -43,12 +43,20 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
+<<<<<<< HEAD
  import AttendanceList from "./components/AttendanceComponents/AttendanceList";
  import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
  import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
  import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
  import PendingList from "./components/AttendanceComponents/PendingList";
 
+=======
+import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+import PendingList from "./components/AttendanceComponents/PendingList";
+>>>>>>> 978f0f98cd9148ab5d69299c0f195610042c848b
 import { Details } from "@mui/icons-material";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
@@ -163,8 +171,8 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "82vh"}}>
-          {/* height: "84vh" */}
+          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "82vh" }}>
+            {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
               <Route exact path="/login" component={Login} />
@@ -178,7 +186,7 @@ class App extends Component {
               <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
               <Route exact path="/PostJob" component={PostJob} />
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-              <Route exact path="/Hrjob" component={HrJobPortal} />
+              <Route exact path="/Hrjob" render={(props)=><HrJobPortal {...props} user={this.props.user} />}/>
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
               <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
 
@@ -193,27 +201,26 @@ class App extends Component {
 
               <Route exact path="/hr-home" render={(props) => <HrHome {...props} user={this.props.user} />} />
 
-              <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
+              {/* <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} /> */}
 
 
               {/* <Route exact path="/job" component={AllJob} /> */}
 
               <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
-             
+
               <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
               <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
               <Route path="/your-attendance" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
               <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
 
               <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
+              <Route exact path="/emp-details" render={(props) => <EmployeeDetails {...props} user={this.props.user} />} />
 
-              
+
               <Route exact path="/employee-list" render={(props) => <EmployeeList {...props} user={this.props.user} />} />
               <Route exact path="/add-employee" render={(props) => <AddEmployee {...props} user={this.props.user} />} />
               <Route exact path="/update-employee/:employeeId" render={(props) => <UpdateEmployee {...props} user={this.props.user} />} />
               <Route exact path="/view-employee/:employeeId" render={(props) => <ViewEmployee {...props} user={this.props.user} />} />
-              <Route exact path="/employee-list-user" render={(props) => <EmployeeListUser {...props} user={this.props.user} />} />
-              
               <Route exact path="/leave-request" render={(props) => <LeaveRequestList {...props} user={this.props.user} />} />
               <Route exact path="/leave-balance" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
 
@@ -228,7 +235,7 @@ class App extends Component {
               <Route exact path="/leave-balances" render={(props) => <LeaveBalanceList {...props} user={this.props.user} />} />
               <Route exact path="/leave-balance-user" render={(props) => <LeaveBalanceListUser {...props} user={this.props.user} />} />
 
-             
+
               <Route exact path="/leave-types" render={(props) => <LeaveTypeList {...props} user={this.props.user} />} />
               <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
               <Route exact path="/addLeaveTypes" render={(props) => <AddLeaveType {...props} user={this.props.user} />} />

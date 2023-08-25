@@ -59,7 +59,7 @@ const PendingList = () => {
     HrService.approveAttendance(attendanceId)
       .then(() => {
         alert('Attendance approved successfully by HR.');
-        fetchPendingAttendances(); 
+        fetchPendingAttendances();
       })
       .catch(error => {
         console.error('Error approving attendance:', error);
@@ -71,7 +71,7 @@ const PendingList = () => {
     HrService.rejectAttendance(attendanceId)
       .then(() => {
         alert('Attendance rejected successfully by HR.');
-        fetchPendingAttendances(); 
+        fetchPendingAttendances();
       })
       .catch(error => {
         console.error('Error rejecting attendance:', error);

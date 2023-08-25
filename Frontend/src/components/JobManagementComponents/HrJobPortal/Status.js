@@ -116,7 +116,7 @@ Next Stage</Button>
       anchor='right'
       open={open}
       onClose={()=>setOpen(false)}
-      PaperProps={{sx:{width:350}}}
+      PaperProps={{sx:{width:350,marginTop:9}}}
     >
 
         <ApplicationInfo index={d} setOpen={setOpen} setD={setD}/>
