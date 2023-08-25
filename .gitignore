@@ -29,7 +29,6 @@ node_modules/
 .properties
 .metadata
 resources/
-application.properties
 target/
 
 ### NetBeans ###

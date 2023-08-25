@@ -42,31 +42,19 @@ import HrHome from "./components/UserComponents/HrHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
-//import AdminDashboard from "./components/adminDashboard.component";
-import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboard";
 
  import AttendanceList from "./components/Attendancecomponents/AttendanceList";
  import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
- import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+ import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
  import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
  import PendingList from "./components/Attendancecomponents/PendingList";
 
 import { Details } from "@mui/icons-material";
 import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
-
-
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import { Details } from "@mui/icons-material";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
-//import EmployeeNavbar from "./employeeNavbar";
 
-//import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
 import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
 import Contact from "./components/Contact";
