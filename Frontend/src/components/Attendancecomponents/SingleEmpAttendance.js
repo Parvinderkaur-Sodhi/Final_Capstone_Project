@@ -1,41 +1,61 @@
-import React, {useState, useEffect} from "react";
-import { Redirect,  useParams, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Redirect, Link } from "react-router-dom";
 import EmployeeService from "../../services/employee.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
-import { makeStyles } from '@material-ui/core/styles';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Pagination } from "@mui/material";
+import { makeStyles } from "@material-ui/core/styles";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
-function formatDate(dateString) {
-  const options = { year: "numeric", month: "numeric", day: "numeric" };
+const formatDate = (dateString) => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
-}
+};
 
-const useStyles = makeStyles({
-
-  root: {
-      "& .MuiTableCell-head": {
-          color: "black",
-          backgroundColor: "lightgrey",
-          fontWeight: "bold"
-      },
-  },
+const useStyles = makeStyles((theme) => ({
   pageBackground: {
-    backgroundColor: "#98144d",
-    color: "white",
-     
+    backgroundColor: "#f4f6f8",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: theme.spacing(3),
   },
+  card: {
+    backgroundColor: "white",
+    width: "100%",
+    padding: theme.spacing(3),
+    borderRadius: theme.spacing(1),
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+  },
+  redText: {
+    color: "red",
+  },
+  introText: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+}));
 
-});
-
-
-function SingleEmpAttendance(props){
-	//const {employeeId}=useParams();
-	const [attendance, setAttendance]=useState([]);
+function SingleEmpAttendance(props) {
+  const classes = useStyles();
+  const [attendance, setAttendance] = useState([]);
   const [attendancePercentage, setAttendancePercentage] = useState(0);
   const employeeId = localStorage.getItem("employeeId");
-  const classes = useStyles();
+  const { user: currentUser } = props;
 
-  const {user: currentUser}=props;
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 4; // Number of records to display per page
+
+  // Calculate the index of the first and last records on the current page
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+
+  // Extract the records for the current page using slicing
+  const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
+
+  // Function to handle page changes
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
 
   useEffect(() => {
     EmployeeService.getAttendanceByEmployeeId(employeeId)
@@ -45,9 +65,7 @@ function SingleEmpAttendance(props){
         const presentDays = response.data.filter(
           (record) => record.present.toLowerCase() === "present"
         ).length;
-        console.log("Present Days:", presentDays); // Add this line
         const percentage = (presentDays / response.data.length) * 100 || 0;
-        console.log("Percentage:", percentage); // Add this line
         setAttendancePercentage(percentage);
       })
       .catch((error) => {
@@ -82,93 +100,93 @@ function SingleEmpAttendance(props){
         alert("Error updating absence reason. Please try again.");
       });
   };
-
-  const styles = {
-    redText: {
-      color: "red",
-    },
-  };
+  
 
   return (
-    <div className={classes.pageBackground}  style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
-      {/* <EmployeeNavbar /> */}
-       
-      <h2 >Your attendance details:
+    <div className={classes.pageBackground}>
+      <EmployeeNavbar />
+  
+      <Typography variant="h4" gutterBottom style={{ color: "#98144d" }}>
+        Your Attendance Details
+      </Typography>
+  
+      <Paper className={classes.card}>
+        <Typography variant="h6" gutterBottom  style={{ color: "#98144d" }}>
+          Employee ID: {employeeId}
+        </Typography>
 
-         
-    <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '10px' }}>
-      <Link to="/mark-attendance">
-        <Button variant="contained" color="success">
-          Mark Attendance
-        </Button>
-      </Link>
-    </div>
-      
-      </h2>
-      <p >  Employee ID: {employeeId}</p>
-      <p className={classes.introText}>We value your commitment and punctuality. Your consistent attendance and dedication to your role contribute significantly to our team's success. By being present and engaged, you help maintain a productive work environment and contribute to the achievement of our goals. Thank you for your ongoing efforts, and we look forward to your continued active participation and contributions.</p>
-      <p style={attendancePercentage < 50 ? styles.redText : {}}>
-        Attendance Percentage: {attendancePercentage.toFixed(2)}%
-      </p>
-      <p>
-        Attendance Status: {attendanceStatus}
-      </p>
-      
-      
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-          
-
-            <TableRow className={classes.root}>
-              {/* <TableCell>ID</TableCell> */}
-              <TableCell>Date</TableCell>
-              <TableCell>Status</TableCell>
-              {/* <TableCell>Employee ID</TableCell>  */}
-              <TableCell>Absence Reason</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {attendance.map((attendanceRecord) => (
-              <TableRow key={attendanceRecord.attendanceId}>
-                {/* <TableCell>{attendanceRecord.attendanceId}</TableCell> */}
-                <TableCell>
-                  {formatDate(attendanceRecord.attendanceDate)}
-                </TableCell>
-                <TableCell>{attendanceRecord.present}</TableCell>
-                {/* <TableCell>
-                  {attendanceRecord.employee.employeeId}
-                </TableCell> */}
-                <TableCell>{attendanceRecord.absenceReason}</TableCell>
-                <TableCell>
-                  {attendanceRecord.approvalStatus === "REJECTED" && (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        const updatedReason = prompt(
-                          "Enter new absence reason:"
-                        );
-                        if (updatedReason !== null) {
-                          handleEditAbsenceReason(
-                            attendanceRecord.attendanceId,
-                            updatedReason
-                          );
-                        }
-                      }}
-                    >
-                      Edit Absence Reason
-                    </Button>
-                  )}
-                </TableCell>
+        <Button
+      variant="contained"
+      color="primary"
+      style={{ backgroundColor: "#98144d", color: "white", marginTop: "16px" }}
+      component={Link}
+      to="/mark-attendance"
+    >
+      Mark Attendance
+    </Button>
+    {/* <Typography className={classes.introText}>
+          We value your commitment and punctuality. Your consistent attendance and dedication to your role contribute significantly to our team's success. By being present and engaged, you help maintain a productive work environment and contribute to the achievement of our goals. Thank you for your ongoing efforts, and we look forward to your continued active participation and contributions.
+        </Typography> */}
+        
+  
+        <Typography style={attendancePercentage < 50 ? { color: "red" } : {}}>
+          Attendance Percentage: {attendancePercentage.toFixed(2)}%
+        </Typography>
+  
+        <Typography>
+          Attendance Status: {attendanceStatus}
+        </Typography>
+  
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead style={{ backgroundColor: "lightgrey" }}>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Absence Reason</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {attendance.map((attendanceRecord) => (
+                <TableRow key={attendanceRecord.attendanceId}>
+                  <TableCell>{formatDate(attendanceRecord.attendanceDate)}</TableCell>
+                  <TableCell>{attendanceRecord.present}</TableCell>
+                  <TableCell>{attendanceRecord.absenceReason}</TableCell>
+                  <TableCell>
+                    {attendanceRecord.approvalStatus === "REJECTED" && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          const updatedReason = prompt("Enter new absence reason:");
+                          if (updatedReason !== null) {
+                            handleEditAbsenceReason(
+                              attendanceRecord.attendanceId,
+                              updatedReason
+                            );
+                          }
+                        }}
+                      >
+                        Edit Absence Reason
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Pagination
+        count={Math.ceil(attendance.length / recordsPerPage)}
+        page={currentPage}
+        onChange={handlePageChange}
+        color="primary"
+      />
+      </Paper>
     </div>
   );
+  
 }
 
 export default SingleEmpAttendance;
