@@ -43,20 +43,11 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-import AttendanceList from "./components/Attendancecomponents/AttendanceList";
-import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
-// import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-//  import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
- import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
- import PendingList from "./components/Attendancecomponents/PendingList";
-
-// import PendingList from "./components/AttendanceComponents/PendingList";
-// import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-// import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-// import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-// import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-// import PendingList from "./components/AttendanceComponents/PendingList";
+import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+import PendingList from "./components/AttendanceComponents/PendingList";
 import { Details } from "@mui/icons-material";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
