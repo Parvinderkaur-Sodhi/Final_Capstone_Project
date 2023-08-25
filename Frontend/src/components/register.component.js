@@ -199,8 +199,8 @@ class Register extends Component {
                   fullWidth
                   variant="contained"
                   color="primary"
+                  style={{ backgroundColor: '#98144d', color: "white", marginTop: "16px" }}
                   disabled={this.state.loading}
-                  style={{ marginTop: "16px", backgroundColor: 'black', color: 'white' }}
                 >
                   {this.state.loading ? <CircularProgress size={24} /> : "Sign Up"}
                 </Button>
@@ -216,7 +216,7 @@ class Register extends Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    style={{ marginTop: "16px" }}
+                    style={{ backgroundColor: '#98144d', color: "white", marginTop: "16px" }}
                     onClick={() => {
                       this.props.history.push("/employee-list");
                     }}

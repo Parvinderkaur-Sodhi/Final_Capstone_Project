@@ -46,6 +46,12 @@ import UserList from "./components/UserComponentsAdmin/UserList";
 import AttendanceList from "./components/Attendancecomponents/AttendanceList";
 import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
 import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+ import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+ import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+ import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+ import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+ import PendingList from "./components/AttendanceComponents/PendingList";
+
 import { Details } from "@mui/icons-material";
 import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
 import PendingList from "./components/AttendanceComponents/PendingList";
@@ -162,7 +168,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "80vh"}}>
+          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "82vh"}}>
           {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
