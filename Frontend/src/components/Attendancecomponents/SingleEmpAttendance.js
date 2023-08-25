@@ -28,11 +28,13 @@ const useStyles = makeStyles({
 
 
 function SingleEmpAttendance(props){
-	const {employeeId}=useParams();
+	//const {employeeId}=useParams();
 	const [attendance, setAttendance]=useState([]);
-	const {user: currentUser}=props;
   const [attendancePercentage, setAttendancePercentage] = useState(0);
+  const employeeId = localStorage.getItem("employeeId");
   const classes = useStyles();
+
+  const {user: currentUser}=props;
 
   useEffect(() => {
     EmployeeService.getAttendanceByEmployeeId(employeeId)

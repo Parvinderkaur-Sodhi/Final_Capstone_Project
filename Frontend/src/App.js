@@ -198,7 +198,7 @@ class App extends Component {
               <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
               <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
               <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
-              <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
+              <Route path="/your-attendance" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
               <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
 
               <Route exact path="/employee-home" render={(props) => <EmployeeHome {...props} user={this.props.user} />} />
