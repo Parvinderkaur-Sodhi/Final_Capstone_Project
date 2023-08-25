@@ -14,6 +14,9 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HrService from "../../services/hr.service";
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
+import { blue, green, red } from "@mui/material/colors";
+import EventIcon from "@mui/icons-material/Event";
+import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 function HrHome(props) {
@@ -47,51 +50,36 @@ function HrHome(props) {
   return (
     <div>
       <HrNavbar />
-      {/* Notification Bar */}
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="flex-end"
-        p={2}
-        position="fixed"
-        width="100%"
-        zIndex={100}
-      >
-        <IconButton
-          color="primary"
-          aria-label="notification"
-          onClick={handleNotificationOpen}
-        >
-          <NotificationsIcon />
-        </IconButton>
-      </Box>
-      <Divider />
-      {/* Notification Content */}
-      {notificationOpen && (
-        <Box p={2} bgcolor="lightgrey" zIndex={99}>
-          This is a sample notification.
-        </Box>
-      )}
-      <Divider />
-      <Grid container spacing={4}>
-        {/* Small Calendar */}
-        <Grid item xs={6}>
-          <Card>
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px" }}>
+      <Grid container spacing={3}>
+        {/* Saved Job Listings */}
+        <Grid item xs={4}>
+          <h2>News</h2>
+          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Calendar
+              <Typography variant="h6">Software Engineer</Typography>
+              <Typography variant="body1" color="textSecondary">
+                TechCo
               </Typography>
-              <SmallCalendar leaveRequests={leaveRequests} />
+            </CardContent>
+          </Card>
+
+        </Grid>
+
+        {/* Job Offers */}
+        <Grid item xs={4}>
+          <h2>Job Offers</h2>
+          <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
+            <CardContent>
+              <Typography variant="h6">Frontend Developer</Typography>
             </CardContent>
           </Card>
         </Grid>
-        {/* Attendance */}
-        <Grid item xs={6}>
-          <Card>
+
+        <Grid item xs={4}>
+          <h2>Attendance</h2>
+          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Attendance
-              </Typography>
               <Box display="flex" justifyContent="center" alignItems="center">
                 <CircularProgress
                   variant="determinate"
@@ -101,13 +89,45 @@ function HrHome(props) {
                 />
                 &nbsp;&nbsp;
                 <Typography variant="h6" gutterBottom>
-                  {attendancePercentage}% Attendance
+                  {attendancePercentage}%
                 </Typography>
               </Box>
             </CardContent>
           </Card>
         </Grid>
+        {/* Attendance Percentage */}
+
+        <Grid item xs={6}>
+          <h2>Leaves</h2>
+          <Card sx={{ backgroundColor: blue[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Calendar
+              </Typography>
+              <SmallCalendar leaveRequests={leaveRequests} />
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={6}>
+          <h2>News and Events</h2>
+          <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+            <CardContent>
+              <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
+                <EventIcon style={{ marginRight: "8px" }} />
+                {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {/* Present Days: {attendanceData.presentDays} */}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {/* Total Working Days: {attendanceData.totalWorkingDays} */}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
+      </Card>
     </div>
   );
 }

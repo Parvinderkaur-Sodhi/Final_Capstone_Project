@@ -97,7 +97,7 @@ function LeaveBalanceList(props) {
             <br></br>
             <TableContainer component={Paper}>
               <Table>
-                <TableHead>
+                <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}> 
                   <TableRow>
                     <TableCell style={{ width: "10%" }}>ID</TableCell>
                     <TableCell style={{ width: "10%" }}>Employee Name</TableCell>

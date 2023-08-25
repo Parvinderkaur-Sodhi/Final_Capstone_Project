@@ -3,6 +3,9 @@ import { Redirect, Link } from "react-router-dom";
 import HrService from "../../services/hr.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
+import HrNavbar from "../DashBoardComponents/HrNavbar";
+//import { TablePagination } from "@mui/material";
+
 
 function formatDate(dateString) {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -39,6 +42,18 @@ function AttendanceList(props){
     const classes = useStyles();
     const [attendance, setAttendances]=useState([]);
     const {user: currentUser}=props;
+    // const [page, setPage] = useState(0);
+    // const [rowsPerPage, setRowsPerPage] = useState(6);
+
+    // const handleChangePage = (event, newPage) => {
+    //     setPage(newPage);
+    // };
+
+    // const handleChangeRowsPerPage = (event) => {
+    //     setRowsPerPage(parseInt(event.target.value, 10));
+    //     setPage(0);
+    // };
+
     useEffect(() =>{
         HrService.getAllAttendances()
        .then((response) =>{
@@ -57,6 +72,7 @@ function AttendanceList(props){
   
     return(
         <div className={classes.pageBackground}>
+            <HrNavbar />
             
             <h2 style={{ padding: "10px", color: "black", textAlign: "center" }}>Attendance List</h2>
 
@@ -102,6 +118,16 @@ function AttendanceList(props){
                     </TableBody>
                 </Table>
             </TableContainer>
+            {/* <TablePagination
+                rowsPerPageOptions={[6, 12, 24]}
+                component="div"
+                count={attendance.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            /> */}
+           
         </div>
     );
 }

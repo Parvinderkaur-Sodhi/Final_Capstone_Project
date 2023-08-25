@@ -69,6 +69,7 @@ class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       dispatch(login(this.state.username, this.state.password, this.state.erole))
         .then(() => {
+          
           if (this.state.erole === "Admin") {
             history.push("/hr-home");
           } else if (this.state.erole === "Manager") {
@@ -81,6 +82,7 @@ class Login extends Component {
           }
           window.location.reload();
         })
+        
         .catch(() => {
           this.setState({
             loading: false
@@ -168,6 +170,7 @@ class Login extends Component {
                 <button
                   className="btn btn-dark btn-block"
                   disabled={this.state.loading}
+                  style={{ backgroundColor: '#98144d' }}
                 >
                   {this.state.loading && (
                     <span className="spinner-border spinner-border-sm"></span>

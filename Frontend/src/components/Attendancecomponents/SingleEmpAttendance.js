@@ -3,6 +3,7 @@ import { Redirect,  useParams, Link } from "react-router-dom";
 import EmployeeService from "../../services/employee.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
+import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -28,11 +29,13 @@ const useStyles = makeStyles({
 
 
 function SingleEmpAttendance(props){
-	const {employeeId}=useParams();
+	//const {employeeId}=useParams();
 	const [attendance, setAttendance]=useState([]);
-	const {user: currentUser}=props;
   const [attendancePercentage, setAttendancePercentage] = useState(0);
+  const employeeId = localStorage.getItem("employeeId");
   const classes = useStyles();
+
+  const {user: currentUser}=props;
 
   useEffect(() => {
     EmployeeService.getAttendanceByEmployeeId(employeeId)
@@ -88,6 +91,7 @@ function SingleEmpAttendance(props){
 
   return (
     <div className={classes.pageBackground}>
+      {/* <EmployeeNavbar /> */}
        
       <h2 >Your attendance details:
 

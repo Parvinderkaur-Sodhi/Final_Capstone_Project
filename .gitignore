@@ -25,10 +25,10 @@ node_modules/
 *.iws
 *.iml
 *.ipr
+.classpath
 .properties
 .metadata
 resources/
-application.properties
 target/
 
 ### NetBeans ###

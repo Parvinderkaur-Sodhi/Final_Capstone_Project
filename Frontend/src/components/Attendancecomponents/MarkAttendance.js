@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import EmployeeService from '../../services/employee.service';
+//import {  Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, Typography, TextField } from "@mui/material";
 //import SideNavbar from '../DashBoardComponents/SideNavbar'; // Import the SideNavbar component
-
+import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
 const useStyles = makeStyles({
   root: {
@@ -67,7 +68,7 @@ const MarkAttendance = () => {
 
   return (
     <div className={classes.pageBackground}>
-    {/* <SideNavbar />  */}
+    <EmployeeNavbar /> 
     <Card className={classes.card}>
       <CardContent>
         <Typography style={{ fontWeight: 'bold' }} className={classes.welcomeHeading} variant="h5" gutterBottom>
@@ -90,6 +91,7 @@ const MarkAttendance = () => {
         <Button onClick={handleMarkAttendance} className={classes.button} variant="contained" color="primary">
           Mark Attendance
         </Button>
+       
       </CardContent>
     </Card>
   </div>

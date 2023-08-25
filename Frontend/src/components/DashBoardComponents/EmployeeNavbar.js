@@ -26,10 +26,10 @@ const Drawer = ({ open, onClose }) => {
     position: 'fixed',
     top: '64px', // Adjust this value as needed
     left: open ? '0' : '-240px', // Drawer width is 240px
-    width: '200px',
+    width: '220px',
     height: '100%',
-    background: '#343a40',
-    color: 'white',
+    backgroundColor: "#98144d",
+    color: "white",
     transition: 'left 0.3s',
     zIndex: 1000,
     paddingTop: '20px',
@@ -62,21 +62,15 @@ const Drawer = ({ open, onClose }) => {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="" onClick={onClose} style={linkStyles}>
-              <PeopleIcon style={iconStyles} />
-              Employees
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink to="" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/emp-details" onClick={onClose} style={linkStyles}>
               <AccountCircleIcon style={iconStyles} />
-              Users
+              Details
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/your-attendance/:employeeId" onClick={onClose} style={linkStyles}>
             <EventIcon style={iconStyles} />
-              Attendance
+               Attendance
             </RouterLink>
           </li>
           <li>

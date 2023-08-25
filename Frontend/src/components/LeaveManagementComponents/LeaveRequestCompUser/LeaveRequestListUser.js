@@ -10,6 +10,8 @@ import CalendarView from "../../CalenderView";
 import EmployeeService from "../../../services/employee.service";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
+import Pagination from '@mui/material/Pagination';
 
 function LeaveRequestListUser(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -20,6 +22,8 @@ function LeaveRequestListUser(props) {
   const [filterStatus, setFilterStatus] = useState("");
   const [filterType, setFilterType] = useState("");
   const [calendarView, setCalendarView] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const leaveRequestsPerPage = 4;
 
   const employeeId = localStorage.getItem("employeeId");
   const { user: currentUser } = props;
@@ -70,10 +74,6 @@ function LeaveRequestListUser(props) {
     setDeleteDialogOpen(false);
   };
 
-  if (!currentUser) {
-    return <Redirect to="/login" />;
-  }
-
   const filteredLeaveRequests = leaveRequests.filter((leaveRequest) => {
     const statusMatches = filterStatus === "" || leaveRequest.status === filterStatus;
     const typeMatches = filterType === "" || leaveRequest.leaveTypeName.typeName === filterType;
@@ -87,13 +87,26 @@ function LeaveRequestListUser(props) {
     );
   });
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const indexOfLastLeaveRequest = currentPage * leaveRequestsPerPage;
+  const indexOfFirstLeaveRequest = indexOfLastLeaveRequest - leaveRequestsPerPage;
+  const currentLeaveRequests = filteredLeaveRequests.slice(indexOfFirstLeaveRequest, indexOfLastLeaveRequest);
+
+
+  if (!currentUser) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div>
-      <Card>
+      <EmployeeNavbar />
+      <Card style={{ height: "80vh", overflowY: "auto", paddingRight: "17px" }}>
         <CardContent>
           <CardHeader className="title" title="Leaves" />
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={4}></Grid>
             <Grid item xs={4}>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel>Status</InputLabel>
@@ -126,33 +139,37 @@ function LeaveRequestListUser(props) {
                 </Select>
               </FormControl>
             </Grid>
+            <Grid item xs={4}>
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="center"
+                marginTop={1}
+              >
+
+                <IconButton
+                  color="primary"
+                  aria-label="toggle-view"
+                  onClick={() => setCalendarView(!calendarView)}
+                >
+                  {calendarView ? (
+                    <>
+                      <ViewListIcon /> &nbsp;
+                      <Typography variant="body2">List View</Typography>
+                    </>
+                  ) : (
+                    <>
+                      <CalendarTodayIcon /> &nbsp;
+                      <Typography variant="body2">Calendar View</Typography>
+                    </>
+                  )}
+                </IconButton>
+              </Box>
+            </Grid>
           </Grid>
 
-          <Box
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-            marginTop={1}
-          >
+          <br></br>
 
-            <IconButton
-              color="primary"
-              aria-label="toggle-view"
-              onClick={() => setCalendarView(!calendarView)}
-            >
-              {calendarView ? (
-                <>
-                  <ViewListIcon /> &nbsp;
-                  <Typography variant="body2">List View</Typography>
-                </>
-              ) : (
-                <>
-                  <CalendarTodayIcon /> &nbsp;
-                  <Typography variant="body2">Calendar View</Typography>
-                </>
-              )}
-            </IconButton>
-          </Box>
           {calendarView ? (
             <CalendarView leaveRequests={filteredLeaveRequests} />
           ) : (
@@ -170,7 +187,7 @@ function LeaveRequestListUser(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredLeaveRequests.map((request) => (
+                {currentLeaveRequests.map((request) => (
                     <TableRow key={request.requestId}>
                       <TableCell>{request.requestId}</TableCell>
                       <TableCell>{request.leaveTypeName.typeName}</TableCell>
@@ -199,10 +216,18 @@ function LeaveRequestListUser(props) {
           )}
         </CardContent>
         <CardActions>
-          <Box display="flex" justifyContent="flex-end" width="100%">
+          <Box display="flex" justifyContent="space-between" width="100%">
             <Link to="/add-leave-request">
-              <Button variant="outlined" color="success" startIcon={<AddCircleOutline />}>Add New Leave Request</Button>
+              <Button variant="outlined" color="success" style={{ backgroundColor: '#98144d', color: "white" }} startIcon={<AddCircleOutline />}>Add New Leave Request</Button>
             </Link>
+            <Pagination
+              count={Math.ceil(filteredLeaveRequests.length / leaveRequestsPerPage)}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+              boundaryCount={1} // Show only the first and last pages
+              siblingCount={0} // Hide siblings (previous and next)
+            />
           </Box>
         </CardActions>
 

@@ -14,7 +14,6 @@ function SmallCalendar({ leaveRequests }) {
 
   return (
     <div>
-      <h3>Accepted Leave Requests for the Current Month</h3>
       <Calendar
         view="month" // Display only the current month
         tileContent={({ date }) => {
