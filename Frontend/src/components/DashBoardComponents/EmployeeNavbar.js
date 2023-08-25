@@ -74,9 +74,9 @@ const Drawer = ({ open, onClose }) => {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/your-attendance/:employeeId" onClick={onClose} style={linkStyles}>
             <EventIcon style={iconStyles} />
-              Attendance
+               Attendance
             </RouterLink>
           </li>
           <li>

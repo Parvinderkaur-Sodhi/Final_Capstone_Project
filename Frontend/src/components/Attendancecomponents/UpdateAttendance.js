@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import {TextField, Button, Box, Card, CardContent, CardActions, CardHeader} from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import { Done } from '@mui/icons-material';
-
+import HrNavbar from '../DashBoardComponents/HrNavbar';
 import HrService from '../../services/hr.service';
 
 const useStyles = makeStyles((theme) => ({
@@ -75,6 +75,7 @@ function UpdateAttendance(props) {
   return (
     
       <div >
+        <HrNavbar />
         <Card style={{ backgroundColor: "lightgrey" }}>
           <CardHeader 
             title={`Update Attendance `}
