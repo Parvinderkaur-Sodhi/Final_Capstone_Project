@@ -90,7 +90,7 @@ function SingleEmpAttendance(props){
   };
 
   return (
-    <div className={classes.pageBackground}>
+    <div className={classes.pageBackground}  style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
       {/* <EmployeeNavbar /> */}
        
       <h2 >Your attendance details:

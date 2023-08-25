@@ -69,9 +69,9 @@ function AttendanceList(props){
         return <Redirect to="/login" />;
     }
 
-  
+  // style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}
     return(
-        <div className={classes.pageBackground}>
+        <div className={classes.pageBackground} >
             <HrNavbar />
             
             <h2 style={{ padding: "10px", color: "black", textAlign: "center" }}>Attendance List</h2>
@@ -84,8 +84,9 @@ function AttendanceList(props){
                             <TableCell>Date</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Employee ID</TableCell>
-                            <TableCell>First Name</TableCell>
-                            <TableCell>Last Name</TableCell>
+                            {/* <TableCell>First Name</TableCell>
+                            <TableCell>Last Name</TableCell> */}
+                            <TableCell>Name</TableCell>
                             <TableCell>Absence Reason</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
@@ -99,8 +100,9 @@ function AttendanceList(props){
                                     <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
                                     <TableCell>{attendance.present}</TableCell>
                                     <TableCell>{attendance.employee.employeeId}</TableCell>
-                                    <TableCell>{attendance.employee.fname}</TableCell>
-                                    <TableCell>{attendance.employee.lname}</TableCell>
+                                    {/* <TableCell>{attendance.employee.fname}</TableCell>
+                                    <TableCell>{attendance.employee.lname}</TableCell> */}
+                                    <TableCell>{attendance.employee.username}</TableCell>
                                     <TableCell>{attendance.absenceReason}</TableCell>
                                     <TableCell>
                                         <Button

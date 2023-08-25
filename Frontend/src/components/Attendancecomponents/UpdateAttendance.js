@@ -75,7 +75,7 @@ function UpdateAttendance(props) {
 
   return (
     
-      <div >
+      <div  style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }} >
         <HrNavbar />
         <Card >
           <CardHeader className={classes.upcard} >
