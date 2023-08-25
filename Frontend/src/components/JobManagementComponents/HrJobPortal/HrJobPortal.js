@@ -3,10 +3,7 @@ import ViewJob from './ViewJob'
 import { Button, Stack } from '@mui/material'
 import PostJob from './PostJob'
 import SearchJob from '../CustomerJobPortal/SearchJob'
-<<<<<<< HEAD
 //import SideNavbar from '../../SideNavbar'
-=======
->>>>>>> 047918b04d7cf906810b4a8a3df073b40b185c3e
 import FilterHrJob from './FilterHrJob'
 // import Deatils from './Deatils'
 // import AppliedJobs from './AppliedJob'
