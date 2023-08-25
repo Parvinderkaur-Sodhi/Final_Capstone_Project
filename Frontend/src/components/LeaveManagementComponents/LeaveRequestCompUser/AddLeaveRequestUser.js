@@ -48,30 +48,33 @@ function AddLeaveRequestUser(props) {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-
+      
         if (name === "startDate") {
-            const today = new Date();
-            const newStartDate = new Date(value);
-
-            const todayString = today.toISOString().split('T')[0];
-            const newStartDateString = newStartDate.toISOString().split('T')[0];
-
-            if (newStartDateString < todayString) {
-                setStartDateError(true);
-            } else {
-                setStartDateError(false);
-            }
+          const today = new Date();
+          const newStartDate = new Date(value);
+      
+          today.setHours(0, 0, 0, 0);
+          newStartDate.setHours(0, 0, 0, 0);
+      
+          if (newStartDate < today) {
+            setStartDateError(true);
+          } else {
+            setStartDateError(false);
+          }
         } else if (name === "endDate") {
-            const newEndDate = new Date(value);
-            const startDate = new Date(leaveRequest.startDate);
-
-            if (newEndDate <= startDate) {
-                setEndDateError(true);
-            } else {
-                setEndDateError(false);
-            }
+          const newEndDate = new Date(value);
+          const startDate = new Date(leaveRequest.startDate);
+      
+          startDate.setHours(0, 0, 0, 0);
+          newEndDate.setHours(0, 0, 0, 0);
+      
+          if (newEndDate < startDate) {
+            setEndDateError(true);
+          } else {
+            setEndDateError(false);
+          }
         }
-
+      
         setLeaveRequest((prevRequest) => ({
             ...prevRequest,
             [name]: value,
