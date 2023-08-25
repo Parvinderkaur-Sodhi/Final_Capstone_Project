@@ -15,10 +15,10 @@ const useStyles = makeStyles({
     },
   },
   pageBackground: {
-    backgroundColor: "#98144d", 
+    backgroundColor: "lightgrey",   //#98144d
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    minHeight: "100vh",
+    minHeight: "20vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -36,6 +36,7 @@ const useStyles = makeStyles({
   welcomeMessage: {
     
     fontStyle: "italic",
+    padding: "10px",
     marginBottom: "20px",
     fontSize: "1.2rem",
     color: "#555",
@@ -75,7 +76,7 @@ const MarkAttendance = () => {
           Welcome to the Attendance Log!
         </Typography>
         <Typography className={classes.welcomeMessage} variant="body1" gutterBottom>
-          Please take a moment to mark your attendance for today by writing your appropriate employee ID. Your punctuality and dedication are greatly appreciated. Remember, your timely attendance keeps the wheels of productivity turning. Thank you for being an essential part of our team.
+          Thank you for being an essential part of our team.
         </Typography>
         <div>
           <TextField
