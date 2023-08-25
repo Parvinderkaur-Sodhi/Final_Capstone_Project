@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import HrService from "../../services/hr.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
+import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 function formatDate(dateString) {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -57,6 +58,7 @@ function AttendanceList(props){
   
     return(
         <div className={classes.pageBackground}>
+            <HrNavbar />
             
             <h2 style={{ padding: "10px", color: "black", textAlign: "center" }}>Attendance List</h2>
 

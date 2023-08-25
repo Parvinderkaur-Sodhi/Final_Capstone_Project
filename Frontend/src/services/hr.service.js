@@ -157,7 +157,7 @@ getAllLeaveBalances() {
   return axios.put(url, obj, { headers: authHeader() });  }
 
 markAttendance(employeeId){
-   return axios.post(`${API_URL_ANTD}addattendance/${employeeId}`, {headers: authHeader()});
+   return axios.post(`${API_URL_ATND}addattendance/${employeeId}`, {headers: authHeader()});
 }
 getAllAttendances(){
     return axios.get(API_URL_ATND, {headers: authHeader() });

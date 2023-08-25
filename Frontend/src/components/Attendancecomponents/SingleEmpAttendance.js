@@ -3,6 +3,7 @@ import { Redirect,  useParams, Link } from "react-router-dom";
 import EmployeeService from "../../services/employee.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
+import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -90,6 +91,7 @@ function SingleEmpAttendance(props){
 
   return (
     <div className={classes.pageBackground}>
+      {/* <EmployeeNavbar /> */}
        
       <h2 >Your attendance details:
 

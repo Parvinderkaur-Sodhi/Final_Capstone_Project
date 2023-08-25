@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, } from '@material-ui/core';
 import HrService from "../../services/hr.service";
 import { makeStyles } from '@material-ui/core/styles';
+import HrNavbar from '../DashBoardComponents/HrNavbar';
+import { Link } from 'react-router-dom';
+
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
@@ -22,6 +25,8 @@ const useStyles = makeStyles({
     backgroundColor: "#98144d", 
     
   },
+
+  
  
 });
 
@@ -69,20 +74,34 @@ const PendingList = () => {
 
   return (
     <div className={classes.pageBackground}>
+      <HrNavbar />
       <h2>
       Pending Attendance List
     
       </h2>
+      
+      
           
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
+          
             <TableRow  className={classes.root}>
               <TableCell>Employee ID</TableCell>
               <TableCell>First Name</TableCell>
               <TableCell>Last Name</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Action</TableCell>
+
+              <Button
+        variant="contained"
+        color="primary"
+        component={Link} // Use the Link component for navigation
+        to="/attendance-list"
+         // Specify the target route
+      >
+        View Attendance List
+      </Button>
             </TableRow>
           </TableHead>
           <TableBody >

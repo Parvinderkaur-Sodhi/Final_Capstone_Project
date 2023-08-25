@@ -74,7 +74,7 @@ const Drawer = ({ open, onClose }) => {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/attendance" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/pending-list" onClick={onClose} style={linkStyles}>
             <EventIcon style={iconStyles} />
               Attendance
             </RouterLink>
