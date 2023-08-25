@@ -43,20 +43,12 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-<<<<<<< HEAD
  import AttendanceList from "./components/AttendanceComponents/AttendanceList";
  import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
  import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
  import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
  import PendingList from "./components/AttendanceComponents/PendingList";
 
-=======
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
->>>>>>> 978f0f98cd9148ab5d69299c0f195610042c848b
 import { Details } from "@mui/icons-material";
 import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
