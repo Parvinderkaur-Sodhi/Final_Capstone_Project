@@ -52,7 +52,7 @@ function PostJob(props) {
         <>
         <HrNavbar/>
         <div>
-            <Card style={{marginLeft:"150px"}}>
+            <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px"}}>
                 <CardHeader className="title" title="Add New Job" />
                 <CardContent>
                     <form onSubmit={handleAdd}>
