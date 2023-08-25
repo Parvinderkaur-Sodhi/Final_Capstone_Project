@@ -7,8 +7,9 @@ import HrNavbar from '../DashBoardComponents/HrNavbar';
 import HrService from '../../services/hr.service';
 
 const useStyles = makeStyles((theme) => ({
-  card: {
+  upcard: {
     backgroundColor:"#98144d",
+    color:"white",
   },
   cardHeader: {
     backgroundColor: 'primary',
@@ -76,10 +77,13 @@ function UpdateAttendance(props) {
     
       <div >
         <HrNavbar />
-        <Card style={{ backgroundColor: "lightgrey" }}>
-          <CardHeader 
-            title={`Update Attendance `}
-          />
+        <Card >
+          <CardHeader className={classes.upcard} >
+          {/* title={`Update Attendance `}
+           */}
+
+          </CardHeader>
+           
           <hr />
           <CardContent>
             <Box textAlign='center' margin={1}>
