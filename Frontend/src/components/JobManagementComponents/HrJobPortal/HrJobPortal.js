@@ -17,16 +17,16 @@ const HrJobPortal = (props) => {
     <div>
       <HrNavbar />
       <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px"}}>
-        <Stack direction="row">
-          <Card width="300px">
-            <div style={{ margin: "30px 100px" }}>
-              <SearchJob job={job} setJob={setJob} />
-            </div>
+        <Stack direction="row" >
+          <div style={{width:"800px"}}>
+            <div style={{marginLeft:"20px",marginTop:"20px"}}>
+                      <SearchJob job={job} setJob={setJob} />
+                      </div>
             <ViewJob job={job} setJob={setJob} />
-          </Card>
+            </div>
           <FilterByCategory job={job} setJob={setJob} />
         </Stack>
-      </Card>
+        </Card>
     </div>
   );
 }

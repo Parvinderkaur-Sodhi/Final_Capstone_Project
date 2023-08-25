@@ -74,7 +74,7 @@ const PendingList = () => {
 
   return (
     <div>
-      {/* <HrNavbar /> */}
+      <HrNavbar />
 
 
       <Card>

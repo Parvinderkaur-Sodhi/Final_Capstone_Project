@@ -61,7 +61,7 @@ setD(index);
     <>
     
    {applicationJob.length>0 &&    <TableContainer component={Card}>
-      <Table width="400px" aria-label="simple table">
+      <Table width="300px" aria-label="simple table">
         <colgroup>
         <col style={{width:'1%'}}/>
         <col style={{width:'1%'}}/>

@@ -35,21 +35,18 @@ import LeaveBalanceListUser from "./components/LeaveManagementComponents/LeaveBa
 import CustomerJobPortal from "./components/JobManagementComponents/CustomerJobPortal/CustomerJobPortal";
 import HrJobPortal from "./components/JobManagementComponents/HrJobPortal/HrJobPortal"
 import TrackStatus from "./components/JobManagementComponents/CustomerJobPortal/TrackStatus";
-import FilterByCategory from "./components/JobManagementComponents/CustomerJobPortal/FilterByCategory";
-import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
 import { Details } from "@mui/icons-material";
-import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
 
@@ -162,7 +159,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "82vh" }}>
+          <div className="container mt-3" style={{ width: "1400px", height: "82vh" ,marginRight:"1px"}}>
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
