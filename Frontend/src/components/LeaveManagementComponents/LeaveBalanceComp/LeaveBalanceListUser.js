@@ -57,6 +57,12 @@ function LeaveBalanceListUser(props) {
     setCurrentPage(value);
   };
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -92,7 +98,7 @@ function LeaveBalanceListUser(props) {
           <TableContainer component={Paper}>
             <Table>
               <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}> 
-                <TableRow>
+                <TableRow style = {Styles}>
                   <TableCell style={{ width: "10%" }}>ID</TableCell>
                   <TableCell style={{ width: "10%" }}>Employee Name</TableCell>
                   <TableCell style={{ width: "10%" }}>Leave Type</TableCell>

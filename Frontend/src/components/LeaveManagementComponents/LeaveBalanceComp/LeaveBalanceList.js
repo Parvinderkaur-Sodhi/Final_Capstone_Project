@@ -35,6 +35,12 @@ function LeaveBalanceList(props) {
       });
   }, []);
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
+
   const filteredLeaveBalances = leaveBalances.filter((leaveBalance) => {
     const typeMatches = filterType === "" || leaveBalance.leaveType.typeName === filterType;
     const employeeNameMatches = leaveBalance.employee.fname.toLowerCase().includes(filterText.toLowerCase());
@@ -97,8 +103,9 @@ function LeaveBalanceList(props) {
             <br></br>
             <TableContainer component={Paper}>
               <Table>
-                <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}> 
-                  <TableRow>
+                <TableHead> 
+                {/* style={{ backgroundColor: 'rgb(229, 229, 229)' }} */}
+                  <TableRow style = {Styles}>
                     <TableCell style={{ width: "10%" }}>ID</TableCell>
                     <TableCell style={{ width: "10%" }}>Employee Name</TableCell>
                     <TableCell style={{ width: "10%" }}>Leave Type</TableCell>

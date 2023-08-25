@@ -31,6 +31,12 @@ function EmployeeList(props) {
       });
   }, []);
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
+
   const handleDeleteClick = (employee) => {
     setSelectedEmployee(employee);
     setDeleteDialogOpen(true);
@@ -108,17 +114,17 @@ function EmployeeList(props) {
             </Grid>
             <br></br>
             <TableContainer component={Paper} style={{ width: "100%" }}>
-              <Table stickyHeader>
+              <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>First Name</TableCell>
-                    <TableCell>Last Name</TableCell>
-                    <TableCell>Department</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Username</TableCell>
-                    <TableCell width={"20px"}>Status</TableCell>
-                    <TableCell width={"220px"}>Actions</TableCell>
+                    <TableCell style = {Styles}>ID</TableCell>
+                    <TableCell style = {Styles}>First Name</TableCell>
+                    <TableCell style = {Styles}>Last Name</TableCell>
+                    <TableCell style = {Styles}>Department</TableCell>
+                    <TableCell style = {Styles}>Email</TableCell>
+                    <TableCell style = {Styles}>Username</TableCell>
+                    <TableCell width={"20px"} style = {Styles}>Status</TableCell>
+                    <TableCell width={"220px"} style = {Styles}>Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

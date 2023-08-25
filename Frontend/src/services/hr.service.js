@@ -19,10 +19,6 @@ getUserById(UserId) {
   return axios.get(`${API_URL_USER}/${UserId}`, { headers: authHeader() });
 }
 
-getAllUsers() {
-  return axios.get(API_URL_USER, { headers: authHeader() });
-}
-
 //Employees
 getAllEmployees() {
   return axios.get(API_URL_EMP, { headers: authHeader() });

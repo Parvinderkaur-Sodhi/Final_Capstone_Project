@@ -16,7 +16,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const SidebarWrapper = styled('div')({
   position: 'fixed',
-  top: '70px',
+  top: '62px',
   left: '0',
   width: '80px',
   height: '100%',

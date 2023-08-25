@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import HrService from "../../services/hr.service";
-//import HrNavbar from "../DashBoardComponents/HrNavbar";
+import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -82,7 +82,7 @@ const PendingList = () => {
   return (
     <div>
 
-    {/* <HrNavbar /> */}
+    <HrNavbar />
     <Card className={classes.card}>
       <Button
         variant="contained"
