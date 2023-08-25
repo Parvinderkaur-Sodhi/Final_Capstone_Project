@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
-import { styled, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -14,29 +14,28 @@ import WorkIcon from '@mui/icons-material/Work';
 import { IconButton } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-const ToggleButton = styled(IconButton)(({ theme }) => ({
+const SidebarWrapper = styled('div')({
   position: 'fixed',
-  top: '80px',
-  left: '15px',
-  background: 'none',
-}));
+  top: '70px',
+  left: '0',
+  width: '80px',
+  height: '100%',
+  backgroundColor: "#98144d",
+  color: "white",
+  transition: 'width 0.3s, transform 0.3s',
+  zIndex: 1000,
+  paddingTop: '20px',
+  overflowX: 'hidden',
+});
 
-const Drawer = ({ open, onClose }) => {
-  const drawerStyles = {
-    position: 'fixed',
-    top: '64px', // Adjust this value as needed
-    left: open ? '0' : '-240px', // Drawer width is 240px
-    width: '220px',
-    height: '100%',
-    backgroundColor: "#98144d",
-    color: "white",
-    transition: 'left 0.3s',
-    zIndex: 1000,
-    paddingTop: '20px',
-    paddingLeft: '6px',
-  };
+const SidebarIconWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '60px',
+});
 
-  const linkStyles = {
+const linkStyles = {
     color: 'white',
     textDecoration: 'none',
     display: 'flex',
@@ -48,95 +47,95 @@ const Drawer = ({ open, onClose }) => {
     marginRight: '10px',
   };
 
+const EmployeeNavbar = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
   return (
-    <div style={drawerStyles}>
-      <IconButton onClick={onClose}>
-        <ChevronLeftIcon style={{ color: 'white' }} />
+    <SidebarWrapper style={{ width: open ? '240px' : '60px' }}>
+      <IconButton onClick={handleDrawerToggle}>
+        {open ? (
+          <ChevronLeftIcon style={{ color: 'white' }} />
+        ) : (
+        <div  style={{ color: 'white' }} >
+          <MenuIcon style={{ color: 'white' }} />
+          <br></br>
+          <br></br>
+          <InboxIcon style={iconStyles} />
+          <AccountCircleIcon style={iconStyles} />
+          <EventIcon style={iconStyles} />
+          <AssignmentIcon style={iconStyles} />
+          <LocalLibraryIcon style={iconStyles} />
+          <BookmarkIcon style={iconStyles} />
+          <BookmarkIcon style={iconStyles} />
+          <MailIcon style={iconStyles} />
+          </div>
+        )}
       </IconButton>
-      <div>
+      <br></br>
+      <br></br>
+      {open && (
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          <li>
-            <RouterLink to="/employee-home" onClick={onClose} style={linkStyles}>
+                    <li>
+            <RouterLink to="/employee-home" style={linkStyles}>
               <InboxIcon style={iconStyles} />
               Home
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/emp-details" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/emp-details" style={linkStyles}>
               <AccountCircleIcon style={iconStyles} />
               Details
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/your-attendance/:employeeId" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/your-attendance/:employeeId" style={linkStyles}>
             <EventIcon style={iconStyles} />
                Attendance
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/leave-request-user" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/leave-request-user" style={linkStyles}>
             <AssignmentIcon style={iconStyles} />
               Leave Requests
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/leave-balance-user" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/leave-balance-user" style={linkStyles}>
             <LocalLibraryIcon style={iconStyles} />
               Leave Balances
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/leave-types-user" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/leave-types-user" style={linkStyles}>
             <BookmarkIcon style={iconStyles} />
               Leave Types
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/EmpJobPortal/2" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/EmpJobPortal/2" style={linkStyles}>
             <WorkIcon style={iconStyles} />
               Browse Jobs
             </RouterLink>
           </li>
            <li>
-            <RouterLink to="/TrackStatus/2" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/TrackStatus/2" style={linkStyles}>
             <WorkIcon style={iconStyles} />
               Applied Jobs
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/dev" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/dev" style={linkStyles}>
               <MailIcon style={iconStyles} />
               Contact Us
             </RouterLink>
           </li>
         </ul>
-      </div>
-    </div>
-  );
-};
-
-const EmployeeNavbar = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <ToggleButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-      >
-        <MenuIcon />
-      </ToggleButton>
-      <Drawer open={open} onClose={handleDrawerClose} />
-    </>
+      )}
+    </SidebarWrapper>
   );
 };
 
