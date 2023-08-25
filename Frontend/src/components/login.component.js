@@ -103,7 +103,7 @@ class Login extends Component {
     }
 
     return (
-      <Box>
+      <Box style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
         <div className="login-container">
           <div className="login-form">
             <Typography variant="h4" align="center">
@@ -134,7 +134,7 @@ class Login extends Component {
                 </FormControl>
               </div>
 
-              <div className="form-group">
+              <div className="form-group" backgroundColor='none'>
                 <TextField
                   required
                   variant="outlined"
@@ -142,7 +142,6 @@ class Login extends Component {
                   fullWidth
                   label="Username"
                   type="text"
-                  className="form-control"
                   name="username"
                   value={this.state.username}
                   onChange={this.onChangeUsername}
@@ -158,7 +157,6 @@ class Login extends Component {
                   fullWidth
                   label="Password"
                   type="password"
-                  className="form-control"
                   name="password"
                   value={this.state.password}
                   onChange={this.onChangePassword}
@@ -175,6 +173,7 @@ class Login extends Component {
                   {this.state.loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
+                  &nbsp;&nbsp;
                   <span>Login</span>
                 </button>
               </div>

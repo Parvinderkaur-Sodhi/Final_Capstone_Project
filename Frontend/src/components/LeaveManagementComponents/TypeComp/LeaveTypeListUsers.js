@@ -45,6 +45,12 @@ function LeaveTypeListUser(props) {
     setPage(0);
   };
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -57,9 +63,9 @@ function LeaveTypeListUser(props) {
           <CardContent>
             <CardHeader className="title" title="Leave Type List" />
             <TableContainer component={Paper} style={{ width: "80%", padding: "40px", margin: "auto" }}>
-              <Table stickyHeader>
-                <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}>
-                  <TableRow>
+              <Table>
+                <TableHead>
+                  <TableRow style = {Styles}>
                     <TableCell style={{ width: "50%" }}>Name</TableCell>
                     <TableCell style={{ width: "50%" }}>Allowed Count</TableCell>
                   </TableRow>

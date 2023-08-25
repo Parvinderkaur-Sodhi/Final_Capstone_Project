@@ -95,7 +95,13 @@ function LeaveRequestListUser(props) {
   const indexOfFirstLeaveRequest = indexOfLastLeaveRequest - leaveRequestsPerPage;
   const currentLeaveRequests = filteredLeaveRequests.slice(indexOfFirstLeaveRequest, indexOfLastLeaveRequest);
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
 
+  
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -176,7 +182,7 @@ function LeaveRequestListUser(props) {
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
-                  <TableRow>
+                  <TableRow style = {Styles}>
                     <TableCell>ID</TableCell>
                     <TableCell>Leave Type</TableCell>
                     <TableCell>Start Date</TableCell>

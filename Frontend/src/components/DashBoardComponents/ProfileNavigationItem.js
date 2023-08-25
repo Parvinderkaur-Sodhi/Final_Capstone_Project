@@ -37,7 +37,7 @@ function ProfileNavigationItem(props) {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose} sx={{ display: 'flex', alignItems: 'center', padding: '16px', borderBottom: '1px solid #ccc' }}>
-                    <strong sx={{ fontSize: '20px', marginRight: '16px' }}>{username}</strong>
+                    <strong sx={{ fontSize: '20px', marginRight: '16px' }}>Hello, {username}</strong>
                 </MenuItem>
                 <MenuItem component={Link} to="/profile" onClick={handleClose} sx={{ fontSize: '16px' }}>
                     <ListItemIcon sx={{ marginRight: '8px' }}>

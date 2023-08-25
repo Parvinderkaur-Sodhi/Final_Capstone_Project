@@ -13,6 +13,7 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import Pagination from '@mui/material/Pagination';
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
+import { Style } from "@mui/icons-material";
 
 function LeaveRequestList(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -109,6 +110,12 @@ function LeaveRequestList(props) {
     setCurrentPage(value);
   };
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
+
 
   if (!currentUser) {
     return <Redirect to="/login" />;
@@ -197,7 +204,7 @@ function LeaveRequestList(props) {
             ) : (
               <TableContainer component={Paper}>
                 <Table>
-                  <TableHead style={{ color: "#FFFF" }}>
+                  <TableHead style={Styles}>
                     <TableRow>
                       <TableCell style={{ width: "5%" }}>ID</TableCell>
                       <TableCell style={{ width: "15%" }}>Employee Name</TableCell>

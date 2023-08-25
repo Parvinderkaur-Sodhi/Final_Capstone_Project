@@ -11,6 +11,10 @@ class UserService {
   getGreetings() {
     return axios.get(API_URL + "greeting", { headers: authHeader() });
   }
+
+  getAllUsers() {
+    return axios.get(API_URL, { headers: authHeader() });
+  }
   
 }
 

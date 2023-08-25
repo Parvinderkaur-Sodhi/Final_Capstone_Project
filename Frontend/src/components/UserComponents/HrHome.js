@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import {
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  IconButton,
-  CircularProgress,
-  Box,
-  Divider,
-} from "@mui/material";
+import { Grid, Card, CardContent, Typography} from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HrService from "../../services/hr.service";
