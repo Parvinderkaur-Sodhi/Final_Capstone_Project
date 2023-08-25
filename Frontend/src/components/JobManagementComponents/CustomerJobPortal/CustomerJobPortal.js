@@ -11,7 +11,7 @@ const CustomerJobPortal = () => {
   const [job,setJob]=useState([]);
   const history=useHistory();
   return (
-    <Stack direction="row" sx={{width:1734,height:596,margin:"-20px -500px",backgroundColor:"#F1F1F1"}}>
+    <Stack direction="row" sx={{width:1734,height:596,margin:"-20px -500px",backgroundColor:"white"}}>
          <Box sx={{width:400,height:600,boxShadow:1,backgroundColor:"white",ml:46}}>
           jfjds
          </Box>
@@ -20,7 +20,7 @@ const CustomerJobPortal = () => {
           <Stack sx={{mt:2,ml:4}} direction="row">
   <SearchJob job={job} setJob={setJob}/>
     <Button 
-    sx={{width:100,height:44,ml:5,marginRight:10,fontSize:10,p:1}}
+    style={{width:150,height:40,backgroundColor:"#98144d",margin:"15px 35px",color:"white"}}
         variant="outlined"
         onClick={()=>{
           history.push(`/trackStatus/${empid}`);
@@ -29,10 +29,7 @@ const CustomerJobPortal = () => {
       
                 <AllJob job={job} setJob={setJob}/>
                 </Stack>
-    {/* </Box> */}
-          {/* <div style={{width:350,height:800,marginRight:"-350px"}}>  
-<FilterByCategory job={job} setJob={setJob}/>
-</div> */}
+   
 <FilterByCategory job={job} setJob={setJob}/>
 
         </Stack>

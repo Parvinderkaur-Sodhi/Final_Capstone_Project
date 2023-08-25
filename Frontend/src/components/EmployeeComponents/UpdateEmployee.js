@@ -291,6 +291,7 @@ function UpdateEmployee(props) {
                             <Button
                                 variant="contained"
                                 color="primary"
+                                style={{ backgroundColor: '#98144d', color: "white" }}
                                 startIcon={<Update />}
                                 onClick={handleUpdate}
                             >

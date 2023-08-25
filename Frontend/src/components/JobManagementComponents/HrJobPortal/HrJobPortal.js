@@ -14,8 +14,6 @@ const HrJobPortal = () => {
   console.log(job);
   return (
     <>
-  <Stack direction="row">
-    {/* <h1>chkxudhcu</h1> */}
     {/* <SideNavbar/> */}
     <div  style={{width:1300,backgroundColor:"#F1F1F1"}}>
       <div style={{margin:"30px 100px"}}>
@@ -23,10 +21,11 @@ const HrJobPortal = () => {
       </div>  
       {/* <FilterHrJob job={job} setJob={setJob}/> */}
       <ViewJob job={job} setJob={setJob}/>
-        </div>
         {/* <PostJob/> */}
-        </Stack>
-</>  )
+        </div>
+       
+</>  
+)
 }
 
 export default HrJobPortal

@@ -22,8 +22,7 @@ const ViewJob = (props) => {
     const jobType=["Full time","Part Time","Remote","Internship"];
     const experience=[1,2,3,"4 and above"];
     // const salary=[]
-    const [open,setOpen]=useState(false);
-    const[d,setD]=useState();
+   
     const [category,setCategory]=useState();
     const history=useHistory();
     useEffect(() => {
@@ -32,10 +31,10 @@ const ViewJob = (props) => {
 const token=user["accessToken"];
         getAllCustomerDetails(token);
     }, []);
-   const openDrawer=(index)=>{
-setOpen(true);
-setD(index);
-    }
+//    const openDrawer=(index)=>{
+// setOpen(true);
+// setD(index);
+//     }
     const getAllCustomerDetails = (token) => {
         employeeService.getAllJobs(token).then((response) => {
             props.setJob(response.data)
@@ -80,8 +79,8 @@ props.job &&  props.job.map((j,index)=>
   <Stack>
        <Typography style={{fontSize:12,margin:"30px 20px",fontWeight:"bolder"}}>1 Opening</Typography>   
 </Stack>
-<Button variant="outlined"  onClick={()=>{openDrawer(index)}} style={{width:70,height:30,backgroundColor:"#88304E",color:"white",margin:"25px 70px"}}>
-  <Typography style={{fontSize:10}} onClick={()=>{ViewAppliedJobs(j.jobProfile)}}>Details</Typography></Button>  
+<Button variant="outlined"  onClick={()=>{ViewAppliedJobs(j.jobProfile)}} style={{width:70,height:30,backgroundColor:"#88304E",color:"white",margin:"25px 70px"}}>
+  <Typography style={{fontSize:10}} >Details</Typography></Button>  
   
 
   </Stack>

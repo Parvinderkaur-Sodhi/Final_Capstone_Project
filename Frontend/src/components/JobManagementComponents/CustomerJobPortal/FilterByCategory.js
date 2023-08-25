@@ -6,7 +6,7 @@ import hrService from '../../../services/hr.service';
 import RangeSlider from './dd';
 
 const FilterByCategory = (props) => {
-           const jobcategory=["Design","Development","testing"];
+           const jobcategory=["Design","Development","testing","Banking","Sales","Marketing"];
            const jobtype=["Full time","Part Time","Remote","Internship"];
            const [selectedFilters,setSelectedFilters]=useState([]);
 const displayAllJobs=()=>{
@@ -67,7 +67,7 @@ else{
 
 },[selectedFilters])
   return (
- <Box  boxShadow={1} borderWidth='1px'  width="450px" margin="13px 40px 0px" height="540px" backgroundColor="white">
+ <Box  boxShadow={1} borderWidth='1px'  width="700px" margin="13px 40px 0px" height="540px" backgroundColor="white">
       <h4 style={{margin:"10px 15px 20px 0px",textAlign:'center'}}>Filter</h4>
 
           <Grid container marginBottom={5}>
@@ -79,7 +79,7 @@ variant="outlined"
 onClick={
      ()=>handleFilterButtononClick(value)
 }
-style={selectedFilters?.includes(value)?{backgroundColor:"purple",color:"white",margin:"5px 10px 4px",width:100,height:30,padding:4}:{color:"black",margin:"5px 10px 4px",width:100,height:30,padding:4}}
+style={selectedFilters?.includes(value)?{backgroundColor:"#98144d",color:"white",margin:"5px 10px 4px",width:110,height:30,padding:2}:{color:"black",margin:"5px 10px 4px",width:110,height:30,padding:2,borderColor:"#98144d"}}
 >
      {value}
 </Button>
@@ -89,14 +89,14 @@ style={selectedFilters?.includes(value)?{backgroundColor:"purple",color:"white",
 
 <RangeSlider job={props.job} setJob={props.setJob}/>
    <Grid container mt={5}>
-<Typography ml={2} mr={10}>Job Type</Typography>
+<Typography ml={2} mr={20}>Job Type</Typography>
       {jobtype.map((value, index) => (
 <Button 
 variant="outlined"
 onClick={
      ()=>handleFilterJobType(value)
 }
-style={selectedFilters?.includes(value)?{backgroundColor:"purple",color:"white",margin:"5px 10px 4px",width:100,height:30,padding:4}:{color:"black",margin:"5px 10px 4px",width:100,maxWidth:150,height:30,padding:4}}
+style={selectedFilters?.includes(value)?{backgroundColor:"#98144d",color:"white",margin:"5px 10px 4px",width:100,height:30,padding:3}:{color:"black",margin:"5px 10px 4px",width:100,maxWidth:150,height:30,padding:3,borderColor:"#98144d"}}
 >
      {value}
 </Button>

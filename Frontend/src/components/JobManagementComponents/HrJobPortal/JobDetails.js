@@ -1,10 +1,10 @@
 import React from 'react'
-import { Box, Stack, Tab, Tabs, styled } from '@mui/material'
+import { Box, Button, Stack, Tab, Tabs, styled } from '@mui/material'
 
 // import ApplicationInfo from './ApplicationInfo';
 import AppliedJobs from './AppliedJob';
 import Status from './Status';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { Details } from '@mui/icons-material';
 import Deatils from './AllApplication';
 import AllApplication from './AllApplication';
@@ -51,15 +51,19 @@ const JobDetails = () => {
       const [value, setValue] = React.useState("Job Details");
         const JobStatus=["Inprocess","Interviewed","Accepted","Rejected"];
   const {jobProfile}=useParams();
-
+const history=useHistory();
  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  
+  const back=()=>{
+    history.push(`/HrJob`);
+
+  }
   return (
     <Stack direction="row">
-    {/* <SideNavbar/> */}
+    <Button onClick={()=>back() } style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"white"}}>Back</Button> 
+    <Stack direction="row" ml={4}>
       <Box sx={{ width:'100%'}}>
                   <TabContext value={value}>
 <Box sx={{borderBottom:1,borderColor:'divider',padding:2}}>
@@ -93,6 +97,7 @@ const JobDetails = () => {
      </TabContext>
 
     </Box>
+    </Stack>
     </Stack>
   )
 }

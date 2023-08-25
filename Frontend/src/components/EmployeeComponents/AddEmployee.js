@@ -64,7 +64,7 @@ function AddEmployee(props) {
             <Card>
                 <CardHeader className="title" title="Add New Employee" />
                 <CardContent>
-                    <div style={{ maxHeight: "70vh", overflowY: "auto", paddingRight: "17px" }}>
+                    <div style={{ maxHeight: "66vh", overflowY: "auto", paddingRight: "17px" }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={6}>
                                 <TextField
@@ -239,6 +239,7 @@ function AddEmployee(props) {
                             <Button
                                 variant="contained"
                                 color="primary"
+                                style={{ backgroundColor: '#98144d', color: "white" }}
                                 startIcon={<Add />}
                                 onClick={handleAdd}
                             >
