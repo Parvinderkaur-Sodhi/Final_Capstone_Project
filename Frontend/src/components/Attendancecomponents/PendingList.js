@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Card, } from '@material-ui/core';
 import HrService from "../../services/hr.service";
 import { makeStyles } from '@material-ui/core/styles';
 import HrNavbar from '../DashBoardComponents/HrNavbar';
@@ -73,9 +73,15 @@ const PendingList = () => {
   };
 
   return (
+    <div>
+      {/* <HrNavbar /> */}
+    
+
+    <Card>
     <div className={classes.pageBackground}>
-      <HrNavbar />
+      
       <h2>
+
       Pending Attendance List
     
       </h2>
@@ -88,8 +94,9 @@ const PendingList = () => {
           
             <TableRow  className={classes.root}>
               <TableCell>Employee ID</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
+              {/* <TableCell>First Name</TableCell>
+              <TableCell>Last Name</TableCell> */}
+              <TableCell>Name</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Action</TableCell>
 
@@ -108,8 +115,9 @@ const PendingList = () => {
             {pendingAttendances.map(attendance => (
               <TableRow key={attendance.attendanceId} >
                 <TableCell>{attendance.employee.employeeId}</TableCell>
-                <TableCell>{attendance.employee.fname}</TableCell>
-                <TableCell>{attendance.employee.lname}</TableCell>
+                {/* <TableCell>{attendance.employee.fname}</TableCell>
+                <TableCell>{attendance.employee.lname}</TableCell> */}
+                <TableCell>{attendance.employee.username}</TableCell>
                 <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
                 <TableCell>
                   <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
@@ -130,6 +138,8 @@ const PendingList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+    </div>
+    </Card>
     </div>
   );
 };

@@ -45,11 +45,11 @@ import UserList from "./components/UserComponentsAdmin/UserList";
 //import AdminDashboard from "./components/adminDashboard.component";
 //import EmployeeDashboard from "./components/DashBoardComponents/EmployeeDashboard";
 
- import AttendanceList from "./components/Attendancecomponents/AttendanceList";
- import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
- import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
- import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
- import PendingList from "./components/Attendancecomponents/PendingList";
+ import AttendanceList from "./components/AttendanceComponents/AttendanceList";
+ import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
+ import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
+ import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
+ import PendingList from "./components/AttendanceComponents/PendingList";
 
 import { Details } from "@mui/icons-material";
 import Deatils from "./components/JobManagementComponents/HrJobPortal/AllApplication";
