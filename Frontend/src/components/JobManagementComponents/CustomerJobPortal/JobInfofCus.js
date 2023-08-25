@@ -46,7 +46,7 @@ hrService.getJobById(props.index).then((response)=>{
 <Stack ml={5} mt={2}>
       <h5>Description</h5>
       <Typography color="#5d6c72">{emp.description}</Typography>
-      <Typography mt={4} color="#5d6c72">{emp.experience}</Typography>
+      <Typography mt={4} color="#5d6c72">{emp.specialization}</Typography>
       <Divider mt={3}/> 
             <Typography mt={4} color="#909fa5">Last Date to Apply :<strong>{emp.lastdate[2]}/{emp.lastdate[1]}/{emp.lastdate[0]}</strong></Typography>
    <Typography mt={2} color="#909fa5">No of Vacancy:<strong>{emp.vacancy}</strong></Typography>

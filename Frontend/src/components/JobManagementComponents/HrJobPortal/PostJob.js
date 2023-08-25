@@ -9,6 +9,7 @@ import { DatePicker } from '@mui/lab/DatePicker';
 import "react-datepicker/dist/react-datepicker.css";
 import hrService from "../../../services/hr.service";
 import { MenuItem, TextField } from "@material-ui/core";
+import HrNavbar from "../../DashBoardComponents/HrNavbar";
 
 function PostJob(props) {
     const [job, setJob] = useState({});
@@ -48,8 +49,10 @@ function PostJob(props) {
   
 
     return (
+        <>
+        <HrNavbar/>
         <div>
-            <Card>
+            <Card style={{marginLeft:"150px"}}>
                 <CardHeader className="title" title="Add New Job" />
                 <CardContent>
                     <form onSubmit={handleAdd}>
@@ -201,6 +204,7 @@ style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"
                 </Alert>
             </Snackbar>
         </div>
+        </>
     );
 }
 

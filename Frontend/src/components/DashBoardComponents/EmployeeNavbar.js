@@ -92,9 +92,15 @@ const Drawer = ({ open, onClose }) => {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="" onClick={onClose} style={linkStyles}>
+            <RouterLink to="/EmpJobPortal/2" onClick={onClose} style={linkStyles}>
             <WorkIcon style={iconStyles} />
-              Jobs
+              Browse Jobs
+            </RouterLink>
+          </li>
+           <li>
+            <RouterLink to="/TrackStatus/2" onClick={onClose} style={linkStyles}>
+            <WorkIcon style={iconStyles} />
+              Applied Jobs
             </RouterLink>
           </li>
           <li>
