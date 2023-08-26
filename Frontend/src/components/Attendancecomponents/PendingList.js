@@ -160,7 +160,7 @@ const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastReco
               <TableCell>{attendance.employee.username}</TableCell>
               <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
               <TableCell className={classes.actionButtons}>
-                <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
+                <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}  style={{ backgroundColor: 'green' }}>Approve</Button>
                 <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
                 {attendance.approvalStatus === 'REJECTED' && (
                   <Button variant="outlined" color="primary">
