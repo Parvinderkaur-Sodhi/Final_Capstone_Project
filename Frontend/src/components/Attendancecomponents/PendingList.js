@@ -13,9 +13,9 @@ const formatDate = (dateString) => {
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "#98144d",
-    padding: theme.spacing(3),
-    color: 'white',
+    backgroundColor: "white",
+    padding: theme.spacing(2),
+    color: 'black',
     position: 'relative',
   },
   tableContainer: {
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: theme.spacing(2),
     right: theme.spacing(2),
+    backgroundColor: '#98144d',
   },
   pagination: {
     display: "flex",
@@ -48,6 +49,8 @@ const PendingList = () => {
   const [pendingAttendances, setPendingAttendances] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(5);
+  const [searchQuery, setSearchQuery] = useState('');
+
 
   useEffect(() => {
     fetchPendingAttendances();
@@ -93,7 +96,20 @@ const PendingList = () => {
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = pendingAttendances.slice(indexOfFirstRecord, indexOfLastRecord);
+  //const currentRecords = pendingAttendances.slice(indexOfFirstRecord, indexOfLastRecord);
+
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredRecords = pendingAttendances.filter((attendance) =>
+  attendance.employee.username.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastRecord);
+
+  
 
 
   return (
@@ -113,7 +129,18 @@ const PendingList = () => {
         >
           View Attendance List
         </Button>
+        
+
         <h2>Pending Attendance List</h2>
+              {/* Search input */}
+        
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          style={{ fontSize: '16px' }} // Adjust the font size as needed
+        />
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table>
             <TableHead>
@@ -125,23 +152,29 @@ const PendingList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentRecords.map((attendance) => (
-                <TableRow key={attendance.attendanceId}>
-                  <TableCell>{attendance.employee.employeeId}</TableCell>
-                  <TableCell>{attendance.employee.username}</TableCell>
-                  <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
-                  <TableCell className={classes.actionButtons}>
-                    <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
-                    <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
-                    {attendance.approvalStatus === 'REJECTED' && (
-                      <Button variant="outlined" color="primary">
-                        Edit Absence Reason
-                      </Button>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+      {currentRecords.map((attendance) => {
+        if (!searchQuery || attendance.employee.username.toLowerCase().includes(searchQuery.toLowerCase())) {
+          return (
+            <TableRow key={attendance.attendanceId}>
+              <TableCell>{attendance.employee.employeeId}</TableCell>
+              <TableCell>{attendance.employee.username}</TableCell>
+              <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
+              <TableCell className={classes.actionButtons}>
+                <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
+                <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
+                {attendance.approvalStatus === 'REJECTED' && (
+                  <Button variant="outlined" color="primary">
+                    Edit Absence Reason
+                  </Button>
+                )}
+              </TableCell>
+            </TableRow>
+          );
+        } else {
+          return null; // Exclude this record from rendering
+        }
+      })}
+    </TableBody>
           </Table>
         </TableContainer>
 

@@ -55,6 +55,8 @@ function AttendanceList(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(5);
   const { user: currentUser } = props;
+  const [searchQuery, setSearchQuery] = useState('');
+
 
   useEffect(() => {
     HrService.getAllAttendances()
@@ -72,11 +74,20 @@ function AttendanceList(props) {
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
+  //const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+  const filteredAttendance = attendance.filter((attendanceItem) =>
+  attendanceItem.employee.username.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
     <div className={classes.pageBackground}>
@@ -85,6 +96,20 @@ function AttendanceList(props) {
       <Typography variant="h4" gutterBottom>
         Attendance List
       </Typography>
+
+    <input
+      type="text"
+      placeholder="Search by name..."
+      value={searchQuery}
+      onChange={handleSearchChange}
+      style={{
+      fontSize: '16px',
+      marginBottom: '10px',
+      width: '50%',
+      textAlign: 'left',  
+      }}
+    />
+
 
       <Paper className={classes.card}>
         <TableContainer>
