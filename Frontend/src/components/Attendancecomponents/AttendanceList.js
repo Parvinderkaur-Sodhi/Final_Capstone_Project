@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import HrService from "../../services/hr.service";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Pagination } from "@mui/material";
+import {
+  Table,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  Paper,
+  Button,
+  Typography,
+} from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
+import Pagination from "@mui/material/Pagination";
 
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -40,15 +51,15 @@ const useStyles = makeStyles((theme) => ({
 
 function AttendanceList(props) {
   const classes = useStyles();
-  const [attendance, setAttendances] = useState([]);
-  const { user: currentUser } = props;
+  const [attendance, setAttendance] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5; // Number of records to display per page
+  const [recordsPerPage] = useState(5);
+  const { user: currentUser } = props;
 
   useEffect(() => {
     HrService.getAllAttendances()
       .then((response) => {
-        setAttendances(response.data);
+        setAttendance(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -63,8 +74,8 @@ function AttendanceList(props) {
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
 
   return (
@@ -90,39 +101,39 @@ function AttendanceList(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {attendance.map((attendance, index) => {
-                const rowClass = index % 2 === 0 ? classes.evenRow : classes.oddRow;
-                return (
-                  <TableRow key={attendance.attendanceId} className={rowClass}>
-                    <TableCell>{attendance.attendanceId}</TableCell>
-                    <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
-                    <TableCell>{attendance.present}</TableCell>
-                    <TableCell>{attendance.employee.employeeId}</TableCell>
-                    <TableCell>{attendance.employee.username}</TableCell>
-                    <TableCell>{attendance.absenceReason}</TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.editButton}
-                        component={Link}
-                        to={`/updateAttendance/${attendance.attendanceId}`}
-                      >
-                        EDIT
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {currentRecords.map((attendanceItem) => (
+                <TableRow key={attendanceItem.attendanceId}>
+                  <TableCell>{attendanceItem.attendanceId}</TableCell>
+                  <TableCell>
+                    {formatDate(attendanceItem.attendanceDate)}
+                  </TableCell>
+                  <TableCell>{attendanceItem.present}</TableCell>
+                  <TableCell>
+                    {attendanceItem.employee.employeeId}
+                  </TableCell>
+                  <TableCell>{attendanceItem.employee.username}</TableCell>
+                  <TableCell>{attendanceItem.absenceReason}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.editButton}
+                      component={Link}
+                      to={`/updateAttendance/${attendanceItem.attendanceId}`}
+                    >
+                      EDIT
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
+
         <Pagination
           count={Math.ceil(attendance.length / recordsPerPage)}
           page={currentPage}
-          onChange={(event, page) => paginate(page)}
-          color="primary"
-          className={classes.pagination}
+          onChange={handlePageChange}
         />
       </Paper>
     </div>
@@ -130,5 +141,3 @@ function AttendanceList(props) {
 }
 
 export default AttendanceList;
-
-
