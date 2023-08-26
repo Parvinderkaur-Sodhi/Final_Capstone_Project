@@ -35,8 +35,6 @@ import LeaveBalanceListUser from "./components/LeaveManagementComponents/LeaveBa
 import CustomerJobPortal from "./components/JobManagementComponents/CustomerJobPortal/CustomerJobPortal";
 import HrJobPortal from "./components/JobManagementComponents/HrJobPortal/HrJobPortal"
 import TrackStatus from "./components/JobManagementComponents/CustomerJobPortal/TrackStatus";
-import FilterByCategory from "./components/JobManagementComponents/CustomerJobPortal/FilterByCategory";
-import Jav from "./components/JobManagementComponents/CustomerJobPortal/Jav";
 
 import HrHome from "./components/UserComponents/HrHome";
 //import UserList from "./components/UserComponentsAdmin/UserList";
@@ -50,7 +48,6 @@ import UserList from "./components/UserComponentsAdmin/UserList";
  import PendingList from "./components/AttendanceComponents/PendingList";
 
 import { Details } from "@mui/icons-material";
-import example from "./components/JobManagementComponents/HrJobPortal/example";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
 import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
 
@@ -163,7 +160,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight: "8rem", width: "1400px", height: "82vh" }}>
+          <div className="container mt-3" style={{ marginRight: "8rem", width: "1420px", height: "82vh" }}>
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />

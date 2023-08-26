@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import HrService from "../../services/hr.service";
+import UserService from "../../services/user.service";
 import { Redirect } from "react-router-dom";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Card, CardContent, CardHeader } from "@mui/material";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 function UserList(props) {
@@ -9,7 +9,7 @@ function UserList(props) {
   const { user: currentUser } = props;
 
   useEffect(() => {
-    HrService.getAllUsers()
+    UserService.getAllUsers()
       .then((response) => {
         console.log(response.data);
         setUsers(response.data);
@@ -19,6 +19,12 @@ function UserList(props) {
       });
   }, []);
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey",
+    fontWeight: "bold",
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -26,30 +32,36 @@ function UserList(props) {
   return (
     <div>
       <HrNavbar />
-      <h2>User List</h2>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Role</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
-                <TableCell>{user.username}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Card>
+        <CardContent>
+          <CardHeader className="title" title="Users List"/>
+          <div style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow style={Styles}>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Username</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Role</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {users.map((user) => (
+                    <TableRow key={user.id}>
+                      <TableCell>{user.id}</TableCell>
+                      <TableCell>{user.username}</TableCell>
+                      <TableCell>{user.email}</TableCell>
+                      <TableCell>{user.role}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

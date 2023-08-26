@@ -55,7 +55,7 @@ history.push(`/AppliedJobs/${jobProfile}`);
       <>
      
     <h4 style={{margin:"50px 34px"}}>Recommended Jobs </h4>
-    <Grid container sx={{mt:-4}}>
+    <Grid container>
 
 {
 props.job &&  props.job.map((j,index)=>
@@ -68,10 +68,10 @@ props.job &&  props.job.map((j,index)=>
       return (
     <>
     
-          <Card style={{width:320,height:100,margin:"5px 10px 10px",borderRadius:10,backgroundColor:"white"}}>
+          <Card style={{width:300,height:100,margin:"5px 20px 10px",borderRadius:10,backgroundColor:"white"}}>
               <Stack direction="row">
                <Typography style={{fontSize:12,margin:"10px 20px"}}>{j.category}</Typography>
-              <Typography  style={{bgcolor:"white",margin:"10px 70px",color:"black",fontSize:12}} >{diff} days ago</Typography>
+              <Typography  style={{bgcolor:"white",marginTop:"10px",marginLeft:"70px",color:"black",fontSize:12}} >{diff} days ago</Typography>
    </Stack>
     <Typography style={{fontSize:20,fontWeight:'bolder',color:"#88304E",margin:"-15px 20px"}}>{j.jobProfile}</Typography> 
    
@@ -79,7 +79,7 @@ props.job &&  props.job.map((j,index)=>
   <Stack>
        <Typography style={{fontSize:12,margin:"30px 20px",fontWeight:"bolder"}}>1 Opening</Typography>   
 </Stack>
-<Button variant="outlined"  onClick={()=>{ViewAppliedJobs(j.jobProfile)}} style={{width:70,height:30,backgroundColor:"#88304E",color:"white",margin:"25px 70px"}}>
+<Button variant="outlined"  onClick={()=>{ViewAppliedJobs(j.jobProfile)}} style={{width:70,height:30,backgroundColor:"#88304E",color:"white",margin:"25px 40px"}}>
   <Typography style={{fontSize:10}} >Details</Typography></Button>  
   
 

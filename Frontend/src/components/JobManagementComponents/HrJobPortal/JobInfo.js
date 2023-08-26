@@ -2,14 +2,14 @@ import hrService from '../../../services/hr.service';
 import {Stack,Typography,Button,Card,Paper,InputBase,Divider,IconButton, Drawer,Grid, Box, Dialog, Snackbar, Alert} from '@mui/material';
 import { ChairOutlined, CurrencyRupeeSharp, Timelapse } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const JobInfo = () => {
 
     const [jobInfo,setJobInfo]=useState();
     const {jobProfile}=useParams();
     console.log(jobProfile);
-
+const history=useHistory();
     useEffect(()=>{
 hrService.getJobByprofile(jobProfile).then((response)=>{
     console.log(response.data);
@@ -45,7 +45,7 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
         </div>
       </Stack>
         <Stack ml={1}>
-               <Typography style={{fontSize:15,margin:"3px 30px 0px "}}>{jobInfo[0].jobType}</Typography>  
+               <Typography style={{fontSize:15,margin:"3px 30px 0px "}}>{jobInfo[0].category}</Typography>  
   <Typography style={{fontSize:15,margin:"4px 30px"}}>Published Date:{jobInfo[0].publish_date[2]}/{jobInfo[0].publish_date[1]}/{jobInfo[0].publish_date[0]}</Typography>   
 
                </Stack>
@@ -55,9 +55,10 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
       <h5>Descriptions</h5>
       <Typography color="#5d6c72">{jobInfo[0].description}</Typography>
       <Typography mt={4} color="#5d6c72">{jobInfo[0].specializtion}</Typography>
-            <Typography mt={10} color="#909fa5">Last Date to Apply :<strong>{jobInfo[0].lastdate[2]}-{jobInfo[0].lastdate[1]}-{jobInfo[0].lastdate[0]}</strong></Typography>
-              <Typography mt={4} color="#909fa5">Total position Availabel:<strong>{jobInfo[0].vacancy}</strong></Typography>
+            <Typography mt={3} color="#909fa5">Last Date to Apply :<strong>{jobInfo[0].lastdate[2]}-{jobInfo[0].lastdate[1]}-{jobInfo[0].lastdate[0]}</strong></Typography>
+              <Typography mt={2} color="#909fa5">Total position Availabel:<strong>{jobInfo[0].vacancy}</strong></Typography>
 </Stack>
+<Button onClick={()=>{history.push(`/postJob/${jobInfo[0].jobId}`)}}>Edit</Button>
   </div>
   }
             </>

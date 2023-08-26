@@ -51,7 +51,7 @@ const changeStatus=(id,status)=>{
   return (
     <div>
     <TableContainer component={Card}>
-      <Table width="400px" aria-label="simple table">
+      <Table width="300px" aria-label="simple table">
         <colgroup>
         <col style={{width:'1%'}}/>
         <col style={{width:'1%'}}/>
@@ -86,7 +86,6 @@ const changeStatus=(id,status)=>{
               <TableCell >{j.job["jobProfile"]}</TableCell>
               <TableCell ><Typography width={80} height={40} boxShadow={4} border="0px solid green" borderRadius={6} padding={1} style={{color:`${checkColor(j.status)}`}}>{j.status}</Typography></TableCell>
               <TableCell>{j.job["salary"]}</TableCell> 
-            {/* <TableCell><Button onClick={()=>{changeStatus(j.applicationId,"Accepted")}}>Info</Button></TableCell>  */}
 <TableCell>
   <Stack direction="row">
   <Button variant="outlined" startIcon={<CancelOutlined/>}>

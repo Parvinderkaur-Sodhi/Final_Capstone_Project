@@ -36,17 +36,13 @@ getAlljobDetails();
     const ApplyforJob=(jobId)=>{
       const obj={};
       employeeService.applyforJob(empid,jobId,obj).then((response)=>{
-        console.log(response.data.length);
         if(response.data.length==0){
-          console.log("djcd");
         setError(true);
               setOpen(false);
-
         }
         else{
 setSuccess(true);
       setOpen(false);
-
         }
         // setFeedback(true);
         // setApplied(true);
@@ -81,8 +77,8 @@ setD(index);
                 </Alert>
             </Snackbar>
 
-    <h4 style={{margin:"50px 34px"}}>Recommended Jobs :</h4>
-    <Grid container sx={{mt:-4,ml:1}}>
+    <h4 style={{margin:"50px 34px"}}>Recommended Jobs : 12</h4>
+    <Grid container>
 
 {
   props.job &&  props.job.map((j,index)=>
@@ -90,20 +86,17 @@ setD(index);
       const date=new Date(j.publish_date);
       const currdate=new Date();
       var diff=currdate.getDate()-date.getDate();
-      const profile=j.jobProfile;
-// var days=diff/(1000*60*60*24);
       return (
     <>
     
-       {/* <Card style={{width:230,height:270,margin:"5px 10px 10px",border:"1px solid",borderColor:"white",borderRadius:20,padding:5}}> */}
-          <Card style={{width:220,height:200,border:"1px solid",margin:"5px 10px 10px",borderColor:"white",borderRadius:20,backgroundColor:"white"}}>
+          <Card style={{width:240,height:200,border:"1px solid",margin:"5px",borderColor:"white",borderRadius:20,backgroundColor:"white"}}>
             <Stack>
-              <Button variant="contained" sx={{bgcolor:"white",margin:"10px 20px",width:"100px",height:30,color:"black",border:"0px solid white",borderRadius:2,fontSize:10}} >{diff} days ago</Button>
-               <Typography style={{fontSize:10,margin:"10px 20px 0px "}}>{j.category}</Typography>   
+              <Button variant="contained" sx={{bgcolor:"white",margin:"10px 20px",width:"120px",height:30,color:"black",border:"0px solid white",borderRadius:2,fontSize:10}} >{diff} days ago</Button>
+               <Typography style={{fontSize:15,margin:"10px 20px 0px "}}>{j.category}</Typography>   
     <Typography style={{fontSize:20,fontWeight:'bolder',color:"#98144d",margin:"0px 20px"}}>{j.jobProfile}</Typography>   
-<Stack direction="row">
+<Stack direction="row" sx={{mt:4}}>
   <Stack>
-           <Typography style={{fontSize:10,margin:"15px 20px"}}>Rs. {j.salary} </Typography>   
+           <Typography style={{fontSize:15,margin:"15px 20px"}}>Rs.{j.salary} </Typography>   
 
        {/* <Typography style={{fontSize:12,margin:"-10px 20px",fontWeight:"bolder"}}>{j.lastdate[2]}/{j.lastdate[1]}/{j.lastdate[0]}</Typography>    */}
 </Stack>

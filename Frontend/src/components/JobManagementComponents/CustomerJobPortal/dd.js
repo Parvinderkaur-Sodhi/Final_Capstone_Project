@@ -24,7 +24,7 @@ export default function RangeSlider(props) {
   };
 
   return (
-    <Box sx={{ width: 200 ,margin:"0px 22px 20px"}}>
+    <Box sx={{ width: 200 ,margin:"30px 22px 20px"}}>
                       <Typography>Salary</Typography>
 
       <Slider
@@ -34,6 +34,7 @@ export default function RangeSlider(props) {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
        min={1} max={15}
+       sx={{color:"#98144d"}}
       />
       {console.log(value[1])}
       <Stack direction="row" marginTop={-2}>

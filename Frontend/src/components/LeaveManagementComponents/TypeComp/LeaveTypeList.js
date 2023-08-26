@@ -51,6 +51,12 @@ function LeaveTypeList(props) {
     setDeleteDialogOpen(false);
   };
 
+  const Styles = {
+    color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold",
+  };
+
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
@@ -62,9 +68,9 @@ function LeaveTypeList(props) {
         <CardHeader className="title" title="Leave Type List" />
         <CardContent>
           <TableContainer component={Paper} style={{ width: "100%" }}>
-            <Table stickyHeader>
-              <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}>
-                <TableRow>
+            <Table>
+              <TableHead>
+                <TableRow style = {Styles}> 
                   <TableCell style={{ width: "10%" }}>ID</TableCell>
                   <TableCell style={{ width: "30%" }}>Name</TableCell>
                   <TableCell style={{ width: "20%" }}>Allowed Count</TableCell>

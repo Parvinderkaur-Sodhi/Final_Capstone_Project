@@ -3,8 +3,12 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import HrService from "../../services/hr.service";
+<<<<<<< HEAD
 import Pagination from "@mui/material/Pagination";
 import HrNavbar from '../DashBoardComponents/HrNavbar';
+=======
+import HrNavbar from "../DashBoardComponents/HrNavbar";
+>>>>>>> 56091c11b92794fa3b7eb34de07a3504b84650b0
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -99,9 +103,54 @@ const PendingList = () => {
   return (
     <div>
 
+<<<<<<< HEAD
    
     <HrNavbar />
     <div>
+=======
+    <HrNavbar />
+    <Card className={classes.card}>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/attendance-list"
+        className={classes.viewAttendanceButton}
+      >
+        View Attendance List
+      </Button>
+      <h2>Pending Attendance List</h2>
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.tableHeaderCell}>Employee ID</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Name</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Date</TableCell>
+              <TableCell className={classes.tableHeaderCell}>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {pendingAttendances.map((attendance) => (
+              <TableRow key={attendance.attendanceId}>
+                <TableCell>{attendance.employee.employeeId}</TableCell>
+                <TableCell>{attendance.employee.username}</TableCell>
+                <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
+                <TableCell className={classes.actionButtons}>
+                  <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
+                  <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
+                  {attendance.approvalStatus === 'REJECTED' && (
+                    <Button variant="outlined" color="primary">
+                      Edit Absence Reason
+                    </Button>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+>>>>>>> 56091c11b92794fa3b7eb34de07a3504b84650b0
       
       <Card className={classes.card}>
         <Button
