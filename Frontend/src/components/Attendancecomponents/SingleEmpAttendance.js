@@ -43,16 +43,12 @@ function SingleEmpAttendance(props) {
   const { user: currentUser } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 4; // Number of records to display per page
+  const recordsPerPage = 5; // Number of records to display per page
 
-  // Calculate the index of the first and last records on the current page
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-
-  // Extract the records for the current page using slicing
   const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
 
-  // Function to handle page changes
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
   };
@@ -148,7 +144,7 @@ function SingleEmpAttendance(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {attendance.map((attendanceRecord) => (
+              {currentRecords.map((attendanceRecord) => (
                 <TableRow key={attendanceRecord.attendanceId}>
                   <TableCell>{formatDate(attendanceRecord.attendanceDate)}</TableCell>
                   <TableCell>{attendanceRecord.present}</TableCell>
