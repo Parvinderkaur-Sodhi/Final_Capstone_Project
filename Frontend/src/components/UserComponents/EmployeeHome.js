@@ -99,12 +99,12 @@ function EmployeeHome(props) {
   return (
     <div>
       <EmployeeNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "white"}}>
         <Grid container spacing={2}>
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: blue[100], display: "flex", justifyContent: "center"}}>
+            <Card sx={{backgroundColor: "lightgrey", display: "flex", justifyContent: "center"}}>
               <CardContent>
                 <PieChart
                   series={[
@@ -129,7 +129,7 @@ function EmployeeHome(props) {
           </Grid>
 
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: green[100] }}>
+            <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
                 <PieChart
                   series={[
@@ -174,7 +174,7 @@ function EmployeeHome(props) {
 
           {/* Leaves */}
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: green[100], display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: "lightgrey", display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   Your Leaves
@@ -208,7 +208,7 @@ function EmployeeHome(props) {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: red[100] }}>
+            <Card sx={{backgroundColor: "lightgrey" }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   News and Events

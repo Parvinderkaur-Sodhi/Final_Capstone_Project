@@ -59,7 +59,8 @@ const MarkAttendance = () => {
   };
 
   return (
-    <div className={classes.pageBackground}>
+    <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
+     <div className={classes.pageBackground}>
       <EmployeeNavbar /> 
       <Card className={classes.card}>
         <CardContent>
@@ -90,6 +91,7 @@ const MarkAttendance = () => {
         </CardContent>
       </Card>
     </div>
+    </Card>
   );
 };
 
