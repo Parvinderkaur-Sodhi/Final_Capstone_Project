@@ -62,7 +62,7 @@ function HrHome(props) {
         <Grid container spacing={2}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: 'white', backgroundColor: "lightgrey" }}>
+            <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
                 <PieChart
                   series={[
@@ -79,6 +79,8 @@ function HrHome(props) {
                     }
 
                   ]}
+                  width={250}
+                  height={170}
                 />
               </CardContent>
             </Card>
@@ -87,7 +89,7 @@ function HrHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: 'white', backgroundColor: "lightgrey" }} >
+            <Card sx={{ backgroundColor: "lightgrey" }} >
               <CardContent>
                 <PieChart
                   series={[
@@ -103,7 +105,8 @@ function HrHome(props) {
                     }
 
                   ]}
-
+                  width={250}
+                  height={170}
                 />
               </CardContent>
             </Card>

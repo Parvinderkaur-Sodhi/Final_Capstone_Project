@@ -13,7 +13,7 @@ const formatDate = (dateString) => {
 const useStyles = makeStyles((theme) => ({
   pageBackground: {
     backgroundColor: "#f4f6f8",
-    minHeight: "100vh",
+    minHeight: "80vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
