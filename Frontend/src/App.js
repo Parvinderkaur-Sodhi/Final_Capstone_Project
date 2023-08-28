@@ -92,7 +92,7 @@ class App extends Component {
 
   logOut() {
     this.props.dispatch(logout());
-    history.push("/login"); 
+    history.push("/login");
     window.location.reload();
     window.location.reload();
     this.setState({
@@ -161,13 +161,14 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight:"8rem", width: "1420px", height: "82vh" }}>
+          <div className="container mt-3" style={{ marginRight: "8rem", width: "1420px", height: "82vh" }}>
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/dev" component={Contact} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/user" component={User} />
 
               {currentUser && currentUser.role === 'Admin' && (
                 <>
@@ -190,10 +191,10 @@ class App extends Component {
                   <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
                   <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
                   <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
-              <Route exact path="/Hrjob" component={HrJobPortal} />
-              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
-              <Route exact path="/PostJob" component={PostJob} />
-             <Route path = "/editJobDetails/:id" component = {PostJob}/>
+                  <Route exact path="/Hrjob" component={HrJobPortal} />
+                  <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
+                  <Route exact path="/PostJob" component={PostJob} />
+                  <Route path="/editJobDetails/:id" component={PostJob} />
 
                 </>
               )}
@@ -212,21 +213,12 @@ class App extends Component {
                   <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
                   <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
                   <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-                             <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+                  <Route exact path="/trackStatus/:empid" component={TrackStatus} />
 
                 </>
 
               )}
 
-
-              <Route exact path="/user" component={User} />
-            
-
-              {/* <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} /> */}
-              {/* <Route exact path="/job" component={AllJob} /> */}
-
-              
-             
             </Switch>
           </div>
           <footer style={{ margin: "4px", textAlign: "center" }}>

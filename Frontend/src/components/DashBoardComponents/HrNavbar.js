@@ -92,12 +92,12 @@ const HrNavbar = () => {
               Employees
             </RouterLink>
           </li>
-          <li>
+          {/* <li>
             <RouterLink to="/user-list" style={linkStyles}>
               <AccountCircleIcon style={iconStyles} />
               Users
             </RouterLink>
-          </li>
+          </li> */}
           <li>
             <RouterLink to="/pending-list" style={linkStyles}>
               <EventIcon style={iconStyles} />

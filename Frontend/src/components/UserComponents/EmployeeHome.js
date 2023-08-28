@@ -84,38 +84,25 @@ function EmployeeHome(props) {
   return (
     <div>
       <EmployeeNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "white"}}>
-        <Grid container spacing={3}>
-          {/* Saved Job Listings */}
-        
-        {/* Job Offers */}
-        <Grid item xs={3} mt={-5}>
-          <h2>Job Offers</h2>
-          <Card sx={{ backgroundColor:blue[100],width:320,height:200}}>
-            <CardContent>
-                           <PieChart
-    series={[
-  {
-    data:[
-      {id:0,value:10,label:'Design',color:'lightgrey'},
-      {id:1,value:25,label:'Development',color:'lightblue'},
-      {id:2,value:25,label:'Testing',color:'lightgreen'},
-      {id:4,value:25,label:'Sales',color:'#ff6347'},
-      {id:5,value:50,label:'Marketing',color:'violet'},
-      {id:6,value:25,label:'Banking',color:'lightyellow'},
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
+        <Grid container spacing={2}>
 
-    ]
-  }
-    
-     ]}
-      width={250}
-      height={170}
-    />
-            </CardContent>
-          </Card>
-        </Grid>
+          {/* Job Offers */}
+          <Grid item xs={4}>
+            <Card sx={{ backgroundColor: blue[100], display: "flex", justifyContent: "center"}}>
+              <CardContent>
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 10, label: 'Design', color: 'lightgrey' },
+                        { id: 1, value: 25, label: 'Development', color: 'lightblue' },
+                        { id: 2, value: 25, label: 'Testing', color: 'lightgreen' },
+                        { id: 4, value: 25, label: 'Sales', color: '#ff6347' },
+                        { id: 5, value: 50, label: 'Marketing', color: 'violet' },
+                        { id: 6, value: 25, label: 'Banking', color: 'lightyellow' },
 
-        <Grid item xs={3} mt={-5} ml={10}>
+        <Grid item xs={3} ml={10}>
                   <h2>Job Applied</h2>
 
                <Card sx={{ backgroundColor: red[100]}}>
@@ -142,14 +129,20 @@ function EmployeeHome(props) {
             </CardContent>
           </Card>
         </Grid>
+        </Grid>
          
           {/* Job Offers */}
      
 
       
+       
+
+          {/* Attendance Percentage */}
+       
+
           {/* Leaves */}
           <Grid item xs={6}>
-            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: green[100], display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   Your Leaves
@@ -163,28 +156,36 @@ function EmployeeHome(props) {
                   <SmallCalendar leaveRequests={leaveRequests} />
                 )}
               </CardContent>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'blue', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Pending</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'green', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Accepted</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'red', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Rejected</span>
+                  </li>
+                </ul>
+              </div>
             </Card>
           </Grid>
 
-          {/* Attendance Percentage */}
           <Grid item xs={6}>
-            <Card className={classes.attendanceCard}>
+            <Card sx={{ backgroundColor: red[100] }}>
               <CardContent>
-                <Typography variant="h5" style={{ marginBottom: "16px" }}>
-                  <strong>Your Attendance Details</strong>
-                </Typography>
-                <Typography variant="h6" style={{ marginBottom: "8px" }}>
-                  Attendance Percentage: {attendancePercentage.toFixed(2)}%
-                </Typography>
-                <Typography variant="subtitle1">
-                  Attendance Status:{" "}
-                  <span className={classes.attendanceStatus}>
-                    {attendanceStatus}
-                  </span>
+                <Typography variant="body1" color="textSecondary">
+                  News and Events
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
+
+
         </Grid>
       </Card>
     </div >
