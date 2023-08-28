@@ -61,7 +61,7 @@ const [total,setTotal]=useState([]);
   return (
     <div>
       <HrNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px" }}>
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "#98144d" }}>
       <Grid container spacing={3}>
         {/* Saved Job Listings */}
         <Grid item xs={4}>
@@ -102,7 +102,7 @@ const [total,setTotal]=useState([]);
         </Grid>
 
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 {/* <Box display="flex" justifyContent="center" alignItems="center">
                 <CircularProgress
@@ -126,7 +126,7 @@ const [total,setTotal]=useState([]);
 
           <Grid item xs={6}>
             <h3>Leaves</h3>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Calendar
@@ -138,7 +138,7 @@ const [total,setTotal]=useState([]);
 
           <Grid item xs={6}>
             <h3>News and Events</h3>
-            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
                   <EventIcon style={{ marginRight: "8px" }} />

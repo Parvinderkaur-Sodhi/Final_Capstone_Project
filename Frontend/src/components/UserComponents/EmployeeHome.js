@@ -7,7 +7,8 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import EmployeeService from "../../services/employee.service";
 import { makeStyles } from "@mui/styles"; // Import makeStyles
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
-import { EventIcon } from "@mui/icons-material";import { Redo } from "@mui/icons-material";
+//import { EventIcon } from "@mui/icons-material";
+import { Redo } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
@@ -173,7 +174,7 @@ function EmployeeHome(props) {
           <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
               <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                <EventIcon style={{ marginRight: "8px" }} />
+                {/* <EventIcon style={{ marginRight: "8px" }} /> */}
                 {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
               </Typography>
               <Typography variant="body1" color="textSecondary">
