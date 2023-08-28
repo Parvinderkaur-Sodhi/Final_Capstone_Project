@@ -9,6 +9,8 @@ import { makeStyles } from "@mui/styles"; // Import makeStyles
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
 //import { EventIcon } from "@mui/icons-material";
 import { Redo } from "@mui/icons-material";
+import employeeService from "../../services/employee.service";
+import HrService from "../../services/hr.service";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
@@ -37,7 +39,10 @@ function EmployeeHome(props) {
   const [attendanceStatus, setAttendanceStatus] = useState(""); // Default status
   const employeeId = localStorage.getItem("employeeId");
   const classes = useStyles({ attendanceStatus });
-
+ const status = ["Inprocess", "Interview", "Accepted", "Rejected"];
+  const category = ["Design", "Development", "testing", "sales", "Marketing", "Banking"];
+  const [len, setLen] = useState([]);
+  const [total, setTotal] = useState([]);
   useEffect(() => {
     const employeeId = localStorage.getItem('employeeId');
     if (employeeId) {
@@ -53,6 +58,21 @@ function EmployeeHome(props) {
         });
     }
   }, []);
+
+
+  useEffect(()=>{
+
+    status.forEach((i)=>{
+    employeeService.getByidandstatus(employeeId,i).then((response)=>{
+      setLen((prev)=>[...prev,response.data.length]);
+    })
+    })
+      category.forEach((i)=>{
+    HrService.getJobBycategory(i).then((response)=>{
+      setTotal((prev)=>[...prev,response.data.length]);
+    })
+  })
+  },[])
 
   useEffect(() => {
     EmployeeService.getAttendanceByEmployeeId(employeeId)
@@ -79,23 +99,7 @@ function EmployeeHome(props) {
     return <Redirect to="/login" />;
   }
 
-  // useEffect(()=>{
-  //       const storedEmployeeId = localStorage.getItem('employeeId');
-
-  //   status.forEach((i)=>{
-  //   HrService.searchByStatus(i).then((response)=>{
-  //     setLen((prev)=>[...prev,response.data.length]);
-  //   })
-
-  //   })
-  //     category.forEach((i)=>{
-  //   HrService.getJobBycategory(i).then((response)=>{
-  //     setTotal((prev)=>[...prev,response.data.length]);
-  //   })
-
-  //   })
-  // },[])
-
+  
   return (
     <div>
       <EmployeeNavbar />
@@ -117,58 +121,60 @@ function EmployeeHome(props) {
                         { id: 5, value: 50, label: 'Marketing', color: 'violet' },
                         { id: 6, value: 25, label: 'Banking', color: 'lightyellow' },
 
-        <Grid item xs={3} ml={10}>
-                  <h2>Job Applied</h2>
+                      ]
+                    }
 
-               <Card sx={{ backgroundColor: red[100]}}>
-            <CardContent>
+                  ]}
+                  width={250}
+                  height={170}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
 
+          <Grid item xs={4}>
+            <Card sx={{ backgroundColor: green[100] }}>
+              <CardContent>
+                <PieChart
+                  series={[
 
-    <PieChart
-    series={[
- 
-  {
-    data:[
-      {id:0,value:10,label:'New',color:'lightgrey'},
-      {id:1,value:25,label:'Interview',color:'lightblue'},
-      {id:2,value:25,label:'Hired',color:'lightgreen'},
-      {id:4,value:25,label:'Rejected',color:'#fa5f55'},
+                    {
+                      data: [
+                        { id: 0, value: 10, label: 'New', color: 'lightgrey' },
+                        { id: 1, value: 25, label: 'Interview', color: 'lightblue' },
+                        { id: 2, value: 25, label: 'Hired', color: 'lightgreen' },
+                        { id: 4, value: 25, label: 'Rejected', color: '#fa5f55' },
 
-    ]
-  }
-    
-     ]}
-      width={250}
-      height={170}
-    />
-            </CardContent>
-          </Card>
-        </Grid>
-         {/* Attendance Percentage */}
-         
-        <Grid item xs={5} >
-          <h2>Attendance</h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                {/* <EventIcon style={{ marginRight: "8px" }} /> */}
-                {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
-              </Typography>
-              <Typography variant="body1" color="textSecondary">
-                {/* Present Days: {attendanceData.presentDays} */}
-              </Typography>
-              <Typography variant="body1" color="textSecondary">
-                {/* Total Working Days: {attendanceData.totalWorkingDays} */}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+                      ]
+                    }
 
-      
-       
+                  ]}
+                  width={250}
+                  height={170}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
 
           {/* Attendance Percentage */}
-       
+          <Grid item xs={4}>
+            <Card className={classes.attendanceCard}>
+              <CardContent>
+                <Typography variant="h5" style={{ marginBottom: "16px" }}>
+                  <strong>Your Attendance Details</strong>
+                </Typography>
+                <Typography variant="h6" style={{ marginBottom: "8px" }}>
+                  Attendance Percentage: {attendancePercentage.toFixed(2)}%
+                </Typography>
+                <Typography variant="subtitle1">
+                  Attendance Status:{" "}
+                  <span className={classes.attendanceStatus}>
+                    {attendanceStatus}
+                  </span>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
 
           {/* Leaves */}
           <Grid item xs={6}>

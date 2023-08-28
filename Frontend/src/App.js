@@ -41,11 +41,11 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
 
 import { Details } from "@mui/icons-material";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
@@ -161,7 +161,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight: "8rem", width: "1420px", height: "82vh" }}>
+          <div className="container mt-3" style={{ marginRight: "-1rem", width: "1420px", height: "82vh" }}>
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
