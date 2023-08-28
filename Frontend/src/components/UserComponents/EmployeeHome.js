@@ -100,35 +100,22 @@ function EmployeeHome(props) {
     <div>
       <EmployeeNavbar />
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
-        <Grid container spacing={3}>
-          {/* Saved Job Listings */}
-        
-        {/* Job Offers */}
-        <Grid item xs={3} >
-          <h2>Job Offers</h2>
-          <Card sx={{ backgroundColor:blue[100],width:320,height:200}}>
-            <CardContent>
-                           <PieChart
-    series={[
-  {
-    data:[
-      {id:0,value:10,label:'Design',color:'lightgrey'},
-      {id:1,value:25,label:'Development',color:'lightblue'},
-      {id:2,value:25,label:'Testing',color:'lightgreen'},
-      {id:4,value:25,label:'Sales',color:'#ff6347'},
-      {id:5,value:50,label:'Marketing',color:'violet'},
-      {id:6,value:25,label:'Banking',color:'lightyellow'},
+        <Grid container spacing={2}>
 
-    ]
-  }
-    
-     ]}
-      width={250}
-      height={170}
-    />
-            </CardContent>
-          </Card>
-        </Grid>
+          {/* Job Offers */}
+          <Grid item xs={4}>
+            <Card sx={{ backgroundColor: blue[100], display: "flex", justifyContent: "center"}}>
+              <CardContent>
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 10, label: 'Design', color: 'lightgrey' },
+                        { id: 1, value: 25, label: 'Development', color: 'lightblue' },
+                        { id: 2, value: 25, label: 'Testing', color: 'lightgreen' },
+                        { id: 4, value: 25, label: 'Sales', color: '#ff6347' },
+                        { id: 5, value: 50, label: 'Marketing', color: 'violet' },
+                        { id: 6, value: 25, label: 'Banking', color: 'lightyellow' },
 
         <Grid item xs={3} ml={10}>
                   <h2>Job Applied</h2>
@@ -185,7 +172,7 @@ function EmployeeHome(props) {
 
           {/* Leaves */}
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: green[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: green[100], display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   Your Leaves
@@ -219,7 +206,7 @@ function EmployeeHome(props) {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: red[100] }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   News and Events

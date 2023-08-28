@@ -59,11 +59,10 @@ function HrHome(props) {
     <div>
       <HrNavbar />
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "#98144d" }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
-            <h2>Job Summary</h2>
-            <Card sx={{ backgroundColor: 'white', marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: 'white', backgroundColor: "lightgrey" }}>
               <CardContent>
                 <PieChart
                   series={[
@@ -80,8 +79,6 @@ function HrHome(props) {
                     }
 
                   ]}
-                  width={300}
-                  height={200}
                 />
               </CardContent>
             </Card>
@@ -90,41 +87,31 @@ function HrHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <h2>Applied Jobs</h2>
-            <Card sx={{ backgroundColor:'white', marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: 'white', backgroundColor: "lightgrey" }} >
               <CardContent>
-    <PieChart
-    series={[
- 
-  {
-    data:[
-      {id:0,value:len[0],label:'New',color:'lightgrey'},
-      {id:1,value:len[1],label:'Interview',color:'lightblue'},
-      {id:2,value:len[2],label:'Hired',color:'lightgreen'},
-      {id:4,value:len[3],label:'Rejected',color:'#fa5f55'},
+                <PieChart
+                  series={[
 
-    ]
-  }
-    
-     ]}
-      width={250}
-      height={170}
-    />              </CardContent>
+                    {
+                      data: [
+                        { id: 0, value: len[0], label: 'New', color: 'lightgrey' },
+                        { id: 1, value: len[1], label: 'Interview', color: 'lightblue' },
+                        { id: 2, value: len[2], label: 'Hired', color: 'lightgreen' },
+                        { id: 4, value: len[3], label: 'Rejected', color: '#fa5f55' },
+
+                      ]
+                    }
+
+                  ]}
+
+                />
+              </CardContent>
             </Card>
           </Grid>
 
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
-                {/* <Box display="flex" justifyContent="center" alignItems="center">
-                <CircularProgress
-                  variant="determinate"
-                  value={attendancePercentage}
-                  size={100}
-                  thickness={6}
-                />
-                </Box>
-                &nbsp;&nbsp; */}
                 <Typography variant="h6">
                   {attendancePercentage}%
                 </Typography>
@@ -137,8 +124,7 @@ function HrHome(props) {
           {/* Attendance Percentage */}
 
           <Grid item xs={6}>
-            <h3>Leaves</h3>
-            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: "lightgrey", display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Calendar
@@ -165,19 +151,9 @@ function HrHome(props) {
           </Grid>
 
           <Grid item xs={6}>
-            <h3>News and Events</h3>
-            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
-                <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                  <EventIcon style={{ marginRight: "8px" }} />
-                  {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {/* Present Days: {attendanceData.presentDays} */}
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {/* Total Working Days: {attendanceData.totalWorkingDays} */}
-                </Typography>
+                <h3>News and Events</h3>
               </CardContent>
             </Card>
           </Grid>
