@@ -101,17 +101,7 @@ function EmployeeHome(props) {
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
         <Grid container spacing={3}>
           {/* Saved Job Listings */}
-          <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6">Software Engineer</Typography>
-                <Typography variant="body1" color="textSecondary">
-                  TechCo
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
+        
         {/* Job Offers */}
         <Grid item xs={3} mt={-5}>
           <h2>Job Offers</h2>
