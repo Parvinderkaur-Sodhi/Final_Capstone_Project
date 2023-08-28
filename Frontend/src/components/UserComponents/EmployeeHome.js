@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Card, CardContent, Typography, Grid } from "@mui/material";
 import { blue, green, red } from "@mui/material/colors";
-import EventIcon from "@mui/icons-material/Event"; 
+import EventIcon from "@mui/icons-material/Event";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 import EmployeeService from "../../services/employee.service";
@@ -80,43 +80,54 @@ function EmployeeHome(props) {
       <Card style={{ padding: 5 }}>
 
       <Grid container spacing={3}>
+          {/* Greeting */}
+          <Grid item xs={10}>
+            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+              <CardContent>
+                <Typography variant="h6" color="textPrimary">
+                  Hello!!!!! (Greetings)
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          {/* Saved Job Listings */}
+          <Grid item xs={3}>
+            <h2>Saved Job</h2>
+            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+              <CardContent>
+                <Typography variant="h6">Software Engineer</Typography>
+                <Typography variant="body1" color="textSecondary">
+                  TechCo
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
 
-        {/* Greeting */}
-        <Grid item xs={10}>
-          <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6" color="textPrimary">
-                Hello!!!!! (Greetings)
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        {/* Saved Job Listings */}
-        <Grid item xs={3}>
-          <h2>Saved Job </h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Software Engineer</Typography>
-              <Typography variant="body1" color="textSecondary">
-                TechCo
-              </Typography>
-            </CardContent>
-          </Card>
-        
-        </Grid>
+          {/* Job Offers */}
+          <Grid item xs={3}>
+            <h2>Job Offers</h2>
+            <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
+              <CardContent>
+                <Typography variant="h6">Frontend Developer</Typography>
+                <Typography variant="body1" color="textSecondary">
+                  WebDev
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
 
-        {/* Job Offers */}
-        <Grid item xs={3}>
-          <h2>Job Offers</h2>
-          <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Frontend Developer</Typography>
-              <Typography variant="body1" color="textSecondary">
-                WebDev
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+          <Grid item xs={3}>
+            <h2>Job Applied </h2>
+            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+              <CardContent>
+                <Typography variant="h6">Data Analyst</Typography>
+                <Typography variant="body1" color="textSecondary">
+                  DataCorp
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          {/* Attendance Percentage */}
 
         <Grid item xs={3}>
           <h2>Job Applied </h2>
@@ -150,8 +161,9 @@ function EmployeeHome(props) {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
+        </Grid>
       </Card>
+     
 
     </div>
   );
