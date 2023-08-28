@@ -58,7 +58,7 @@ function HrHome(props) {
   return (
     <div>
       <HrNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px" }}>
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "#98144d" }}>
         <Grid container spacing={3}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
@@ -90,16 +90,31 @@ function HrHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <h2>Job Offers</h2>
-            <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
+            <h2>Applied Jobs</h2>
+            <Card sx={{ backgroundColor:'white', marginBottom: 4 }}>
               <CardContent>
-                <Typography variant="h6">Frontend Developer</Typography>
-              </CardContent>
+    <PieChart
+    series={[
+ 
+  {
+    data:[
+      {id:0,value:len[0],label:'New',color:'lightgrey'},
+      {id:1,value:len[1],label:'Interview',color:'lightblue'},
+      {id:2,value:len[2],label:'Hired',color:'lightgreen'},
+      {id:4,value:len[3],label:'Rejected',color:'#fa5f55'},
+
+    ]
+  }
+    
+     ]}
+      width={250}
+      height={170}
+    />              </CardContent>
             </Card>
           </Grid>
 
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 {/* <Box display="flex" justifyContent="center" alignItems="center">
                 <CircularProgress
@@ -123,7 +138,7 @@ function HrHome(props) {
 
           <Grid item xs={6}>
             <h3>Leaves</h3>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Calendar
@@ -151,7 +166,7 @@ function HrHome(props) {
 
           <Grid item xs={6}>
             <h3>News and Events</h3>
-            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
                   <EventIcon style={{ marginRight: "8px" }} />
