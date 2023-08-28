@@ -7,7 +7,8 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import EmployeeService from "../../services/employee.service";
 import { makeStyles } from "@mui/styles"; // Import makeStyles
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
-import { EventIcon } from "@mui/icons-material";import { Redo } from "@mui/icons-material";
+//import { EventIcon } from "@mui/icons-material";
+import { Redo } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
