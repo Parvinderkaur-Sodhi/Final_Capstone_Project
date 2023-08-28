@@ -79,27 +79,12 @@ function EmployeeHome(props) {
     return <Redirect to="/login" />;
   }
 
-  // useEffect(()=>{
-  //       const storedEmployeeId = localStorage.getItem('employeeId');
 
-  //   status.forEach((i)=>{
-  //   HrService.searchByStatus(i).then((response)=>{
-  //     setLen((prev)=>[...prev,response.data.length]);
-  //   })
-
-  //   })
-  //     category.forEach((i)=>{
-  //   HrService.getJobBycategory(i).then((response)=>{
-  //     setTotal((prev)=>[...prev,response.data.length]);
-  //   })
-
-  //   })
-  // },[])
 
   return (
     <div>
       <EmployeeNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "white"}}>
         <Grid container spacing={3}>
           {/* Saved Job Listings */}
         
@@ -157,25 +142,7 @@ function EmployeeHome(props) {
             </CardContent>
           </Card>
         </Grid>
-         {/* Attendance Percentage */}
          
-        <Grid item xs={5} mt={-5}>
-          <h2>Attendance</h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                {/* <EventIcon style={{ marginRight: "8px" }} /> */}
-                {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
-              </Typography>
-              <Typography variant="body1" color="textSecondary">
-                {/* Present Days: {attendanceData.presentDays} */}
-              </Typography>
-              <Typography variant="body1" color="textSecondary">
-                {/* Total Working Days: {attendanceData.totalWorkingDays} */}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
           {/* Job Offers */}
      
 
