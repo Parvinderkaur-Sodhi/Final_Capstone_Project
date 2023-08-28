@@ -14,26 +14,6 @@ const CustomerJobPortal = () => {
   const history = useHistory();
 
   return (
-<<<<<<< HEAD
-<div>
-            <EmployeeNavbar />
-
-        <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px"}}>
-
-      <Stack direction="row">
- <div style={{width:"800px"}}>
-            <div style={{marginLeft:"20px",marginTop:"20px"}}>
-                      <SearchJob job={job} setJob={setJob} />
-                      </div>
-          <AllJob job={job} setJob={setJob} />
-          </div>
-                  <FilterByCategory job={job} setJob={setJob} />
-      </Stack>
-
-
-</Card>
-</div>
-=======
     <div>
       <EmployeeNavbar />
       <Card  style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
@@ -48,7 +28,6 @@ const CustomerJobPortal = () => {
         </Stack> 
       </Card>
     </div>
->>>>>>> c8ef689ab8432346fd8847fcdda0d63f7fa554fd
   );
 }
 

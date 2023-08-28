@@ -133,11 +133,7 @@ function EmployeeHome(props) {
           </Grid>
 
           <Grid item xs={4}>
-<<<<<<< HEAD
-            <Card sx={{ backgroundColor: green[100] }}>
-=======
             <Card sx={{ backgroundColor: "lightgrey" }}>
->>>>>>> c8ef689ab8432346fd8847fcdda0d63f7fa554fd
               <CardContent>
                 <PieChart
                   series={[
