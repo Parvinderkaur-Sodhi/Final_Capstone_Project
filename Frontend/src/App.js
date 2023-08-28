@@ -161,7 +161,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight:"-5px", width: "1420px", height: "82vh" }}>
+          <div className="container mt-3" style={{ marginRight:"8rem",width: "1420px", height: "82vh" }}>
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
