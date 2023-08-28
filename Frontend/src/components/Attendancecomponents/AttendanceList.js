@@ -11,6 +11,7 @@ import {
   Paper,
   Button,
   Typography,
+  Card,
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
@@ -24,7 +25,7 @@ const formatDate = (dateString) => {
 const useStyles = makeStyles((theme) => ({
   pageBackground: {
     backgroundColor: "#f4f6f8",
-    minHeight: "100vh",
+    minHeight: "80vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -90,7 +91,9 @@ function AttendanceList(props) {
 const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
+    <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
     <div className={classes.pageBackground}>
+      
       <HrNavbar />
 
       <Typography variant="h4" gutterBottom>
@@ -161,7 +164,9 @@ const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastR
           onChange={handlePageChange}
         />
       </Paper>
+      
     </div>
+    </Card>
   );
 }
 
