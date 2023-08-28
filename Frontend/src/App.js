@@ -186,6 +186,11 @@ class App extends Component {
                   <Route exact path="/addLeaveTypes" render={(props) => <AddLeaveType {...props} user={this.props.user} />} />
                   <Route exact path="/updateLeaveType/:typeId" render={(props) => <UpdateLeaveType {...props} user={this.props.user} />} />
                   <Route exact path="/user-list" render={(props) => <UserList {...props} user={this.props.user} />} />
+
+                  <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
+                  <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
+                  <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
+
                 </>
               )}
 
@@ -199,6 +204,9 @@ class App extends Component {
                   <Route exact path="/update-leave-request/:requestId" render={(props) => <UpdateLeaveRequestUser {...props} user={this.props.user} />} />
                   <Route exact path="/leave-balance-user" render={(props) => <LeaveBalanceListUser {...props} user={this.props.user} />} />
                   <Route exact path="/leave-types-user" render={(props) => <LeaveTypeListUser {...props} user={this.props.user} />} />
+
+                  <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
+                  <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
                 </>
 
               )}
@@ -222,12 +230,8 @@ class App extends Component {
               {/* <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} /> */}
               {/* <Route exact path="/job" component={AllJob} /> */}
 
-              <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
-              <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
-              <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
-              <Route path="/your-attendance" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
-              <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
-
+              
+             
             </Switch>
           </div>
           <footer style={{ margin: "4px", textAlign: "center" }}>
