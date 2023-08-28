@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, useHistory } from 'react-router-dom';
-import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Card, CardContent, CardHeader } from "@mui/material";
+import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Card, CardContent, CardHeader, Alert } from "@mui/material";
 import EmployeeService from "../../../services/employee.service";
 import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
 
@@ -123,7 +123,7 @@ function AddLeaveRequestUser(props) {
 
             EmployeeService.saveLeaveRequest(requestData)
                 .then(() => {
-                    console.log("Leave request added successfully");
+                    alert("Leave request submitted successfully!!");
                     history.push("/leave-request-user");
                 })
                 .catch((error) => {

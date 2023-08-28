@@ -16,7 +16,7 @@ const HrJobPortal = (props) => {
   return (
     <div>
       <HrNavbar />
-      <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px"}}>
+      <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px", padding: "20px"}}>
         <Stack direction="row" >
           <div style={{width:"800px"}}>
             <div style={{marginLeft:"20px",marginTop:"20px"}}>

@@ -168,7 +168,7 @@ function UpdateLeaveRequestUser(props) {
 
             EmployeeService.updateLeaveRequest(requestId, requestData)
                 .then(() => {
-                    console.log("Leave request updated successfully");
+                    alert("Leave request updated successfully!!");
                     history.push("/leave-request-user");
                 })
                 .catch((error) => {
