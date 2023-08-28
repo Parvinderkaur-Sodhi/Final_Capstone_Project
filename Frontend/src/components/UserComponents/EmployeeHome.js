@@ -7,6 +7,7 @@ import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
 
+
 function EmployeeHome(props) {
   const { user: currentUser } = props;
   const [employeeId, setEmployeeId] = useState(null);
@@ -26,6 +27,8 @@ function EmployeeHome(props) {
   return (
     <div>
       <EmployeeNavbar/>
+      <Card style={{ padding: 20 }}>
+
       <Grid container spacing={3}>
 
         {/* Greeting */}
@@ -114,6 +117,8 @@ function EmployeeHome(props) {
           </Card>
         </Grid>
       </Grid>
+      </Card>
+
     </div>
   );
 }
