@@ -194,7 +194,7 @@ class Login extends Component {
             </Form>
           </div>
           <div className="login-bg">
-            <img src="./bg.png"></img>
+            <img src="./limage.jpg" height={400}></img>
           </div>
         </div>
       </Box>
