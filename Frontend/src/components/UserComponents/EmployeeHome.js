@@ -104,7 +104,7 @@ function EmployeeHome(props) {
           {/* Saved Job Listings */}
         
         {/* Job Offers */}
-        <Grid item xs={3} mt={-5}>
+        <Grid item xs={3} >
           <h2>Job Offers</h2>
           <Card sx={{ backgroundColor:blue[100],width:320,height:200}}>
             <CardContent>
@@ -130,7 +130,7 @@ function EmployeeHome(props) {
           </Card>
         </Grid>
 
-        <Grid item xs={3} mt={-5} ml={10}>
+        <Grid item xs={3} ml={10}>
                   <h2>Job Applied</h2>
 
                <Card sx={{ backgroundColor: red[100]}}>
@@ -159,7 +159,7 @@ function EmployeeHome(props) {
         </Grid>
          {/* Attendance Percentage */}
          
-        <Grid item xs={5} mt={-5}>
+        <Grid item xs={5} >
           <h2>Attendance</h2>
           <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
