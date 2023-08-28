@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import HrService from "../../services/hr.service";
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
 import { blue, green, red } from "@mui/material/colors";
 import EventIcon from "@mui/icons-material/Event";
-import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 import { PieChart } from '@mui/x-charts/PieChart';
 
@@ -17,10 +14,10 @@ function HrHome(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [attendancePercentage, setAttendancePercentage] = useState(85); // Sample data
   const [notificationOpen, setNotificationOpen] = useState(false);
-const status=["Inprocess","Interview","Accepted","Rejected"];
-const category=["Design","Development","testing","sales","Marketing","Banking"];
-const [len,setLen]=useState([]);
-const [total,setTotal]=useState([]);
+  const status = ["Inprocess", "Interview", "Accepted", "Rejected"];
+  const category = ["Design", "Development", "testing", "sales", "Marketing", "Banking"];
+  const [len, setLen] = useState([]);
+  const [total, setTotal] = useState([]);
   useEffect(() => {
     HrService.getAllLeaveRequests()
       .then((response) => {
@@ -32,20 +29,20 @@ const [total,setTotal]=useState([]);
   }, []);
 
 
-  useEffect(()=>{
-    status.forEach((i)=>{
-    HrService.searchByStatus(i).then((response)=>{
-      setLen((prev)=>[...prev,response.data.length]);
-    })
+  useEffect(() => {
+    status.forEach((i) => {
+      HrService.searchByStatus(i).then((response) => {
+        setLen((prev) => [...prev, response.data.length]);
+      })
 
     })
-      category.forEach((i)=>{
-    HrService.getJobBycategory(i).then((response)=>{
-      setTotal((prev)=>[...prev,response.data.length]);
-    })
+    category.forEach((i) => {
+      HrService.getJobBycategory(i).then((response) => {
+        setTotal((prev) => [...prev, response.data.length]);
+      })
 
     })
-  },[])
+  }, [])
   const handleNotificationClose = () => {
     setNotificationOpen(false);
   };
@@ -62,41 +59,41 @@ const [total,setTotal]=useState([]);
     <div>
       <HrNavbar />
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "#98144d" }}>
-      <Grid container spacing={3}>
-        {/* Saved Job Listings */}
-        <Grid item xs={4}>
-          <h2>Job Summary</h2>
-          <Card sx={{ backgroundColor: 'white', marginBottom: 4 }}>
-            <CardContent>
-              <PieChart
-    series={[
-  {
-    data:[
-      {id:0,value:total[0],label:'design',color:'lightgrey'},
-      {id:1,value:total[1],label:'Development',color:'lightblue'},
-      {id:2,value:total[2],label:'Testing',color:'lightgreen'},
-      {id:4,value:total[3],label:'Sales',color:'#ff6347'},
-      {id:5,value:total[4],label:'Marketing',color:'violet'},
-      {id:6,value:total[5],label:'Banking',color:'lightyellow'},
+        <Grid container spacing={3}>
+          {/* Saved Job Listings */}
+          <Grid item xs={4}>
+            <h2>Job Summary</h2>
+            <Card sx={{ backgroundColor: 'white', marginBottom: 4 }}>
+              <CardContent>
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: total[0], label: 'design', color: 'lightgrey' },
+                        { id: 1, value: total[1], label: 'Development', color: 'lightblue' },
+                        { id: 2, value: total[2], label: 'Testing', color: 'lightgreen' },
+                        { id: 4, value: total[3], label: 'Sales', color: '#ff6347' },
+                        { id: 5, value: total[4], label: 'Marketing', color: 'violet' },
+                        { id: 6, value: total[5], label: 'Banking', color: 'lightyellow' },
 
-    ]
-  }
-    
-     ]}
-      width={300}
-      height={200}
-    />
-            </CardContent>
-          </Card>
+                      ]
+                    }
+
+                  ]}
+                  width={300}
+                  height={200}
+                />
+              </CardContent>
+            </Card>
 
           </Grid>
 
-        {/* Job Offers */}
-        <Grid item xs={4}>
-          <h2>Applied Jobs</h2>
-          <Card sx={{ backgroundColor:'white', marginBottom: 4 }}>
-            <CardContent>
-  <PieChart
+          {/* Job Offers */}
+          <Grid item xs={4}>
+            <h2>Applied Jobs</h2>
+            <Card sx={{ backgroundColor:'white', marginBottom: 4 }}>
+              <CardContent>
+    <PieChart
     series={[
  
   {
@@ -112,9 +109,9 @@ const [total,setTotal]=useState([]);
      ]}
       width={250}
       height={170}
-    />            </CardContent>
-          </Card>
-        </Grid>
+    />              </CardContent>
+            </Card>
+          </Grid>
 
           <Grid item xs={4}>
             <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
@@ -148,6 +145,22 @@ const [total,setTotal]=useState([]);
                 </Typography>
                 <SmallCalendar leaveRequests={leaveRequests} />
               </CardContent>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'blue', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Pending</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'green', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Accepted</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'red', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Rejected</span>
+                  </li>
+                </ul>
+              </div>
             </Card>
           </Grid>
 

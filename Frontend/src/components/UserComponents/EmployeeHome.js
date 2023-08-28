@@ -176,13 +176,16 @@ function EmployeeHome(props) {
             </CardContent>
           </Card>
         </Grid>
-          {/* Job Offers */}
-     
 
       
+       
+
+          {/* Attendance Percentage */}
+       
+
           {/* Leaves */}
           <Grid item xs={6}>
-            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: green[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   Your Leaves
@@ -196,28 +199,36 @@ function EmployeeHome(props) {
                   <SmallCalendar leaveRequests={leaveRequests} />
                 )}
               </CardContent>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'blue', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Pending</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'green', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Accepted</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ backgroundColor: 'red', width: '12px', height: '12px', marginRight: '4px' }}></div>
+                    <span>Rejected</span>
+                  </li>
+                </ul>
+              </div>
             </Card>
           </Grid>
 
-          {/* Attendance Percentage */}
           <Grid item xs={6}>
-            <Card className={classes.attendanceCard}>
+            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
               <CardContent>
-                <Typography variant="h5" style={{ marginBottom: "16px" }}>
-                  <strong>Your Attendance Details</strong>
-                </Typography>
-                <Typography variant="h6" style={{ marginBottom: "8px" }}>
-                  Attendance Percentage: {attendancePercentage.toFixed(2)}%
-                </Typography>
-                <Typography variant="subtitle1">
-                  Attendance Status:{" "}
-                  <span className={classes.attendanceStatus}>
-                    {attendanceStatus}
-                  </span>
+                <Typography variant="body1" color="textSecondary">
+                  News and Events
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
+
+
         </Grid>
       </Card>
     </div >
