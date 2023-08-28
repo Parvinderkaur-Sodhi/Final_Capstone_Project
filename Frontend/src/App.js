@@ -41,11 +41,11 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
 
 import { Details } from "@mui/icons-material";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
@@ -190,6 +190,10 @@ class App extends Component {
                   <Route path="/pending-list" render={(props) => <PendingList {...props} user={this.props.user} />} />
                   <Route path="/attendance-list" render={(props) => <AttendanceList {...props} user={this.props.user} />} />
                   <Route path="/updateAttendance/:attendanceId" render={(props) => <UpdateAttendance {...props} user={this.props.user} />} />
+              <Route exact path="/Hrjob" component={HrJobPortal} />
+              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
+              <Route exact path="/PostJob" component={PostJob} />
+             <Route path = "/editJobDetails/:id" component = {PostJob}/>
 
                 </>
               )}
@@ -207,26 +211,16 @@ class App extends Component {
 
                   <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
                   <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
+                  <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
+                             <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+
                 </>
 
               )}
 
 
               <Route exact path="/user" component={User} />
-              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-              <Route exact path="/Hrjob" component={HrJobPortal} />
-              <Route exact path="/trackStatus/:empid" component={TrackStatus} />
-              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
-              <Route exact path="/PostJob" component={PostJob} />
-              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-              <Route exact path="/Hrjob" render={(props) => <HrJobPortal {...props} user={this.props.user} />} />
-              <Route exact path="/trackStatus/:empid" component={TrackStatus} />
-              <Route exact path="/AppliedJobs/:jobProfile" component={JobDetails} />
-
-              <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-              <Route exact path="/Hrjobs" component={HrJobPortal} />
-              <Route exact path="/trackStatus/:empid" component={TrackStatus} />
-             <Route path = "/editJobDetails/:id" component = {PostJob}/>
+            
 
               {/* <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} /> */}
               {/* <Route exact path="/job" component={AllJob} /> */}

@@ -175,7 +175,7 @@ function EmployeeHome(props) {
           <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
             <CardContent>
               <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                <EventIcon style={{ marginRight: "8px" }} />
+                {/* <EventIcon style={{ marginRight: "8px" }} /> */}
                 {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
               </Typography>
               <Typography variant="body1" color="textSecondary">
@@ -188,28 +188,9 @@ function EmployeeHome(props) {
           </Card>
         </Grid>
           {/* Job Offers */}
-          <Grid item xs={4}>
-            <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6">Frontend Developer</Typography>
-                <Typography variant="body1" color="textSecondary">
-                  WebDev
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+     
 
-          <Grid item xs={4}>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6">Data Analyst</Typography>
-                <Typography variant="body1" color="textSecondary">
-                  DataCorp
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
+      
           {/* Leaves */}
           <Grid item xs={6}>
             <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
