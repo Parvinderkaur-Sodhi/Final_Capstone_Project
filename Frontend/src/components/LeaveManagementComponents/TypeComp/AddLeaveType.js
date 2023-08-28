@@ -19,6 +19,7 @@ function AddLeaveType(props) {
 
         HrService.saveLeaveType(typedata)
             .then((response) => {
+                alert("Leave Type added successfully!!");
                 setRedirectToList(true);
             })
             .catch((error) => {

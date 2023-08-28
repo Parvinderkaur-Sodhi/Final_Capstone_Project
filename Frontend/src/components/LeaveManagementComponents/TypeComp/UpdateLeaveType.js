@@ -35,6 +35,7 @@ function UpdateLeaveType(props) {
 
         HrService.updateLeaveType(leaveType.typeId, updatedLeaveType)
             .then((response) => {
+                alert("Leave Type Updated successfully!!");
                 setRedirectToList(true);
             })
             .catch((error) => {
