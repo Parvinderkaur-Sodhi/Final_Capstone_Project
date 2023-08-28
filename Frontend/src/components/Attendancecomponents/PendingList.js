@@ -113,13 +113,14 @@ const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastReco
 
 
   return (
+    <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
     <div>
 
    
     <HrNavbar />
     <div>
       
-      <Card className={classes.card}>
+      <Card className={classes.card} >
         <Button
           variant="contained"
           color="primary"
@@ -189,6 +190,7 @@ const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastReco
       </Card>
     </div>
     </div>
+    </Card>
   );
 };
 

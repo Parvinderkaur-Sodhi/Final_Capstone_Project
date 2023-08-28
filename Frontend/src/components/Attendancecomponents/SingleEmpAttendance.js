@@ -99,7 +99,7 @@ function SingleEmpAttendance(props) {
   
 
   return (
-    <div className={classes.pageBackground}>
+    <div className={classes.pageBackground} style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
       <EmployeeNavbar />
   
       <Typography variant="h4" gutterBottom style={{ color: "#98144d" }}>
