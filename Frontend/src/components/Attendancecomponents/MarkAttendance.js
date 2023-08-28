@@ -7,7 +7,7 @@ import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 const useStyles = makeStyles((theme) => ({
   pageBackground: {
     backgroundColor: "#f4f6f8",
-    minHeight: "80vh",
+    minHeight: "70vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   welcomeHeading: {
     fontWeight: 'bold',
+    textAlign: "center"
   },
   welcomeMessage: {
     fontStyle: "italic",
