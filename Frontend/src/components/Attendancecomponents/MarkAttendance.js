@@ -7,7 +7,7 @@ import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 const useStyles = makeStyles((theme) => ({
   pageBackground: {
     backgroundColor: "#f4f6f8",
-    minHeight: "100vh",
+    minHeight: "80vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -59,7 +59,7 @@ const MarkAttendance = () => {
   };
 
   return (
-    <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
+    <Card style={{ maxHeight: "100vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
      <div className={classes.pageBackground}>
       <EmployeeNavbar /> 
       <Card className={classes.card}>
