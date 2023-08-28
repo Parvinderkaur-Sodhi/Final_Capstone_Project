@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { Grid, Card, CardContent, Typography} from "@mui/material";
+import { Grid, Card, CardContent, Typography } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HrService from "../../services/hr.service";
@@ -89,88 +89,71 @@ const [total,setTotal]=useState([]);
             </CardContent>
           </Card>
 
-        </Grid>
+          </Grid>
 
         {/* Job Offers */}
         <Grid item xs={4}>
-          <h2>Application Summary</h2>
-          <Card sx={{ backgroundColor: "white",padding:"0px" }}>
+          <h2>Job Offers</h2>
+          <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
             <CardContent>
-
-
-    <PieChart
-    series={[
- 
-  {
-    data:[
-      {id:0,value:len[0],label:'New',color:'lightgrey'},
-      {id:1,value:len[1],label:'Interview',color:'lightblue'},
-      {id:2,value:len[2],label:'Hired',color:'lightgreen'},
-      {id:4,value:len[3],label:'Rejected',color:'#fa5f55'},
-
-    ]
-  }
-    
-     ]}
-      width={300}
-      height={200}
-    />
- 
+              <Typography variant="h6">Frontend Developer</Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid item xs={4}>
-          <h2>Attendance</h2>
-          {/* <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Box display="flex" justifyContent="center" alignItems="center">
+          <Grid item xs={4}>
+            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+              <CardContent>
+                {/* <Box display="flex" justifyContent="center" alignItems="center">
                 <CircularProgress
                   variant="determinate"
                   value={attendancePercentage}
                   size={100}
                   thickness={6}
                 />
-                &nbsp;&nbsp;
-                <Typography variant="h6" gutterBottom>
+                </Box>
+                &nbsp;&nbsp; */}
+                <Typography variant="h6">
                   {attendancePercentage}%
                 </Typography>
-              </Box>
-            </CardContent>
-          </Card> */}
-        </Grid>
-        {/* Attendance Percentage */}
+                <Typography variant="body1" color="textSecondary">
+                  Attendance
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          {/* Attendance Percentage */}
 
-        <Grid item xs={6}>
-          <h2>Leaves</h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Calendar
-              </Typography>
-              <SmallCalendar leaveRequests={leaveRequests} />
-            </CardContent>
-          </Card>
-        </Grid>
+          <Grid item xs={6}>
+            <h3>Leaves</h3>
+            <Card sx={{ backgroundColor: blue[100], marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Calendar
+                </Typography>
+                <SmallCalendar leaveRequests={leaveRequests} />
+              </CardContent>
+            </Card>
+          </Grid>
 
-        <Grid item xs={6}>
-          <h2>News and Events</h2>
-          <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                <EventIcon style={{ marginRight: "8px" }} />
-                {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
-              </Typography>
-              <Typography variant="body1" color="textSecondary">
-                {/* Present Days: {attendanceData.presentDays} */}
-              </Typography>
-              <Typography variant="body1" color="textSecondary">
-                {/* Total Working Days: {attendanceData.totalWorkingDays} */}
-              </Typography>
-            </CardContent>
-          </Card>
+          <Grid item xs={6}>
+            <h3>News and Events</h3>
+            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+              <CardContent>
+                <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
+                  <EventIcon style={{ marginRight: "8px" }} />
+                  {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                  {/* Present Days: {attendanceData.presentDays} */}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                  {/* Total Working Days: {attendanceData.totalWorkingDays} */}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
       </Card>
     </div>
   );
