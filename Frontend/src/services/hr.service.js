@@ -121,8 +121,8 @@ getAllLeaveBalances() {
     return axios.post(API_URL+'Jobs/postJob',job,{headers:authHeader()});
   }
 
-  updateJob(id){
-        return axios.put(API_URL+'/update'+id,{headers:{"Authorization":authHeader()}});
+  updateJob(id,job){
+        return axios.put(API_URL+'Jobs/update/'+id,job,{headers:authHeader()});
 
   }
 

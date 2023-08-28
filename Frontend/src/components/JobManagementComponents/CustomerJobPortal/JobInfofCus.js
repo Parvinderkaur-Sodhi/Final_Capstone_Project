@@ -13,7 +13,7 @@ hrService.getJobById(props.index).then((response)=>{
 },[])
   return (
     <>
-    {emp!=null  && <Stack  padding={1}>
+    {emp!=null  && <Stack >
       <Typography style={{fontSize:20,fontWeight:'bolder',color:"#98144d",margin:"0px 30px",textAlign:'center'}}>{(emp).jobProfile}</Typography>  
        <Stack direction='row' mt={2} ml={5} marginBottom={4}>
         <div style={{marginRight:"44px"}}>

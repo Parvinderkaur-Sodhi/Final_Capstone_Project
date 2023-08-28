@@ -18,10 +18,13 @@ const AppliedJobs = () => {
       const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
 const [open,setOpen]=useState(false);
   
-  const employeesPerPage = 4;
+  const employeesPerPage = 2;
 const [appliedJob,setAppliedJob]=useState([]);
   const totalPageCount = Math.ceil(appliedJob.length / employeesPerPage);
   const [currentPage, setCurrentPage] = useState(1);
+
+const indexOfLastEmployee = currentPage * employeesPerPage;
+    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
 
 const {empid}=useParams();
 console.log(empid);
@@ -39,6 +42,7 @@ const getAppliedJobs=()=>{
             console.log(error);
         })
 }
+
 const handleChangeStatus=(e)=>{
   if(e.target.value=="None"){
     getAppliedJobs();
@@ -68,10 +72,9 @@ const handlePageChange = (event, value) => {
   };
   return (
     <>
-      <Card>
-        <CardContent>
-    <Stack direction="row" margin={4}>
-      <Typography sx={{fontSize:30,color:"#98144b"}}>Applied Jobs :</Typography>
+      <Card style={{height:"550px",width:900,marginLeft:"50px"}}>
+    <Stack direction="row" margin={2}>
+      <Typography sx={{fontSize:30,color:"#98144b"}}>Applied Jobs : {appliedJob.length}</Typography>
       <FormControl style={{borderColor:"#98144d",marginLeft:1}}>
   <InputLabel style={{marginLeft:400,marginTop:-5}}>Status</InputLabel>
   <Select
@@ -89,7 +92,7 @@ const handlePageChange = (event, value) => {
 </FormControl>
 </Stack>
     {appliedJob.length>0 &&   
-     <TableContainer component={Paper} style={{ width: "100%" }}>
+     <TableContainer sx={{maxHeight:540}}>
       <Table stickyHeader>
         <colgroup>
         <col style={{width:'1%'}}/>
@@ -100,9 +103,13 @@ const handlePageChange = (event, value) => {
         <col style={{width:'1%'}}/>
 
         </colgroup>
-        <TableHead>
+        <TableHead stickyHeader position="sticky" top="0px" z-index="1" >
 
-          <TableRow sx={{backgroundColor:"grey"}}>
+          <TableRow style={{ color: 'black',
+    backgroundColor: "lightgrey", 
+    fontWeight: "bold"}}
+   
+  >
             <TableCell >Application Id</TableCell>
             <TableCell>Job Profile</TableCell>
             <TableCell >Category</TableCell>
@@ -134,7 +141,7 @@ const handlePageChange = (event, value) => {
       anchor='right'
       open={open}
       onClose={()=>setOpen(false)}
-      PaperProps={{sx:{width:400,height:680}}}
+      PaperProps={{sx:{width:350,height:680,marginTop:7}}}
     >
 
  <JobInfofCus index={d} setOpen={setOpen} setD={setD}/>
@@ -151,7 +158,6 @@ const handlePageChange = (event, value) => {
     </TableContainer>
 }
                   <Pagination count={totalPageCount} page={currentPage} onChange={handlePageChange} color="primary" boundaryCount={1} siblingCount={0} />
-</CardContent>
 </Card>
 </>
 // {

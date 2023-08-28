@@ -14,11 +14,9 @@ const CustomerJobPortal = () => {
   const history = useHistory();
 
   return (
-    <div>
-    <Card style={{overflowY:"auto"}}>
-            <EmployeeNavbar />
 
       <Stack direction="row">
+            <EmployeeNavbar />
 
         <Card style={{width:"800px"}}>
           <div style={{ marginLeft: "20px",mt:"20px" }}>
@@ -26,13 +24,9 @@ const CustomerJobPortal = () => {
           </div>
           <AllJob job={job} setJob={setJob} />
         </Card>
-        <Card>
         <FilterByCategory job={job} setJob={setJob} />
-        </Card>
 
       </Stack>
-      </Card>
-    </div>
   );
 }
 
