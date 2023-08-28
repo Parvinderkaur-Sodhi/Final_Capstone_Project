@@ -6,10 +6,12 @@ import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 import EmployeeService from "../../services/employee.service";
 import { makeStyles } from "@mui/styles"; // Import makeStyles
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
+import { Redo } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
-    backgroundColor: blue[100],
+    //backgroundColor: red[100],
+    backgroundColor: "lightgrey",
     padding: 16, // Use numeric value instead of theme.spacing
     borderRadius: 8, // Use numeric value instead of theme.spacing
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
@@ -79,11 +81,11 @@ function EmployeeHome(props) {
   return (
     <div>
       <EmployeeNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
         <Grid container spacing={3}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 <Typography variant="h6">Software Engineer</Typography>
                 <Typography variant="body1" color="textSecondary">
@@ -95,7 +97,7 @@ function EmployeeHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: green[100], marginBottom: 4 }}>
+            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 <Typography variant="h6">Frontend Developer</Typography>
                 <Typography variant="body1" color="textSecondary">
@@ -106,7 +108,7 @@ function EmployeeHome(props) {
           </Grid>
 
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
+            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 <Typography variant="h6">Data Analyst</Typography>
                 <Typography variant="body1" color="textSecondary">
@@ -118,7 +120,7 @@ function EmployeeHome(props) {
 
           {/* Leaves */}
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
+            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
                   Your Leaves
