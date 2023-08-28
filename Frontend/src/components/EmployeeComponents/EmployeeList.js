@@ -17,7 +17,7 @@ function EmployeeList(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState('');
 
-  const employeesPerPage = 4;
+  const employeesPerPage = 1;
   const totalPageCount = Math.ceil(employees.length / employeesPerPage);
 
   useEffect(() => {

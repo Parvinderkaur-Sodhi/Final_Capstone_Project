@@ -3,7 +3,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import HrService from "../../services/hr.service";
-import HrNavbar from "../DashBoardComponents/HrNavbar";
+import Pagination from "@mui/material/Pagination";
+import HrNavbar from '../DashBoardComponents/HrNavbar';
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -12,9 +13,9 @@ const formatDate = (dateString) => {
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "#98144d",
-    padding: theme.spacing(3),
-    color: 'white',
+    backgroundColor: "white",
+    padding: theme.spacing(2),
+    color: 'black',
     position: 'relative',
   },
   tableContainer: {
@@ -34,16 +35,26 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: theme.spacing(2),
     right: theme.spacing(2),
+    backgroundColor: '#98144d',
+  },
+  pagination: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(3),
   },
 }));
 
 const PendingList = () => {
   const classes = useStyles();
   const [pendingAttendances, setPendingAttendances] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(5);
+  const [searchQuery, setSearchQuery] = useState('');
+
 
   useEffect(() => {
     fetchPendingAttendances();
-  }, []);
+  }, [currentPage]);
 
   const fetchPendingAttendances = () => {
     HrService.getPendingAttendances()
@@ -79,53 +90,104 @@ const PendingList = () => {
       });
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  //const currentRecords = pendingAttendances.slice(indexOfFirstRecord, indexOfLastRecord);
+
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredRecords = pendingAttendances.filter((attendance) =>
+  attendance.employee.username.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastRecord);
+
+  
+
+
   return (
     <div>
 
+   
     <HrNavbar />
-    <Card className={classes.card}>
-      <Button
-        variant="contained"
-        color="primary"
-        component={Link}
-        to="/attendance-list"
-        className={classes.viewAttendanceButton}
-      >
-        View Attendance List
-      </Button>
-      <h2>Pending Attendance List</h2>
-      <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.tableHeaderCell}>Employee ID</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Date</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {pendingAttendances.map((attendance) => (
-              <TableRow key={attendance.attendanceId}>
-                <TableCell>{attendance.employee.employeeId}</TableCell>
-                <TableCell>{attendance.employee.username}</TableCell>
-                <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
-                <TableCell className={classes.actionButtons}>
-                  <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}>Approve</Button>
-                  <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
-                  {attendance.approvalStatus === 'REJECTED' && (
-                    <Button variant="outlined" color="primary">
-                      Edit Absence Reason
-                    </Button>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <div>
       
-    </Card>
+      <Card className={classes.card}>
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          to="/attendance-list"
+          className={classes.viewAttendanceButton}
+        >
+          View Attendance List
+        </Button>
+        
+
+        <h2>Pending Attendance List</h2>
+              {/* Search input */}
+        
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          style={{ fontSize: '16px' }} // Adjust the font size as needed
+        />
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.tableHeaderCell}>Employee ID</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Name</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Date</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+      {currentRecords.map((attendance) => {
+        if (!searchQuery || attendance.employee.username.toLowerCase().includes(searchQuery.toLowerCase())) {
+          return (
+            <TableRow key={attendance.attendanceId}>
+              <TableCell>{attendance.employee.employeeId}</TableCell>
+              <TableCell>{attendance.employee.username}</TableCell>
+              <TableCell>{formatDate(attendance.attendanceDate)}</TableCell>
+              <TableCell className={classes.actionButtons}>
+                <Button variant="contained" color="primary" onClick={() => handleApproveAttendance(attendance.attendanceId)}  style={{ backgroundColor: 'green' }}>Approve</Button>
+                <Button variant="contained" color="secondary" onClick={() => handleRejectAttendance(attendance.attendanceId)}>Reject</Button>
+                {attendance.approvalStatus === 'REJECTED' && (
+                  <Button variant="outlined" color="primary">
+                    Edit Absence Reason
+                  </Button>
+                )}
+              </TableCell>
+            </TableRow>
+          );
+        } else {
+          return null; // Exclude this record from rendering
+        }
+      })}
+    </TableBody>
+          </Table>
+        </TableContainer>
+
+        {/* Pagination component */}
+        <div className={classes.pagination}>
+          <Pagination
+            count={Math.ceil(pendingAttendances.length / recordsPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+          />
+        </div>
+      </Card>
+    </div>
     </div>
   );
 };

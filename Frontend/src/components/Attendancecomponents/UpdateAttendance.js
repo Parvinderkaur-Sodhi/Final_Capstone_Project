@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { TextField, Button, Card, CardContent, CardActions, Typography } from '@mui/material';
+//import { TextField, Button, Card, CardContent, CardActions, Typography } from '@mui/material';
+import { TextField, Button, Card, CardContent, CardActions, Typography, Select, MenuItem } from '@mui/material';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Done } from '@mui/icons-material';
 import HrNavbar from '../DashBoardComponents/HrNavbar';
@@ -82,30 +84,45 @@ function UpdateAttendance(props) {
     <div style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
       <HrNavbar />
       <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h5" gutterBottom>
-            Update Attendance
-          </Typography>
-          <hr />
-          <TextField
-            label="Present"
-            variant="outlined"
-            color="primary"
-            value={present}
-            onChange={(e) => setPresent(e.target.value)}
-            fullWidth
-            className={classes.inputField}
-          />
-          <TextField
-            label="Absence Reason"
-            variant="outlined"
-            color="primary"
-            value={absenceReason}
-            onChange={(e) => setAbsenceReason(e.target.value)}
-            fullWidth
-            className={classes.inputField}
-          />
-        </CardContent>
+      <CardContent>
+      <Typography variant="h5" gutterBottom>
+        Update Attendance
+      </Typography>
+      <hr />
+      <Select
+        label="Present"
+        variant="outlined"
+        color="primary"
+        value={present}
+        onChange={(e) => setPresent(e.target.value)}
+        fullWidth
+        className={classes.inputField}
+      > 
+        <MenuItem value="">Select Attendance Status:</MenuItem>
+        <MenuItem value="present">present</MenuItem>
+        <MenuItem value="absent">absent</MenuItem>
+      </Select>
+      <Select
+        label="Absence Reason"
+        variant="outlined"
+        color="primary"
+        value={absenceReason}
+        onChange={(e) => setAbsenceReason(e.target.value)}
+        fullWidth
+        className={classes.inputField}
+      >
+          <MenuItem value="">Select Absence Reason:</MenuItem>
+          <MenuItem value="Sickness">Sickness or Illness</MenuItem>
+          <MenuItem value="Medical Appointment">Medical Appointment</MenuItem>
+          <MenuItem value="family Emergency">Family Emergency</MenuItem>
+          <MenuItem value="Personal Leave">Personal Leave</MenuItem>
+          <MenuItem value="Vacation">Vacation</MenuItem>
+          <MenuItem value="Bereavement">Bereavement</MenuItem>
+          <MenuItem value="Maternity Paternity">Maternity/Paternity Leave</MenuItem>
+          <MenuItem value="Unplanned Event">Unplanned Event</MenuItem>
+      </Select>
+    </CardContent>
+
         <CardActions>
           <div className={classes.buttonContainer}>
             <Button
@@ -124,5 +141,4 @@ function UpdateAttendance(props) {
 }
 
 export default UpdateAttendance;
-
 

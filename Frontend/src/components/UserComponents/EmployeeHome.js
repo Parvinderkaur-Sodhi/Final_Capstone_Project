@@ -46,7 +46,9 @@ function EmployeeHome(props) {
     <div>
       <EmployeeNavbar />
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
-        <Grid container spacing={3}>
+        <Card style={{ padding: 20 }}>
+
+      <Grid container spacing={3}>
           {/* Greeting */}
           <Grid item xs={10}>
             <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
@@ -140,6 +142,8 @@ function EmployeeHome(props) {
           </Grid>
         </Grid>
       </Card>
+      </Card>
+
     </div>
   );
 }
