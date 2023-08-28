@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 // import HrService from "../../services/hr.service";
 import {
@@ -10,17 +10,28 @@ import "react-datepicker/dist/react-datepicker.css";
 import hrService from "../../../services/hr.service";
 import { MenuItem, TextField } from "@material-ui/core";
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 function Postjob(props) {
-    const [job, setjob] = useState({});
+    const [job, setJob] = useState({});
     const [addSuccess, setAddSuccess] = useState(false);
-    // const { user: currentUser } = props;
+ const {id} = useParams();
+const history=useHistory();
 
-   
+         useEffect(() => {
+
+        hrService.getJobById(id).then((response) =>{
+            console.log(response.data);
+            setJob(response.data);
+         
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [])
 
     const handleFieldChange = (fieldName, value) => {
         const v=`"${fieldName}"`;
-        setjob((prevjob) => ({
+        setJob((prevjob) => ({
             ...prevjob,
            [fieldName]: value,
         }));
@@ -29,10 +40,20 @@ function Postjob(props) {
 
     const handleAdd = (e) => {
         e.preventDefault();
+if(id){
+    console.log(job);
+hrService.updateJob(id,job).then((response) => {
+                console.log(response.data);
+                setAddSuccess(true);
+                history.push(`/AppliedJobs/${response.data["jobProfile"]}`);
+    }).catch(error => {
+                console.log(error)
+            })
 
+        }
         
-
-        hrService.postjob(job)
+else{
+        hrService.postJob(job)
             .then((response) => {
                 console.log(response.data);
                 setAddSuccess(true);
@@ -40,7 +61,7 @@ function Postjob(props) {
             .catch((error) => {
                 console.log("Error adding job:", error);
             });
-
+        }
     };
 
     const handleClose=()=>{
@@ -162,9 +183,9 @@ function Postjob(props) {
                         <Grid item xs={12} md={6}>
                             <TextField
                                 label="Salary"
-                             type="number"
-required={true}
-                                value={job.jobsalary|| ""}
+                                type="number"
+                                 required={true}
+                                value={job.salary|| ""}
                                 onChange={(e) => handleFieldChange("salary", e.target.value)}
                                 fullWidth
                                 variant="outlined"
@@ -185,7 +206,9 @@ required={true}
                          <Box display="flex" justifyContent="flex-end">
                             <Button variant="outlined"  type="submit" startIcon={<Add />}
 style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"white"}}>
-  <Typography style={{fontSize:15,fontWeight:'bolder'}}>Post job</Typography></Button>  
+  <Typography style={{fontSize:15,fontWeight:'bolder'}}> {
+            id?"'UPDATE Job":"Post Job"
+           } </Typography></Button>  
                       
                     </Box>
                  </Grid>

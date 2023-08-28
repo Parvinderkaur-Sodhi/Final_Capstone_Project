@@ -10,6 +10,8 @@ const JobInfo = () => {
     const {jobProfile}=useParams();
     console.log(jobProfile);
 const history=useHistory();
+
+   
     useEffect(()=>{
 hrService.getJobByprofile(jobProfile).then((response)=>{
     console.log(response.data);
@@ -20,7 +22,10 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
 <>
  {jobInfo && 
  <div style={{height:"400px"}}>
+  <Stack direction="row">
       <Typography style={{fontSize:25,fontWeight:'bolder',color:"#98144d",margin:"0px 30px"}}>{jobInfo[0].jobProfile}</Typography>  
+      <Button style={{backgroundColor:"#98144d",color:"white"}} onClick={()=>{history.push(`/editJobDetails/${jobInfo[0].jobId}`)}}>Edit</Button>
+</Stack>
     <Stack direction='row' mt={2} ml={5} marginBottom={1}>
         <div style={{marginRight:"44px"}}>
         <Box boxShadow={1} borderWidth='1px' borderRadius={10} p={1}  width="40px"  height="40px" backgroundColor="#e3dbfa"><CurrencyRupeeSharp/></Box>
@@ -54,11 +59,10 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
 <Stack mt={1} ml={5}>
       <h5>Descriptions</h5>
       <Typography color="#5d6c72">{jobInfo[0].description}</Typography>
-      <Typography mt={4} color="#5d6c72">{jobInfo[0].specializtion}</Typography>
+      <Typography mt={4} color="#5d6c72">{jobInfo[0].specialization}</Typography>
             <Typography mt={3} color="#909fa5">Last Date to Apply :<strong>{jobInfo[0].lastdate[2]}-{jobInfo[0].lastdate[1]}-{jobInfo[0].lastdate[0]}</strong></Typography>
               <Typography mt={2} color="#909fa5">Total position Availabel:<strong>{jobInfo[0].vacancy}</strong></Typography>
 </Stack>
-<Button onClick={()=>{history.push(`/postJob/${jobInfo[0].jobId}`)}}>Edit</Button>
   </div>
   }
             </>

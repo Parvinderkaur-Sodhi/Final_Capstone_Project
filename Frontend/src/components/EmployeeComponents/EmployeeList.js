@@ -82,11 +82,11 @@ function EmployeeList(props) {
   }
 
   return (
-    <div>
+    <>
       <HrNavbar />
-      <Card>
+      <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
         <CardContent>
-          <div style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
+        
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={4}><h1>Employee List</h1></Grid>
               <Grid item xs={4}></Grid>
@@ -172,7 +172,6 @@ function EmployeeList(props) {
                 </Box>
               </Box>
             </CardActions>
-          </div>
         </CardContent>
       </Card>
 
@@ -190,7 +189,7 @@ function EmployeeList(props) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
 

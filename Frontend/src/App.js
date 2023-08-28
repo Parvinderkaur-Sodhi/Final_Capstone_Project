@@ -161,7 +161,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3" style={{ marginRight: "8rem", width: "1420px", height: "82vh" }}>
+          <div className="container mt-3" style={{ marginRight:"-5px", width: "1420px", height: "82vh" }}>
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />
@@ -226,6 +226,7 @@ class App extends Component {
               <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
               <Route exact path="/Hrjobs" component={HrJobPortal} />
               <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+             <Route path = "/editJobDetails/:id" component = {PostJob}/>
 
               {/* <Route path="/mark-attendance/:employeeId" render={(props) => <MarkAttendance {...props} user={this.props.user} />} /> */}
               {/* <Route exact path="/job" component={AllJob} /> */}

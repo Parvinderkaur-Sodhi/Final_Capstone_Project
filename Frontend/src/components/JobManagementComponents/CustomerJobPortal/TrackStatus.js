@@ -12,9 +12,7 @@ const TrackStatus = () => {
   return (
     <>
       <EmployeeNavbar />
-      <Card style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px"}}>
         <AppliedJobs />
-      </Card>
     </>
   )
 }
