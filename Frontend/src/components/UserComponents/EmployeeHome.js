@@ -2,27 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Card, CardContent, Typography, Grid } from "@mui/material";
 import { blue, green, red } from "@mui/material/colors";
-import EventIcon from "@mui/icons-material/Event";
-import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 import EmployeeService from "../../services/employee.service";
 import { makeStyles } from "@mui/styles"; // Import makeStyles
-
-// function EmployeeHome(props) {
-//   const { user: currentUser } = props;
-//   const [employeeId, setEmployeeId] = useState(null);
-
-//   useEffect(() => {
-//     const storedEmployeeId = localStorage.getItem('employeeId');
-//     if (storedEmployeeId) {
-//       setEmployeeId(storedEmployeeId);
-//     }
-//   }, []);
-
-
-//   if (!currentUser) {
-//     return <Redirect to="/login" />;
-//   }
+import SmallCalendar from "../DashBoardComponents/SmallCalendar";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
@@ -49,7 +32,7 @@ function EmployeeHome(props) {
   const [attendancePercentage, setAttendancePercentage] = useState(0);
   const [attendanceStatus, setAttendanceStatus] = useState(""); // Default status
   const employeeId = localStorage.getItem("employeeId");
-  const classes = useStyles({ attendanceStatus }); 
+  const classes = useStyles({ attendanceStatus });
 
   useEffect(() => {
     const employeeId = localStorage.getItem('employeeId');
@@ -66,10 +49,6 @@ function EmployeeHome(props) {
         });
     }
   }, []);
-  const [attendancePercentage, setAttendancePercentage] = useState(0);
-  const [attendanceStatus, setAttendanceStatus] = useState(""); // Default status
-  const employeeId = localStorage.getItem("employeeId");
-  const classes = useStyles({ attendanceStatus }); 
 
   useEffect(() => {
     EmployeeService.getAttendanceByEmployeeId(employeeId)
@@ -102,20 +81,6 @@ function EmployeeHome(props) {
       <EmployeeNavbar />
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
         <Grid container spacing={3}>
-      <EmployeeNavbar/>
-      <Card style={{ padding: 5 }}>
-
-      <Grid container spacing={3}>
-          {/* Greeting */}
-          <Grid item xs={10}>
-            <Card sx={{ backgroundColor: red[100], marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6" color="textPrimary">
-                  Hello!!!!! (Greetings)
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
             <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
@@ -150,24 +115,6 @@ function EmployeeHome(props) {
               </CardContent>
             </Card>
           </Grid>
-          {/* Attendance Percentage */}
-
-          <Grid item xs={6}>
-            <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6" style={{ display: "flex", alignItems: "center" }}>
-                  <EventIcon style={{ marginRight: "8px" }} />
-                  {/* Attendance Percentage: {attendancePercentage.toFixed(2)}% */}
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {/* Present Days: {attendanceData.presentDays} */}
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {/* Total Working Days: {attendanceData.totalWorkingDays} */}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
 
           {/* Leaves */}
           <Grid item xs={6}>
@@ -187,76 +134,29 @@ function EmployeeHome(props) {
               </CardContent>
             </Card>
           </Grid>
-        <Grid item xs={3}>
-          <h2>Job Applied </h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Data Analyst</Typography>
-              <Typography variant="body1" color="textSecondary">
-                DataCorp
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-         {/* Attendance Percentage */}
-         
-        
-         <Grid item xs={12} sm={6}>
-          <Card className={classes.attendanceCard}>
-            <CardContent>
-              <Typography variant="h5" style={{ marginBottom: "16px" }}>
-                <strong>Your Attendance Details</strong>
-              </Typography>
-              <Typography variant="h6" style={{ marginBottom: "8px" }}>
-                Attendance Percentage: {attendancePercentage.toFixed(2)}%
-              </Typography>
-              <Typography variant="subtitle1">
-                Attendance Status:{" "}
-                <span className={classes.attendanceStatus}>
-                  {attendanceStatus}
-                </span>
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        </Grid>
 
-        <Grid item xs={3}>
-          <h2>Job Applied </h2>
-          <Card sx={{ backgroundColor: blue[100], marginBottom: 4 }}>
-            <CardContent>
-              <Typography variant="h6">Data Analyst</Typography>
-              <Typography variant="body1" color="textSecondary">
-                DataCorp
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-         {/* Attendance Percentage */}
-         
-        
-         <Grid item xs={12} sm={6}>
-          <Card className={classes.attendanceCard}>
-            <CardContent>
-              <Typography variant="h5" style={{ marginBottom: "16px" }}>
-                <strong>Your Attendance Details</strong>
-              </Typography>
-              <Typography variant="h6" style={{ marginBottom: "8px" }}>
-                Attendance Percentage: {attendancePercentage.toFixed(2)}%
-              </Typography>
-              <Typography variant="subtitle1">
-                Attendance Status:{" "}
-                <span className={classes.attendanceStatus}>
-                  {attendanceStatus}
-                </span>
-              </Typography>
-            </CardContent>
-          </Card>
+          {/* Attendance Percentage */}
+          <Grid item xs={6}>
+            <Card className={classes.attendanceCard}>
+              <CardContent>
+                <Typography variant="h5" style={{ marginBottom: "16px" }}>
+                  <strong>Your Attendance Details</strong>
+                </Typography>
+                <Typography variant="h6" style={{ marginBottom: "8px" }}>
+                  Attendance Percentage: {attendancePercentage.toFixed(2)}%
+                </Typography>
+                <Typography variant="subtitle1">
+                  Attendance Status:{" "}
+                  <span className={classes.attendanceStatus}>
+                    {attendanceStatus}
+                  </span>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Card>
-     
-
-    </div>
+    </div >
   );
 }
 
