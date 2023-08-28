@@ -67,7 +67,7 @@ else{
 
 },[selectedFilters])
   return (
- <Box  boxShadow={1} borderWidth='1px'  width="280px" height="540px" backgroundColor="white">
+ <Box  boxShadow={1} borderWidth='1px'  width="280px" height="540px" backgroundColor="white" position="sticky" top="0px" z-index="1">
       <h4 style={{margin:"10px 15px 20px 0px",textAlign:'center'}}>Filter</h4>
 
           <Grid container>
