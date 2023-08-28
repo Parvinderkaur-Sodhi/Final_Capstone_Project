@@ -102,17 +102,7 @@ function EmployeeHome(props) {
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" , backgroundColor: "#98144d"}}>
         <Grid container spacing={3}>
           {/* Saved Job Listings */}
-          <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "lightgrey", marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6">Software Engineer</Typography>
-                <Typography variant="body1" color="textSecondary">
-                  TechCo
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
+        
         {/* Job Offers */}
         <Grid item xs={3} mt={-5}>
           <h2>Job Offers</h2>
@@ -187,28 +177,9 @@ function EmployeeHome(props) {
           </Card>
         </Grid>
           {/* Job Offers */}
-          <Grid item xs={4}>
-            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6">Frontend Developer</Typography>
-                <Typography variant="body1" color="textSecondary">
-                  WebDev
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+     
 
-          <Grid item xs={4}>
-            <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
-              <CardContent>
-                <Typography variant="h6">Data Analyst</Typography>
-                <Typography variant="body1" color="textSecondary">
-                  DataCorp
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
+      
           {/* Leaves */}
           <Grid item xs={6}>
             <Card sx={{  backgroundColor: "lightgrey", marginBottom: 4 }}>
