@@ -49,7 +49,7 @@ public class AppliedJobsController {
     }
     
     
-    @GetMapping("/getByIdandStatus/{id}/{status")
+    @GetMapping("/getByIdandStatus/{id}/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<AppliedJobs> getAppliedJobsById(@PathVariable int id,@PathVariable String status) {
         List<AppliedJobs> AppliedJobs = AppliedJobsService.getJobByIdAndStatus(id,status);

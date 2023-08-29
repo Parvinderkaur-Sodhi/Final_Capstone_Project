@@ -58,11 +58,11 @@ function HrHome(props) {
   return (
     <div>
       <HrNavbar />
-      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}>
+      {/* <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}> */}
         <Grid container spacing={2}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "lightgrey" }}>
+            <Card sx={{ backgroundColor: "white" }}>
               <CardContent>
                 <PieChart
                   series={[
@@ -93,14 +93,14 @@ function HrHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "lightgrey" }} >
+            <Card sx={{ backgroundColor: "white" }} >
               <CardContent>
                 <PieChart
                   series={[
 
                     {
                       data: [
-                        { id: 0, value: len[0], label: 'New', color: 'lightgrey' },
+                        { id: 0, value: len[0], label: 'New', color: 'white' },
                         { id: 1, value: len[1], label: 'Interview', color: 'lightblue' },
                         { id: 2, value: len[2], label: 'Hired', color: 'lightgreen' },
                         { id: 4, value: len[3], label: 'Rejected', color: '#fa5f55' },
@@ -122,7 +122,7 @@ function HrHome(props) {
           </Grid>
 
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "lightgrey" }}>
+            <Card sx={{ backgroundColor: "white" }}>
               <CardContent>
                 <Typography variant="h6">
                   {attendancePercentage}%
@@ -136,7 +136,7 @@ function HrHome(props) {
           {/* Attendance Percentage */}
 
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: "lightgrey", display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: "white", display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Calendar
@@ -163,14 +163,14 @@ function HrHome(props) {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: "lightgrey" }}>
+            <Card sx={{ backgroundColor: "white" }}>
               <CardContent>
                 <h3>News and Events</h3>
               </CardContent>
             </Card>
           </Grid>
         </Grid>
-      </Card>
+      {/* </Card> */}
     </div>
   );
 }

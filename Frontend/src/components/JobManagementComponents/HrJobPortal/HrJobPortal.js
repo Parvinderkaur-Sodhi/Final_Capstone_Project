@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import ViewJob from './ViewJob';
 import { Button, Stack, Card } from '@mui/material';
-import PostJob from './PostJob';
 import SearchJob from '../CustomerJobPortal/SearchJob';
-import FilterHrJob from './FilterHrJob';
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
 import FilterByCategory from '../CustomerJobPortal/FilterByCategory';
 
