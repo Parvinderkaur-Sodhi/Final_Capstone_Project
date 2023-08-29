@@ -14,8 +14,8 @@ public interface AppliedJobsService {
     AppliedJobs getJobById(int applicationno);
     
     AppliedJobs getJobByJobProfile(String profile);
-
-
+ List<AppliedJobs>getJobByIdAndStatus(int id,String status);
+      
     List<AppliedJobs> getJobByJobStatus(String status);
     List<AppliedJobs> AppliedJobsforEmp(int empId);
     List<AppliedJobs> getJobByProfileAndStatus(String profile,String status);

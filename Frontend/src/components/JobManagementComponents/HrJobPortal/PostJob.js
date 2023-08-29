@@ -141,7 +141,7 @@ else{
                                     onChange={(e) => handleFieldChange("position", e.target.value)}
                                 >
                                     <MenuItem value="Senior">Senior</MenuItem>
-                                    <MenuItem value="Junior">Junior</MenuItem>
+                                    <MenuItem value="junior">Junior</MenuItem>
                                     
 
                                 </Select>
@@ -172,6 +172,9 @@ else{
                         <Grid item xs={12} md={6}>
                             <TextField
                             required={true}
+                              InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 label="Last date"
                                 type="date"
                                 value={job.lastdate || ""}
