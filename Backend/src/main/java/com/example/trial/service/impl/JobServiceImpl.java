@@ -59,6 +59,10 @@ public class JobServiceImpl implements JobService{
 			        if (existingjob != null) {
 			            // Update properties of existingJobs using jobs object
 			            existingjob.setJobProfile(Job.getJobProfile());
+			            existingjob.setSpecialization(Job.getSpecialization());
+			            existingjob.setCategory(Job.getCategory());
+			            existingjob.setExperience(Job.getExperience());
+			            existingjob.setPosition(Job.getPosition());
 			            existingjob.setVacancy(Job.getVacancy());
 			            existingjob.setDescription(Job.getDescription());
 			            existingjob.setJobType(Job.getJobType());

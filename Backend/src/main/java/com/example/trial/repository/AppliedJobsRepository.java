@@ -18,4 +18,6 @@ AppliedJobs findByJobJobProfile(String profile);
     List<AppliedJobs>findAllByStatus(String status);
     List<AppliedJobs>findAllByEmpEmployeeId(int empId);
 List<AppliedJobs>findAllByJobJobProfileAndStatus(String profile,String status);
+List<AppliedJobs>findAllByJobJobIdAndStatus(int id,String status);
+
 	}
