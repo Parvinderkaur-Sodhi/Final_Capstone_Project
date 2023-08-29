@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import hrService from '../../../services/hr.service'
-import { Box, Button, Divider, Drawer, Typography } from '@mui/material';
+import { Box, Button, Divider, Drawer, Pagination, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -56,7 +56,16 @@ const changeStatus=(id,status)=>{
 setOpen(true);
 setD(index);
     }
+ const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 5;
 
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentappliedJob = applicationJob.slice(indexOfFirstJob, indexOfLastJob);
+  const totalPageCount = Math.ceil(applicationJob.length / jobsPerPage);
+   const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
   return (
     <>
     
@@ -85,7 +94,7 @@ setD(index);
 
         <TableBody>
         {
-       applicationJob && applicationJob.map((j)=>
+       applicationJob && currentappliedJob.map((j)=>
      
        (
         <>
@@ -131,7 +140,11 @@ Next Stage</Button>
         </TableBody>
       </Table>
     </TableContainer>
+    
 }
+<Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "auto" }}>
+          <Pagination count={totalPageCount} page={currentPage} onChange={handlePageChange} color="primary" boundaryCount={1} siblingCount={0} />
+        </Box>
 {
   applicationJob.length==0 && 
   <Typography>No Application availabel</Typography>

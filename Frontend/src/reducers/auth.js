@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
-const employeeId = JSON.parse(localStorage.getItem("employeeId"));
+// const employeeId = JSON.parse(localStorage.getItem("employeeId"));
 
 const initialState = user
   ? { isLoggedIn: true, user }

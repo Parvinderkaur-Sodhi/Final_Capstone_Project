@@ -48,6 +48,17 @@ public class AppliedJobsController {
         return AppliedJobs;
     }
     
+    
+    @GetMapping("/getByIdandStatus/{id}/{status}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AppliedJobs> getAppliedJobsById(@PathVariable int id,@PathVariable String status) {
+        List<AppliedJobs> AppliedJobs = AppliedJobsService.getJobByIdAndStatus(id,status);
+        if (AppliedJobs == null) {
+            throw new ResourceNotFoundException("AppliedJobs not found with ID: " + id);
+        }
+        return AppliedJobs;
+    }
+    
     //search AppliedJobs by Profile
     @GetMapping("/searchByprofile/{AppliedJobsProfile}")
     @ResponseStatus(HttpStatus.OK)

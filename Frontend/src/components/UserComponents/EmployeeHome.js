@@ -9,6 +9,8 @@ import { makeStyles } from "@mui/styles"; // Import makeStyles
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
 //import { EventIcon } from "@mui/icons-material";
 import { Redo } from "@mui/icons-material";
+import employeeService from "../../services/employee.service";
+import HrService from "../../services/hr.service";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
@@ -37,7 +39,10 @@ function EmployeeHome(props) {
   const [attendanceStatus, setAttendanceStatus] = useState(""); // Default status
   const employeeId = localStorage.getItem("employeeId");
   const classes = useStyles({ attendanceStatus });
-
+ const status = ["Inprocess", "Interview", "Accepted", "Rejected"];
+  const category = ["Design", "Development", "Testing", "sales", "Marketing", "Banking"];
+  const [len, setLen] = useState([]);
+  const [total, setTotal] = useState([]);
   useEffect(() => {
     const employeeId = localStorage.getItem('employeeId');
     if (employeeId) {
@@ -52,7 +57,24 @@ function EmployeeHome(props) {
           setIsLoading(false);
         });
     }
+     
   }, []);
+
+
+  useEffect(()=>{
+  status.forEach((i)=>{
+    employeeService.getByidandstatus(employeeId,i).then((response)=>{
+      console.log(response.data.length);
+      setLen((prev)=>[...prev,response.data.length]);
+    })
+    })
+ 
+      category.forEach((i)=>{
+    HrService.getJobBycategory(i).then((response)=>{
+      setTotal((prev)=>[...prev,response.data.length]);
+    })
+  })
+  },[])
 
   useEffect(() => {
     EmployeeService.getAttendanceByEmployeeId(employeeId)
@@ -79,23 +101,7 @@ function EmployeeHome(props) {
     return <Redirect to="/login" />;
   }
 
-  // useEffect(()=>{
-  //       const storedEmployeeId = localStorage.getItem('employeeId');
-
-  //   status.forEach((i)=>{
-  //   HrService.searchByStatus(i).then((response)=>{
-  //     setLen((prev)=>[...prev,response.data.length]);
-  //   })
-
-  //   })
-  //     category.forEach((i)=>{
-  //   HrService.getJobBycategory(i).then((response)=>{
-  //     setTotal((prev)=>[...prev,response.data.length]);
-  //   })
-
-  //   })
-  // },[])
-
+  
   return (
     <div>
       <EmployeeNavbar />
@@ -110,15 +116,20 @@ function EmployeeHome(props) {
                   series={[
                     {
                       data: [
-                        { id: 0, value: 10, label: 'Design', color: 'lightgrey' },
-                        { id: 1, value: 25, label: 'Development', color: 'lightblue' },
-                        { id: 2, value: 25, label: 'Testing', color: 'lightgreen' },
-                        { id: 4, value: 25, label: 'Sales', color: '#ff6347' },
-                        { id: 5, value: 50, label: 'Marketing', color: 'violet' },
-                        { id: 6, value: 25, label: 'Banking', color: 'lightyellow' },
+                          { id: 0, value: total[0], label: 'design', color: '#98144d' },
+                        { id: 1, value: total[1], label: 'Development', color: '#a22b5e' },
+                        { id: 2, value: total[2], label: 'Testing', color: '#c17294' },
+                        { id: 4, value: total[3], label: 'Sales', color: '#d182a0' },
+                        { id: 5, value: total[4], label: 'Marketing', color: '#ead0db' },
+                        { id: 6, value: total[5], label: 'Banking', color: '#f4e7ed' },
 
-                      ]
+                      ],
+                       innerRadius: 70,
+      outerRadius: 40,
+      cx: 70,
+      cy: 80,
                     }
+                    
 
                   ]}
                   width={250}
@@ -133,19 +144,22 @@ function EmployeeHome(props) {
               <CardContent>
                 <PieChart
                   series={[
-
                     {
                       data: [
-                        { id: 0, value: 10, label: 'New', color: 'lightgrey' },
-                        { id: 1, value: 25, label: 'Interview', color: 'lightblue' },
-                        { id: 2, value: 25, label: 'Hired', color: 'lightgreen' },
-                        { id: 4, value: 25, label: 'Rejected', color: '#fa5f55' },
+                        { id: 0, value: len[0], label: 'New', color: 'lightgrey' },
+                        { id: 1, value: len[1], label: 'Interview', color: 'lightblue' },
+                        { id: 2, value: len[2], label: 'Hired', color: 'lightgreen' },
+                        { id: 3, value: len[3], label: 'Rejected', color: '#fa5f55' },
 
-                      ]
+                      ],
+                        innerRadius: 70,
+      outerRadius: 60,
+      cx: 70,
+      cy: 80,
+
                     }
-
-                  ]}
-                  width={250}
+                        ]}
+                    width={250}
                   height={170}
                 />
               </CardContent>

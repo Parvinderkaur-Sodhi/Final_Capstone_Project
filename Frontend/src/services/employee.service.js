@@ -22,6 +22,11 @@ class EmployeeService {
     return axios.get(`${API_URL}AppliedJobs/viewByEmp/${empId}`, { headers: authHeader() });
 
   }
+
+  getByidandstatus(id,status) {
+    return axios.get(`${API_URL}AppliedJobs/getByIdandStatus/${id}/${status}`, { headers: authHeader() });
+
+  }
   getAllJobs(token) {
     console.log("dfdsf");
     return axios.get(API_URL + 'Jobs/viewJob', { headers: { "Authorization": `Bearer ${token}` } });
