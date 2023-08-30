@@ -29,6 +29,8 @@ function HrHome(props) {
       });
   }, []);
 
+  // attendance
+
   useEffect(() => {
     HrService.getAllAttendances()
       .then((response) => {
@@ -44,12 +46,7 @@ function HrHome(props) {
     
   }, []);
 
-    
-  
-  
-  
-  
-
+ 
 
   useEffect(() => {
     status.forEach((i) => {
@@ -143,23 +140,26 @@ function HrHome(props) {
             </Card>
           </Grid>
 
-              <Grid item xs={4}>
-      <Card sx={{ backgroundColor: "white" }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Attendance
-          </Typography>
-          <div>
+        {/* Attendance */}
+        <Grid item xs={4}>
+          <Card sx={{ backgroundColor: "white" }}>
+            <CardContent>
+            <Typography variant="h6" gutterBottom>
+                Attendance
+            </Typography>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <Typography variant="body1">
-              Present: {attendancePercentage.toFixed(2)}%
+              <strong>Present:</strong> {attendancePercentage.toFixed(2)}%
             </Typography>
             <Typography variant="body1">
-              Absent: {(100 - attendancePercentage).toFixed(2)}%
+              <strong>Absent:</strong>{" "}
+                {(100 - attendancePercentage).toFixed(2)}%
             </Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </Grid>
+            </div>
+            </CardContent>
+          </Card>
+        </Grid>
+
 
 
 

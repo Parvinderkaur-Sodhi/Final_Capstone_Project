@@ -26,7 +26,7 @@ public class Attendance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int attendanceId;
-	//private boolean present; 
+	 
 	private String present;
     private LocalDate attendanceDate;
     

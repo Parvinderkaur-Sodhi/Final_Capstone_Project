@@ -76,7 +76,7 @@ function AttendanceList(props) {
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  //const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
+  
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -85,6 +85,7 @@ function AttendanceList(props) {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
+  
   const filteredAttendance = attendance.filter((attendanceItem) =>
   attendanceItem.employee.username.toLowerCase().includes(searchQuery.toLowerCase())
 );
