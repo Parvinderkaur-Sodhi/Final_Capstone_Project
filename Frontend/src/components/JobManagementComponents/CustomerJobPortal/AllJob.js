@@ -44,8 +44,6 @@ getAlljobDetails();
 setSuccess(true);
       setOpen(false);
         }
-        // setFeedback(true);
-        // setApplied(true);
       })
     }
     const openDrawer=(index)=>{

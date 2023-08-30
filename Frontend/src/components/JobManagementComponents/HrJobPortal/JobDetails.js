@@ -1,15 +1,8 @@
 import React from 'react'
 import { Box, Button, Card, Stack, Tab, Tabs, styled } from '@mui/material'
-
-// import ApplicationInfo from './ApplicationInfo';
-import AppliedJobs from './AppliedJob';
 import Status from './Status';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { Details } from '@mui/icons-material';
-import Deatils from './AllApplication';
-import AllApplication from './AllApplication';
 import JobInfo from './JobInfo';
-//import SideNavbar from '../../SideNavbar';
 import TabPanel from '@mui/lab/TabPanel/TabPanel';
 import TabContext from '@mui/lab/TabContext/TabContext';
 import TabList from '@mui/lab/TabList/TabList';

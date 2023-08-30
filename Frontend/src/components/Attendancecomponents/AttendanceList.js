@@ -1,54 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import HrService from "../../services/hr.service";
-import {
-  Table,
-  TableContainer,
-  TableHead,
-  TableBody,
-  TableCell,
-  TableRow,
-  Paper,
-  Button,
-  Typography,
-  Card,
-} from "@mui/material";
+import {  Table,  TableContainer,  TableHead,  TableBody,  TableCell,  TableRow,  Paper,  Button,  Typography,  Card,} from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 import Pagination from "@mui/material/Pagination";
 
+
 const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const useStyles = makeStyles((theme) => ({
-  pageBackground: {
-    backgroundColor: "#f4f6f8",
-    minHeight: "80vh",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(3),
-  },
+const useStyles = makeStyles({
+ 
   card: {
     backgroundColor: "white",
     width: "100%",
-    padding: theme.spacing(3),
-    borderRadius: theme.spacing(1),
+    padding: "24px", 
+    borderRadius: "8px", 
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
   },
   table: {
-    minWidth: 650,
+    minWidth: "650px", 
   },
   editButton: {
-    backgroundColor: "#98144d", // Updated button color
+    backgroundColor: "#98144d",
     color: "white",
     "&:hover": {
-      backgroundColor: "#800c3d", // Darker shade on hover
+      backgroundColor: "#800c3d",
     },
   },
-}));
+
+  tableHeaderCell: {
+    color: 'black',
+    backgroundColor: 'lightgrey',
+    fontWeight: 'bold',
+  },
+});
+
 
 function AttendanceList(props) {
   const classes = useStyles();
@@ -75,7 +65,7 @@ function AttendanceList(props) {
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  //const currentRecords = attendance.slice(indexOfFirstRecord, indexOfLastRecord);
+  
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -84,6 +74,7 @@ function AttendanceList(props) {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
+  
   const filteredAttendance = attendance.filter((attendanceItem) =>
   attendanceItem.employee.username.toLowerCase().includes(searchQuery.toLowerCase())
 );
@@ -92,7 +83,7 @@ const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastR
 
   return (
     <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
-    <div className={classes.pageBackground}>
+    
       
       <HrNavbar />
 
@@ -119,13 +110,13 @@ const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastR
           <Table className={classes.table} aria-label="attendance table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Employee ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Absence Reason</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell className={classes.tableHeaderCell}>ID</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Date</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Status</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Employee ID</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Name</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Absence Reason</TableCell>
+                <TableCell className={classes.tableHeaderCell}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -165,7 +156,7 @@ const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastR
         />
       </Paper>
       
-    </div>
+    
     </Card>
   );
 }

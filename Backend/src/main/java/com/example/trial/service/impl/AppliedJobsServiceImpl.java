@@ -117,7 +117,7 @@ public class AppliedJobsServiceImpl implements AppliedJobsService{
 			@Override
 			public List<AppliedJobs> getJobByIdAndStatus(int id, String status) {
 				// TODO Auto-generated method stub
-				return appliedjobrepo.findAllByJobJobIdAndStatus(id, status);
+				return appliedjobrepo.findAllByEmpEmployeeIdAndStatus(id, status);
 			}
 
 			        

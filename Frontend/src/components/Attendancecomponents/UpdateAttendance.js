@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-//import { TextField, Button, Card, CardContent, CardActions, Typography } from '@mui/material';
+
 import { TextField, Button, Card, CardContent, CardActions, Typography, Select, MenuItem } from '@mui/material';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,22 +8,22 @@ import { Done } from '@mui/icons-material';
 import HrNavbar from '../DashBoardComponents/HrNavbar';
 import HrService from '../../services/hr.service';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   card: {
     width: '80%',
     margin: '0 auto',
-    marginTop: theme.spacing(3),
+    marginTop: '16px', 
     backgroundColor: "#f5f5f5",
-    borderRadius: theme.spacing(1),
+    borderRadius: '8px', 
   },
   inputField: {
-    marginBottom: theme.spacing(2),
+    marginBottom: '8px', 
   },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
-    marginTop: theme.spacing(3),
+    marginTop: '16px', 
   },
   updateButton: {
     backgroundColor: "#98144d",
@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#800c3d",
     },
   },
-}));
+});
+
 
 function UpdateAttendance(props) {
   const { user: currentUser } = props;

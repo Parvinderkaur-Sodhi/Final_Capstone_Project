@@ -57,16 +57,18 @@ function EmployeeHome(props) {
           setIsLoading(false);
         });
     }
+     
   }, []);
 
 
   useEffect(()=>{
-
-    status.forEach((i)=>{
+  status.forEach((i)=>{
     employeeService.getByidandstatus(employeeId,i).then((response)=>{
+      console.log(response.data.length);
       setLen((prev)=>[...prev,response.data.length]);
     })
     })
+ 
       category.forEach((i)=>{
     HrService.getJobBycategory(i).then((response)=>{
       setTotal((prev)=>[...prev,response.data.length]);
@@ -142,19 +144,22 @@ function EmployeeHome(props) {
               <CardContent>
                 <PieChart
                   series={[
-
                     {
                       data: [
-                        { id: 0, value: 10, label: 'New', color: 'lightgrey' },
-                        { id: 1, value: 25, label: 'Interview', color: 'lightblue' },
-                        { id: 2, value: 25, label: 'Hired', color: 'lightgreen' },
-                        { id: 4, value: 25, label: 'Rejected', color: '#fa5f55' },
+                        { id: 0, value: len[0], label: 'New', color: 'lightgrey' },
+                        { id: 1, value: len[1], label: 'Interview', color: 'lightblue' },
+                        { id: 2, value: len[2], label: 'Hired', color: 'lightgreen' },
+                        { id: 3, value: len[3], label: 'Rejected', color: '#fa5f55' },
 
-                      ]
+                      ],
+                        innerRadius: 70,
+      outerRadius: 60,
+      cx: 70,
+      cy: 80,
+
                     }
-
-                  ]}
-                  width={250}
+                        ]}
+                    width={250}
                   height={170}
                 />
               </CardContent>
