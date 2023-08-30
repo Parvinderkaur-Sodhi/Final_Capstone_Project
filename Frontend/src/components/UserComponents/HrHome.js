@@ -3,11 +3,10 @@ import { Redirect } from "react-router-dom";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import HrService from "../../services/hr.service";
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
-import { blue, green, red } from "@mui/material/colors";
-import EventIcon from "@mui/icons-material/Event";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
+import { format } from 'date-fns';
 
 function HrHome(props) {
   const { user: currentUser } = props;
@@ -45,21 +44,38 @@ function HrHome(props) {
   }, []);
 
   // attendance
-
   useEffect(() => {
+    const currentDate = new Date().toLocaleDateString('en-US'); 
+
     HrService.getAllAttendances()
       .then((response) => {
-        const totalEmployees = response.data.length;
-        const presentEmployees = response.data.filter((attendance) => attendance.present === 'present').length;
-        const calculatedAttendancePercentage = (presentEmployees / totalEmployees) * 100;
-        setAttendancePercentage(calculatedAttendancePercentage);
+        const allAttendances = response.data;
+
+        // Filter attendance records for the current date
+        const specificDateAttendances = allAttendances.filter(
+          (attendance) => {
+            const formattedAttendanceDate = format(new Date(attendance.attendanceDate), 'M/d/yyyy');
+            return formattedAttendanceDate === currentDate;
+          }
+        );
+
+        const totalEmployees = specificDateAttendances.length;
+        const presentEmployees = specificDateAttendances.filter(
+          (attendance) => attendance.present === 'present'
+        ).length;
+
+        if (totalEmployees === 0) {
+          setAttendancePercentage(0);
+        } else {
+          const calculatedAttendancePercentage = (presentEmployees / totalEmployees) * 100;
+          setAttendancePercentage(calculatedAttendancePercentage);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-  
-    
   }, []);
+  
 
  
 
@@ -206,7 +222,7 @@ function HrHome(props) {
           </Grid>
 
         
-          <Card sx={{ backgroundColor: "lightgrey", display: "flex", alignItems: "center", marginLeft: "20px", marginTop: "15px", padding: "10px" }}>
+          <Card sx={{ backgroundColor: "lightgrey", display: "flex", alignItems: "center", marginLeft: "40px", marginTop: "15px", padding: "10px" }}>
               <CardContent>
                 <h3>News and Events</h3>
                 <p>Join our upcoming Tech Talk:</p>
