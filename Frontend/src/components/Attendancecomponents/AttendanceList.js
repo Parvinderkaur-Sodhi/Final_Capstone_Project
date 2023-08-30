@@ -17,8 +17,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 import Pagination from "@mui/material/Pagination";
 
+
 const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 

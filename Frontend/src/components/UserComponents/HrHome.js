@@ -12,7 +12,8 @@ import { PieChart } from '@mui/x-charts/PieChart';
 function HrHome(props) {
   const { user: currentUser } = props;
   const [leaveRequests, setLeaveRequests] = useState([]);
-  const [attendancePercentage, setAttendancePercentage] = useState(85); // Sample data
+  const [attendancePercentage, setAttendancePercentage] = useState(0); // Initialize with 0
+
   const [notificationOpen, setNotificationOpen] = useState(false);
   const status = ["Inprocess", "Interview", "Accepted", "Rejected"];
   const category = ["Design", "Development", "testing", "sales", "Marketing", "Banking"];
@@ -27,6 +28,27 @@ function HrHome(props) {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {
+    HrService.getAllAttendances()
+      .then((response) => {
+        const totalEmployees = response.data.length;
+        const presentEmployees = response.data.filter((attendance) => attendance.present === 'present').length;
+        const calculatedAttendancePercentage = (presentEmployees / totalEmployees) * 100;
+        setAttendancePercentage(calculatedAttendancePercentage);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+    
+  }, []);
+
+    
+  
+  
+  
+  
 
 
   useEffect(() => {
@@ -58,7 +80,7 @@ function HrHome(props) {
   return (
     <div>
       <HrNavbar />
-      {/* <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}> */}
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}>
         <Grid container spacing={2}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
@@ -121,19 +143,25 @@ function HrHome(props) {
             </Card>
           </Grid>
 
-          <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "white" }}>
-              <CardContent>
-                <Typography variant="h6">
-                  {attendancePercentage}%
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  Attendance
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          {/* Attendance Percentage */}
+              <Grid item xs={4}>
+      <Card sx={{ backgroundColor: "white" }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            Attendance
+          </Typography>
+          <div>
+            <Typography variant="body1">
+              Present: {attendancePercentage.toFixed(2)}%
+            </Typography>
+            <Typography variant="body1">
+              Absent: {(100 - attendancePercentage).toFixed(2)}%
+            </Typography>
+          </div>
+        </CardContent>
+      </Card>
+    </Grid>
+
+
 
           <Grid item xs={6}>
             <Card sx={{ backgroundColor: "white", display: 'flex', justifyContent: 'center' }}>
@@ -170,7 +198,7 @@ function HrHome(props) {
             </Card>
           </Grid>
         </Grid>
-      {/* </Card> */}
+      </Card>
     </div>
   );
 }
