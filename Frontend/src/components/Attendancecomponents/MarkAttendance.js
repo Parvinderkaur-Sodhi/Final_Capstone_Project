@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, Typography, TextField } from "@mui/material";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   pageBackground: {
     backgroundColor: "#f4f6f8",
     minHeight: "70vh",
@@ -15,30 +15,31 @@ const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
     maxWidth: 500,
-    padding: theme.spacing(3),
+    padding: "16px", 
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
   },
   button: {
-    marginTop: theme.spacing(2),
-    backgroundColor: "#98144d", // Color code
-    color: "white", // Text color
+    marginTop: "8px", 
+    backgroundColor: "#98144d",
+    color: "white",
     "&:hover": {
-      backgroundColor: "#800f3e", // Hover color
+      backgroundColor: "#800f3e",
     },
   },
   welcomeHeading: {
     fontWeight: 'bold',
-    textAlign: "center"
+    textAlign: "center",
   },
   welcomeMessage: {
     fontStyle: "italic",
-    padding: theme.spacing(2, 0),
-    marginBottom: theme.spacing(3),
+    padding: "8px 0", 
+    marginBottom: "16px", 
     fontSize: "1.2rem",
     color: "#555",
     textAlign: "center",
   },
-}));
+});
+
 
 const MarkAttendance = () => {
   const classes = useStyles();

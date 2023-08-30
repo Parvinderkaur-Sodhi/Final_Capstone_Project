@@ -140,7 +140,7 @@ const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastReco
           placeholder="Search by name..."
           value={searchQuery}
           onChange={handleSearchChange}
-          style={{ fontSize: '16px' }} // Adjust the font size as needed
+          style={{ fontSize: '16px' }} 
         />
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table>
@@ -149,7 +149,7 @@ const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastReco
                 <TableCell className={classes.tableHeaderCell}>Employee ID</TableCell>
                 <TableCell className={classes.tableHeaderCell}>Name</TableCell>
                 <TableCell className={classes.tableHeaderCell}>Date</TableCell>
-                <TableCell className={classes.tableHeaderCell}>Action</TableCell>
+                <TableCell className={classes.tableHeaderCell} >Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
