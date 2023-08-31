@@ -198,7 +198,7 @@ function HrHome(props) {
             <Card sx={{  backgroundColor: "lightgrey" , display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Calendar
+                  <strong>Calendar</strong>
                 </Typography>
                 <SmallCalendar leaveRequests={leaveRequests} />
               </CardContent>

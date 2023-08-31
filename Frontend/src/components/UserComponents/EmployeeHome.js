@@ -11,6 +11,7 @@ import SmallCalendar from "../DashBoardComponents/SmallCalendar";
 import { Redo } from "@mui/icons-material";
 import employeeService from "../../services/employee.service";
 import HrService from "../../services/hr.service";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   attendanceCard: {
@@ -43,6 +44,21 @@ function EmployeeHome(props) {
   const category = ["Design", "Development", "Testing", "sales", "Marketing", "Banking"];
   const [len, setLen] = useState([]);
   const [total, setTotal] = useState([]);
+
+
+
+  //---
+
+  const [eventDialogOpen, setEventDialogOpen] = useState(false);
+
+  const openEventDialog = () => {
+    setEventDialogOpen(true);
+  };
+
+  const closeEventDialog = () => {
+    setEventDialogOpen(false);
+  };
+
   useEffect(() => {
     const employeeId = localStorage.getItem('employeeId');
     if (employeeId) {
@@ -191,7 +207,7 @@ function EmployeeHome(props) {
             <Card sx={{ backgroundColor: "lightgrey", display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="body1" color="textSecondary">
-                  Your Leaves
+                  <strong>Your Leaves</strong>
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
                   {/* Optional: Loading message */}
@@ -221,15 +237,34 @@ function EmployeeHome(props) {
             </Card>
           </Grid>
 
-          <Grid item xs={6}>
-            <Card sx={{backgroundColor: "lightgrey" }}>
-              <CardContent>
-                <Typography variant="body1" color="textSecondary">
-                  News and Events
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          
+          <Card sx={{ backgroundColor: 'lightgrey', display: 'flex', alignItems: 'center', marginLeft: '40px', marginTop: '15px', padding: '10px' }}>
+        <CardContent>
+          <h3>News and Events</h3>
+          <p>Join our upcoming Employee Workshop:</p>
+          <strong>Event: </strong> Employee Workshop: Wellness Tips<br />
+          <strong>Date: </strong> November 5, 2023<br />
+          <strong>Time: </strong> 2:00 PM - 4:00 PM<br />
+          <strong>Location: </strong> Seminar Room B<br />
+          <Button onClick={openEventDialog} variant="contained" style={{ backgroundColor: "#98144d" }}>
+            Register Now
+          </Button>
+        </CardContent>
+      </Card>
+      <Dialog open={eventDialogOpen} onClose={closeEventDialog}>
+        <DialogTitle>Register for Employee Workshop: Wellness Tips</DialogTitle>
+        <DialogContent>
+          <p>
+            You missed the opportunity to register for the Employee Workshop on Wellness Tips. Registration is now closed.
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeEventDialog} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+          
 
 
         </Grid>
