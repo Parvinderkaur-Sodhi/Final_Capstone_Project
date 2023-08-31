@@ -3,21 +3,36 @@ import { Redirect } from "react-router-dom";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import HrService from "../../services/hr.service";
 import SmallCalendar from "../DashBoardComponents/SmallCalendar";
-import { blue, green, red } from "@mui/material/colors";
-import EventIcon from "@mui/icons-material/Event";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 import { PieChart } from '@mui/x-charts/PieChart';
-
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
+import { format } from 'date-fns';
 
 function HrHome(props) {
   const { user: currentUser } = props;
   const [leaveRequests, setLeaveRequests] = useState([]);
-  const [attendancePercentage, setAttendancePercentage] = useState(85); // Sample data
+  const [attendancePercentage, setAttendancePercentage] = useState(0); // Initialize with 0
+
   const [notificationOpen, setNotificationOpen] = useState(false);
   const status = ["Inprocess", "Interview", "Accepted", "Rejected"];
   const category = ["Design", "Development", "testing", "sales", "Marketing", "Banking"];
   const [len, setLen] = useState([]);
   const [total, setTotal] = useState([]);
+
+  
+  const [eventDialogOpen, setEventDialogOpen] = useState(false);
+
+  // Function to open the event dialog
+  const openEventDialog = () => {
+    setEventDialogOpen(true);
+  };
+
+  // Function to close the event dialog
+  const closeEventDialog = () => {
+    setEventDialogOpen(false);
+  };
+
+
   useEffect(() => {
     HrService.getAllLeaveRequests()
       .then((response) => {
@@ -28,6 +43,41 @@ function HrHome(props) {
       });
   }, []);
 
+  // attendance
+  useEffect(() => {
+    const currentDate = new Date().toLocaleDateString('en-US'); 
+
+    HrService.getAllAttendances()
+      .then((response) => {
+        const allAttendances = response.data;
+
+        // Filter attendance records for the current date
+        const specificDateAttendances = allAttendances.filter(
+          (attendance) => {
+            const formattedAttendanceDate = format(new Date(attendance.attendanceDate), 'M/d/yyyy');
+            return formattedAttendanceDate === currentDate;
+          }
+        );
+
+        const totalEmployees = specificDateAttendances.length;
+        const presentEmployees = specificDateAttendances.filter(
+          (attendance) => attendance.present === 'present'
+        ).length;
+
+        if (totalEmployees === 0) {
+          setAttendancePercentage(0);
+        } else {
+          const calculatedAttendancePercentage = (presentEmployees / totalEmployees) * 100;
+          setAttendancePercentage(calculatedAttendancePercentage);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  
+
+ 
 
   useEffect(() => {
     status.forEach((i) => {
@@ -58,11 +108,11 @@ function HrHome(props) {
   return (
     <div>
       <HrNavbar />
-      {/* <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}> */}
+      <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}>
         <Grid container spacing={2}>
           {/* Saved Job Listings */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "white" }}>
+            <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
                 <PieChart
                   series={[
@@ -93,7 +143,7 @@ function HrHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "white" }} >
+            <Card sx={{  backgroundColor: "lightgrey"  }} >
               <CardContent>
                 <PieChart
                   series={[
@@ -121,25 +171,34 @@ function HrHome(props) {
             </Card>
           </Grid>
 
-          <Grid item xs={4}>
-            <Card sx={{ backgroundColor: "white" }}>
-              <CardContent>
-                <Typography variant="h6">
-                  {attendancePercentage}%
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  Attendance
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          {/* Attendance Percentage */}
+        {/* Attendance */}
+        <Grid item xs={4}>
+          <Card sx={{  backgroundColor: "lightgrey"  }}>
+            <CardContent>
+            <Typography variant="h6" gutterBottom>
+                <strong>Today's Attendance Summary:</strong>
+            </Typography>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <Typography variant="body1">
+              <strong>Present:</strong> {attendancePercentage.toFixed(2)}%
+            </Typography>
+            <Typography variant="body1">
+              <strong>Absent:</strong>{" "}
+                {(100 - attendancePercentage).toFixed(2)}%
+            </Typography>
+            </div>
+            </CardContent>
+          </Card>
+        </Grid>
+
+
+
 
           <Grid item xs={6}>
-            <Card sx={{ backgroundColor: "white", display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{  backgroundColor: "lightgrey" , display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Calendar
+                  <strong>Calendar</strong>
                 </Typography>
                 <SmallCalendar leaveRequests={leaveRequests} />
               </CardContent>
@@ -162,15 +221,42 @@ function HrHome(props) {
             </Card>
           </Grid>
 
-          <Grid item xs={6}>
-            <Card sx={{ backgroundColor: "white" }}>
+        
+          <Card sx={{ backgroundColor: "lightgrey", display: "flex", alignItems: "center", marginLeft: "40px", marginTop: "15px", padding: "10px" }}>
               <CardContent>
                 <h3>News and Events</h3>
+                <p>Join our upcoming Tech Talk:</p>
+                <strong>Event: </strong> Tech Talk: Future of AI<br />
+                <strong>Date: </strong> October 15, 2023<br />
+                <strong>Time: </strong> 3:00 PM - 5:00 PM<br />
+                <strong>Location: </strong> Conference Room A<br />
+                <Button onClick={openEventDialog} variant="contained" style={{backgroundColor: "#98144d"}}>
+                  Register Now
+                </Button>
               </CardContent>
-            </Card>
-          </Grid>
+          </Card>
+          <Dialog open={eventDialogOpen} onClose={closeEventDialog}>
+          <DialogTitle>Register for Tech Talk: Future of AI</DialogTitle>
+          <DialogContent>
+          <p>
+              You missed this exciting Tech Talk on the Future of AI. Registration closed!! 
+          </p>
+          </DialogContent>
+          <DialogActions>
+          <Button onClick={closeEventDialog} color="primary">
+              Close
+          </Button>
+    
+          </DialogActions>
+          </Dialog>
+
+        
+
+
+
+
         </Grid>
-      {/* </Card> */}
+      </Card>
     </div>
   );
 }

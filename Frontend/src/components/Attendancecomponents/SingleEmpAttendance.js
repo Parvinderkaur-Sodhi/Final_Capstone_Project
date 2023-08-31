@@ -10,30 +10,31 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   pageBackground: {
     backgroundColor: "#f4f6f8",
     minHeight: "80vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: theme.spacing(3),
+    padding: "24px", 
   },
   card: {
     backgroundColor: "white",
     width: "100%",
-    padding: theme.spacing(3),
-    borderRadius: theme.spacing(1),
+    padding: "24px", 
+    borderRadius: "8px", 
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
   },
   redText: {
     color: "red",
   },
   introText: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    marginTop: "16px", 
+    marginBottom: "16px", 
   },
-}));
+});
+
 
 function SingleEmpAttendance(props) {
   const classes = useStyles();
@@ -120,10 +121,7 @@ function SingleEmpAttendance(props) {
     >
       Mark Attendance
     </Button>
-    {/* <Typography className={classes.introText}>
-          We value your commitment and punctuality. Your consistent attendance and dedication to your role contribute significantly to our team's success. By being present and engaged, you help maintain a productive work environment and contribute to the achievement of our goals. Thank you for your ongoing efforts, and we look forward to your continued active participation and contributions.
-        </Typography> */}
-        
+   
   
         <Typography style={attendancePercentage < 50 ? { color: "red" } : {}}>
           Attendance Percentage: {attendancePercentage.toFixed(2)}%
