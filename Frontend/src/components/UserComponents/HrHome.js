@@ -176,7 +176,7 @@ function HrHome(props) {
           <Card sx={{  backgroundColor: "lightgrey"  }}>
             <CardContent>
             <Typography variant="h6" gutterBottom>
-                Attendance
+                <strong>Today's Attendance Summary:</strong>
             </Typography>
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <Typography variant="body1">
@@ -230,7 +230,7 @@ function HrHome(props) {
                 <strong>Date: </strong> October 15, 2023<br />
                 <strong>Time: </strong> 3:00 PM - 5:00 PM<br />
                 <strong>Location: </strong> Conference Room A<br />
-                <Button onClick={openEventDialog} variant="outlined">
+                <Button onClick={openEventDialog} variant="contained" style={{backgroundColor: "#98144d"}}>
                   Register Now
                 </Button>
               </CardContent>
