@@ -4,11 +4,14 @@ import EmployeeService from "../../services/employee.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
+
 
 const useStyles = makeStyles({
   pageBackground: {
@@ -82,7 +85,7 @@ function SingleEmpAttendance(props) {
   const handleEditAbsenceReason = (attendanceId, updatedReason) => {
     EmployeeService.updateAbsenceReason(attendanceId, updatedReason)
       .then(() => {
-        alert("Absence reason updated successfully.");
+        toast.success("Absence reason updated successfully.");
 
         setAttendance((prevAttendance) =>
           prevAttendance.map((record) =>
@@ -94,7 +97,7 @@ function SingleEmpAttendance(props) {
       })
       .catch((error) => {
         console.error("Error updating absence reason:", error);
-        alert("Error updating absence reason. Please try again.");
+        toast.error("Error updating absence reason. Please try again.");
       });
   };
   
@@ -102,7 +105,8 @@ function SingleEmpAttendance(props) {
   return (
     <div className={classes.pageBackground} style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
       <EmployeeNavbar />
-  
+      {/* <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover /> */}
+
       <Typography variant="h4" gutterBottom style={{ color: "#98144d" }}>
         Your Attendance Details
       </Typography>

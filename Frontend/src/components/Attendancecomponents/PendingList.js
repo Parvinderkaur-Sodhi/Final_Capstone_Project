@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import HrService from "../../services/hr.service";
 import Pagination from "@mui/material/Pagination";
 import HrNavbar from '../DashBoardComponents/HrNavbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -69,24 +71,24 @@ const PendingList = () => {
   const handleApproveAttendance = (attendanceId) => {
     HrService.approveAttendance(attendanceId)
       .then(() => {
-        alert('Attendance approved successfully by HR.');
+        toast.success('Attendance approved successfully by HR.');
         fetchPendingAttendances();
       })
       .catch(error => {
         console.error('Error approving attendance:', error);
-        alert('Error approving attendance. Please try again.');
+        toast.error('Error approving attendance. Please try again.');
       });
   };
 
   const handleRejectAttendance = (attendanceId) => {
     HrService.rejectAttendance(attendanceId)
       .then(() => {
-        alert('Attendance rejected successfully by HR.');
+        toast.success('Attendance rejected successfully by HR.');
         fetchPendingAttendances();
       })
       .catch(error => {
         console.error('Error rejecting attendance:', error);
-        alert('Error rejecting attendance. Please try again.');
+        toast.error('Error rejecting attendance. Please try again.');
       });
   };
 
@@ -118,6 +120,8 @@ const currentRecords = filteredRecords.slice(indexOfFirstRecord, indexOfLastReco
 
    
     <HrNavbar />
+    {/* <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover /> */}
+
     <div>
       
       <Card className={classes.card} >

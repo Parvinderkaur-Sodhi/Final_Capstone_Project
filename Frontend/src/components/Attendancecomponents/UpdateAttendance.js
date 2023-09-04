@@ -67,10 +67,12 @@ function UpdateAttendance(props) {
     HrService.updateAttendance(attendanceId, updatedAttendance)
       .then((response) => {
         console.log('Attendance updated successfully', response.data);
+        
         setRedirectToList(true);
       })
       .catch((error) => {
         console.log('Error updating data', error);
+        
       });
   };
 
@@ -84,6 +86,7 @@ function UpdateAttendance(props) {
   return (
     <div style={{ maxHeight: "84vh", overflowY: "auto", paddingRight: "17px" }}>
       <HrNavbar />
+      
       <Card className={classes.card}>
       <CardContent>
       <Typography variant="h5" gutterBottom>
@@ -113,6 +116,7 @@ function UpdateAttendance(props) {
         className={classes.inputField}
       >
           <MenuItem value="">Select Absence Reason:</MenuItem>
+          <MenuItem value="NA">NA</MenuItem>
           <MenuItem value="Sickness">Sickness or Illness</MenuItem>
           <MenuItem value="Medical Appointment">Medical Appointment</MenuItem>
           <MenuItem value="family Emergency">Family Emergency</MenuItem>

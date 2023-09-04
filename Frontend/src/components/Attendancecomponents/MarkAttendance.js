@@ -3,6 +3,8 @@ import EmployeeService from '../../services/employee.service';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, Typography, TextField } from "@mui/material";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles({
   pageBackground: {
@@ -52,11 +54,11 @@ const MarkAttendance = () => {
 
     EmployeeService.markAttendance(employeeId, attendanceData)
       .then(() => {
-        alert('Attendance marked successfully. It will be approved/rejected by HR later.');
+        toast.success('Attendance marked successfully. It will be approved/rejected by HR later.');
       })
       .catch(error => {
         console.error('Error marking attendance:', error);
-        alert('Error marking attendance. Please try again.');
+        toast.error('Error marking attendance. Please try again.');
       });
   };
 
@@ -64,6 +66,7 @@ const MarkAttendance = () => {
     <Card style={{ maxHeight: "100vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
      <div className={classes.pageBackground}>
       <EmployeeNavbar /> 
+      {/* <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover /> */}
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.welcomeHeading} variant="h5" gutterBottom>
