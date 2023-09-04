@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import hrService from '../../../services/hr.service'
-import { Box, Button, Divider, Drawer, Pagination, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, Pagination, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -15,6 +15,9 @@ const Status = (props) => {
     const [d,setD]=useState();
       const JobStatus=["Inprocess","Interview","Accepted","Rejected"];
 const [open,setOpen]=useState(false);
+const [selectedRequestId,setSelectedRequestId]=useState();
+const [selectedStatus,setSelectedStatus]=useState();
+
     useEffect(()=>{
       console.log(props.status);
 viewByprofileandStatus();
@@ -41,16 +44,28 @@ if(status=="Scheduled Interview")
 return "purple";
 }
 
-const changeStatus=(id,status)=>{
-    
-  const obj={
-    "status":status
+const changeStatus=(id,status)=>{  
+    setSelectedRequestId(id);
+     setSelectedStatus(status);
+ setDialogOpen(true);
+}
+const handleDeleteConfirm = () => {
+    const obj={
+    "status":selectedStatus
   };
-    hrService.updateStatus(id,obj).then((response)=>{
+    hrService.updateStatus(selectedRequestId,obj).then((response)=>{
         console.log(response.data);
         viewByprofileandStatus();
+            setDialogOpen(false);
+
     })
-}
+  };
+
+  const handleDeleteCancel = () => {
+    setSelectedRequestId();
+    setSelectedStatus();
+    setDialogOpen(false);
+  };
 
  const openDrawer=(index)=>{
 setOpen(true);
@@ -58,7 +73,7 @@ setD(index);
     }
  const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 5;
-
+const [dialogOpen,setDialogOpen]=useState(false);
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentappliedJob = applicationJob.slice(indexOfFirstJob, indexOfLastJob);
@@ -68,7 +83,20 @@ setD(index);
   };
   return (
     <>
-    
+      <Dialog open={dialogOpen}>
+          <DialogTitle>Update Application Status</DialogTitle>
+          <DialogContent>
+            Are you sure you want to update to {selectedStatus} stage?
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDeleteCancel} color="error">
+              Cancel
+            </Button>
+            <Button onClick={handleDeleteConfirm} color="primary">
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
    {applicationJob.length>0 &&    <TableContainer component={Card}>
       <Table width="300px" aria-label="simple table">
         <colgroup>
