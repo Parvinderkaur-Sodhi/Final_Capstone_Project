@@ -2,13 +2,8 @@ import React from 'react'
 import HrService from '../../../services/hr.service';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import {Stack,Typography,Button,Card,Paper,InputBase,Divider,IconButton, Drawer,Grid, Box, Dialog, Snackbar, Alert} from '@mui/material';
-import SearchJob from './SearchJob';
-import { ChairOutlined, ChangeCircle, CurrencyRupeeSharp, Timelapse } from '@mui/icons-material';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import {Stack,Typography,Button,Card,Divider,Drawer,Grid, Box, Snackbar, Alert} from '@mui/material';
+import { ChairOutlined, CurrencyRupeeSharp, Timelapse } from '@mui/icons-material';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import employeeService from '../../../services/employee.service';
 const AllJob = (props) => {
@@ -79,17 +74,20 @@ setD(index);
     <Grid container>
 
 {
-  props.job &&  props.job.map((j,index)=>
+  props.job.length>0 &&  props.job.map((j,index)=>
     {
       const date=new Date(j.publish_date);
       const currdate=new Date();
-      var diff=currdate.getDate()-date.getDate();
+  var diffinmilli=Math.abs(date.getTime()-currdate.getTime());
+var diff=Math.ceil(diffinmilli/(1000*3600*24));
       return (
     <>
     
           <Card style={{width:240,height:200,border:"1px solid",margin:"5px",borderColor:"white",borderRadius:20,backgroundColor:"white"}}>
             <Stack>
-              <Button variant="contained" sx={{bgcolor:"white",margin:"10px 20px",width:"120px",height:30,color:"black",border:"0px solid white",borderRadius:2,fontSize:10}} >{diff} days ago</Button>
+             {diff>0 && <Button variant="contained" sx={{bgcolor:"white",margin:"10px 20px",width:"120px",height:30,color:"black",border:"0px solid white",borderRadius:2,fontSize:10}} >{diff} days ago</Button>}
+               {diff==0 && <Button variant="contained" sx={{bgcolor:"white",margin:"10px 20px",width:"120px",height:30,color:"black",border:"0px solid white",borderRadius:2,fontSize:10}} >Today</Button>}
+
                <Typography style={{fontSize:15,margin:"10px 20px 0px "}}>{j.category}</Typography>   
     <Typography style={{fontSize:20,fontWeight:'bolder',color:"#98144d",margin:"0px 20px"}}>{j.jobProfile}</Typography>   
 <Stack direction="row" sx={{mt:4}}>
@@ -146,8 +144,13 @@ variant="persistent"
       <Typography color="#5d6c72">{props.job[d].description}</Typography>
       <Typography mt={4} color="#5d6c72">{props.job[d].specialization}</Typography>
       <Divider mt={3}/> 
-            <Typography mt={4} color="#909fa5">Last Date to Apply :<strong>{props.job[d].lastdate[2]}/{props.job[d].lastdate[1]}/{props.job[d].lastdate[0]}</strong></Typography>
-   <Typography mt={2} color="#909fa5">No of Vacancy:<strong>{props.job[d].vacancy}</strong></Typography>
+      { <Typography mt={4} color="#909fa5">Last Date to Apply :<strong>{props.job[d].lastdate[2]}/{props.job[d].lastdate[1]}/{props.job[d].lastdate[0]}</strong></Typography>}
+  {/* { currdate.getTime()>props.job[d].lastdate.getTime() &&  
+    <Typography mt={4} color="#909fa5">Last Date to Apply :<strong>Out of Date</strong></Typography>} */}
+ 
+  {props.job[d].vacancy>0 && <Typography mt={2} color="#909fa5">No of Vacancy:<strong>{props.job[d].vacancy}</strong></Typography>}
+  {props.job[d].vacancy==0  && <Typography mt={2} color="#98144d"><strong> Sorry Vacancy filled</strong></Typography>}
+
  </Stack>
     <Stack direction="row" mt={1} ml={5}>
                  <Stack direction="row" mt={1}>
@@ -155,17 +158,9 @@ variant="persistent"
               setOpen(false);
               setD()}} style={{width:110,height:40,color:'black'}}>
   <Typography style={{fontSize:15,fontWeight:'bolder'}}>Cancel</Typography></Button>  
- {/* {<Button variant="outlined"  disabled style={{width:150,height:40,backgroundColor:"purple",color:"white",marginLeft:10}}>
-  <Typography style={{fontSize:15,fontWeight:'bolder'}}>Applied</Typography></Button>  }  */}
-   {applied && <Button variant="outlined"  onClick={()=>{ApplyforJob(props.job[d].jobId)}} style={{width:150,height:40,backgroundColor:"#98144d",color:"white",marginLeft:10}}>
-  <Typography style={{fontSize:15,fontWeight:'bolder'}}>Apply now</Typography></Button>  }
-            {/* <Button variant="contained"  onClick={()=>{
-              props.setOpen(false);
-              props.setD()}} style={{width:110,height:40,backgroundColor:'#98144d',color:"white"}}>
-  <Typography style={{fontSize:15,fontWeight:'bolder'}}>Close</Typography></Button>   */}
 
- 
- 
+   {props.job[d].vacancy>0  && <Button variant="outlined"  onClick={()=>{ApplyforJob(props.job[d].jobId)}} style={{width:150,height:40,backgroundColor:"#98144d",color:"white",marginLeft:10}}>
+  <Typography style={{fontSize:15,fontWeight:'bolder'}}>Apply now</Typography></Button>  }
   </Stack>
       </Stack>
       </Stack>
@@ -180,6 +175,7 @@ variant="persistent"
       )
     }
    ) }
+  
    </Grid>
 
 </>
