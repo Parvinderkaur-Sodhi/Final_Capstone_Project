@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import HrService from "../../services/hr.service";
 import { Card, CardContent, Typography, Grid, Avatar, Box } from "@mui/material";
+import HrNavbar from "../DashBoardComponents/HrNavbar";
 
 function ViewEmployee() {
   const [employee, setEmployee] = useState({});
@@ -20,6 +21,7 @@ function ViewEmployee() {
 
   return (
     <Card sx={{ backgroundColor: "#f5f5f5", padding: 3, borderRadius: 2, boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.2)" }}>
+      <HrNavbar />
       <CardContent>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
@@ -56,9 +58,18 @@ function ViewEmployee() {
               <Typography variant="body1">
                 <strong>Phone No:</strong> {employee.phoneNumber}
               </Typography>
-              <Typography variant="body1">
+              {/* <Typography variant="body1">
                 <strong>Date of Joining:</strong> {employee.doJoining}
+              </Typography> */}
+              <Typography variant="body1">
+                <strong>Date of Joining:</strong>{" "}
+                {employee.doJoining ? (
+                  new Date(parseInt(employee.doJoining)).toLocaleDateString()
+                ) : (
+                  "Invalid Date"
+                )}
               </Typography>
+
               <Typography variant="body1">
                 <strong>Job Title:</strong> {employee.jobTitle}
               </Typography>
@@ -68,9 +79,18 @@ function ViewEmployee() {
               <Typography variant="body1">
                 <strong>Permanent Address:</strong> {employee.paddress}
               </Typography>
+              {/* <Typography variant="body1">
+                <strong>DOB:</strong> 
+              </Typography> */}
               <Typography variant="body1">
-                <strong>DOB:</strong> {employee.dob}
+                <strong>DOB:</strong>{" "}
+                {employee.doJoining ? (
+                  new Date(parseInt(employee.dob)).toLocaleDateString()
+                ) : (
+                  "Invalid Date"
+                )}
               </Typography>
+
               <Typography variant="body1">
                 <strong>Addhar Id:</strong> {employee.idNo}
               </Typography>

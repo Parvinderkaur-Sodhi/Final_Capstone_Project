@@ -12,6 +12,8 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
 import EmployeeDetails from "./components/EmployeeComponents/EmployeeDetails";
@@ -162,6 +164,7 @@ class App extends Component {
           </nav>
 
           <div className="container mt-3" style={{ marginRight: "8rem", width: "1420px", height: "82vh" }}>
+          <ToastContainer />
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />

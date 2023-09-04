@@ -7,7 +7,7 @@ import {
 import { Update } from "@mui/icons-material";
 import "react-datepicker/dist/react-datepicker.css";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
-
+import {toast} from 'react-toastify';
 
 function UpdateEmployee(props) {
     const [employee, setEmployee] = useState({});
@@ -55,6 +55,7 @@ function UpdateEmployee(props) {
         HrService.updateEmployee(employeeId, employee)
             .then(() => {
                 setUpdateSuccess(true);
+                toast.success("Employee Updated Successfully!!");
             })
             .catch((error) => {
                 console.log("Error updating employee:", error);
@@ -155,14 +156,21 @@ function UpdateEmployee(props) {
                                     variant="outlined"
                                 />
                             </Grid>
+
                             <Grid item xs={12} md={6}>
-                                <TextField
-                                    label="Department"
-                                    value={employee.department || ""}
-                                    onChange={(e) => handleFieldChange("department", e.target.value)}
-                                    fullWidth
-                                    variant="outlined"
-                                />
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel>Department</InputLabel>
+                                    <Select
+                                         label="Department"
+                                         value={employee.department || ""}
+                                         onChange={(e) => handleFieldChange("department", e.target.value)}
+                                    >
+                                        <MenuItem value="HR">HR</MenuItem>
+                                        <MenuItem value="IT">IT</MenuItem>
+                                        <MenuItem value="Marketing">Marketing</MenuItem>
+                                        <MenuItem value="Other">Other</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
 
                             <Grid item xs={12} md={6}>
@@ -267,7 +275,7 @@ function UpdateEmployee(props) {
                                     variant="outlined"
                                 />
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            {/* <Grid item xs={12} md={6}>
                                 <TextField
                                     label="Employee Picture"
                                     value={employee.employeePic || ""}
@@ -284,7 +292,7 @@ function UpdateEmployee(props) {
                                     fullWidth
                                     variant="outlined"
                                 />
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                         <br />
                         <Box display="flex" justifyContent="flex-end">

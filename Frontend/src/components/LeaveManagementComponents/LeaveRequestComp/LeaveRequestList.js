@@ -13,7 +13,8 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import Pagination from '@mui/material/Pagination';
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
-import { Style } from "@mui/icons-material";
+// Importing toastify module
+import {toast} from 'react-toastify';
 
 function LeaveRequestList(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -33,7 +34,7 @@ function LeaveRequestList(props) {
   useEffect(() => {
     HrService.getAllLeaveRequests()
       .then((response) => {
-        setLeaveRequests(response.data);
+        setLeaveRequests(response.data.reverse());
       })
       .catch((error) => {
         console.log(error);
@@ -80,9 +81,10 @@ function LeaveRequestList(props) {
         setConfirmationOpen(false);
         setSelectedRequestId(null);
         setSelectedStatus("");
+        toast(selectedStatus + " Sucessfully!!");
       })
       .catch((error) => {
-        console.log("Error updating leave request status:", error);
+        toast("Error updating leave request status:", error);
       });
   };
 
@@ -112,7 +114,7 @@ function LeaveRequestList(props) {
 
   const Styles = {
     color: 'black',
-    backgroundColor: "lightgrey", 
+    backgroundColor: "lightgrey",
     fontWeight: "bold",
   };
 

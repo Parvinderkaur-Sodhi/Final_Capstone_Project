@@ -128,7 +128,7 @@ class Login extends Component {
                   >
                     <MenuItem value="">Select Role</MenuItem>
                     <MenuItem value="Admin">Admin</MenuItem>
-                    <MenuItem value="Manager">Manager</MenuItem>
+                    {/* <MenuItem value="Manager">Manager</MenuItem> */}
                     <MenuItem value="Employee">Employee</MenuItem>
                   </Select>
                 </FormControl>

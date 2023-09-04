@@ -3,6 +3,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Card, CardContent, CardHeader, Alert } from "@mui/material";
 import EmployeeService from "../../../services/employee.service";
 import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
+import {toast} from 'react-toastify';
 
 function AddLeaveRequestUser(props) {
     const { user: currentUser } = props;
@@ -123,11 +124,12 @@ function AddLeaveRequestUser(props) {
 
             EmployeeService.saveLeaveRequest(requestData)
                 .then(() => {
-                    alert("Leave request submitted successfully!!");
                     history.push("/leave-request-user");
+                    toast.success("Leave request submitted successfully!!");
                 })
                 .catch((error) => {
                     console.log("Error adding leave request:", error);
+                    toast.error("Error adding leave request!!");
                 });
         }
     };

@@ -8,6 +8,7 @@ import {
 import { Delete, Create, AddCircleOutline, Search } from '@mui/icons-material';
 import Pagination from '@mui/material/Pagination';
 import HrNavbar from "../DashBoardComponents/HrNavbar";
+import { FaEye } from "react-icons/fa";
 
 function EmployeeList(props) {
   const [employees, setEmployees] = useState([]);
@@ -144,7 +145,7 @@ function EmployeeList(props) {
                         </Link>
                         &nbsp;
                         <Link to={`/view-employee/${employee.employeeId}`}>
-                          <Button color="success" style={{ marginBottom: "10px" }} variant="outlined" startIcon={<Create />}>View</Button>
+                          <Button color="success" style={{ marginBottom: "10px" }} variant="outlined" startIcon={<FaEye />}>View</Button>
                         </Link>
                         {/* <Button variant="outlined" color="error" startIcon={<Delete />} onClick={() => handleDeleteClick(employee)}>
                         Delete

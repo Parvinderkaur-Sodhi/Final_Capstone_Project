@@ -60,7 +60,12 @@ function EmployeeDetails() {
                   <strong>Phone No:</strong> {employee.phoneNumber}
                 </Typography>
                 <Typography variant="body1">
-                  <strong>Date of Joining:</strong> {employee.doJoining}
+                  <strong>Date of Joining:</strong>{" "}
+                  {employee.doJoining ? (
+                    new Date(parseInt(employee.doJoining)).toLocaleDateString()
+                  ) : (
+                    "Invalid Date"
+                  )}
                 </Typography>
                 <Typography variant="body1">
                   <strong>Job Title:</strong> {employee.jobTitle}
@@ -72,7 +77,12 @@ function EmployeeDetails() {
                   <strong>Permanent Address:</strong> {employee.paddress}
                 </Typography>
                 <Typography variant="body1">
-                  <strong>DOB:</strong> {employee.dob}
+                  <strong>DOB:</strong>{" "}
+                  {employee.doJoining ? (
+                    new Date(parseInt(employee.dob)).toLocaleDateString()
+                  ) : (
+                    "Invalid Date"
+                  )}
                 </Typography>
                 <Typography variant="body1">
                   <strong>Addhar Id:</strong> {employee.idNo}

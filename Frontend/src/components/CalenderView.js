@@ -9,7 +9,7 @@ function CalendarView({ leaveRequests }) {
   const events = leaveRequests.map((leaveRequest) => ({
     title: leaveRequest.employeeId.fname,
     start: new Date(leaveRequest.startDate),
-    end: new Date(leaveRequest.endDate),
+    end: new Date(leaveRequest.endDate + 1),
     status: leaveRequest.status, // Store status in event object
   }));
 
@@ -36,19 +36,26 @@ function CalendarView({ leaveRequests }) {
       <div style={{ marginBottom: "20px" }}>
         <ul style={{ listStyle: "none", padding: 0, display: "flex", gap: "10px" }}>
           <li>
-            <div style={{ backgroundColor: "blue", width: "12px", height: "12px", marginRight: "4px" }}></div>
-            <span>Pending</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <div style={{ backgroundColor: "blue", width: "12px", height: "12px" }}></div>
+              <span>Pending</span>
+            </div>
           </li>
           <li>
-            <div style={{ backgroundColor: "green", width: "12px", height: "12px", marginRight: "4px" }}></div>
-            <span>Accepted</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <div style={{ backgroundColor: "green", width: "12px", height: "12px" }}></div>
+              <span>Accepted</span>
+            </div>
           </li>
           <li>
-            <div style={{ backgroundColor: "red", width: "12px", height: "12px", marginRight: "4px" }}></div>
-            <span>Rejected</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <div style={{ backgroundColor: "red", width: "12px", height: "12px" }}></div>
+              <span>Rejected</span>
+            </div>
           </li>
         </ul>
       </div>
+
       <div style={{ height: "80vh" }}>
         <Calendar
           localizer={localizer}
@@ -58,7 +65,7 @@ function CalendarView({ leaveRequests }) {
           eventPropGetter={eventStyleGetter} // Apply custom event styles
         />
       </div>
-    </div>
+    </div >
   );
 }
 

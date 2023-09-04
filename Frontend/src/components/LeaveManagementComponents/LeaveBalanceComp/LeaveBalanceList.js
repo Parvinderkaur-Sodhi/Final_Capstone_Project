@@ -21,7 +21,7 @@ function LeaveBalanceList(props) {
     HrService.getAllLeaveBalances()
       .then((response) => {
         console.log(response);
-        setLeaveBalances(response.data);
+        setLeaveBalances(response.data.reverse());
       })
       .catch((error) => {
         console.log(error);
