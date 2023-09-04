@@ -4,6 +4,8 @@ import HrService from "../../../services/hr.service";
 import { TextField, Button, Box, Card, CardContent, CardActions, CardHeader } from "@mui/material";
 import { Done } from '@mui/icons-material';
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
+import {toast} from 'react-toastify';
+
 
 function AddLeaveType(props) {
     const [newLeaveType, setNewLeaveType] = useState('');
@@ -19,11 +21,12 @@ function AddLeaveType(props) {
 
         HrService.saveLeaveType(typedata)
             .then((response) => {
-                alert("Leave Type added successfully!!");
                 setRedirectToList(true);
+                toast.success("Leave Type added successfully!!");
             })
             .catch((error) => {
                 console.log("Error adding leave type:", error);
+                toast.error("Error Adding Leave Type!!");
             });
     };
 

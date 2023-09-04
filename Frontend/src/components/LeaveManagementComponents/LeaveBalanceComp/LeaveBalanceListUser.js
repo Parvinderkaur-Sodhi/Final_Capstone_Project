@@ -18,7 +18,7 @@ function LeaveBalanceListUser(props) {
 
   EmployeeService.getAllLeaveTypes()
     .then((response) => {
-      setLeaveTypes(response.data);
+      setLeaveTypes(response.data.reverse());
     })
     .catch((error) => {
       console.log(error);

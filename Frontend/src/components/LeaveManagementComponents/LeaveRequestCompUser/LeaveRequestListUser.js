@@ -12,6 +12,7 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
 import Pagination from '@mui/material/Pagination';
+import {toast} from 'react-toastify';
 
 function LeaveRequestListUser(props) {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -32,7 +33,7 @@ function LeaveRequestListUser(props) {
     if (employeeId) {
       EmployeeService.getLeaveRequestByEmployeeId(employeeId)
         .then((response) => {
-          setLeaveRequests(response.data);
+          setLeaveRequests(response.data.reverse());
           console.log(response.data);
         })
         .catch((error) => {
@@ -62,6 +63,7 @@ function LeaveRequestListUser(props) {
           setLeaveRequests(leaveRequests.filter((request) => request.requestId !== selectedRequestId));
           setSelectedRequestId(null);
           setDeleteDialogOpen(false);
+          toast.success("Leave Request Deleted Sucessfully!!");
         })
         .catch((error) => {
           console.log("Error deleting leave request:", error);

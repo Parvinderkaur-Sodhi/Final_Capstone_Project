@@ -1,19 +1,12 @@
 
 import React from 'react'
-import HrService from '../../../services/hr.service';
 
-import {Stack,Typography,Button,Card,Paper,InputBase,Divider,IconButton, Drawer,Grid, Box, Dialog, Snackbar, Alert, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
+import {Stack,Typography,Button,Card,Grid} from '@mui/material';
 // import SearchJob from './SearchJob';
-import { ChairOutlined, ChangeCircle, CurrencyRupeeSharp } from '@mui/icons-material';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 // import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import employeeService from '../../../services/employee.service';
-import hrService from '../../../services/hr.service';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ViewJob = (props) => {
@@ -63,21 +56,23 @@ props.job &&  props.job.map((j,index)=>
     
       const date=new Date(j.publish_date);
       const currdate=new Date();
-      var diff=currdate.getDate()-date.getDate();
-// var days=diff/(1000*60*60*24);
+      var diffinmilli=Math.abs(date.getTime()-currdate.getTime());
+var diff=Math.ceil(diffinmilli/(1000*3600*24));
       return (
     <>
     
           <Card style={{width:300,height:100,margin:"5px 20px 10px",borderRadius:10,backgroundColor:"white"}}>
               <Stack direction="row">
                <Typography style={{fontSize:12,margin:"10px 20px"}}>{j.category}</Typography>
-              <Typography  style={{bgcolor:"white",marginTop:"10px",marginLeft:"70px",color:"black",fontSize:12}} >{diff} days ago</Typography>
+            {diff>0 &&  <Typography  style={{bgcolor:"white",marginTop:"10px",marginLeft:"70px",color:"black",fontSize:12}} >{diff} days ago</Typography>}
+                        {diff==0 &&  <Typography  style={{bgcolor:"white",marginTop:"10px",marginLeft:"70px",color:"black",fontSize:12}} >Today</Typography>}
+
    </Stack>
     <Typography style={{fontSize:20,fontWeight:'bolder',color:"#88304E",margin:"-15px 20px"}}>{j.jobProfile}</Typography> 
    
 <Stack direction="row">
   <Stack>
-       <Typography style={{fontSize:12,margin:"30px 20px",fontWeight:"bolder"}}>1 Opening</Typography>   
+       <Typography style={{fontSize:12,margin:"30px 20px",fontWeight:"bolder"}}>{j.vacancy} opening</Typography>   
 </Stack>
 <Button variant="outlined"  onClick={()=>{ViewAppliedJobs(j.jobProfile)}} style={{width:70,height:30,backgroundColor:"#88304E",color:"white",margin:"25px 40px"}}>
   <Typography style={{fontSize:10}} >Details</Typography></Button>  

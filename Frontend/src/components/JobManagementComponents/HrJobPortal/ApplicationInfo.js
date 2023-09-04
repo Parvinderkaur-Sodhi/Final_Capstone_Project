@@ -42,7 +42,7 @@ hrService.getEmployeeById(props.index).then((response)=>{
            <Stack direction="row" mt={4}>
             <Stack>
             <Typography>DOB</Typography>
-            <Typography>{emp.dob}</Typography>
+            <Typography>{new Date(emp.dob).toLocaleDateString()}</Typography>
 </Stack>
 <Stack ml={5}>
             <Typography>Phone No</Typography>
@@ -72,12 +72,12 @@ hrService.getEmployeeById(props.index).then((response)=>{
            <Stack direction="row" mt={4}>
             <Stack>
             <Typography>Date of Joining</Typography>
-            <Typography>Ui/Ux Designer</Typography>
+            <Typography>{new Date(emp.doJoining).toLocaleDateString()}</Typography>
 </Stack>
-   <Stack ml={8}>
+   {/* <Stack ml={8}>
             <Typography>Skills set</Typography>
-            <Typography>cpp</Typography>
-</Stack>
+            <Typography>{emp.skills}</Typography>
+</Stack> */}
         </Stack>
      
     <Button variant="contained"  onClick={()=>{

@@ -4,6 +4,7 @@ import HrService from "../../../services/hr.service";
 import { TextField, Button, Box, Card, CardContent, CardActions, CardHeader } from "@mui/material";
 import { Done } from "@mui/icons-material";
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
+import {toast} from 'react-toastify';
 
 function UpdateLeaveType(props) {
     const { user: currentUser } = props;
@@ -35,11 +36,12 @@ function UpdateLeaveType(props) {
 
         HrService.updateLeaveType(leaveType.typeId, updatedLeaveType)
             .then((response) => {
-                alert("Leave Type Updated successfully!!");
                 setRedirectToList(true);
+                toast.success("Leave Type Updated successfully!!");
             })
             .catch((error) => {
                 console.log("Error updating leave type:", error);
+                toast.error("Error Updating Leave Type!!");
             });
     };
 

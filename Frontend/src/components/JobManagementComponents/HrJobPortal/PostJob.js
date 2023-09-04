@@ -15,6 +15,7 @@ import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min
 function Postjob(props) {
     const [job, setJob] = useState({});
     const [addSuccess, setAddSuccess] = useState(false);
+    const [dateWarning,setDateWarning]=useState(false);
  const {id} = useParams();
 const history=useHistory();
 
@@ -30,12 +31,30 @@ const history=useHistory();
     }, [])
 
     const handleFieldChange = (fieldName, value) => {
+        if(fieldName=="lastdate"){
+const date=new Date();
+const givendate=new Date(value);
+console.log(date);
+if(givendate.getTime()<date.getTime()){
+    setDateWarning(true);
+}
+
+     else{
         const v=`"${fieldName}"`;
         setJob((prevjob) => ({
             ...prevjob,
            [fieldName]: value,
         }));
-    
+        }   
+
+    }
+      else{
+        const v=`"${fieldName}"`;
+        setJob((prevjob) => ({
+            ...prevjob,
+           [fieldName]: value,
+        }));
+        }
     };
 
     const handleAdd = (e) => {
@@ -181,6 +200,7 @@ else{
                                 onChange={(e) => handleFieldChange("lastdate", e.target.value)}
                                 fullWidth
                                 variant="outlined"
+                                minDate={new Date(Date.now())}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -225,8 +245,18 @@ style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"
             sx={{width:400,marginTop:20}}
             autoHideDuration={5000}
             >
-                <Alert severity="success" variant="filled">
+                <Alert severity="success" variant="filled" onClose={()=>setAddSuccess(false)}>
                     SuccessFully Added !
+                </Alert>
+            </Snackbar>
+             <Snackbar open={dateWarning}
+            anchorOrigin={{vertical:"bottom",horizontal:"center"}}
+            onclose={()=>setAddSuccess(false)}
+            sx={{width:400,marginTop:20}}
+            autoHideDuration={5000}
+            >
+                <Alert severity="warning" variant="filled" onClose={()=>setDateWarning(false)}>
+                    Date should not have past values !!
                 </Alert>
             </Snackbar>
         </div>

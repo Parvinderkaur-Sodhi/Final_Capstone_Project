@@ -12,6 +12,8 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from './helpers/history';
 import EventBus from "./common/EventBus";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import EmployeeList from "./components/EmployeeComponents/EmployeeList";
 import EmployeeDetails from "./components/EmployeeComponents/EmployeeDetails";
@@ -41,15 +43,15 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
 
 import { Details } from "@mui/icons-material";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
-import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
+// import AllJob from "./components/JobManagementComponents/CustomerJobPortal/AllJob";
 
 import ProfileNavigationItem from "./components/DashBoardComponents/ProfileNavigationItem";
 import PostJob from "./components/JobManagementComponents/HrJobPortal/PostJob";
@@ -162,6 +164,7 @@ class App extends Component {
           </nav>
 
           <div className="container mt-3" style={{ marginRight: "8rem", width: "1420px", height: "82vh" }}>
+          <ToastContainer />
             {/* height: "84vh" */}
             <Switch>
               <Route exact path={["/", "/login"]} component={Login} />

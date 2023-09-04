@@ -8,6 +8,7 @@ import { Add } from "@mui/icons-material";
 import { DatePicker } from '@mui/lab/DatePicker';
 import "react-datepicker/dist/react-datepicker.css";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
+import {toast} from 'react-toastify';
 
 function AddEmployee(props) {
     const [employee, setEmployee] = useState({});
@@ -43,6 +44,7 @@ function AddEmployee(props) {
         HrService.saveEmployee(employee)
             .then(() => {
                 setAddSuccess(true);
+                toast.success("Employee Added Successfully!!");
             })
             .catch((error) => {
                 console.log("Error adding employee:", error);
@@ -111,7 +113,7 @@ function AddEmployee(props) {
                                     variant="outlined"
                                 />
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            {/* <Grid item xs={12} md={6}>
                                 <TextField
                                     label="Department"
                                     value={employee.department || ""}
@@ -119,7 +121,25 @@ function AddEmployee(props) {
                                     fullWidth
                                     variant="outlined"
                                 />
+                            </Grid> */}
+
+                            <Grid item xs={12} md={6}>
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel>Department</InputLabel>
+                                    <Select
+                                         label="Department"
+                                         value={employee.department || ""}
+                                         onChange={(e) => handleFieldChange("department", e.target.value)}
+                                    >
+                                        <MenuItem value="HR">HR</MenuItem>
+                                        <MenuItem value="IT">IT</MenuItem>
+                                        <MenuItem value="Marketing">Marketing</MenuItem>
+                                        <MenuItem value="Other">Other</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
+
+
                             <Grid item xs={12} md={6}>
                                 <TextField
                                     label="Email"

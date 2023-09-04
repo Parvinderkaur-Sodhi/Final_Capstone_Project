@@ -67,7 +67,7 @@ public class AuthController {
         if (selectedRole.equals(userDetails.getRole())) {
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getRole(), userDetails.getUsername(), userDetails.getEmail()));
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Error: Unauthorized"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Error! Unauthorized Access"));
         }
 
 }
@@ -75,11 +75,11 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error! username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error! Email is already in use!"));
         }
 
         // Create new user account

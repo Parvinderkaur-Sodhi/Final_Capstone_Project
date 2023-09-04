@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { Delete, Create, AddCircleOutline } from '@mui/icons-material';
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
 import Pagination from '@mui/material/Pagination';
+import {toast} from 'react-toastify';
 
 function LeaveTypeList(props) {
   const [leaveTypes, setLeaveTypes] = useState([]);
@@ -39,6 +40,7 @@ function LeaveTypeList(props) {
           setLeaveTypes(leaveTypes.filter((lt) => lt.typeId !== selectedLeaveType.typeId));
           setSelectedLeaveType(null);
           setDeleteDialogOpen(false);
+          toast.error("Leave Type deleted Sucessfully!!")
         })
         .catch((error) => {
           console.log("Error deleting leave type:", error);
