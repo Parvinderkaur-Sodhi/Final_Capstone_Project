@@ -17,16 +17,16 @@ const useStyles = makeStyles((theme) => ({
   attendanceCard: {
     //backgroundColor: red[100],
     backgroundColor: "lightgrey",
-    padding: 16, // Use numeric value instead of theme.spacing
-    borderRadius: 8, // Use numeric value instead of theme.spacing
+    padding: 16, 
+    borderRadius: 8, 
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
   },
   attendanceStatus: {
     color: "#fff",
     backgroundColor: (props) =>
       props.attendanceStatus === "Poor" ? "red" : "green",
-    padding: 8, // Use numeric value instead of theme.spacing
-    borderRadius: 8, // Use numeric value instead of theme.spacing
+    padding: 8, 
+    borderRadius: 8, 
     display: "inline-block",
   },
 }));
