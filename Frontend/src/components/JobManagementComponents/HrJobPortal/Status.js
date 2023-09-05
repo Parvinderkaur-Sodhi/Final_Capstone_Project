@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Card from '@mui/material/Card';
 import { CancelOutlined, Done } from '@mui/icons-material';
 import ApplicationInfo from './ApplicationInfo';
+import { toast } from 'react-toastify';
 const Status = (props) => {
     const [applicationJob,setApplicationJob]=useState([]);
     const [d,setD]=useState();
@@ -55,6 +56,7 @@ const handleDeleteConfirm = () => {
   };
     hrService.updateStatus(selectedRequestId,obj).then((response)=>{
         console.log(response.data);
+        toast.success("Status updated successfully !");
         viewByprofileandStatus();
             setDialogOpen(false);
 

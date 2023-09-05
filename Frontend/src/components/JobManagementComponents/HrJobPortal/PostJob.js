@@ -11,6 +11,7 @@ import hrService from "../../../services/hr.service";
 import { MenuItem, TextField } from "@material-ui/core";
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
 
 function Postjob(props) {
     const [job, setJob] = useState({});
@@ -36,7 +37,7 @@ const date=new Date();
 const givendate=new Date(value);
 console.log(date);
 if(givendate.getTime()<date.getTime()){
-    setDateWarning(true);
+    toast.warning("Date should not have past values!");
 }
 
      else{
@@ -63,10 +64,10 @@ if(id){
     console.log(job);
 hrService.updateJob(id,job).then((response) => {
                 console.log(response.data);
-                setAddSuccess(true);
+                toast.success("Successfully Updated");
                 history.push(`/AppliedJobs/${response.data["jobProfile"]}`);
     }).catch(error => {
-                console.log(error)
+                toast.error(error);
             })
 
         }
@@ -75,17 +76,15 @@ else{
         hrService.postJob(job)
             .then((response) => {
                 console.log(response.data);
-                setAddSuccess(true);
+                toast.success("Successfully Added");
             })
             .catch((error) => {
-                console.log("Error adding job:", error);
+                toast.error("Error adding job:", error);
             });
         }
     };
 
-    const handleClose=()=>{
-        setAddSuccess(false);
-    }
+  
   
 
     return (
@@ -239,16 +238,7 @@ style={{width:150,height:40,backgroundColor:"#98144d",margin:"20px 30px",color:"
                     </form>
                 </CardContent>
             </Card>
-            <Snackbar open={addSuccess}
-            anchorOrigin={{vertical:"bottom",horizontal:"center"}}
-            onclose={()=>setAddSuccess(false)}
-            sx={{width:400,marginTop:20}}
-            autoHideDuration={5000}
-            >
-                <Alert severity="success" variant="filled" onClose={()=>setAddSuccess(false)}>
-                    SuccessFully Added !
-                </Alert>
-            </Snackbar>
+         
              <Snackbar open={dateWarning}
             anchorOrigin={{vertical:"bottom",horizontal:"center"}}
             onclose={()=>setAddSuccess(false)}
