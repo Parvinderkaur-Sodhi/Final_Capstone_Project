@@ -31,10 +31,10 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
         <Box boxShadow={1} borderWidth='1px' borderRadius={10} p={1}  width="40px"  height="40px" backgroundColor="#e3dbfa"><CurrencyRupeeSharp/></Box>
                 <Typography style={{fontSize:15,color:"#909fa5"}}>Salary</Typography>  
 
-        <Typography style={{fontSize:15}}>Rs.{jobInfo[0].salary}</Typography>  
+        <Typography style={{fontSize:15}}>Rs.{jobInfo[0].salary} p.a</Typography>  
 
         </div>
-          <div style={{marginRight:"44px"}}>
+          <div style={{marginRight:"74px"}}>
         <Box boxShadow={1} borderWidth='1px' borderRadius={10} p={1}  width="40px"  height="40px" backgroundColor="#e3dbfa"><Timelapse/></Box>
                 <Typography style={{fontSize:15,color:"#909fa5"}}>job Type</Typography>  
 
@@ -49,19 +49,22 @@ hrService.getJobByprofile(jobProfile).then((response)=>{
 
         </div>
       </Stack>
-        <Stack ml={1}>
-               <Typography style={{fontSize:15,margin:"3px 30px 0px "}}>{jobInfo[0].category}</Typography>  
-  <Typography style={{fontSize:15,margin:"4px 30px"}}>Published Date:{jobInfo[0].publish_date[2]}/{jobInfo[0].publish_date[1]}/{jobInfo[0].publish_date[0]}</Typography>   
-
-               </Stack>
+      
           
    
-<Stack mt={1} ml={5}>
-      <h5>Descriptions</h5>
-      <Typography color="#5d6c72">{jobInfo[0].description}</Typography>
-      <Typography mt={4} color="#5d6c72">{jobInfo[0].specialization}</Typography>
-            <Typography mt={3} color="#909fa5">Last Date to Apply :<strong>{jobInfo[0].lastdate[2]}-{jobInfo[0].lastdate[1]}-{jobInfo[0].lastdate[0]}</strong></Typography>
-              <Typography mt={2} color="#909fa5">Total position Availabel:<strong>{jobInfo[0].vacancy}</strong></Typography>
+<Stack mt={3} ml={5}>
+      <h5>Description : </h5>
+      <ul>
+     <li><Typography color="#5d6c72">{jobInfo[0].description}</Typography></li>
+      <li><Typography mt={1} color="#5d6c72">Must have good hands on  {jobInfo[0].specialization}</Typography></li>
+        <Stack mt={1}>
+              <li> <Typography style={{color:"#5d6c72"}}>Domain : {jobInfo[0].category}</Typography>  </li>
+  <li><Typography style={{marginTop:"4px",color:"#5d6c72"}}>Published Date:{jobInfo[0].publish_date[2]}/{jobInfo[0].publish_date[1]}/{jobInfo[0].publish_date[0]}</Typography>  </li> 
+
+               </Stack>
+               </ul>
+            <Typography mt={4} color="#909fa5">Last Date to Apply :<strong>{jobInfo[0].lastdate[2]}-{jobInfo[0].lastdate[1]}-{jobInfo[0].lastdate[0]}</strong></Typography>
+              <Typography mt={1} color="#909fa5">Total position Availabel:<strong>{jobInfo[0].vacancy}</strong></Typography>
 </Stack>
   </div>
   }
