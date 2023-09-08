@@ -133,9 +133,9 @@ function HrHome(props) {
                       outerRadius: 40,
                       cx: 70,
                       cy: 80,
-                       innerRadius: 70,
-      outerRadius: 40,
-      cx: 80,
+                      innerRadius: 70,
+                      outerRadius: 40,
+                      cx: 80,
                     }
 
                   ]}
