@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import {Stack,Typography,Button,Card,Paper,InputBase,Divider,IconButton, Drawer} from '@mui/material';
+import {Stack,Typography,Button,Card,Paper,InputBase,Divider,IconButton, Drawer, CircularProgress} from '@mui/material';
 import { Search } from '@mui/icons-material';
 import hrService from '../../../services/hr.service';
 
 const SearchJob = (props) => {
-
+const [loading,setLoading]=useState(false);
 const displayAllJobs=()=>{
      hrService.getAllJobs().then((response) => {
             props.setJob(response.data)
@@ -15,6 +15,7 @@ const displayAllJobs=()=>{
 }
 
     const searchByGroceryName=(val)=>{
+      setLoading(true);
        console.log(val.length);
        if(val.length==0){
         displayAllJobs();
@@ -24,11 +25,13 @@ const displayAllJobs=()=>{
               console.log(response.data);
 if(response.data.length>0){
                    props.setJob([]);
+                   setLoading(false);
                    response.data.forEach((i)=>{
           props.setJob(prevstate=>[...prevstate,i]);
                    })
 }
 else{
+  setLoading(false);
 props.setJob([]);
 }
         }).catch(error =>{
@@ -37,6 +40,7 @@ props.setJob([]);
       }
     }
   return (
+    <>
 <Paper
       style={{  display: 'flex', alignItems: 'center', width:500,height:50,border:"0px solid grey",borderRadius:40 }}
     >
@@ -50,7 +54,9 @@ props.setJob([]);
       <Divider style={{ height: 50}} orientation="vertical" />
 <IconButton color="primary" style={{ p: '10px' }} aria-label="directions">
 <Search/>  </IconButton>
-    </Paper>  )
+    </Paper> 
+    </>
+     )
 }
 
 export default SearchJob

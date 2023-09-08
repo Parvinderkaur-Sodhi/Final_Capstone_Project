@@ -1,22 +1,16 @@
 
 import React from 'react'
 
-import {Stack,Typography,Button,Card,Grid} from '@mui/material';
-// import SearchJob from './SearchJob';
-// import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import {Stack,Typography,Button,Card,Grid, CircularProgress} from '@mui/material';
+
 import { useEffect } from 'react';
 import { useState } from 'react';
 import employeeService from '../../../services/employee.service';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ViewJob = (props) => {
-    const categoryList=["design","development","testing","sales"];
-    const seniorityList=["Senior","Junior","Middle"];
-    const jobType=["Full time","Part Time","Remote","Internship"];
-    const experience=[1,2,3,"4 and above"];
-    // const salary=[]
    
-    const [category,setCategory]=useState();
+   const[loading,setLoading]=useState(true);
     const history=useHistory();
     useEffect(() => {
 
@@ -30,6 +24,7 @@ const token=user["accessToken"];
 //     }
     const getAllCustomerDetails = (token) => {
         employeeService.getAllJobs(token).then((response) => {
+          setLoading(false);
             props.setJob(response.data)
             console.log(response.data);
         }).catch(error =>{
@@ -49,7 +44,7 @@ history.push(`/AppliedJobs/${jobProfile}`);
      
     <h4 style={{margin:"50px 34px"}}>Recommended Jobs </h4>
     <Grid container>
-
+{loading && <CircularProgress/>}
 {
 props.job &&  props.job.map((j,index)=>
     {

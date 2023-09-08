@@ -11,6 +11,7 @@ import hrService from "../../../services/hr.service";
 import { MenuItem, TextField } from "@material-ui/core";
 import HrNavbar from "../../DashBoardComponents/HrNavbar";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
 
 function Postjob(props) {
     const [job, setJob] = useState({});
@@ -36,7 +37,7 @@ function Postjob(props) {
             const givendate = new Date(value);
             console.log(date);
             if (givendate.getTime() < date.getTime()) {
-                setDateWarning(true);
+                toast.warning("Date should not have past values!");
             }
 
             else {
@@ -63,10 +64,10 @@ function Postjob(props) {
             console.log(job);
             hrService.updateJob(id, job).then((response) => {
                 console.log(response.data);
-                setAddSuccess(true);
+                toast.success("Successfully Updated");
                 history.push(`/AppliedJobs/${response.data["jobProfile"]}`);
             }).catch(error => {
-                console.log(error)
+                toast.error(error);
             })
 
         }
@@ -75,19 +76,17 @@ function Postjob(props) {
             hrService.postJob(job)
                 .then((response) => {
                     console.log(response.data);
-                    setAddSuccess(true);
+                    toast.success("Successfully Added");
                     history.push('/HrJob');
                 })
                 .catch((error) => {
-                    console.log("Error adding job:", error);
+                    toast.error("Error adding job:", error);
                 });
         }
     };
 
-    const handleClose = () => {
-        setAddSuccess(false);
-    }
-
+  
+  
 
     return (
         <>
@@ -237,30 +236,21 @@ function Postjob(props) {
                                 </Box>
                             </Grid>
 
-                        </form>
-                    </CardContent>
-                </Card>
-                <Snackbar open={addSuccess}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                    onclose={() => setAddSuccess(false)}
-                    sx={{ width: 400, marginTop: 20 }}
-                    autoHideDuration={5000}
-                >
-                    <Alert severity="success" variant="filled" onClose={() => setAddSuccess(false)}>
-                        SuccessFully Added !
-                    </Alert>
-                </Snackbar>
-                <Snackbar open={dateWarning}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                    onclose={() => setAddSuccess(false)}
-                    sx={{ width: 400, marginTop: 20 }}
-                    autoHideDuration={5000}
-                >
-                    <Alert severity="warning" variant="filled" onClose={() => setDateWarning(false)}>
-                        Date should not have past values !!
-                    </Alert>
-                </Snackbar>
-            </div>
+                    </form>
+                </CardContent>
+            </Card>
+         
+             <Snackbar open={dateWarning}
+            anchorOrigin={{vertical:"bottom",horizontal:"center"}}
+            onclose={()=>setAddSuccess(false)}
+            sx={{width:400,marginTop:20}}
+            autoHideDuration={5000}
+            >
+                <Alert severity="warning" variant="filled" onClose={()=>setDateWarning(false)}>
+                    Date should not have past values !!
+                </Alert>
+            </Snackbar>
+        </div>
         </>
     );
 }

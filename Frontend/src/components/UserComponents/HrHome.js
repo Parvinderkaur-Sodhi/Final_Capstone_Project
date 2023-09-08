@@ -114,12 +114,15 @@ function HrHome(props) {
           <Grid item xs={4}>
             <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
+                <Typography variant="h5" style={{ margin: "17px" }}>
+                  <strong>Job Category</strong>
+                </Typography>
                 <PieChart
                   series={[
                     {
                       data: [
                         { id: 0, value: total[0], label: 'design', color: '#98144d' },
-                        { id: 1, value: total[1], label: 'Development', color: '#a22b5e' },
+                        { id: 1, value: total[1], label: 'Develop', color: '#a22b5e' },
                         { id: 2, value: total[2], label: 'Testing', color: '#c17294' },
                         { id: 4, value: total[3], label: 'Sales', color: '#d182a0' },
                         { id: 5, value: total[4], label: 'Marketing', color: '#ead0db' },
@@ -130,11 +133,14 @@ function HrHome(props) {
                       outerRadius: 40,
                       cx: 70,
                       cy: 80,
+                       innerRadius: 70,
+      outerRadius: 40,
+      cx: 80,
                     }
 
                   ]}
-                  width={250}
-                  height={170}
+                  width={280}
+                  height={200}
                 />
               </CardContent>
             </Card>
