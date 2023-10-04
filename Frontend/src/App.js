@@ -43,11 +43,11 @@ import HrHome from "./components/UserComponents/HrHome";
 import EmployeeHome from "./components/UserComponents/EmployeeHome";
 import UserList from "./components/UserComponentsAdmin/UserList";
 
-import AttendanceList from "./components/AttendanceComponents/AttendanceList";
-import UpdateAttendance from "./components/AttendanceComponents/UpdateAttendance";
-import SingleEmpAttendance from "./components/AttendanceComponents/SingleEmpAttendance";
-import MarkAttendance from "./components/AttendanceComponents/MarkAttendance";
-import PendingList from "./components/AttendanceComponents/PendingList";
+import AttendanceList from "./components/Attendancecomponents/AttendanceList";
+import UpdateAttendance from "./components/Attendancecomponents/UpdateAttendance";
+import SingleEmpAttendance from "./components/Attendancecomponents/SingleEmpAttendance";
+import MarkAttendance from "./components/Attendancecomponents/MarkAttendance";
+import PendingList from "./components/Attendancecomponents/PendingList";
 
 import { Details } from "@mui/icons-material";
 import JobDetails from "./components/JobManagementComponents/HrJobPortal/JobDetails";
@@ -206,8 +206,8 @@ class App extends Component {
 
                   <Route path="/mark-attendance" render={(props) => <MarkAttendance {...props} user={this.props.user} />} />
                   <Route path="/your-attendance/:employeeId" render={(props) => <SingleEmpAttendance {...props} user={this.props.user} />} />
-                  <Route exact path="/EmpJobPortal/:empid" component={CustomerJobPortal} />
-                  <Route exact path="/trackStatus/:empid" component={TrackStatus} />
+                  <Route exact path="/EmpJobPortal" component={CustomerJobPortal} />
+                  <Route exact path="/trackStatus" component={TrackStatus} />
 
                 </>
 

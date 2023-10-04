@@ -14,8 +14,7 @@ const displayAllJobs=()=>{
         })
 }
 
-    const searchByGroceryName=(val)=>{
-      setLoading(true);
+    const searchByJobName=(val)=>{
        console.log(val.length);
        if(val.length==0){
         displayAllJobs();
@@ -25,13 +24,11 @@ const displayAllJobs=()=>{
               console.log(response.data);
 if(response.data.length>0){
                    props.setJob([]);
-                   setLoading(false);
                    response.data.forEach((i)=>{
           props.setJob(prevstate=>[...prevstate,i]);
                    })
 }
 else{
-  setLoading(false);
 props.setJob([]);
 }
         }).catch(error =>{
@@ -47,7 +44,7 @@ props.setJob([]);
        <InputBase
         style={{  padding:50,flex: 1 }}
         placeholder="Search for jobs"
-        onChange = {event => searchByGroceryName(event.currentTarget.value)}
+        onChange = {event => searchByJobName(event.currentTarget.value)}
 
       />
   

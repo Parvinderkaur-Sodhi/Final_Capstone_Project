@@ -79,8 +79,9 @@ function EmployeeHome(props) {
 
   useEffect(()=>{
   status.forEach((i)=>{
+    console.log(i);
     employeeService.getByidandstatus(employeeId,i).then((response)=>{
-      console.log(response.data.length);
+      console.log(response.data);
       setLen((prev)=>[...prev,response.data.length]);
     })
     })
