@@ -3,7 +3,7 @@ import { Redirect, useParams, useHistory } from 'react-router-dom';
 import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Card, CardContent, CardHeader } from "@mui/material";
 import EmployeeService from "../../../services/employee.service";
 import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function UpdateLeaveRequestUser(props) {
     const { user: currentUser } = props;
@@ -11,6 +11,7 @@ function UpdateLeaveRequestUser(props) {
     const history = useHistory();
     const [leaveBalances, setLeaveBalances] = useState([]);
     const [leaveTypes, setLeaveTypes] = useState([]);
+    const [fetchedLeaveRequests, setFetchedLeaveRequests] = useState([]);
     const [leaveRequest, setLeaveRequest] = useState({
         leaveTypeId: "",
         startDate: "",
@@ -66,6 +67,16 @@ function UpdateLeaveRequestUser(props) {
                 console.log(error);
             });
     }, []);
+
+    useEffect(() => {
+        EmployeeService.getLeaveRequestByEmployeeId(localStorage.getItem("employeeId"))
+            .then((response) => {
+                setFetchedLeaveRequests(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [currentUser]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -156,6 +167,25 @@ function UpdateLeaveRequestUser(props) {
                     return;
                 } else {
                     setLeaveBalanceError("");
+                }
+            }
+
+            // Check for date conflicts with existing leave requests
+            const leaveRequestStartDate = new Date(leaveRequest.startDate);
+            const leaveRequestEndDate = new Date(leaveRequest.endDate);
+
+            for (const fetchedLeaveRequest of fetchedLeaveRequests) {
+                const fetchedStartDate = new Date(fetchedLeaveRequest.startDate);
+                const fetchedEndDate = new Date(fetchedLeaveRequest.endDate);
+
+                // Check if the leave request overlaps with an existing request
+                if (
+                    (leaveRequestStartDate >= fetchedStartDate && leaveRequestStartDate <= fetchedEndDate) ||
+                    (leaveRequestEndDate >= fetchedStartDate && leaveRequestEndDate <= fetchedEndDate) ||
+                    (fetchedStartDate >= leaveRequestStartDate && fetchedEndDate <= leaveRequestEndDate)
+                ) {
+                    setLeaveBalanceError("Leave request conflicts with an existing request");
+                    return;
                 }
             }
 

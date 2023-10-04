@@ -52,6 +52,7 @@ function LeaveBalanceList(props) {
   const indexOfLastBalance = currentPage * leaveBalancesPerPage;
   const indexOfFirstBalance = indexOfLastBalance - leaveBalancesPerPage;
   const currentBalances = filteredLeaveBalances.slice(indexOfFirstBalance, indexOfLastBalance);
+  
 
   // Change the page
   const handlePageChange = (event, value) => {
@@ -109,12 +110,12 @@ function LeaveBalanceList(props) {
                     <TableCell style={{ width: "10%" }}>ID</TableCell>
                     <TableCell style={{ width: "10%" }}>Employee Name</TableCell>
                     <TableCell style={{ width: "10%" }}>Leave Type</TableCell>
-                    <TableCell style={{ width: "10%" }}>Balance</TableCell>
+                    <TableCell style={{ width: "10%" }}>Leave Balance</TableCell>
                     <TableCell style={{ width: "10%" }}>Leaves Used</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredLeaveBalances.map((leaveBalance) => (
+                  {currentBalances.map((leaveBalance) => (
                     <TableRow key={leaveBalance.balanceId}>
                       <TableCell>{leaveBalance.balanceId}</TableCell>
                       <TableCell>{leaveBalance.employee.fname}</TableCell>
