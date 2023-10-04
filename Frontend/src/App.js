@@ -113,7 +113,16 @@ class App extends Component {
             <Link to={"/"} className="navbar-brand">
               <img src="./logo-cropped.webp" height={40}></img> &nbsp; HRMS/Job Portal System
             </Link>
-          
+            <div className="navbar-nav mr-auto">
+
+              {currentUser && (
+                <li className="nav-item">
+                  <Link to={"#"} className="nav-link">
+                    
+                  </Link>
+                </li>
+              )}
+            </div>
 
             {currentUser ? (
               <div className="navbar-nav ml-auto">
