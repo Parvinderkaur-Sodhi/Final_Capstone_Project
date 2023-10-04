@@ -7,7 +7,7 @@ import FilterByCategory from './FilterByCategory';
 import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
 
 const CustomerJobPortal = () => {
-  const { empid } = useParams();
+  const { empid } = localStorage.getItem("employeeId");
   const [job, setJob] = useState([]);
   const history = useHistory();
 

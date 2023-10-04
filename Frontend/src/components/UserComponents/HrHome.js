@@ -151,6 +151,9 @@ function HrHome(props) {
           <Grid item xs={4}>
             <Card sx={{ backgroundColor: "lightgrey" }} >
               <CardContent>
+                    <Typography variant="h5" style={{ margin: "17px" }}>
+                  <strong>Application Status</strong>
+                </Typography>
                 <PieChart
                   series={[
 

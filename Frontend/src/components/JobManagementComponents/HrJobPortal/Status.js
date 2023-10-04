@@ -38,11 +38,11 @@ const viewByprofileandStatus=()=>{
     if(status=="Inprocess")
     return "#76b5c5";
 if(status=="Accepted")
-return "#00FF00";
+return "#008000";
 if(status=="Rejected")
 return "#D04b4b";
-if(status=="Scheduled Interview")
-return "purple";
+if(status=="Interview")
+return "#F2CC87";
 }
 
 const changeStatus=(id,status)=>{  
@@ -74,7 +74,7 @@ setOpen(true);
 setD(index);
     }
  const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 5;
+  const jobsPerPage = 4;
 const [dialogOpen,setDialogOpen]=useState(false);
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
@@ -101,16 +101,16 @@ const [dialogOpen,setDialogOpen]=useState(false);
         </Dialog>
    {applicationJob.length>0 &&   
    <>
-    <TableContainer component={Paper} style={{ width: "100%" }}>
+    <TableContainer component={Paper} style={{ width: "900px" ,marginLeft:"-80px"}}>
       <Table>
-        <TableHead style={{width:"700px"}}>
+        <TableHead style={{width:"1000px"}}>
 
           <TableRow sx={{backgroundColor:"lightgrey",width:"500px"}}>
             <TableCell width={120}>Application Id</TableCell>
             <TableCell width={160}>Employee Name</TableCell>
-            <TableCell width={200}>Current Profile</TableCell>
+            <TableCell width={250}>Current Profile</TableCell>
             <TableCell width={150}>Status</TableCell>
-         {props.status!=="Rejected" &&  props.status!=="Accepted" && <TableCell width={300}>Action</TableCell>}
+         {props.status!=="Rejected" &&  props.status!=="Accepted" && <TableCell width={500}>Action</TableCell>}
 <TableCell>More</TableCell>
         </TableRow>
         </TableHead>
@@ -126,19 +126,19 @@ const [dialogOpen,setDialogOpen]=useState(false);
               sx={{ '&:last-child td, &:last-child th': { border: 0 } ,height:20}}
             >
               <TableCell component="th" scope="row">{j.applicationId}</TableCell>
-              <TableCell>{j.emp["fname"]+" " +j.emp["lname"]}</TableCell>
-              <TableCell >{j.job["jobProfile"]}</TableCell>
+              <TableCell>{j.emp["fname"]}</TableCell>
+              <TableCell >{j.emp["jobTitle"]}</TableCell>
               <TableCell >
                 <Typography width={80} height={40}  padding={1} style={{color:`${checkColor(j.status)}`}}>
                 {j.status}</Typography></TableCell>
             
  {props.status !=="Rejected" && props.status!=="Accepted" &&
 <TableCell>
-<Button variant="outlined" startIcon={<CancelOutlined/>} onClick={()=>{changeStatus(j.applicationId,"Rejected")}}>
+<Button variant="outlined" startIcon={<CancelOutlined style={{color:"red"}}/>} onClick={()=>{changeStatus(j.applicationId,"Rejected")}}>
 Reject</Button>
  
    
-    <Button variant="outlined" startIcon={<Done/>} onClick={()=>{changeStatus(j.applicationId,JobStatus[JobStatus.indexOf(j.status)+1])}}>
+    <Button variant="outlined" sx={{ marginLeft:"2px"}} startIcon={<Done style={{color:"green"}}/>} onClick={()=>{changeStatus(j.applicationId,JobStatus[JobStatus.indexOf(j.status)+1])}}>
 Next Stage</Button>
 </TableCell>
 }
