@@ -24,6 +24,7 @@ class EmployeeService {
   }
 
   getByidandstatus(id,status) {
+    console.log(status);
     return axios.get(`${API_URL}AppliedJobs/getByIdandStatus/${id}/${status}`, { headers: authHeader() });
 
   }
