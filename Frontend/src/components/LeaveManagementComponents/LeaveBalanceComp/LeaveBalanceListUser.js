@@ -59,7 +59,7 @@ function LeaveBalanceListUser(props) {
 
   const Styles = {
     color: 'black',
-    backgroundColor: "lightgrey", 
+    backgroundColor: "lightgrey",
     fontWeight: "bold",
   };
 
@@ -97,17 +97,17 @@ function LeaveBalanceListUser(props) {
           <br></br>
           <TableContainer component={Paper}>
             <Table>
-              <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}> 
-                <TableRow style = {Styles}>
+              <TableHead style={{ backgroundColor: 'rgb(229, 229, 229)' }}>
+                <TableRow style={Styles}>
                   <TableCell style={{ width: "10%" }}>ID</TableCell>
                   <TableCell style={{ width: "10%" }}>Employee Name</TableCell>
                   <TableCell style={{ width: "10%" }}>Leave Type</TableCell>
-                  <TableCell style={{ width: "10%" }}>Balance</TableCell>
+                  <TableCell style={{ width: "10%" }}>Balance Available</TableCell>
                   <TableCell style={{ width: "10%" }}>Leaves Used</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredLeaveBalances.map((leaveBalance) => (
+                {currentBalances.map((leaveBalance) => (
                   <TableRow key={leaveBalance.balanceId}>
                     <TableCell>{leaveBalance.balanceId}</TableCell>
                     <TableCell>{leaveBalance.employee.fname}</TableCell>

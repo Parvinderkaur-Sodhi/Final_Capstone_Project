@@ -3,13 +3,14 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { Typography, Paper, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Card, CardContent, CardHeader, Alert } from "@mui/material";
 import EmployeeService from "../../../services/employee.service";
 import EmployeeNavbar from "../../DashBoardComponents/EmployeeNavbar";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function AddLeaveRequestUser(props) {
     const { user: currentUser } = props;
     const history = useHistory();
     const [leaveTypes, setLeaveTypes] = useState([]);
     const [leaveBalances, setLeaveBalances] = useState([]);
+    const [fetchedLeaveRequests, setFetchedLeaveRequests] = useState([]);
     const [leaveRequest, setLeaveRequest] = useState({
         leaveTypeId: "",
         startDate: "",
@@ -47,35 +48,52 @@ function AddLeaveRequestUser(props) {
             });
     }, [currentUser]);
 
+    useEffect(() => {
+        EmployeeService.getLeaveRequestByEmployeeId(localStorage.getItem("employeeId"))
+            .then((response) => {
+                setFetchedLeaveRequests(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [currentUser]);
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-      
+
         if (name === "startDate") {
-          const today = new Date();
-          const newStartDate = new Date(value);
-      
-          today.setHours(0, 0, 0, 0);
-          newStartDate.setHours(0, 0, 0, 0);
-      
-          if (newStartDate < today) {
-            setStartDateError(true);
-          } else {
-            setStartDateError(false);
-          }
+            const today = new Date();
+            const newStartDate = new Date(value);
+
+            today.setHours(0, 0, 0, 0);
+            newStartDate.setHours(0, 0, 0, 0);
+
+            if (newStartDate < today) {
+                setStartDateError(true);
+            } else {
+                setStartDateError(false);
+            }
+
+            // Update the leaveRequest object with the new value
+            setLeaveRequest((prevRequest) => ({
+                ...prevRequest,
+                startDate: value,
+            }));
+
         } else if (name === "endDate") {
-          const newEndDate = new Date(value);
-          const startDate = new Date(leaveRequest.startDate);
-      
-          startDate.setHours(0, 0, 0, 0);
-          newEndDate.setHours(0, 0, 0, 0);
-      
-          if (newEndDate < startDate) {
-            setEndDateError(true);
-          } else {
-            setEndDateError(false);
-          }
+            const newEndDate = new Date(value);
+            const startDate = new Date(leaveRequest.startDate);
+
+            startDate.setHours(0, 0, 0, 0);
+            newEndDate.setHours(0, 0, 0, 0);
+
+            if (newEndDate < startDate) {
+                setEndDateError(true);
+            } else {
+                setEndDateError(false);
+            }
         }
-      
+
         setLeaveRequest((prevRequest) => ({
             ...prevRequest,
             [name]: value,
@@ -88,7 +106,6 @@ function AddLeaveRequestUser(props) {
         // Validate leave balance
         const requestedDuration = calculateDateDifference(leaveRequest.startDate, leaveRequest.endDate);
         const selectedLeaveType = leaveTypes.find(type => type.typeId === leaveRequest.leaveTypeId);
-        console.log("leaveTypes:", selectedLeaveType);
 
         if (selectedLeaveType) {
             const leaveBalance = leaveBalances.find(balance => balance.leaveType.typeId === selectedLeaveType.typeId);
@@ -109,6 +126,41 @@ function AddLeaveRequestUser(props) {
                     setLeaveBalanceError("");
                 }
             }
+
+            // // Check for date conflicts with existing leave requests
+            // const leaveRequestStartDate = new Date(leaveRequest.startDate);
+            // const leaveRequestEndDate = new Date(leaveRequest.endDate);
+
+            // for (const fetchedLeaveRequest of fetchedLeaveRequests) {
+            //     const fetchedStartDate = new Date(fetchedLeaveRequest.startDate);
+            //     const fetchedEndDate = new Date(fetchedLeaveRequest.endDate);
+
+            //     // Check if the leave request start date or end date falls within the existing leave request range
+            //     if ((leaveRequestStartDate >= fetchedStartDate && leaveRequestStartDate <= fetchedEndDate) ||
+            //         (leaveRequestEndDate >= fetchedStartDate && leaveRequestEndDate <= fetchedEndDate)) {
+            //         setLeaveBalanceError("Leave request conflicts with an existing request.");
+            //         return;
+            //     }
+            // }
+
+            const leaveRequestStartDate = new Date(leaveRequest.startDate);
+            const leaveRequestEndDate = new Date(leaveRequest.endDate);
+
+            for (const fetchedLeaveRequest of fetchedLeaveRequests) {
+                const fetchedStartDate = new Date(fetchedLeaveRequest.startDate);
+                const fetchedEndDate = new Date(fetchedLeaveRequest.endDate);
+
+                // Check if the leave request overlaps with an existing request
+                if (
+                    (leaveRequestStartDate >= fetchedStartDate && leaveRequestStartDate <= fetchedEndDate) ||
+                    (leaveRequestEndDate >= fetchedStartDate && leaveRequestEndDate <= fetchedEndDate) ||
+                    (fetchedStartDate >= leaveRequestStartDate && fetchedEndDate <= leaveRequestEndDate)
+                ) {
+                    setLeaveBalanceError("Leave request conflicts with an existing request.");
+                    return;
+                }
+            }
+
 
 
             // Proceed with leave request submission
@@ -142,84 +194,84 @@ function AddLeaveRequestUser(props) {
     return (
         <div>
             <EmployeeNavbar />
-            <Card style={{ padding: "10px", paddingBottom: "60px"}}>
+            <Card style={{ padding: "10px", paddingBottom: "60px" }}>
                 <CardContent>
                     <CardHeader className="title" title="Add Leave Request" />
                     <br></br>
                     {/* <Paper elevation={3} sx={{ padding: 2 }}> */}
-                        <form onSubmit={handleSubmit}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <FormControl fullWidth variant="outlined">
-                                        <InputLabel>Leave Type</InputLabel>
-                                        <Select
-                                            name="leaveTypeId"
-                                            value={leaveRequest.leaveTypeId}
-                                            onChange={handleInputChange}
-                                            label="Leave Type"
-                                        >
-                                            {leaveTypes.map((leaveType) => (
-                                                <MenuItem key={leaveType.typeId} value={leaveType.typeId}>
-                                                    {leaveType.typeName}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                    {leaveBalanceError && (
-                                        <Box color="error.main">{leaveBalanceError}</Box>
-                                    )}
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        fullWidth
-                                        name="startDate"
-                                        label="Start Date"
-                                        type="date"
-                                        value={leaveRequest.startDate}
+                    <form onSubmit={handleSubmit}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel>Leave Type</InputLabel>
+                                    <Select
+                                        name="leaveTypeId"
+                                        value={leaveRequest.leaveTypeId}
                                         onChange={handleInputChange}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        error={startDateError}
-                                        helperText={startDateError && "Start date must be today or later"}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        fullWidth
-                                        name="endDate"
-                                        label="End Date"
-                                        type="date"
-                                        value={leaveRequest.endDate}
-                                        onChange={handleInputChange}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        error={endDateError}
-                                        helperText={endDateError && "End date must be on or after start date"}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        name="reason"
-                                        label="Reason"
-                                        multiline
-                                        rows={4}
-                                        value={leaveRequest.reason}
-                                        onChange={handleInputChange}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <br></br>
-                                    <Box display="flex" justifyContent="center">
-                                        <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: '#98144d', color: "white" }}>
-                                            Add Request
-                                        </Button>
-                                    </Box>
-                                </Grid>
+                                        label="Leave Type"
+                                    >
+                                        {leaveTypes.map((leaveType) => (
+                                            <MenuItem key={leaveType.typeId} value={leaveType.typeId}>
+                                                {leaveType.typeName}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                                {leaveBalanceError && (
+                                    <Box color="error.main">{leaveBalanceError}</Box>
+                                )}
                             </Grid>
-                        </form>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    name="startDate"
+                                    label="Start Date"
+                                    type="date"
+                                    value={leaveRequest.startDate}
+                                    onChange={handleInputChange}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    error={startDateError}
+                                    helperText={startDateError && "Start date must be today or later"}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    name="endDate"
+                                    label="End Date"
+                                    type="date"
+                                    value={leaveRequest.endDate}
+                                    onChange={handleInputChange}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    error={endDateError}
+                                    helperText={endDateError && "End date must be on or after start date"}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    name="reason"
+                                    label="Reason"
+                                    multiline
+                                    rows={4}
+                                    value={leaveRequest.reason}
+                                    onChange={handleInputChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <br></br>
+                                <Box display="flex" justifyContent="center">
+                                    <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: '#98144d', color: "white" }}>
+                                        Add Request
+                                    </Button>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </form>
                     {/* </Paper> */}
                 </CardContent>
             </Card>

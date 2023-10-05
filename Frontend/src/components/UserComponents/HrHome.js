@@ -19,7 +19,7 @@ function HrHome(props) {
   const [len, setLen] = useState([]);
   const [total, setTotal] = useState([]);
 
-  
+
   const [eventDialogOpen, setEventDialogOpen] = useState(false);
 
   // Function to open the event dialog
@@ -45,7 +45,7 @@ function HrHome(props) {
 
   // attendance
   useEffect(() => {
-    const currentDate = new Date().toLocaleDateString('en-US'); 
+    const currentDate = new Date().toLocaleDateString('en-US');
 
     HrService.getAllAttendances()
       .then((response) => {
@@ -75,9 +75,9 @@ function HrHome(props) {
         console.log(error);
       });
   }, []);
-  
 
- 
+
+
 
   useEffect(() => {
     status.forEach((i) => {
@@ -114,27 +114,33 @@ function HrHome(props) {
           <Grid item xs={4}>
             <Card sx={{ backgroundColor: "lightgrey" }}>
               <CardContent>
+                <Typography variant="h5" style={{ margin: "17px" }}>
+                  <strong>Job Category</strong>
+                </Typography>
                 <PieChart
                   series={[
                     {
                       data: [
                         { id: 0, value: total[0], label: 'design', color: '#98144d' },
-                        { id: 1, value: total[1], label: 'Development', color: '#a22b5e' },
+                        { id: 1, value: total[1], label: 'Develop', color: '#a22b5e' },
                         { id: 2, value: total[2], label: 'Testing', color: '#c17294' },
                         { id: 4, value: total[3], label: 'Sales', color: '#d182a0' },
                         { id: 5, value: total[4], label: 'Marketing', color: '#ead0db' },
                         { id: 6, value: total[5], label: 'Banking', color: '#f4e7ed' },
 
                       ],
-                       innerRadius: 70,
-      outerRadius: 40,
-      cx: 70,
-      cy: 80,
+                      innerRadius: 70,
+                      outerRadius: 40,
+                      cx: 70,
+                      cy: 80,
+                      innerRadius: 70,
+                      outerRadius: 40,
+                      cx: 80,
                     }
 
                   ]}
-                  width={250}
-                  height={170}
+                  width={280}
+                  height={200}
                 />
               </CardContent>
             </Card>
@@ -143,8 +149,11 @@ function HrHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{  backgroundColor: "lightgrey"  }} >
+            <Card sx={{ backgroundColor: "lightgrey" }} >
               <CardContent>
+                    <Typography variant="h5" style={{ margin: "17px" }}>
+                  <strong>Application Status</strong>
+                </Typography>
                 <PieChart
                   series={[
 
@@ -156,11 +165,11 @@ function HrHome(props) {
                         { id: 4, value: len[3], label: 'Rejected', color: '#fa5f55' },
 
                       ],
-                       innerRadius: 70,
-      outerRadius: 60,
-      
-      cx: 70,
-      cy: 80,
+                      innerRadius: 70,
+                      outerRadius: 60,
+
+                      cx: 70,
+                      cy: 80,
                     }
 
                   ]}
@@ -171,31 +180,31 @@ function HrHome(props) {
             </Card>
           </Grid>
 
-        {/* Attendance */}
-        <Grid item xs={4}>
-          <Card sx={{  backgroundColor: "lightgrey"  }}>
-            <CardContent>
-            <Typography variant="h6" gutterBottom>
-                <strong>Today's Attendance Summary:</strong>
-            </Typography>
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <Typography variant="body1">
-              <strong>Present:</strong> {attendancePercentage.toFixed(2)}%
-            </Typography>
-            <Typography variant="body1">
-              <strong>Absent:</strong>{" "}
-                {(100 - attendancePercentage).toFixed(2)}%
-            </Typography>
-            </div>
-            </CardContent>
-          </Card>
-        </Grid>
+          {/* Attendance */}
+          <Grid item xs={4}>
+            <Card sx={{ backgroundColor: "lightgrey" }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  <strong>Today's Attendance Summary:</strong>
+                </Typography>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <Typography variant="body1">
+                    <strong>Present:</strong> {attendancePercentage.toFixed(2)}%
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Absent:</strong>{" "}
+                    {(100 - attendancePercentage).toFixed(2)}%
+                  </Typography>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
 
 
 
 
           <Grid item xs={6}>
-            <Card sx={{  backgroundColor: "lightgrey" , display: 'flex', justifyContent: 'center' }}>
+            <Card sx={{ backgroundColor: "lightgrey", display: 'flex', justifyContent: 'center' }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   <strong>Calendar</strong>
@@ -221,8 +230,8 @@ function HrHome(props) {
             </Card>
           </Grid>
 
-        
-          <Card sx={{ backgroundColor: "lightgrey", display: "flex", alignItems: "center", marginLeft: "40px", marginTop: "15px", padding: "10px" }}>
+          <Grid item xs={6}>
+            <Card sx={{ backgroundColor: "lightgrey", display: "flex", alignItems: "center", marginTop: "15px", padding: "10px" }}>
               <CardContent>
                 <h3>News and Events</h3>
                 <p>Join our upcoming Tech Talk:</p>
@@ -230,27 +239,29 @@ function HrHome(props) {
                 <strong>Date: </strong> October 15, 2023<br />
                 <strong>Time: </strong> 3:00 PM - 5:00 PM<br />
                 <strong>Location: </strong> Conference Room A<br />
-                <Button onClick={openEventDialog} variant="contained" style={{backgroundColor: "#98144d"}}>
+                <br></br>
+                <Button onClick={openEventDialog} variant="contained" style={{ backgroundColor: "#98144d" }}>
                   Register Now
                 </Button>
               </CardContent>
-          </Card>
+            </Card>
+          </Grid>
           <Dialog open={eventDialogOpen} onClose={closeEventDialog}>
-          <DialogTitle>Register for Tech Talk: Future of AI</DialogTitle>
-          <DialogContent>
-          <p>
-              You missed this exciting Tech Talk on the Future of AI. Registration closed!! 
-          </p>
-          </DialogContent>
-          <DialogActions>
-          <Button onClick={closeEventDialog} color="primary">
-              Close
-          </Button>
-    
-          </DialogActions>
+            <DialogTitle>Register for Tech Talk: Future of AI</DialogTitle>
+            <DialogContent>
+              <p>
+                You missed this exciting Tech Talk on the Future of AI. Registration closed!!
+              </p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={closeEventDialog} color="primary">
+                Close
+              </Button>
+
+            </DialogActions>
           </Dialog>
 
-        
+
 
 
 
