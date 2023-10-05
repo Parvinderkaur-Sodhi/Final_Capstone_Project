@@ -50,6 +50,8 @@ const linkStyles = {
 const EmployeeNavbar = () => {
   const [open, setOpen] = useState(false);
 
+  const empid=localStorage.getItem("employeeId");
+
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
@@ -116,15 +118,15 @@ const EmployeeNavbar = () => {
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/EmpJobPortal/2" style={linkStyles}>
+            <RouterLink to="/EmpJobPortal" style={linkStyles}>
             <WorkIcon style={iconStyles} />
               Browse Jobs
             </RouterLink>
           </li>
-           <li>
-            <RouterLink to="/TrackStatus/2" style={linkStyles}>
+             <li>
+            <RouterLink to="/trackStatus" style={linkStyles}>
             <WorkIcon style={iconStyles} />
-              Applied Jobs
+              Track Status
             </RouterLink>
           </li>
           <li>
