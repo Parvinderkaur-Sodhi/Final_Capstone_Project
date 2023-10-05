@@ -11,8 +11,8 @@ import { toast } from 'react-toastify';
 const AllJob = (props) => {
       const [open,setOpen]=useState(false);
       const[d,setD]=useState(null);
-     const {empid}=useParams();
-          //  const colors=["#e3dbfa","#fbe2f4","#ffe1cc",'#d4f6ed'];
+     const empid=localStorage.getItem("employeeId");
+
     useEffect(()=>{
 getAlljobDetails();
 },[])
@@ -30,13 +30,21 @@ getAlljobDetails();
     const ApplyforJob=(jobId)=>{
       const obj={};
       employeeService.applyforJob(empid,jobId,obj).then((response)=>{
-        if(response.data.length==0){
+         if(response.data.length==0){
           toast.error("Already applied");
               setOpen(false);
+              setD(null);
+        }
+        if(response.data.job==null){
+           toast.error("Deadline has passed");
+              setOpen(false);
+              setD(null);
         }
         else{
                 toast.success("Applied Successfully!!");
       setOpen(false);
+                    setD(null);
+
         }
       })
     }
@@ -49,7 +57,7 @@ setD(index);
   return (
     <>
       
-    <h4 style={{margin:"50px 34px"}}>Recommended Jobs : 12</h4>
+    <h4 style={{margin:"50px 34px"}}>Recommended Jobs : {props.job.length}</h4>
     <Grid container>
 
 {
@@ -154,6 +162,8 @@ variant="persistent"
       )
     }
    ) }
+  {
+    props.job.length==0 &&   <Typography fontSize={30} mt={10} ml={10} color="#98144d">No Result Found !!</Typography>}
   
    </Grid>
 
