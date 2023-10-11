@@ -57,7 +57,7 @@ const history=useHistory();
   return (
     <>
 <HrNavbar/>
-<Card style={{marginLeft:30}}>
+<Card style={{marginLeft:30,height:"580px",width:"1100px"}}>
     <Stack direction="row">
     <Button onClick={()=>back() } style={{width:150,height:40,backgroundColor:"#98144d",margin:"30px 8px",color:"white"}}>Back</Button> 
     <Stack direction="row" ml={2}>

@@ -79,8 +79,9 @@ function EmployeeHome(props) {
 
   useEffect(()=>{
   status.forEach((i)=>{
+    console.log(i);
     employeeService.getByidandstatus(employeeId,i).then((response)=>{
-      console.log(response.data.length);
+      console.log(response.data);
       setLen((prev)=>[...prev,response.data.length]);
     })
     })
@@ -126,14 +127,16 @@ function EmployeeHome(props) {
 
           {/* Job Offers */}
           <Grid item xs={4}>
-            <Card sx={{backgroundColor: "lightgrey", display: "flex", justifyContent: "center"}}>
-              <CardContent>
+            <Card sx={{backgroundColor: "lightgrey"}}>
+                <Typography variant="h5" style={{ margin: "17px" }}>
+                  <strong>Job Category</strong>
+                </Typography>
                 <PieChart
                   series={[
                     {
                       data: [
                           { id: 0, value: total[0], label: 'design', color: '#98144d' },
-                        { id: 1, value: total[1], label: 'Development', color: '#a22b5e' },
+                        { id: 1, value: total[1], label: 'develop', color: '#a22b5e' },
                         { id: 2, value: total[2], label: 'Testing', color: '#c17294' },
                         { id: 4, value: total[3], label: 'Sales', color: '#d182a0' },
                         { id: 5, value: total[4], label: 'Marketing', color: '#ead0db' },
@@ -142,27 +145,27 @@ function EmployeeHome(props) {
                       ],
                        innerRadius: 70,
       outerRadius: 40,
-      cx: 70,
-      cy: 80,
+      cx:80
                     }
-                    
+                   
 
                   ]}
-                  width={250}
-                  height={170}
+                  width={280}
+                  height={200}
                 />
-              </CardContent>
             </Card>
           </Grid>
 
           <Grid item xs={4}>
             <Card sx={{ backgroundColor: "lightgrey" }}>
-              <CardContent>
+                   <Typography variant="h5" style={{ margin: "17px" }}>
+                  <strong>Application Status</strong>
+                </Typography>
                 <PieChart
                   series={[
                     {
                       data: [
-                        { id: 0, value: len[0], label: 'New', color: 'lightgrey' },
+                        { id: 0, value: len[0], label: 'New', color: 'white' },
                         { id: 1, value: len[1], label: 'Interview', color: 'lightblue' },
                         { id: 2, value: len[2], label: 'Hired', color: 'lightgreen' },
                         { id: 3, value: len[3], label: 'Rejected', color: '#fa5f55' },
@@ -171,14 +174,12 @@ function EmployeeHome(props) {
                         innerRadius: 70,
       outerRadius: 60,
       cx: 70,
-      cy: 80,
-
+cy:70
                     }
                         ]}
                     width={250}
                   height={170}
                 />
-              </CardContent>
             </Card>
           </Grid>
 

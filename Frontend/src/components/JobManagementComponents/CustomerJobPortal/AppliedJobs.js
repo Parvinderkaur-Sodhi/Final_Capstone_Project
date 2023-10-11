@@ -32,7 +32,7 @@ const AppliedJobs = () => {
     setCurrentPage(value);
   };
 
-  const { empid } = useParams();
+  const  empid=localStorage.getItem("employeeId");
   console.log(empid);
   useEffect(() => {
     getAppliedJobs();
@@ -52,7 +52,7 @@ const AppliedJobs = () => {
       getAppliedJobs();
     }
     else {
-      hrService.searchByStatus(e.target.value).then((response) => {
+      employeeService.getByidandstatus(empid,e.target.value).then((response) => {
         setAppliedJob(response.data);
       })
     }
@@ -161,9 +161,13 @@ const AppliedJobs = () => {
             </Table>
           </TableContainer>
         }
-        <Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "auto" }}>
+        {
+          currentappliedJob.length == 0 && 
+          <Typography fontSize={30} mt={10} ml={10} color="#98144d">No Result Found !!</Typography>
+        }
+     {currentappliedJob.length>0 &&   <Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "auto" }}>
           <Pagination count={totalPageCount} page={currentPage} onChange={handlePageChange} color="primary" boundaryCount={1} siblingCount={0} />
-        </Box>
+        </Box>}
       </Card>
     </>
     // {

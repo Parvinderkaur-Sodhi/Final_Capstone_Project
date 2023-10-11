@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import hrService from '../../../services/hr.service'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, Pagination, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, Pagination, Paper, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Card from '@mui/material/Card';
 import { CancelOutlined, Done } from '@mui/icons-material';
 import ApplicationInfo from './ApplicationInfo';
+import { toast } from 'react-toastify';
 const Status = (props) => {
     const [applicationJob,setApplicationJob]=useState([]);
     const [d,setD]=useState();
@@ -37,11 +38,11 @@ const viewByprofileandStatus=()=>{
     if(status=="Inprocess")
     return "#76b5c5";
 if(status=="Accepted")
-return "#92e3b4";
+return "#008000";
 if(status=="Rejected")
 return "#D04b4b";
-if(status=="Scheduled Interview")
-return "purple";
+if(status=="Interview")
+return "#F2CC87";
 }
 
 const changeStatus=(id,status)=>{  
@@ -55,6 +56,7 @@ const handleDeleteConfirm = () => {
   };
     hrService.updateStatus(selectedRequestId,obj).then((response)=>{
         console.log(response.data);
+        toast.success("Status updated successfully !");
         viewByprofileandStatus();
             setDialogOpen(false);
 
@@ -72,7 +74,7 @@ setOpen(true);
 setD(index);
     }
  const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 5;
+  const jobsPerPage = 4;
 const [dialogOpen,setDialogOpen]=useState(false);
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
@@ -97,25 +99,18 @@ const [dialogOpen,setDialogOpen]=useState(false);
             </Button>
           </DialogActions>
         </Dialog>
-   {applicationJob.length>0 &&    <TableContainer component={Card}>
-      <Table width="300px" aria-label="simple table">
-        <colgroup>
-        <col style={{width:'1%'}}/>
-        <col style={{width:'1%'}}/>
-        <col style={{width:'1%'}}/>
-        <col style={{width:'1%'}}/>
-        <col style={{width:'1%'}}/>
-        <col style={{width:'1%'}}/>
+   {applicationJob.length>0 &&   
+   <>
+    <TableContainer component={Paper} style={{ width: "900px" ,marginLeft:"-80px"}}>
+      <Table>
+        <TableHead style={{width:"1000px"}}>
 
-        </colgroup>
-        <TableHead>
-
-          <TableRow sx={{backgroundColor:"grey"}}>
-            <TableCell >Application Id</TableCell>
-            <TableCell>Employee Name</TableCell>
-            <TableCell >Current Profile</TableCell>
-            <TableCell >Status</TableCell>
-         {props.status!=="Rejected" &&  props.status!=="Accepted" && <TableCell>Action</TableCell>}
+          <TableRow sx={{backgroundColor:"lightgrey",width:"500px"}}>
+            <TableCell width={120}>Application Id</TableCell>
+            <TableCell width={160}>Employee Name</TableCell>
+            <TableCell width={250}>Current Profile</TableCell>
+            <TableCell width={150}>Status</TableCell>
+         {props.status!=="Rejected" &&  props.status!=="Accepted" && <TableCell width={500}>Action</TableCell>}
 <TableCell>More</TableCell>
         </TableRow>
         </TableHead>
@@ -131,19 +126,19 @@ const [dialogOpen,setDialogOpen]=useState(false);
               sx={{ '&:last-child td, &:last-child th': { border: 0 } ,height:20}}
             >
               <TableCell component="th" scope="row">{j.applicationId}</TableCell>
-              <TableCell>{j.emp["fname"]+" " +j.emp["lname"]}</TableCell>
-              <TableCell >{j.job["jobProfile"]}</TableCell>
+              <TableCell>{j.emp["fname"]}</TableCell>
+              <TableCell >{j.emp["jobTitle"]}</TableCell>
               <TableCell >
-                <Box width={80} height={40} boxShadow={4}  borderRadius={6} padding={1} style={{backgroundColor:`${checkColor(j.status)}`}}>
-                {j.status}</Box></TableCell>
+                <Typography width={80} height={40}  padding={1} style={{color:`${checkColor(j.status)}`}}>
+                {j.status}</Typography></TableCell>
             
  {props.status !=="Rejected" && props.status!=="Accepted" &&
 <TableCell>
-<Button variant="outlined" startIcon={<CancelOutlined/>} onClick={()=>{changeStatus(j.applicationId,"Rejected")}}>
+<Button variant="outlined" startIcon={<CancelOutlined style={{color:"red"}}/>} onClick={()=>{changeStatus(j.applicationId,"Rejected")}}>
 Reject</Button>
  
    
-    <Button variant="outlined" startIcon={<Done/>} onClick={()=>{changeStatus(j.applicationId,JobStatus[JobStatus.indexOf(j.status)+1])}}>
+    <Button variant="outlined" sx={{ marginLeft:"2px"}} startIcon={<Done style={{color:"green"}}/>} onClick={()=>{changeStatus(j.applicationId,JobStatus[JobStatus.indexOf(j.status)+1])}}>
 Next Stage</Button>
 </TableCell>
 }
@@ -168,11 +163,12 @@ Next Stage</Button>
         </TableBody>
       </Table>
     </TableContainer>
-    
+ <Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
+          <Pagination count={totalPageCount} page={currentPage} onChange={handlePageChange}  boundaryCount={1} siblingCount={0} />
+        </Box>  
+        </> 
 }
-<Box style={{ display: "flex", justifyContent: "flex-end", marginTop: "auto" }}>
-          <Pagination count={totalPageCount} page={currentPage} onChange={handlePageChange} color="primary" boundaryCount={1} siblingCount={0} />
-        </Box>
+
 {
   applicationJob.length==0 && 
   <Typography>No Application availabel</Typography>

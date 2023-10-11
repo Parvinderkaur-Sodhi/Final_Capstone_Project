@@ -82,6 +82,7 @@ function LeaveRequestList(props) {
         setSelectedRequestId(null);
         setSelectedStatus("");
         toast(selectedStatus + " Sucessfully!!");
+        //window.location.reload();
       })
       .catch((error) => {
         toast("Error updating leave request status:", error);
