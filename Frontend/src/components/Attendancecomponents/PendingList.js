@@ -5,12 +5,17 @@ import { Link } from 'react-router-dom';
 import HrService from "../../services/hr.service";
 import Pagination from "@mui/material/Pagination";
 import HrNavbar from '../DashBoardComponents/HrNavbar';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// const formatDate = (dateString) => {
+//   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+//   return new Date(dateString).toLocaleDateString(undefined, options);
+// };
+
 const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  return new Date(dateString).toLocaleDateString('en-GB', options);
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -52,8 +57,7 @@ const PendingList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(5);
   const [searchQuery, setSearchQuery] = useState('');
-
-
+  
   useEffect(() => {
     fetchPendingAttendances();
   }, [currentPage]);

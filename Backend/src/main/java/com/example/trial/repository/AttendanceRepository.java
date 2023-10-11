@@ -12,6 +12,7 @@ import com.example.trial.models.Attendance.ApprovalStatus;
 @Repository
 @EnableJpaRepositories
 public interface AttendanceRepository extends JpaRepository<Attendance, Integer>{
+	//custom query methods
 	List<Attendance> findByEmployeeEmployeeId(int employeeId);
 	 List<Attendance> findByApprovalStatus(ApprovalStatus approvalStatus);
 	

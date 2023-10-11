@@ -108,6 +108,7 @@ function HrHome(props) {
   return (
     <div>
       <HrNavbar />
+      
       <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "10px", backgroundColor: "white" }}>
         <Grid container spacing={2}>
           {/* Saved Job Listings */}

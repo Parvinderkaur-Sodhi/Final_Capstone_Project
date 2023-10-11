@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import HrService from "../../services/hr.service";
-import {  Table,  TableContainer,  TableHead,  TableBody,  TableCell,  TableRow,  Paper,  Button,  Typography,  Card,} from "@mui/material";
+import {  Table,  TableContainer,  TableHead,  TableBody,  TableCell,  TableRow,  Paper,  Button,  Typography,  Card, Box} from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import HrNavbar from "../DashBoardComponents/HrNavbar";
 import Pagination from "@mui/material/Pagination";
 
 
-const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+
+ const formatDate = (dateString) => {
+ const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+
+ return new Date(dateString).toLocaleDateString('en-GB', options);
 };
 
 const useStyles = makeStyles({
@@ -63,6 +65,7 @@ function AttendanceList(props) {
     return <Redirect to="/login" />;
   }
 
+  //pagination
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   
@@ -80,6 +83,7 @@ function AttendanceList(props) {
 );
 
 const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastRecord);
+
 
   return (
     <Card style={{ maxHeight: "80vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
@@ -148,12 +152,16 @@ const currentRecords = filteredAttendance.slice(indexOfFirstRecord, indexOfLastR
             </TableBody>
           </Table>
         </TableContainer>
-
+        <Box>
         <Pagination
           count={Math.ceil(attendance.length / recordsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
         />
+
+        </Box>
+       
+        
       </Paper>
       
     

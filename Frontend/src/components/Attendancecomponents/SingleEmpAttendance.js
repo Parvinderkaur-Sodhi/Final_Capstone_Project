@@ -4,12 +4,12 @@ import EmployeeService from "../../services/employee.service";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import EmployeeNavbar from "../DashBoardComponents/EmployeeNavbar";
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "numeric", day: "numeric" };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  return new Date(dateString).toLocaleDateString('en-GB', options);
 };
 
 
@@ -128,7 +128,7 @@ function SingleEmpAttendance(props) {
    
   
         <Typography style={attendancePercentage < 50 ? { color: "red" } : {}}>
-          Attendance Percentage: {attendancePercentage.toFixed(2)}%
+          Attendance Percentage: {attendancePercentage.toFixed(3)}%
         </Typography>
   
         <Typography>

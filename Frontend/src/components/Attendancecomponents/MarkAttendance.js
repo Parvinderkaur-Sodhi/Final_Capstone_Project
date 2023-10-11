@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EmployeeService from '../../services/employee.service';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, Typography, TextField } from "@mui/material";
@@ -47,6 +47,14 @@ const MarkAttendance = () => {
   const classes = useStyles();
   const [employeeId, setEmployeeId] = useState('');
 
+  
+  useEffect(() => {
+    const storedEmployeeId = localStorage.getItem("employeeId");
+    if (storedEmployeeId) {
+      setEmployeeId(storedEmployeeId);
+    }
+  }, []);
+
   const handleMarkAttendance = () => {
     const attendanceData = {
       present: 'present',
@@ -64,38 +72,37 @@ const MarkAttendance = () => {
 
   return (
     <Card style={{ maxHeight: "100vh", overflowY: "auto", paddingRight: "17px", padding: "20px" }}>
-     <div className={classes.pageBackground}>
-      <EmployeeNavbar /> 
-      {/* <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover /> */}
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.welcomeHeading} variant="h5" gutterBottom>
-            Welcome to the Attendance Log!
-          </Typography>
-          <Typography className={classes.welcomeMessage} variant="body1" gutterBottom>
-            Thank you for being an essential part of our team.
-          </Typography>
-          <div>
-            <TextField
-              label="Employee ID"
-              type="text"
-              value={employeeId}
-              onChange={(e) => setEmployeeId(e.target.value)}
-              fullWidth
-              variant="outlined"
-              margin="normal"
-            />
-          </div>
-          <Button
-            onClick={handleMarkAttendance}
-            className={classes.button}
-            variant="contained"
-          >
-            Mark Attendance
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+      <div className={classes.pageBackground}>
+        <EmployeeNavbar />
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography className={classes.welcomeHeading} variant="h5" gutterBottom>
+              Welcome to the Attendance Log!
+            </Typography>
+            <Typography className={classes.welcomeMessage} variant="body1" gutterBottom>
+              Thank you for being an essential part of our team.
+            </Typography>
+            <div>
+              <TextField
+                label="Employee ID"
+                type="text"
+                value={employeeId}
+                disabled
+                fullWidth
+                variant="outlined"
+                margin="normal"
+              />
+            </div>
+            <Button
+              onClick={handleMarkAttendance}
+              className={classes.button}
+              variant="contained"
+            >
+              Mark Attendance
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
     </Card>
   );
 };

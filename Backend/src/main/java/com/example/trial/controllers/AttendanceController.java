@@ -54,10 +54,19 @@ public class AttendanceController {
 	}
 	
 	
+	
+	
 	@PutMapping("/{attendanceId}")
-	public Attendance updateAttendance(@PathVariable int attendanceId, @RequestBody Attendance attendance) {
-		return attendanceService.updateAttendance(attendanceId, attendance);
+	public ResponseEntity<Attendance> updateAttendance(@PathVariable int attendanceId, @RequestBody Attendance attendance) {
+	    Attendance updatedAttendance = attendanceService.updateAttendance(attendanceId, attendance);
+
+	    if (updatedAttendance != null) {
+	        return ResponseEntity.ok(updatedAttendance); // Return 200 OK with the updated attendance
+	    } else {
+	        return ResponseEntity.notFound().build(); // Return 404 Not Found if the attendance record was not found
+	    }
 	}
+
 	
 	@GetMapping("/{employeeId}")
 	public ResponseEntity<List<Attendance>> getAttendanceByEmployeeId(@PathVariable int employeeId) {

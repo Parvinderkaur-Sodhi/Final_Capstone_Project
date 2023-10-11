@@ -49,6 +49,7 @@ class EmployeeService {
         throw error;
       });
   }
+ 
 
   updateAbsenceReason(attendanceId, updatedReason) {
     const url = `${API_URL_ATND}/${attendanceId}/update-absence-reason`;

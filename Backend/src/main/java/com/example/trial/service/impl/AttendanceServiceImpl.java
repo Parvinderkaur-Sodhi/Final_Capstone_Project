@@ -30,8 +30,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
     @Override
     public Attendance markAttendance(Attendance attendance) {
-    	//attendance.setAttendanceDate(LocalDate.now());
-    	//return attendancerepo.save(attendance);
+    	
     	
     	attendance.setAttendanceDate(LocalDate.now());
         attendance.setApprovalStatus(ApprovalStatus.PENDING); // New attendance will be pending approval
@@ -80,7 +79,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         Attendance attendance = attendancerepo.findById(attendanceId).orElse(null);
         if (attendance != null) {
             attendance.setApprovalStatus(ApprovalStatus.APPROVED);
-            attendance.setPresent("present"); // Set present status to "No" when rejected
+            attendance.setPresent("present"); // Set present status to "absent" when rejected
             attendance.setAbsenceReason("NA");
             return attendancerepo.save(attendance);
         }
