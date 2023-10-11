@@ -93,6 +93,7 @@ public class AuthController {
         employee.setUserId(user.getId());
         employee.setEmail(signUpRequest.getEmail());
         employee.setUsername(signUpRequest.getUsername());
+        employee.setFname(signUpRequest.getUsername());
         employee.setEmpRole(signUpRequest.getRole());
         employeeService.saveEmployee(employee);
 
